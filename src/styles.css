@@ -23,8 +23,8 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-display: "Manrope", "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -65,38 +65,44 @@
   --color-gradient-start: var(--gradient-start);
   --color-gradient-mid: var(--gradient-mid);
   --color-gradient-end: var(--gradient-end);
+
+  --color-g-blue: #4285F4;
+  --color-g-red: #EA4335;
+  --color-g-yellow: #FBBC05;
+  --color-g-green: #34A853;
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  --background: oklch(0.98 0.005 260);
-  --foreground: oklch(0.16 0.04 265);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.04 265);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0.04 265);
+  /* Eleva360: white bg, slate-900 fg */
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
 
-  --primary: oklch(0.54 0.245 262.3);
-  --primary-foreground: oklch(0.98 0.005 260);
-  --secondary: oklch(0.96 0.015 255);
-  --secondary-foreground: oklch(0.16 0.04 265);
-  --muted: oklch(0.96 0.015 255);
-  --muted-foreground: oklch(0.55 0.05 260);
-  --accent: oklch(0.69 0.14 194.8);
-  --accent-foreground: oklch(0.98 0.005 260);
+  --primary: #2563EB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F8FAFC;
+  --secondary-foreground: #0F172A;
+  --muted: #F8FAFC;
+  --muted-foreground: #64748B;
+  --accent: #14B8A6;
+  --accent-foreground: #FFFFFF;
 
-  --destructive: oklch(0.58 0.245 27);
-  --destructive-foreground: oklch(0.98 0.005 260);
-  --border: oklch(0.9 0.02 255);
-  --input: oklch(0.9 0.02 255);
-  --ring: oklch(0.54 0.245 262.3);
+  --destructive: #EA4335;
+  --destructive-foreground: #FFFFFF;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #2563EB;
 
-  --elevation: oklch(0.14 0.04 265);
-  --elevation-foreground: oklch(0.98 0.005 260);
-  --gradient-start: oklch(0.54 0.245 262.3);
-  --gradient-mid: oklch(0.77 0.113 230.5);
-  --gradient-end: oklch(0.69 0.14 194.8);
+  --elevation: #0F172A;
+  --elevation-foreground: #FFFFFF;
+  --gradient-start: #2563EB;
+  --gradient-mid: #38BDF8;
+  --gradient-end: #14B8A6;
 
   --chart-1: oklch(0.54 0.245 262.3);
   --chart-2: oklch(0.77 0.113 230.5);
