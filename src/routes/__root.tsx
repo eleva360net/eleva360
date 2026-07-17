@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Elevate360 — Soluciones digitales para negocios" },
-      { name: "description", content: "Transformamos tu negocio con estrategia digital, diseño web, automatización y datos. Escalá con Elevate360." },
-      { name: "author", content: "Elevate360" },
-      { property: "og:title", content: "Elevate360 — Soluciones digitales para negocios" },
-      { property: "og:description", content: "Transformamos tu negocio con estrategia digital, diseño web, automatización y datos. Escalá con Elevate360." },
+      { title: "Eleva360 — Más clientes desde Google para tu negocio local" },
+      { name: "description", content: "Ayudamos a negocios locales en Chile a aparecer primero en Google Maps, captar clientes por WhatsApp y vender más." },
+      { name: "author", content: "Eleva360" },
+      { property: "og:title", content: "Eleva360 — Más clientes desde Google" },
+      { property: "og:description", content: "Haz que te encuentren. Convierte búsquedas en clientes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Elevate360" },
+      { name: "twitter:site", content: "@Eleva360" },
     ],
     links: [
       {
