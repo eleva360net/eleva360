@@ -1,42 +1,53 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  BarChart3,
-  Bot,
-  Globe,
-  Layers,
-  Mail,
+  Check,
+  ChevronRight,
+  Instagram,
+  Facebook,
   MapPin,
+  MessageCircle,
   Menu,
   Phone,
-  Rocket,
-  Smartphone,
+  QrCode,
   Sparkles,
+  Star,
+  Store,
+  TrendingUp,
+  Users,
   Zap,
+  Bot,
+  ClipboardList,
+  Search,
+  Camera,
+  Smartphone,
+  BarChart3,
+  ShieldCheck,
+  HeartHandshake,
+  Target,
+  Utensils,
+  X,
 } from "lucide-react";
 import { useState } from "react";
 
-import heroImage from "../assets/hero-elevate360.jpg";
+import heroImage from "../assets/hero-eleva360.jpg";
+
+const WHATSAPP_URL =
+  "https://wa.me/56900000000?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Elevate360 — Soluciones digitales para negocios" },
+      { title: "Eleva360 — Más clientes desde Google para tu negocio local" },
       {
         name: "description",
         content:
-          "Transformamos tu negocio con estrategia digital, diseño web, automatización y datos. Escalá con Elevate360.",
+          "Ayudamos a negocios locales en Chile a aparecer primero en Google Maps, captar clientes por WhatsApp y vender más. SEO Local, Google Business Profile, carta digital y automatización.",
       },
-      {
-        property: "og:title",
-        content: "Elevate360 — Soluciones digitales para negocios",
-      },
-      {
-        property: "og:description",
-        content:
-          "Transformamos tu negocio con estrategia digital, diseño web, automatización y datos. Escalá con Elevate360.",
-      },
+      { name: "keywords", content: "Google Maps, Google Business Profile, SEO Local, Marketing Digital, WhatsApp Business, Carta Digital, Negocios Locales, Chile" },
+      { property: "og:title", content: "Eleva360 — Más clientes desde Google" },
+      { property: "og:description", content: "Haz que te encuentren. Convierte búsquedas en clientes." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
     ],
@@ -50,12 +61,16 @@ function Index() {
       <Navbar />
       <main className="flex-1">
         <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
         <ServicesSection />
-        <StatsSection />
-        <ProcessSection />
+        <PlanSection />
+        <BenefitsSection />
+        <WhySection />
         <CTASection />
       </main>
       <Footer />
+      <WhatsAppFloating />
     </div>
   );
 }
@@ -64,24 +79,18 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   const links = [
+    { label: "Sistema", href: "#solucion" },
     { label: "Servicios", href: "#servicios" },
-    { label: "Proceso", href: "#proceso" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Plan Impulso", href: "#plan" },
+    { label: "Por qué Eleva360", href: "#porque" },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="gradient-bg flex h-8 w-8 items-center justify-center rounded-lg">
-            <Sparkles className="h-5 w-5 text-white" />
-          </div>
-          <span className="font-display text-xl font-bold tracking-tight text-foreground">
-            Elevate<span className="gradient-text">360</span>
-          </span>
-        </Link>
+        <Logo />
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
@@ -95,21 +104,23 @@ function Navbar() {
 
         <div className="hidden md:block">
           <a
-            href="#contacto"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-g-green)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
           >
-            Hablemos
-            <ArrowRight className="h-4 w-4" />
+            <MessageCircle className="h-4 w-4" />
+            WhatsApp
           </a>
         </div>
 
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background md:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
         >
-          <Menu className="h-5 w-5 text-foreground" />
+          {open ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5 text-foreground" />}
         </button>
       </div>
 
@@ -127,12 +138,13 @@ function Navbar() {
               </a>
             ))}
             <a
-              href="#contacto"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-g-green)] px-5 py-2.5 text-sm font-semibold text-white"
             >
-              Hablemos
-              <ArrowRight className="h-4 w-4" />
+              <MessageCircle className="h-4 w-4" /> Hablar por WhatsApp
             </a>
           </nav>
         </div>
@@ -141,66 +153,116 @@ function Navbar() {
   );
 }
 
+function Logo() {
+  return (
+    <Link to="/" className="flex items-center gap-2">
+      <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--foreground)] shadow-sm">
+        <MapPin className="h-5 w-5 text-white" strokeWidth={2.5} />
+        <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[color:var(--color-g-green)] ring-2 ring-white" />
+      </div>
+      <span className="font-display text-xl font-extrabold tracking-tight text-foreground">
+        Eleva<span className="text-primary">360</span>
+      </span>
+    </Link>
+  );
+}
+
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute -left-1/4 -top-1/4 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute -bottom-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-accent/10 blur-3xl" />
+    <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
         <div className="flex flex-col items-start text-left">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 backdrop-blur-sm">
-            <span className="gradient-bg h-2 w-2 rounded-full" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Soluciones digitales
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
+            <span className="flex h-2 w-2 rounded-full bg-[color:var(--color-g-green)]">
+              <span className="h-2 w-2 animate-ping rounded-full bg-[color:var(--color-g-green)]/60" />
+            </span>
+            <span className="text-xs font-semibold tracking-wide text-muted-foreground">
+              Especialistas en negocios locales · Chile
             </span>
           </div>
 
-          <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Elevá tu negocio al siguiente nivel
+          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            Haz que te encuentren.
+            <br />
+            <span className="text-primary">Convierte búsquedas</span> en clientes.
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-            En Elevate360 diseñamos estrategias digitales completas: web, datos,
-            automatización y experiencia de usuario. Todo en un solo lugar.
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+            Ayudamos a negocios locales a aparecer primero en Google, captar
+            más clientes por WhatsApp y vender más sin depender de publicidad.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#contacto"
-              className="gradient-bg inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30"
             >
-              Empezar proyecto
-              <ArrowRight className="h-5 w-5" />
+              Quiero más clientes
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href="#servicios"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-[color:var(--color-g-green)] hover:text-[color:var(--color-g-green)]"
             >
-              Ver servicios
+              <MessageCircle className="h-5 w-5 text-[color:var(--color-g-green)]" />
+              Hablar por WhatsApp
             </a>
           </div>
 
-          <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
             <span className="flex items-center gap-1.5">
-              <Zap className="h-4 w-4 text-accent" /> Entrega rápida
+              <ShieldCheck className="h-4 w-4 text-primary" /> +80 negocios activos
             </span>
             <span className="flex items-center gap-1.5">
-              <Layers className="h-4 w-4 text-accent" /> 100% personalizado
+              <Star className="h-4 w-4 fill-[color:var(--color-g-yellow)] text-[color:var(--color-g-yellow)]" />
+              4.9 promedio en reseñas
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Zap className="h-4 w-4 text-accent" /> Resultados en 30 días
             </span>
           </div>
         </div>
 
         <div className="relative">
-          <div className="gradient-border glow overflow-hidden rounded-2xl">
+          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-[color:var(--color-g-blue)]/5 to-accent/10 blur-2xl" />
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
             <img
               src={heroImage}
-              alt="Visualización abstracta de transformación digital para negocios"
-              className="aspect-[4/3] w-full object-cover"
+              alt="Negocio local creciendo con Google Maps, WhatsApp y reseñas"
+              className="aspect-square w-full rounded-2xl object-cover"
+              width={1024}
+              height={1024}
               loading="eager"
             />
+          </div>
+
+          {/* Floating badges */}
+          <div className="absolute -left-3 top-8 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[color:var(--color-g-blue)]/10">
+              <MapPin className="h-4 w-4 text-[color:var(--color-g-blue)]" />
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground">Ranking Maps</div>
+              <div className="text-sm font-bold text-foreground">#1 en tu zona</div>
+            </div>
+          </div>
+          <div className="absolute -right-3 bottom-10 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[color:var(--color-g-green)]/10">
+              <MessageCircle className="h-4 w-4 text-[color:var(--color-g-green)]" />
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground">Nuevo cliente</div>
+              <div className="text-sm font-bold text-foreground">+156% mensajes</div>
+            </div>
           </div>
         </div>
       </div>
@@ -208,173 +270,426 @@ function HeroSection() {
   );
 }
 
-function ServicesSection() {
-  const services = [
+function SectionHeader({
+  eyebrow,
+  title,
+  subtitle,
+  align = "center",
+}: {
+  eyebrow?: string;
+  title: React.ReactNode;
+  subtitle?: string;
+  align?: "center" | "left";
+}) {
+  return (
+    <div
+      className={`mx-auto max-w-2xl ${align === "center" ? "text-center" : "text-left"}`}
+    >
+      {eyebrow && (
+        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+          {eyebrow}
+        </span>
+      )}
+      <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>
+      )}
+    </div>
+  );
+}
+
+function ProblemSection() {
+  const problems = [
+    { icon: Star, title: "Pocas reseñas", desc: "La gente no confía si no te ven recomendado." },
+    { icon: Search, title: "No apareces primero", desc: "Tu competencia se lleva las búsquedas locales." },
+    { icon: Phone, title: "Llaman a la competencia", desc: "Los clientes eligen al que aparece antes." },
+    { icon: MessageCircle, title: "WhatsApp desordenado", desc: "Mensajes que se pierden y clientes que no vuelven." },
+    { icon: Store, title: "Perfil abandonado", desc: "Fotos viejas, horarios erróneos, cero información." },
+    { icon: Utensils, title: "Sin menú digital", desc: "Los clientes se van si no ven qué ofreces." },
+  ];
+
+  return (
+    <section className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="El problema"
+          title={
+            <>
+              ¿Tu negocio aparece cuando un cliente
+              <span className="text-primary"> busca en Google?</span>
+            </>
+          }
+          subtitle="Si respondiste 'no sé' o 'no', estos son los problemas que están frenando tu crecimiento."
+        />
+
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {problems.map((p) => (
+            <div
+              key={p.title}
+              className="group flex gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--destructive)]/10">
+                <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-display text-base font-bold text-foreground">
+                  {p.title}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SolutionSection() {
+  const nodes = [
     {
-      icon: Globe,
-      title: "Diseño web y presencia digital",
-      description:
-        "Sitios modernos, rápidos y optimizados para convertir visitantes en clientes.",
+      icon: MapPin,
+      title: "Google Business Profile",
+      desc: "Optimizado para aparecer primero en Maps.",
+      color: "var(--color-g-blue)",
     },
     {
-      icon: BarChart3,
-      title: "Datos e inteligencia de negocio",
-      description:
-        "Dashboards, reportes y análisis para tomar decisiones con confianza.",
+      icon: Star,
+      title: "Sistema de Reseñas",
+      desc: "Convierte clientes felices en reseñas 5 estrellas.",
+      color: "var(--color-g-yellow)",
     },
     {
       icon: Bot,
-      title: "Automatización y productividad",
-      description:
-        "Optimizá procesos repetitivos con flujos automatizados y herramientas inteligentes.",
+      title: "WhatsApp Automatizado",
+      desc: "Responde 24/7 y no pierdas ni un cliente.",
+      color: "var(--color-g-green)",
     },
     {
-      icon: Smartphone,
-      title: "Experiencia de usuario",
-      description:
-        "Interfaces intuitivas que tus clientes disfrutan usar, en cualquier dispositivo.",
-    },
-    {
-      icon: Rocket,
-      title: "Estrategia de crecimiento",
-      description:
-        "Planificación digital para escalar tu negocio de forma sostenible.",
-    },
-    {
-      icon: Sparkles,
-      title: "Identidad de marca",
-      description:
-        "Diseño visual coherente que comunica el valor de tu negocio al instante.",
+      icon: QrCode,
+      title: "Carta Digital + QR",
+      desc: "Tu menú siempre a un escaneo de distancia.",
+      color: "var(--color-g-red)",
     },
   ];
 
   return (
-    <section id="servicios" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section id="solucion" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Servicios que impulsan resultados
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Combinamos creatividad, tecnología y estrategia para potenciar cada
-            área de tu negocio.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="La solución"
+          title={
+            <>
+              Con el <span className="gradient-text">Sistema Eleva360</span>{" "}
+              todo trabaja en conjunto.
+            </>
+          }
+          subtitle="Cuatro piezas conectadas que hacen que tu negocio se encuentre, convierta y crezca — sin que tengas que hacer nada."
+        />
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="group gradient-border p-6 transition-all hover:shadow-lg"
-            >
-              <div className="gradient-bg mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl">
-                <service.icon className="h-6 w-6 text-white" />
+        <div className="relative mt-16">
+          {/* Connecting lines (desktop) */}
+          <svg
+            aria-hidden
+            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+            preserveAspectRatio="none"
+            viewBox="0 0 1000 400"
+          >
+            <defs>
+              <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="var(--color-g-blue)" />
+                <stop offset="33%" stopColor="var(--color-g-yellow)" />
+                <stop offset="66%" stopColor="var(--color-g-green)" />
+                <stop offset="100%" stopColor="var(--color-g-red)" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 130 200 C 300 60, 400 340, 500 200 S 700 60, 870 200"
+              fill="none"
+              stroke="url(#lineGrad)"
+              strokeWidth="2"
+              strokeDasharray="6 8"
+              opacity="0.55"
+            />
+          </svg>
+
+          <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {nodes.map((n, i) => (
+              <div
+                key={n.title}
+                className="group relative rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
+              >
+                <div className="absolute -top-3 left-6 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                  0{i + 1}
+                </div>
+                <div
+                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl"
+                  style={{ background: `color-mix(in oklab, ${n.color} 15%, transparent)` }}
+                >
+                  <n.icon className="h-6 w-6" style={{ color: n.color }} />
+                </div>
+                <h3 className="font-display text-lg font-bold text-foreground">
+                  {n.title}
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
               </div>
-              <h3 className="font-display text-xl font-semibold text-foreground">
-                {service.title}
-              </h3>
-              <p className="mt-3 text-muted-foreground">
-                {service.description}
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceCard({
+  icon: Icon,
+  title,
+  price,
+  features,
+  color,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  price: string;
+  features: string[];
+  color: string;
+}) {
+  return (
+    <div className="group flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+      <div
+        className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
+        style={{ background: `color-mix(in oklab, ${color} 15%, transparent)` }}
+      >
+        <Icon className="h-6 w-6" />
+      </div>
+      <h3 className="font-display text-xl font-bold text-foreground">{title}</h3>
+      <div className="mt-3 flex items-baseline gap-1.5">
+        <span className="font-display text-3xl font-extrabold text-foreground">{price}</span>
+        <span className="text-sm text-muted-foreground">CLP</span>
+      </div>
+      <ul className="mt-6 space-y-2.5">
+        {features.map((f) => (
+          <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-g-green)]" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-primary hover:text-white"
+      >
+        Quiero este servicio
+        <ChevronRight className="h-4 w-4" />
+      </a>
+    </div>
+  );
+}
+
+function ServicesSection() {
+  return (
+    <section id="servicios" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Servicios"
+          title="Herramientas simples. Resultados reales."
+          subtitle="Elige un servicio puntual o combínalos. Todo pensado para negocios locales que quieren crecer."
+        />
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <ServiceCard
+            icon={(p) => <MapPin {...p} className={`${p.className} text-[color:var(--color-g-blue)]`} />}
+            title="Optimización Google Maps"
+            price="$60.000"
+            color="var(--color-g-blue)"
+            features={[
+              "Optimización completa del perfil",
+              "SEO Local por zona y categoría",
+              "Categorías, productos y servicios",
+              "Fotos profesionales del negocio",
+              "Mini sitio Google integrado",
+              "QR de reseñas físico",
+              "Perfil listo para convertir",
+            ]}
+          />
+          <ServiceCard
+            icon={(p) => <QrCode {...p} className={`${p.className} text-[color:var(--color-g-red)]`} />}
+            title="Carta Digital + QR"
+            price="$40.000"
+            color="var(--color-g-red)"
+            features={[
+              "Diseño 100% responsive",
+              "Integración con Google Business",
+              "Código QR imprimible incluido",
+              "Actualización simple del menú",
+            ]}
+          />
+          <ServiceCard
+            icon={(p) => <Bot {...p} className={`${p.className} text-[color:var(--color-g-green)]`} />}
+            title="WhatsApp Automatizado"
+            price="$40.000"
+            color="var(--color-g-green)"
+            features={[
+              "Botón de WhatsApp en Google",
+              "Mensaje automático de bienvenida",
+              "Respuestas rápidas configuradas",
+              "Integración con carta digital",
+            ]}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PlanSection() {
+  const features = [
+    "Optimización continua del perfil",
+    "Publicaciones mensuales en Google",
+    "Actualización constante de fotos",
+    "Respuesta profesional a reseñas",
+    "Cambios de horarios y servicios",
+    "Monitoreo del posicionamiento",
+    "Recomendaciones para más clientes",
+  ];
+
+  return (
+    <section id="plan" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-5xl">
+        <div className="relative overflow-hidden rounded-[2rem] border border-border bg-[color:var(--elevation)] p-8 text-white shadow-2xl shadow-primary/20 sm:p-12 lg:p-14">
+          {/* Decorative glow */}
+          <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
+          <div aria-hidden className="absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
+
+          <div className="relative grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--color-g-yellow)]" />
+                Más recomendado
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+                Plan Impulso
+              </h2>
+              <p className="mt-4 max-w-md text-base text-white/70 sm:text-lg">
+                Nos encargamos de mantener tu negocio activo para que siga
+                apareciendo frente a nuevos clientes todos los meses.
               </p>
+
+              <div className="mt-6 flex items-baseline gap-2">
+                <span className="font-display text-5xl font-extrabold sm:text-6xl">
+                  $39.990
+                </span>
+                <span className="text-white/60">CLP / mes</span>
+              </div>
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
+              >
+                Quiero mantener mi negocio creciendo
+                <ArrowRight className="h-5 w-5" />
+              </a>
             </div>
-          ))}
+
+            <div className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur">
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                Incluye cada mes
+              </div>
+              <ul className="mt-4 space-y-3">
+                {features.map((f) => (
+                  <li key={f} className="flex items-start gap-3 text-sm text-white/90">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[color:var(--color-g-green)]/20">
+                      <Check className="h-3 w-3 text-[color:var(--color-g-green)]" />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function StatsSection() {
-  const stats = [
-    { value: "+120", label: "Proyectos entregados" },
-    { value: "95%", label: "Clientes recurrentes" },
-    { value: "+40%", label: "Mejora promedio en conversiones" },
-    { value: "7 años", label: "Experiencia en el mercado" },
+function BenefitsSection() {
+  const items = [
+    { icon: TrendingUp, label: "Más visibilidad", value: "+320%", color: "var(--color-g-blue)" },
+    { icon: Phone, label: "Más llamadas", value: "+180%", color: "var(--color-g-red)" },
+    { icon: MessageCircle, label: "Más mensajes", value: "+240%", color: "var(--color-g-green)" },
+    { icon: Star, label: "Más reseñas", value: "+5x", color: "var(--color-g-yellow)" },
+    { icon: Users, label: "Más clientes", value: "+60%", color: "var(--primary)" },
   ];
 
   return (
-    <section className="border-y border-border bg-muted/30 px-4 py-16 sm:px-6 lg:px-8">
+    <section className="border-y border-border bg-white px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="font-display text-4xl font-bold gradient-text sm:text-5xl">
-                {stat.value}
-              </div>
-              <div className="mt-2 text-sm font-medium text-muted-foreground">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProcessSection() {
-  const steps = [
-    {
-      number: "01",
-      title: "Descubrimiento",
-      description:
-        "Conocemos tu negocio, objetivos y desafíos para definir el rumbo correcto.",
-    },
-    {
-      number: "02",
-      title: "Diseño y estrategia",
-      description:
-        "Creamos una propuesta visual y funcional alineada a tus metas de crecimiento.",
-      highlight: true,
-    },
-    {
-      number: "03",
-      title: "Implementación y escala",
-      description:
-        "Lanzamos, medimos y optimizamos para que los resultados se sostengan en el tiempo.",
-    },
-  ];
-
-  return (
-    <section id="proceso" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Un proceso simple, resultados concretos
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Cada paso está pensado para avanzar rápido sin perder calidad ni
-            alineación con tu negocio.
-          </p>
-        </div>
-
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {steps.map((step) => (
+        <SectionHeader
+          eyebrow="Beneficios"
+          title="Lo que consiguen nuestros clientes"
+          subtitle="Métricas promedio observadas en los primeros 90 días con el Sistema Eleva360."
+        />
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {items.map((s) => (
             <div
-              key={step.number}
-              className={`relative rounded-2xl p-8 ${
-                step.highlight
-                  ? "gradient-bg text-white"
-                  : "border border-border bg-card text-card-foreground"
-              }`}
+              key={s.label}
+              className="group rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
             >
               <div
-                className={`font-display text-5xl font-bold ${
-                  step.highlight ? "text-white/30" : "gradient-text"
-                }`}
+                className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl"
+                style={{ background: `color-mix(in oklab, ${s.color} 15%, transparent)` }}
               >
-                {step.number}
+                <s.icon className="h-5 w-5" style={{ color: s.color }} />
               </div>
-              <h3 className="mt-6 font-display text-2xl font-semibold">
-                {step.title}
+              <div className="font-display text-2xl font-extrabold text-foreground">
+                {s.value}
+              </div>
+              <div className="mt-1 text-sm font-medium text-muted-foreground">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhySection() {
+  const items = [
+    { icon: HeartHandshake, title: "Atención personalizada", desc: "Trato humano, no un ticket más en un CRM." },
+    { icon: MapPin, title: "Presencial y remoto", desc: "Vamos a tu local o coordinamos por videollamada." },
+    { icon: Target, title: "Especialistas en negocios locales", desc: "Sabemos cómo compite tu rubro en tu zona." },
+    { icon: BarChart3, title: "Resultados medibles", desc: "Reportes claros, sin humo ni palabras raras." },
+  ];
+
+  return (
+    <section id="porque" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Por qué Eleva360"
+          title="Una agencia que trabaja como parte de tu equipo."
+        />
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((it) => (
+            <div
+              key={it.title}
+              className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
+            >
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <it.icon className="h-6 w-6" />
+              </div>
+              <h3 className="font-display text-lg font-bold text-foreground">
+                {it.title}
               </h3>
-              <p
-                className={`mt-3 ${
-                  step.highlight ? "text-white/80" : "text-muted-foreground"
-                }`}
-              >
-                {step.description}
-              </p>
+              <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
             </div>
           ))}
         </div>
@@ -385,36 +700,37 @@ function ProcessSection() {
 
 function CTASection() {
   return (
-    <section id="contacto" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section id="contacto" className="px-4 pb-24 pt-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <div className="relative overflow-hidden rounded-3xl bg-elevation px-6 py-16 text-center text-elevation-foreground sm:px-12 lg:py-20">
-          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+        <div className="relative overflow-hidden rounded-[2rem] bg-[color:var(--elevation)] px-6 py-16 text-center text-white sm:px-12 lg:py-20">
+          <div aria-hidden className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+          <div aria-hidden className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
 
           <div className="relative mx-auto max-w-2xl">
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              ¿Listo para transformar tu negocio?
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-g-green)] shadow-lg">
+              <MessageCircle className="h-7 w-7 text-white" />
+            </div>
+            <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+              ¿Listo para conseguir más clientes desde Google?
             </h2>
-            <p className="mt-6 text-lg text-elevation-foreground/80">
-              Agendá una llamada gratuita y descubrí cómo Elevate360 puede
-              ayudarte a crecer.
+            <p className="mt-6 text-lg text-white/75">
+              Mientras tu competencia espera clientes, nosotros hacemos que te
+              encuentren primero.
             </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
               <a
-                href="mailto:hola@elevate360.com"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-semibold text-elevation transition-all hover:bg-white/90 hover:shadow-lg"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-g-green)] px-7 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
-                <Mail className="h-5 w-5" />
-                Escribinos ahora
-              </a>
-              <a
-                href="tel:+5491112345678"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10"
-              >
-                <Phone className="h-5 w-5" />
-                Llamar
+                <MessageCircle className="h-5 w-5" />
+                Hablar por WhatsApp
               </a>
             </div>
+            <p className="mt-6 text-sm text-white/50">
+              Respuesta en menos de 1 hora hábil.
+            </p>
           </div>
         </div>
       </div>
@@ -424,33 +740,65 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="gradient-bg flex h-8 w-8 items-center justify-center rounded-lg">
-              <Sparkles className="h-5 w-5 text-white" />
-            </div>
-            <span className="font-display text-xl font-bold tracking-tight text-foreground">
-              Elevate<span className="gradient-text">360</span>
-            </span>
-          </Link>
-
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="h-4 w-4" /> Argentina
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Mail className="h-4 w-4" /> hola@elevate360.com
-            </span>
-          </div>
-
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Elevate360. Todos los derechos
-            reservados.
+    <footer className="border-t border-border bg-white px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
+        <div className="flex flex-col gap-3">
+          <Logo />
+          <p className="max-w-sm text-sm text-muted-foreground">
+            Haz que te encuentren. Convierte búsquedas en clientes.
           </p>
         </div>
+        <div className="flex items-center gap-3">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <Instagram className="h-4 w-4" />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <Facebook className="h-4 w-4" />
+          </a>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[color:var(--color-g-green)] hover:text-[color:var(--color-g-green)]"
+          >
+            <MessageCircle className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+      <div className="mx-auto mt-8 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
+        <span>© {new Date().getFullYear()} Eleva360. Todos los derechos reservados.</span>
+        <span className="flex items-center gap-1.5">
+          <MapPin className="h-3.5 w-3.5" /> Hecho en Chile 🇨🇱
+        </span>
       </div>
     </footer>
+  );
+}
+
+function WhatsAppFloating() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Hablar por WhatsApp"
+      className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-g-green)] text-white shadow-xl shadow-[color:var(--color-g-green)]/40 transition-transform hover:scale-110"
+    >
+      <MessageCircle className="h-6 w-6" />
+      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--color-g-green)]/40" />
+    </a>
   );
 }
