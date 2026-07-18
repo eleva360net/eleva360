@@ -229,9 +229,9 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-[color:var(--color-g-blue)]/5 to-accent/10 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
+        <div className="animate-hero-fade-up animation-delay-300 relative">
+          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-[color:var(--color-g-blue)]/5 to-accent/10 blur-2xl" />
+          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
             <img
               src={heroImage}
               alt="Negocio local creciendo con Google Maps, WhatsApp y reseñas"
