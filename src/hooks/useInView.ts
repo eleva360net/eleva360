@@ -10,20 +10,61 @@ export function useInView<T extends HTMLElement>(
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
-    if (once && inView) return;
+    if (!element || (once && inView)) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+    let rafId = 0;
+    let cleaned = false;
+    const listenerOptions = { passive: true } as AddEventListenerOptions;
+
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      window.removeEventListener("scroll", onScroll, listenerOptions);
+      window.removeEventListener("resize", onScroll, listenerOptions);
+      cancelAnimationFrame(rafId);
+    };
+
+    const checkBounds = () => {
+      if (!element || cleaned) return;
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < windowHeight && rect.bottom > 0) {
         setInView(true);
-        if (once) observer.disconnect();
-      } else if (!once) {
-        setInView(false);
+        cleanup();
       }
-    }, optionsRef.current);
+    };
 
-    observer.observe(element);
-    return () => observer.disconnect();
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(checkBounds);
+    };
+
+    window.addEventListener("scroll", onScroll, listenerOptions);
+    window.addEventListener("resize", onScroll, listenerOptions);
+
+    // IntersectionObserver is preferred when available
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setInView(true);
+            cleanup();
+          } else if (!once) {
+            setInView(false);
+          }
+        },
+        optionsRef.current,
+      );
+      observer.observe(element);
+    }
+
+    checkBounds();
+
+    return () => {
+      observer?.disconnect();
+      cleanup();
+    };
   }, [once, inView]);
 
   return { ref, inView };
