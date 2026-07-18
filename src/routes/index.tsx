@@ -30,7 +30,7 @@ import { useState } from "react";
 import heroImage from "../assets/hero-eleva360.jpg";
 
 const WHATSAPP_URL =
-  "https://wa.me/56900000000?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
+  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
 
 export const Route = createFileRoute("/")({
   component: Index,
