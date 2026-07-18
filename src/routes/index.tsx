@@ -153,12 +153,19 @@ function Navbar() {
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2">
-      <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--foreground)] shadow-sm">
-        <MapPin className="h-5 w-5 text-white" strokeWidth={2.5} />
-        <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[color:var(--color-g-green)] ring-2 ring-white" />
+    <Link to="/" className="animate-logo-appear group flex items-center gap-2.5">
+      <div className="relative">
+        <span
+          aria-hidden
+          className="animate-logo-glow absolute -inset-2 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 blur-lg"
+        />
+        <div className="logo-gradient animate-logo-gradient-shift animate-logo-float relative flex h-10 w-10 items-center justify-center rounded-full shadow-lg shadow-primary/15">
+          <div className="animate-logo-icon-rotate">
+            <MapPin className="h-5 w-5 text-white" strokeWidth={2.5} />
+          </div>
+        </div>
       </div>
-      <span className="font-display text-xl font-extrabold tracking-tight text-foreground">
+      <span className="animate-logo-text-appear font-display text-xl font-extrabold tracking-tight text-foreground">
         Eleva<span className="text-primary">360</span>
       </span>
     </Link>
