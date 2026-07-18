@@ -217,3 +217,80 @@
 @utility glow {
   box-shadow: 0 0 60px -15px color-mix(in oklab, var(--gradient-mid) 35%, transparent);
 }
+
+@keyframes hero-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes hero-gradient-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(2%, -2%) scale(1.05);
+  }
+  66% {
+    transform: translate(-2%, 2%) scale(1.05);
+  }
+}
+
+@utility animate-hero-fade-up {
+  animation: hero-fade-up 600ms ease-out forwards;
+  opacity: 0;
+}
+
+@utility animate-hero-scale-in {
+  animation: hero-scale-in 600ms ease-out forwards;
+  opacity: 0;
+}
+
+@utility animate-hero-float {
+  animation: hero-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility animate-hero-gradient-drift {
+  animation: hero-gradient-drift 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+@utility animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+@utility animation-delay-400 {
+  animation-delay: 400ms;
+}

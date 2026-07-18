@@ -168,8 +168,8 @@ function HeroSection() {
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
+        <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
       </div>
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
@@ -183,13 +183,13 @@ function HeroSection() {
             </span>
           </div>
 
-          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="animate-hero-fade-up font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Haz que te encuentren.
             <br />
             <span className="text-primary">Convierte búsquedas</span> en clientes.
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Ayudamos a negocios locales a aparecer primero en Google, captar
             más clientes por WhatsApp y vender más sin depender de publicidad.
           </p>
@@ -199,7 +199,7 @@ function HeroSection() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30"
+              className="animate-hero-scale-in animation-delay-300 group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30"
             >
               Quiero más clientes
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -208,7 +208,7 @@ function HeroSection() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-[color:var(--color-g-green)] hover:text-[color:var(--color-g-green)]"
+              className="animate-hero-fade-up animation-delay-400 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-[color:var(--color-g-green)] hover:text-[color:var(--color-g-green)]"
             >
               <MessageCircle className="h-5 w-5 text-[color:var(--color-g-green)]" />
               Hablar por WhatsApp
@@ -229,9 +229,9 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-[color:var(--color-g-blue)]/5 to-accent/10 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
+        <div className="animate-hero-fade-up animation-delay-300 relative">
+          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-[color:var(--color-g-blue)]/5 to-accent/10 blur-2xl" />
+          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
             <img
               src={heroImage}
               alt="Negocio local creciendo con Google Maps, WhatsApp y reseñas"
