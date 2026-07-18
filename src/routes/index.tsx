@@ -26,6 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { useInView } from "../hooks/useInView";
 
 import heroImage from "../assets/hero-eleva360.jpg";
 
@@ -446,15 +447,34 @@ function ServiceCard({
   price,
   features,
   color,
+  index,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   price: string;
   features: string[];
   color: string;
+  index: number;
 }) {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 }, true);
+  const [revealed, setRevealed] = useState(false);
+
+  const isAnimating = inView && !revealed;
+  const visible = inView || revealed;
+
   return (
-    <div className="group flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+    <div
+      ref={ref}
+      onAnimationEnd={() => setRevealed(true)}
+      style={{ animationDelay: `${index * 120}ms` }}
+      className={[
+        "group flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm",
+        "transition-all duration-300 ease-out",
+        "hover:-translate-y-2 hover:scale-[1.02] hover:border-primary hover:shadow-xl hover:shadow-primary/10",
+        isAnimating ? "animate-service-card" : "",
+        visible ? "opacity-100" : "opacity-0",
+      ].join(" ")}
+    >
       <div
         className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
         style={{ background: `color-mix(in oklab, ${color} 15%, transparent)` }}
@@ -499,6 +519,7 @@ function ServicesSection() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           <ServiceCard
+            index={0}
             icon={(p) => <MapPin {...p} className={`${p.className} text-[color:var(--color-g-blue)]`} />}
             title="Optimización Google Maps"
             price="$60.000"
@@ -514,6 +535,7 @@ function ServicesSection() {
             ]}
           />
           <ServiceCard
+            index={1}
             icon={(p) => <QrCode {...p} className={`${p.className} text-[color:var(--color-g-red)]`} />}
             title="Carta Digital + QR"
             price="$40.000"
@@ -526,6 +548,7 @@ function ServicesSection() {
             ]}
           />
           <ServiceCard
+            index={2}
             icon={(p) => <Bot {...p} className={`${p.className} text-[color:var(--color-g-green)]`} />}
             title="WhatsApp Automatizado"
             price="$40.000"
