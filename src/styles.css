@@ -323,3 +323,115 @@
   will-change: transform, opacity;
 }
 
+/* Premium logo animation */
+@keyframes logo-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes logo-icon-rotate {
+  0% {
+    opacity: 0;
+    transform: rotate(-8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes logo-text-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes logo-gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes logo-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+@utility animate-logo-appear {
+  animation: logo-appear 800ms ease-out forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@utility animate-logo-icon-rotate {
+  animation: logo-icon-rotate 800ms ease-out forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@utility animate-logo-text-appear {
+  animation: logo-text-appear 700ms ease-out 120ms forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@utility logo-gradient {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  background-size: 200% 200%;
+}
+
+@utility animate-logo-gradient-shift {
+  animation: logo-gradient-shift 6s ease-in-out infinite;
+}
+
+@utility animate-logo-float {
+  animation: logo-float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility animate-logo-glow {
+  animation: logo-glow 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@utility animation-delay-50 {
+  animation-delay: 50ms;
+}
+
+@utility animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+
