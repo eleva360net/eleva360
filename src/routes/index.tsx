@@ -25,13 +25,107 @@ import {
   Utensils,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 import heroImage from "../assets/hero-eleva360.jpg";
 
 const WHATSAPP_URL =
   "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
+
+/* ————— Motion helpers ————— */
+function Reveal({
+  children,
+  as: Tag = "div",
+  delay = 0,
+  variant = "up",
+  className = "",
+}: {
+  children: React.ReactNode;
+  as?: any;
+  delay?: number;
+  variant?: "up" | "left" | "right" | "zoom";
+  className?: string;
+}) {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.15 }, true);
+  const visibleCls =
+    variant === "left"
+      ? "reveal-left-visible"
+      : variant === "right"
+      ? "reveal-right-visible"
+      : variant === "zoom"
+      ? "reveal-zoom-visible"
+      : "reveal-visible";
+  return (
+    <Tag
+      ref={ref as any}
+      style={{ animationDelay: `${delay}ms` }}
+      className={`reveal ${inView ? visibleCls : ""} ${className}`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+function CountUp({
+  to,
+  suffix = "",
+  prefix = "",
+  duration = 1600,
+}: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+}) {
+  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.4 }, true);
+  const [value, setValue] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (!inView || started.current) return;
+    started.current = true;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setValue(Math.round(to * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to, duration]);
+  return (
+    <span ref={ref}>
+      {prefix}
+      {value}
+      {suffix}
+    </span>
+  );
+}
+
+function IndustryMarquee() {
+  const items = [
+    "Restaurantes", "Cafeterías", "Peluquerías", "Barberías", "Clínicas dentales",
+    "Talleres mecánicos", "Veterinarias", "Gimnasios", "Panaderías", "Farmacias",
+    "Estudios de tatuajes", "Escuelas de manejo", "Ferreterías", "Notarías",
+  ];
+  const row = [...items, ...items];
+  return (
+    <div className="relative overflow-hidden border-y border-border bg-white/60 py-4 backdrop-blur-sm">
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
+      <div className="animate-marquee flex w-max gap-8 whitespace-nowrap">
+        {row.map((it, i) => (
+          <span key={i} className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary/50" />
+            {it}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -59,6 +153,7 @@ function Index() {
       <Navbar />
       <main className="flex-1">
         <HeroSection />
+        <IndustryMarquee />
         <ProblemSection />
         <SolutionSection />
         <ServicesSection />
@@ -330,21 +425,20 @@ function ProblemSection() {
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {problems.map((p) => (
-            <div
-              key={p.title}
-              className="group flex gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--destructive)]/10">
-                <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
+          {problems.map((p, i) => (
+            <Reveal key={p.title} delay={i * 80}>
+              <div className="group flex h-full gap-4 rounded-2xl border border-border bg-white p-5 tilt-hover hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--destructive)]/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-display text-base font-bold text-foreground">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <h3 className="font-display text-base font-bold text-foreground">
-                  {p.title}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -387,7 +481,7 @@ function SolutionSection() {
           eyebrow="La solución"
           title={
             <>
-              Con el <span className="gradient-text">Sistema Eleva360</span>{" "}
+              Con el <span className="gradient-text-animated">Sistema Eleva360</span>{" "}
               todo trabaja en conjunto.
             </>
           }
@@ -417,20 +511,22 @@ function SolutionSection() {
               strokeWidth="2"
               strokeDasharray="6 8"
               opacity="0.55"
+              className="animate-dash-flow"
             />
           </svg>
 
           <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {nodes.map((n, i) => (
-              <div
-                key={n.title}
-                className="group relative rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
-              >
+              <Reveal key={n.title} delay={i * 120} variant="zoom">
+                <div
+                  className="group relative h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 animate-float-slow"
+                  style={{ animationDelay: `${i * 400}ms` }}
+                >
                 <div className="absolute -top-3 left-6 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                   0{i + 1}
                 </div>
                 <div
-                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl"
+                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                   style={{ background: `color-mix(in oklab, ${n.color} 15%, transparent)` }}
                 >
                   <n.icon className="h-6 w-6" style={{ color: n.color }} />
@@ -439,7 +535,8 @@ function SolutionSection() {
                   {n.title}
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
-              </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -475,15 +572,16 @@ function ServiceCard({
       onAnimationEnd={() => setRevealed(true)}
       style={{ animationDelay: `${index * 120}ms` }}
       className={[
-        "group flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm",
+        "group card-shine relative flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm",
         "transition-all duration-300 ease-out",
         "hover:-translate-y-2 hover:scale-[1.02] hover:border-primary hover:shadow-xl hover:shadow-primary/10",
         isAnimating ? "animate-service-card" : "",
         visible ? "opacity-100" : "opacity-0",
       ].join(" ")}
     >
+      <span aria-hidden className="card-shine-inner" />
       <div
-        className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
+        className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
         style={{ background: `color-mix(in oklab, ${color} 15%, transparent)` }}
       >
         <Icon className="h-6 w-6" />
@@ -505,10 +603,10 @@ function ServiceCard({
         href={WHATSAPP_URL}
         target="_blank"
         rel="noreferrer"
-        className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-primary hover:text-white"
+        className="group/btn mt-8 inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-primary hover:text-white"
       >
         Quiero este servicio
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
       </a>
     </div>
   );
@@ -648,11 +746,11 @@ function PlanSection() {
 
 function BenefitsSection() {
   const items = [
-    { icon: TrendingUp, label: "Más visibilidad", value: "+320%", color: "var(--color-g-blue)" },
-    { icon: Phone, label: "Más llamadas", value: "+180%", color: "var(--color-g-red)" },
-    { icon: MessageCircle, label: "Más mensajes", value: "+240%", color: "var(--color-g-green)" },
-    { icon: Star, label: "Más reseñas", value: "+5x", color: "var(--color-g-yellow)" },
-    { icon: Users, label: "Más clientes", value: "+60%", color: "var(--primary)" },
+    { icon: TrendingUp, label: "Más visibilidad", to: 320, prefix: "+", suffix: "%", color: "var(--color-g-blue)" },
+    { icon: Phone, label: "Más llamadas", to: 180, prefix: "+", suffix: "%", color: "var(--color-g-red)" },
+    { icon: MessageCircle, label: "Más mensajes", to: 240, prefix: "+", suffix: "%", color: "var(--color-g-green)" },
+    { icon: Star, label: "Más reseñas", to: 5, prefix: "+", suffix: "x", color: "var(--color-g-yellow)" },
+    { icon: Users, label: "Más clientes", to: 60, prefix: "+", suffix: "%", color: "var(--primary)" },
   ];
 
   return (
@@ -664,24 +762,23 @@ function BenefitsSection() {
           subtitle="Métricas promedio observadas en los primeros 90 días con el Sistema Eleva360."
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {items.map((s) => (
-            <div
-              key={s.label}
-              className="group rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div
-                className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl"
-                style={{ background: `color-mix(in oklab, ${s.color} 15%, transparent)` }}
-              >
-                <s.icon className="h-5 w-5" style={{ color: s.color }} />
+          {items.map((s, i) => (
+            <Reveal key={s.label} delay={i * 100} variant="zoom">
+              <div className="group h-full rounded-2xl border border-border bg-white p-5 text-center shadow-sm tilt-hover hover:shadow-lg">
+                <div
+                  className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                  style={{ background: `color-mix(in oklab, ${s.color} 15%, transparent)` }}
+                >
+                  <s.icon className="h-5 w-5" style={{ color: s.color }} />
+                </div>
+                <div className="font-display text-2xl font-extrabold text-foreground tabular-nums">
+                  <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
+                </div>
+                <div className="mt-1 text-sm font-medium text-muted-foreground">
+                  {s.label}
+                </div>
               </div>
-              <div className="font-display text-2xl font-extrabold text-foreground">
-                {s.value}
-              </div>
-              <div className="mt-1 text-sm font-medium text-muted-foreground">
-                {s.label}
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -705,19 +802,18 @@ function WhySection() {
           title="Una agencia que trabaja como parte de tu equipo."
         />
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((it) => (
-            <div
-              key={it.title}
-              className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
-            >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <it.icon className="h-6 w-6" />
-              </div>
+          {items.map((it, i) => (
+            <Reveal key={it.title} delay={i * 100}>
+              <div className="group h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-lg">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                  <it.icon className="h-6 w-6" />
+                </div>
               <h3 className="font-display text-lg font-bold text-foreground">
                 {it.title}
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
-            </div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -822,7 +918,7 @@ function WhatsAppFloating() {
       target="_blank"
       rel="noreferrer"
       aria-label="Hablar por WhatsApp"
-      className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-g-green)] text-white shadow-xl shadow-[color:var(--color-g-green)]/40 transition-transform hover:scale-110"
+      className="animate-wa-bob fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-g-green)] text-white shadow-xl shadow-[color:var(--color-g-green)]/40 transition-transform hover:scale-110"
     >
       <MessageCircle className="h-6 w-6" />
       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--color-g-green)]/40" />

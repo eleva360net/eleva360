@@ -434,4 +434,128 @@
   animation-delay: 100ms;
 }
 
+/* ————— Reveal on scroll ————— */
+@keyframes reveal-up {
+  0% { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-left {
+  0% { opacity: 0; transform: translateX(-28px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes reveal-right {
+  0% { opacity: 0; transform: translateX(28px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes reveal-zoom {
+  0% { opacity: 0; transform: scale(0.94); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@utility reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+@utility reveal-visible {
+  animation: reveal-up 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@utility reveal-left-visible {
+  animation: reveal-left 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@utility reveal-right-visible {
+  animation: reveal-right 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@utility reveal-zoom-visible {
+  animation: reveal-zoom 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ————— Marquee ————— */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@utility animate-marquee {
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+/* ————— Shine sweep for cards ————— */
+@keyframes shine-sweep {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  100% { transform: translateX(220%) skewX(-20deg); }
+}
+@utility card-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+@utility card-shine-inner {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklab, var(--primary) 18%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%) skewX(-20deg);
+  transition: opacity 200ms ease-out;
+  opacity: 0;
+}
+.group:hover .card-shine-inner {
+  opacity: 1;
+  animation: shine-sweep 900ms ease-out forwards;
+}
+
+/* ————— Slow float (staggered) ————— */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@utility animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ————— Animated dashed line ————— */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -140; }
+}
+@utility animate-dash-flow {
+  animation: dash-flow 6s linear infinite;
+}
+
+/* ————— Gradient text shimmer ————— */
+@keyframes gradient-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@utility gradient-text-animated {
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end), var(--gradient-mid), var(--gradient-start));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shimmer 8s ease-in-out infinite;
+}
+
+/* ————— Tilt hover for cards ————— */
+@utility tilt-hover {
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 400ms ease-out, border-color 300ms ease-out;
+}
+.tilt-hover:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-3deg) translateY(-6px);
+}
+
+/* ————— WhatsApp floating pulse ————— */
+@keyframes wa-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-3deg); }
+}
+@utility animate-wa-bob {
+  animation: wa-bob 3.5s ease-in-out infinite;
+}
+
 
