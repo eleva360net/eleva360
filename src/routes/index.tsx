@@ -572,15 +572,16 @@ function ServiceCard({
       onAnimationEnd={() => setRevealed(true)}
       style={{ animationDelay: `${index * 120}ms` }}
       className={[
-        "group flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm",
+        "group card-shine relative flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm",
         "transition-all duration-300 ease-out",
         "hover:-translate-y-2 hover:scale-[1.02] hover:border-primary hover:shadow-xl hover:shadow-primary/10",
         isAnimating ? "animate-service-card" : "",
         visible ? "opacity-100" : "opacity-0",
       ].join(" ")}
     >
+      <span aria-hidden className="card-shine-inner" />
       <div
-        className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl"
+        className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
         style={{ background: `color-mix(in oklab, ${color} 15%, transparent)` }}
       >
         <Icon className="h-6 w-6" />
@@ -602,10 +603,10 @@ function ServiceCard({
         href={WHATSAPP_URL}
         target="_blank"
         rel="noreferrer"
-        className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-primary hover:text-white"
+        className="group/btn mt-8 inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-primary hover:text-white"
       >
         Quiero este servicio
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
       </a>
     </div>
   );
