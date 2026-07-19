@@ -746,11 +746,11 @@ function PlanSection() {
 
 function BenefitsSection() {
   const items = [
-    { icon: TrendingUp, label: "Más visibilidad", value: "+320%", color: "var(--color-g-blue)" },
-    { icon: Phone, label: "Más llamadas", value: "+180%", color: "var(--color-g-red)" },
-    { icon: MessageCircle, label: "Más mensajes", value: "+240%", color: "var(--color-g-green)" },
-    { icon: Star, label: "Más reseñas", value: "+5x", color: "var(--color-g-yellow)" },
-    { icon: Users, label: "Más clientes", value: "+60%", color: "var(--primary)" },
+    { icon: TrendingUp, label: "Más visibilidad", to: 320, prefix: "+", suffix: "%", color: "var(--color-g-blue)" },
+    { icon: Phone, label: "Más llamadas", to: 180, prefix: "+", suffix: "%", color: "var(--color-g-red)" },
+    { icon: MessageCircle, label: "Más mensajes", to: 240, prefix: "+", suffix: "%", color: "var(--color-g-green)" },
+    { icon: Star, label: "Más reseñas", to: 5, prefix: "+", suffix: "x", color: "var(--color-g-yellow)" },
+    { icon: Users, label: "Más clientes", to: 60, prefix: "+", suffix: "%", color: "var(--primary)" },
   ];
 
   return (
@@ -762,24 +762,23 @@ function BenefitsSection() {
           subtitle="Métricas promedio observadas en los primeros 90 días con el Sistema Eleva360."
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {items.map((s) => (
-            <div
-              key={s.label}
-              className="group rounded-2xl border border-border bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div
-                className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl"
-                style={{ background: `color-mix(in oklab, ${s.color} 15%, transparent)` }}
-              >
-                <s.icon className="h-5 w-5" style={{ color: s.color }} />
+          {items.map((s, i) => (
+            <Reveal key={s.label} delay={i * 100} variant="zoom">
+              <div className="group h-full rounded-2xl border border-border bg-white p-5 text-center shadow-sm tilt-hover hover:shadow-lg">
+                <div
+                  className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                  style={{ background: `color-mix(in oklab, ${s.color} 15%, transparent)` }}
+                >
+                  <s.icon className="h-5 w-5" style={{ color: s.color }} />
+                </div>
+                <div className="font-display text-2xl font-extrabold text-foreground tabular-nums">
+                  <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
+                </div>
+                <div className="mt-1 text-sm font-medium text-muted-foreground">
+                  {s.label}
+                </div>
               </div>
-              <div className="font-display text-2xl font-extrabold text-foreground">
-                {s.value}
-              </div>
-              <div className="mt-1 text-sm font-medium text-muted-foreground">
-                {s.label}
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -803,19 +802,18 @@ function WhySection() {
           title="Una agencia que trabaja como parte de tu equipo."
         />
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((it) => (
-            <div
-              key={it.title}
-              className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
-            >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <it.icon className="h-6 w-6" />
-              </div>
+          {items.map((it, i) => (
+            <Reveal key={it.title} delay={i * 100}>
+              <div className="group h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-lg">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                  <it.icon className="h-6 w-6" />
+                </div>
               <h3 className="font-display text-lg font-bold text-foreground">
                 {it.title}
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
-            </div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -920,7 +918,7 @@ function WhatsAppFloating() {
       target="_blank"
       rel="noreferrer"
       aria-label="Hablar por WhatsApp"
-      className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-g-green)] text-white shadow-xl shadow-[color:var(--color-g-green)]/40 transition-transform hover:scale-110"
+      className="animate-wa-bob fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-g-green)] text-white shadow-xl shadow-[color:var(--color-g-green)]/40 transition-transform hover:scale-110"
     >
       <MessageCircle className="h-6 w-6" />
       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--color-g-green)]/40" />
