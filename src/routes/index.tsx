@@ -272,7 +272,7 @@ function Logo() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+    <section className="relative flex min-h-[88vh] items-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
         <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
@@ -289,25 +289,24 @@ function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Haz que te encuentren.
-            <br />
-            <span className="text-primary">Convierte búsquedas</span> en clientes.
-          </h1>
+          <h1 className="animate-hero-fade-up font-display text-5xl font-extrabold leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+  Consigue más clientes
+  <br />
+  desde <span className="text-primary">Google Maps</span>.
+</h1>
 
-          <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Ayudamos a negocios locales a aparecer primero en Google, captar
-            más clientes por WhatsApp y vender más sin depender de publicidad pagada.
-          </p>
+<p className="animate-hero-fade-up animation-delay-200 mt-8 max-w-2xl text-xl leading-relaxed text-muted-foreground">
+  Optimizamos tu presencia en Google Maps, automatizamos WhatsApp y mejoramos tu perfil para que más personas encuentren tu negocio y te contacten todos los días.
+</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+<div className="mt-8 flex flex-wrap gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
               className="animate-hero-scale-in animation-delay-300 group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30"
             >
-              Quiero más clientes
+              Quiero una evaluación gratuita
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </a>
             <a
