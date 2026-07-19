@@ -199,7 +199,7 @@ function HeroSection() {
 
           <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Ayudamos a negocios locales a aparecer primero en Google, captar
-            más clientes por WhatsApp y vender más sin depender de publicidad.
+            más clientes por WhatsApp y vender más sin depender de publicidad pagada.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
