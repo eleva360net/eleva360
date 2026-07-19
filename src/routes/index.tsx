@@ -29,6 +29,9 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 import heroImage from "../assets/hero-eleva360.jpg";
+import serviceMapsImg from "../assets/service-maps.jpg";
+import serviceMenuImg from "../assets/service-menu.jpg";
+import serviceWhatsappImg from "../assets/service-whatsapp.jpg";
 
 const WHATSAPP_URL =
   "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
@@ -154,9 +157,9 @@ function Index() {
       <main className="flex-1">
         <HeroSection />
         <IndustryMarquee />
+        <ServicesSection />
         <ProblemSection />
         <SolutionSection />
-        <ServicesSection />
         <PlanSection />
         <BenefitsSection />
         <WhySection />
@@ -552,6 +555,7 @@ function ServiceCard({
   features,
   color,
   index,
+  illustration,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
@@ -559,6 +563,7 @@ function ServiceCard({
   features: string[];
   color: string;
   index: number;
+  illustration: string;
 }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 }, true);
   const [revealed, setRevealed] = useState(false);
@@ -572,7 +577,7 @@ function ServiceCard({
       onAnimationEnd={() => setRevealed(true)}
       style={{ animationDelay: `${index * 120}ms` }}
       className={[
-        "group card-shine relative flex flex-col rounded-3xl border border-border bg-white p-7 shadow-sm",
+        "group card-shine relative flex flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-sm",
         "transition-all duration-300 ease-out",
         "hover:-translate-y-2 hover:scale-[1.02] hover:border-primary hover:shadow-xl hover:shadow-primary/10",
         isAnimating ? "animate-service-card" : "",
@@ -581,33 +586,52 @@ function ServiceCard({
     >
       <span aria-hidden className="card-shine-inner" />
       <div
-        className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-        style={{ background: `color-mix(in oklab, ${color} 15%, transparent)` }}
+        className="relative aspect-[5/3] w-full overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, color-mix(in oklab, ${color} 10%, white), color-mix(in oklab, ${color} 3%, white))`,
+        }}
       >
-        <Icon className="h-6 w-6" />
+        <img
+          src={illustration}
+          alt=""
+          aria-hidden
+          width={1024}
+          height={768}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+        <div
+          className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 shadow-md ring-1 ring-black/5 backdrop-blur transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+        >
+          <Icon className="h-5 w-5" />
+        </div>
       </div>
-      <h3 className="font-display text-xl font-bold text-foreground">{title}</h3>
-      <div className="mt-3 flex items-baseline gap-1.5">
-        <span className="font-display text-3xl font-extrabold text-foreground">{price}</span>
-        <span className="text-sm text-muted-foreground">CLP</span>
+      <div className="flex flex-1 flex-col p-7">
+        <h3 className="font-display text-xl font-bold text-foreground">{title}</h3>
+        <div className="mt-3 flex items-baseline gap-1.5">
+          <span className="font-display text-3xl font-extrabold text-foreground">{price}</span>
+          <span className="text-sm text-muted-foreground">CLP</span>
+        </div>
+        <ul className="mt-6 space-y-2.5">
+          {features.map((f) => (
+            <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-g-green)]" />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="group/btn mt-auto pt-8 inline-flex items-center justify-center gap-1.5"
+        >
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-white">
+            Quiero este servicio
+            <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+          </span>
+        </a>
       </div>
-      <ul className="mt-6 space-y-2.5">
-        {features.map((f) => (
-          <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-g-green)]" />
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noreferrer"
-        className="group/btn mt-8 inline-flex items-center justify-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-primary hover:text-white"
-      >
-        Quiero este servicio
-        <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-      </a>
     </div>
   );
 }
@@ -629,6 +653,7 @@ function ServicesSection() {
             title="Optimización Google Maps"
             price="$60.000"
             color="var(--color-g-blue)"
+            illustration={serviceMapsImg}
             features={[
               "Optimización completa del perfil",
               "SEO Local por zona y categoría",
@@ -645,6 +670,7 @@ function ServicesSection() {
             title="Carta Digital + QR"
             price="$40.000"
             color="var(--color-g-red)"
+            illustration={serviceMenuImg}
             features={[
               "Diseño 100% responsive",
               "Integración con Google Business",
@@ -658,6 +684,7 @@ function ServicesSection() {
             title="WhatsApp Automatizado"
             price="$40.000"
             color="var(--color-g-green)"
+            illustration={serviceWhatsappImg}
             features={[
               "Botón de WhatsApp en Google",
               "Mensaje automático de bienvenida",
