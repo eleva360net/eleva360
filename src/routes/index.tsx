@@ -153,6 +153,7 @@ function Index() {
       <Navbar />
       <main className="flex-1">
         <HeroSection />
+        <IndustryMarquee />
         <ProblemSection />
         <SolutionSection />
         <ServicesSection />
@@ -424,21 +425,20 @@ function ProblemSection() {
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {problems.map((p) => (
-            <div
-              key={p.title}
-              className="group flex gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--destructive)]/10">
-                <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
+          {problems.map((p, i) => (
+            <Reveal key={p.title} delay={i * 80}>
+              <div className="group flex h-full gap-4 rounded-2xl border border-border bg-white p-5 tilt-hover hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--destructive)]/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-display text-base font-bold text-foreground">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <h3 className="font-display text-base font-bold text-foreground">
-                  {p.title}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -481,7 +481,7 @@ function SolutionSection() {
           eyebrow="La solución"
           title={
             <>
-              Con el <span className="gradient-text">Sistema Eleva360</span>{" "}
+              Con el <span className="gradient-text-animated">Sistema Eleva360</span>{" "}
               todo trabaja en conjunto.
             </>
           }
@@ -511,20 +511,22 @@ function SolutionSection() {
               strokeWidth="2"
               strokeDasharray="6 8"
               opacity="0.55"
+              className="animate-dash-flow"
             />
           </svg>
 
           <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {nodes.map((n, i) => (
-              <div
-                key={n.title}
-                className="group relative rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
-              >
+              <Reveal key={n.title} delay={i * 120} variant="zoom">
+                <div
+                  className="group relative h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 animate-float-slow"
+                  style={{ animationDelay: `${i * 400}ms` }}
+                >
                 <div className="absolute -top-3 left-6 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                   0{i + 1}
                 </div>
                 <div
-                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl"
+                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                   style={{ background: `color-mix(in oklab, ${n.color} 15%, transparent)` }}
                 >
                   <n.icon className="h-6 w-6" style={{ color: n.color }} />
@@ -533,7 +535,8 @@ function SolutionSection() {
                   {n.title}
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
-              </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
