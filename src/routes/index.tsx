@@ -25,13 +25,107 @@ import {
   Utensils,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 import heroImage from "../assets/hero-eleva360.jpg";
 
 const WHATSAPP_URL =
   "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
+
+/* ————— Motion helpers ————— */
+function Reveal({
+  children,
+  as: Tag = "div",
+  delay = 0,
+  variant = "up",
+  className = "",
+}: {
+  children: React.ReactNode;
+  as?: any;
+  delay?: number;
+  variant?: "up" | "left" | "right" | "zoom";
+  className?: string;
+}) {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.15 }, true);
+  const visibleCls =
+    variant === "left"
+      ? "reveal-left-visible"
+      : variant === "right"
+      ? "reveal-right-visible"
+      : variant === "zoom"
+      ? "reveal-zoom-visible"
+      : "reveal-visible";
+  return (
+    <Tag
+      ref={ref as any}
+      style={{ animationDelay: `${delay}ms` }}
+      className={`reveal ${inView ? visibleCls : ""} ${className}`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+function CountUp({
+  to,
+  suffix = "",
+  prefix = "",
+  duration = 1600,
+}: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+}) {
+  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.4 }, true);
+  const [value, setValue] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (!inView || started.current) return;
+    started.current = true;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setValue(Math.round(to * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to, duration]);
+  return (
+    <span ref={ref}>
+      {prefix}
+      {value}
+      {suffix}
+    </span>
+  );
+}
+
+function IndustryMarquee() {
+  const items = [
+    "Restaurantes", "Cafeterías", "Peluquerías", "Barberías", "Clínicas dentales",
+    "Talleres mecánicos", "Veterinarias", "Gimnasios", "Panaderías", "Farmacias",
+    "Estudios de tatuajes", "Escuelas de manejo", "Ferreterías", "Notarías",
+  ];
+  const row = [...items, ...items];
+  return (
+    <div className="relative overflow-hidden border-y border-border bg-white/60 py-4 backdrop-blur-sm">
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
+      <div className="animate-marquee flex w-max gap-8 whitespace-nowrap">
+        {row.map((it, i) => (
+          <span key={i} className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary/50" />
+            {it}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   component: Index,
