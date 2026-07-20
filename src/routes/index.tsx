@@ -2,14 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Check,
-  ChevronRight,
   Instagram,
   Facebook,
   MapPin,
   MessageCircle,
   Menu,
-  Phone,
-  QrCode,
   Sparkles,
   Star,
   Store,
@@ -22,19 +19,27 @@ import {
   ShieldCheck,
   HeartHandshake,
   Target,
-  Utensils,
+  Clock,
   X,
+  Layers,
+  Workflow,
+  LineChart,
+  ShoppingCart,
+  CalendarCheck,
+  Cpu,
+  LayoutDashboard,
+  Globe,
+  Rocket,
+  Wrench,
+  Gauge,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 import heroImage from "../assets/hero-eleva360.jpg";
-import serviceMapsImg from "../assets/service-maps.jpg";
-import serviceMenuImg from "../assets/service-menu.jpg";
-import serviceWhatsappImg from "../assets/service-whatsapp.jpg";
 
 const WHATSAPP_URL =
-  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20m%C3%A1s%20clientes%20desde%20Google";
+  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20negocio";
 
 /* ————— Motion helpers ————— */
 function Reveal({
@@ -134,15 +139,15 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Eleva360 — Más clientes desde Google para tu negocio local" },
+      { title: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
       {
         name: "description",
         content:
-          "Ayudamos a negocios locales en Chile a aparecer primero en Google Maps, captar clientes por WhatsApp y vender más. SEO Local, Google Business Profile, carta digital y automatización.",
+          "Eleva360 implementa soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Tú te enfocas en tu negocio, nosotros en su presencia digital.",
       },
-      { name: "keywords", content: "Google Maps, Google Business Profile, SEO Local, Marketing Digital, WhatsApp Business, Carta Digital, Negocios Locales, Chile" },
-      { property: "og:title", content: "Eleva360 — Más clientes desde Google para tu negocio local" },
-      { property: "og:description", content: "Ayudamos a negocios locales en Chile a aparecer primero en Google Maps, captar clientes por WhatsApp y vender más. SEO Local, Google Business Profile, carta digital y automatización." },
+      { name: "keywords", content: "Soluciones digitales, tecnología para negocios, automatización, presencia digital, transformación digital, Chile" },
+      { property: "og:title", content: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
+      { property: "og:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
     ],
@@ -157,11 +162,12 @@ function Index() {
       <main className="flex-1">
         <HeroSection />
         <IndustryMarquee />
-        <ServicesSection />
         <ProblemSection />
         <SolutionSection />
+        <HowItWorksSection />
+        <ResultsSection />
         <PlanSection />
-        <BenefitsSection />
+        <FutureSection />
         <WhySection />
         <CTASection />
       </main>
@@ -175,10 +181,10 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { label: "Sistema", href: "#solucion" },
-    { label: "Servicios", href: "#servicios" },
+    { label: "Solución", href: "#solucion" },
+    { label: "Cómo funciona", href: "#como-funciona" },
     { label: "Plan Impulso", href: "#plan" },
-    { label: "Por qué Eleva360", href: "#porque" },
+    { label: "Ecosistema", href: "#futuro" },
   ];
 
   return (
@@ -203,10 +209,10 @@ function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-g-green)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
           >
-            <MessageCircle className="h-4 w-4" />
-            WhatsApp
+            Diagnóstico gratis
+            <ArrowRight className="h-4 w-4" />
           </a>
         </div>
 
@@ -238,9 +244,9 @@ function Navbar() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-g-green)] px-5 py-2.5 text-sm font-semibold text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
             >
-              <MessageCircle className="h-4 w-4" /> Hablar por WhatsApp
+              Solicitar diagnóstico gratuito
             </a>
           </nav>
         </div>
@@ -259,7 +265,7 @@ function Logo() {
         />
         <div className="logo-gradient animate-logo-gradient-shift animate-logo-float relative flex h-10 w-10 items-center justify-center rounded-full shadow-lg shadow-primary/15">
           <div className="animate-logo-icon-rotate">
-            <MapPin className="h-5 w-5 text-white" strokeWidth={2.5} />
+            <Sparkles className="h-5 w-5 text-white" strokeWidth={2.5} />
           </div>
         </div>
       </div>
@@ -281,65 +287,62 @@ function HeroSection() {
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
         <div className="flex flex-col items-start text-left">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-[color:var(--color-g-green)]">
-              <span className="h-2 w-2 animate-ping rounded-full bg-[color:var(--color-g-green)]/60" />
+            <span className="flex h-2 w-2 rounded-full bg-primary">
+              <span className="h-2 w-2 animate-ping rounded-full bg-primary/60" />
             </span>
             <span className="text-xs font-semibold tracking-wide text-muted-foreground">
-              Especialistas en negocios locales · Chile
+              Soluciones digitales para negocios · Chile
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up font-display text-5xl font-extrabold leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-  Consigue más clientes
-  <br />
-  desde <span className="text-primary">Google Maps</span>.
-</h1>
+          <h1 className="animate-hero-fade-up font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            Haz crecer tu negocio
+            <br />
+            mientras nosotros nos encargamos de tu{" "}
+            <span className="gradient-text-animated">presencia digital</span>.
+          </h1>
 
-<p className="animate-hero-fade-up animation-delay-200 mt-8 max-w-2xl text-xl leading-relaxed text-muted-foreground">
-  Optimizamos tu presencia en Google Maps, automatizamos WhatsApp y mejoramos tu perfil para que más personas encuentren tu negocio y te contacten todos los días.
-</p>
+          <p className="animate-hero-fade-up animation-delay-200 mt-8 max-w-2xl text-xl leading-relaxed text-muted-foreground">
+            Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
+          </p>
 
-<div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
               className="animate-hero-scale-in animation-delay-300 group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30"
             >
-              Quiero una evaluación gratuita
+              Solicitar diagnóstico gratuito
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="animate-hero-fade-up animation-delay-400 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-[color:var(--color-g-green)] hover:text-[color:var(--color-g-green)]"
+              href="#como-funciona"
+              className="animate-hero-fade-up animation-delay-400 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
             >
-              <MessageCircle className="h-5 w-5 text-[color:var(--color-g-green)]" />
-              Hablar por WhatsApp
+              Ver cómo funciona
             </a>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4 text-primary" /> +80 negocios activos
+              <ShieldCheck className="h-4 w-4 text-primary" /> Implementación sin fricción
             </span>
             <span className="flex items-center gap-1.5">
-              <Star className="h-4 w-4 fill-[color:var(--color-g-yellow)] text-[color:var(--color-g-yellow)]" />
-              4.9 promedio en reseñas
+              <Zap className="h-4 w-4 text-accent" /> Resultados desde el primer mes
             </span>
             <span className="flex items-center gap-1.5">
-              <Zap className="h-4 w-4 text-accent" /> Resultados en 30 días
+              <HeartHandshake className="h-4 w-4 text-primary" /> Acompañamiento continuo
             </span>
           </div>
         </div>
 
         <div className="animate-hero-fade-up animation-delay-300 relative">
-          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-[color:var(--color-g-blue)]/5 to-accent/10 blur-2xl" />
+          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
           <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
             <img
               src={heroImage}
-              alt="Negocio local creciendo con Google Maps, WhatsApp y reseñas"
+              alt="Ecosistema digital que impulsa el crecimiento de un negocio"
               className="aspect-square w-full rounded-2xl object-cover"
               width={1024}
               height={1024}
@@ -347,23 +350,22 @@ function HeroSection() {
             />
           </div>
 
-          {/* Floating badges */}
           <div className="absolute -left-3 top-8 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[color:var(--color-g-blue)]/10">
-              <MapPin className="h-4 w-4 text-[color:var(--color-g-blue)]" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+              <Gauge className="h-4 w-4 text-primary" />
             </div>
             <div>
-              <div className="text-xs text-muted-foreground">Ranking Maps</div>
-              <div className="text-sm font-bold text-foreground">#1 en tu zona</div>
+              <div className="text-xs text-muted-foreground">Sistema activo</div>
+              <div className="text-sm font-bold text-foreground">Automatizado 24/7</div>
             </div>
           </div>
           <div className="absolute -right-3 bottom-10 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[color:var(--color-g-green)]/10">
-              <MessageCircle className="h-4 w-4 text-[color:var(--color-g-green)]" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
+              <TrendingUp className="h-4 w-4 text-accent" />
             </div>
             <div>
-              <div className="text-xs text-muted-foreground">Nuevo cliente</div>
-              <div className="text-sm font-bold text-foreground">+156% mensajes</div>
+              <div className="text-xs text-muted-foreground">Este mes</div>
+              <div className="text-sm font-bold text-foreground">Crecimiento sostenido</div>
             </div>
           </div>
         </div>
@@ -384,9 +386,7 @@ function SectionHeader({
   align?: "center" | "left";
 }) {
   return (
-    <div
-      className={`mx-auto max-w-2xl ${align === "center" ? "text-center" : "text-left"}`}
-    >
+    <div className={`mx-auto max-w-2xl ${align === "center" ? "text-center" : "text-left"}`}>
       {eyebrow && (
         <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
           {eyebrow}
@@ -395,21 +395,19 @@ function SectionHeader({
       <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
       </h2>
-      {subtitle && (
-        <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>
-      )}
+      {subtitle && <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>}
     </div>
   );
 }
 
 function ProblemSection() {
   const problems = [
-    { icon: Star, title: "Pocas reseñas", desc: "La gente no confía si no te ven recomendado." },
-    { icon: Search, title: "No apareces primero", desc: "Tu competencia se lleva las búsquedas locales." },
-    { icon: Phone, title: "Llaman a la competencia", desc: "Los clientes eligen al que aparece antes." },
-    { icon: MessageCircle, title: "WhatsApp desordenado", desc: "Mensajes que se pierden y clientes que no vuelven." },
-    { icon: Store, title: "Perfil abandonado", desc: "Fotos viejas, horarios erróneos, cero información." },
-    { icon: Utensils, title: "Sin menú digital", desc: "Los clientes se van si no ven qué ofreces." },
+    { icon: Search, title: "No aparecen bien en Google", desc: "Nuevos clientes buscan y encuentran a otros primero." },
+    { icon: MessageCircle, title: "Responden tarde por WhatsApp", desc: "Los mensajes se pierden y las oportunidades también." },
+    { icon: Store, title: "Sus clientes no encuentran información", desc: "Horarios, servicios o precios que nunca están claros." },
+    { icon: Wrench, title: "Siguen usando procesos manuales", desc: "Agendas en papel, planillas sueltas, todo desconectado." },
+    { icon: Clock, title: "Pierden tiempo en tareas repetitivas", desc: "Horas al día en cosas que un sistema podría resolver." },
+    { icon: Star, title: "Su reputación no se cuida", desc: "Reseñas sin responder, marca invisible frente a la competencia." },
   ];
 
   return (
@@ -419,11 +417,11 @@ function ProblemSection() {
           eyebrow="El problema"
           title={
             <>
-              ¿Tu negocio aparece cuando un cliente
-              <span className="text-primary"> busca en Google?</span>
+              Muchos negocios pierden clientes todos los días{" "}
+              <span className="text-primary">sin darse cuenta.</span>
             </>
           }
-          subtitle="Si respondiste 'no sé' o 'no', estos son los problemas que están frenando tu crecimiento."
+          subtitle="La mayoría de los negocios no tiene un problema de esfuerzo. Tiene un problema de sistema."
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -434,9 +432,7 @@ function ProblemSection() {
                   <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-display text-base font-bold text-foreground">
-                    {p.title}
-                  </h3>
+                  <h3 className="font-display text-base font-bold text-foreground">{p.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
                 </div>
               </div>
@@ -453,26 +449,22 @@ function SolutionSection() {
     {
       icon: MapPin,
       title: "Google Business Profile",
-      desc: "Optimizado para aparecer primero en Maps.",
-      color: "var(--color-g-blue)",
+      desc: "Presencia optimizada para que te encuentren cuando importa.",
     },
     {
-      icon: Star,
-      title: "Sistema de Reseñas",
-      desc: "Convierte clientes felices en reseñas 5 estrellas.",
-      color: "var(--color-g-yellow)",
+      icon: MessageCircle,
+      title: "WhatsApp Business",
+      desc: "Comunicación automatizada que responde y ordena tus clientes.",
     },
     {
-      icon: Bot,
-      title: "WhatsApp Automatizado",
-      desc: "Responde 24/7 y no pierdas ni un cliente.",
-      color: "var(--color-g-green)",
+      icon: Globe,
+      title: "Carta y sitio digital",
+      desc: "Información clara siempre disponible, en cualquier dispositivo.",
     },
     {
-      icon: QrCode,
-      title: "Carta Digital + QR",
-      desc: "Tu menú siempre a un escaneo de distancia.",
-      color: "var(--color-g-red)",
+      icon: Layers,
+      title: "Un ecosistema conectado",
+      desc: "Todas las piezas trabajan juntas dentro del sistema Eleva360.",
     },
   ];
 
@@ -483,15 +475,15 @@ function SolutionSection() {
           eyebrow="La solución"
           title={
             <>
-              Con el <span className="gradient-text-animated">Sistema Eleva360</span>{" "}
-              todo trabaja en conjunto.
+              Un{" "}
+              <span className="gradient-text-animated">sistema digital</span>{" "}
+              diseñado para hacer crecer tu negocio.
             </>
           }
-          subtitle="Cuatro piezas conectadas que hacen que tu negocio se encuentre, convierta y crezca — sin que tengas que hacer nada."
+          subtitle="Eleva360 implementa un ecosistema donde todas las herramientas trabajan juntas. No son productos sueltos: son piezas de un mismo sistema."
         />
 
         <div className="relative mt-16">
-          {/* Connecting lines (desktop) */}
           <svg
             aria-hidden
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
@@ -500,10 +492,9 @@ function SolutionSection() {
           >
             <defs>
               <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="var(--color-g-blue)" />
-                <stop offset="33%" stopColor="var(--color-g-yellow)" />
-                <stop offset="66%" stopColor="var(--color-g-green)" />
-                <stop offset="100%" stopColor="var(--color-g-red)" />
+                <stop offset="0%" stopColor="var(--gradient-start)" />
+                <stop offset="50%" stopColor="var(--gradient-mid)" />
+                <stop offset="100%" stopColor="var(--gradient-end)" />
               </linearGradient>
             </defs>
             <path
@@ -524,19 +515,14 @@ function SolutionSection() {
                   className="group relative h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 animate-float-slow"
                   style={{ animationDelay: `${i * 400}ms` }}
                 >
-                <div className="absolute -top-3 left-6 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                  0{i + 1}
-                </div>
-                <div
-                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-                  style={{ background: `color-mix(in oklab, ${n.color} 15%, transparent)` }}
-                >
-                  <n.icon className="h-6 w-6" style={{ color: n.color }} />
-                </div>
-                <h3 className="font-display text-lg font-bold text-foreground">
-                  {n.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
+                  <div className="absolute -top-3 left-6 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                    0{i + 1}
+                  </div>
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    <n.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-foreground">{n.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -547,150 +533,95 @@ function SolutionSection() {
   );
 }
 
-function ServiceCard({
-  icon: Icon,
-  title,
-  price,
-  features,
-  color,
-  index,
-  illustration,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  price: string;
-  features: string[];
-  color: string;
-  index: number;
-  illustration: string;
-}) {
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 }, true);
-  const [revealed, setRevealed] = useState(false);
-
-  const isAnimating = inView && !revealed;
-  const visible = inView || revealed;
+function HowItWorksSection() {
+  const steps = [
+    {
+      icon: Search,
+      title: "Analizamos tu negocio",
+      desc: "Entendemos tu rubro, tus clientes y qué está frenando tu crecimiento.",
+    },
+    {
+      icon: Wrench,
+      title: "Implementamos las herramientas",
+      desc: "Dejamos funcionando cada pieza del sistema, sin que tengas que hacer nada.",
+    },
+    {
+      icon: Workflow,
+      title: "Automatizamos procesos",
+      desc: "Convertimos tareas manuales en flujos que trabajan solos por tu negocio.",
+    },
+    {
+      icon: LineChart,
+      title: "Optimizamos continuamente",
+      desc: "Medimos, ajustamos y mejoramos para que sigas creciendo mes a mes.",
+    },
+  ];
 
   return (
-    <div
-      ref={ref}
-      onAnimationEnd={() => setRevealed(true)}
-      style={{ animationDelay: `${index * 120}ms` }}
-      className={[
-        "group card-shine relative flex flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-sm",
-        "transition-all duration-300 ease-out",
-        "hover:-translate-y-2 hover:scale-[1.02] hover:border-primary hover:shadow-xl hover:shadow-primary/10",
-        isAnimating ? "animate-service-card" : "",
-        visible ? "opacity-100" : "opacity-0",
-      ].join(" ")}
-    >
-      <span aria-hidden className="card-shine-inner" />
-      <div
-        className="relative aspect-[5/3] w-full overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg, color-mix(in oklab, ${color} 10%, white), color-mix(in oklab, ${color} 3%, white))`,
-        }}
-      >
-        <img
-          src={illustration}
-          alt=""
-          aria-hidden
-          width={1024}
-          height={768}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+    <section id="como-funciona" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Cómo funciona"
+          title="Un proceso simple. Un impacto real."
+          subtitle="Cuatro pasos, cero complicaciones. Nosotros hacemos el trabajo técnico, tú ves los resultados."
         />
-        <div
-          className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 shadow-md ring-1 ring-black/5 backdrop-blur transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-        >
-          <Icon className="h-5 w-5" />
+
+        <div className="relative mt-16">
+          <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block" />
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 120}>
+                <div className="relative flex flex-col items-start">
+                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-white shadow-sm">
+                    <span className="font-display text-sm font-bold text-primary">0{i + 1}</span>
+                  </div>
+                  <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10">
+                    <s.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-bold text-foreground">{s.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-7">
-        <h3 className="font-display text-xl font-bold text-foreground">{title}</h3>
-        <div className="mt-3 flex items-baseline gap-1.5">
-          <span className="font-display text-3xl font-extrabold text-foreground">{price}</span>
-          <span className="text-sm text-muted-foreground">CLP</span>
-        </div>
-        <ul className="mt-6 space-y-2.5">
-          {features.map((f) => (
-            <li key={f} className="flex items-start gap-2 text-sm text-foreground/80">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-g-green)]" />
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="group/btn mt-auto pt-8 inline-flex items-center justify-center gap-1.5"
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition-all group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-white">
-            Quiero este servicio
-            <ChevronRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          </span>
-        </a>
-      </div>
-    </div>
+    </section>
   );
 }
 
-function ServicesSection() {
+function ResultsSection() {
+  const items = [
+    { icon: TrendingUp, label: "Más visibilidad", to: 320, prefix: "+", suffix: "%", desc: "Frente a más clientes potenciales cada día." },
+    { icon: MessageCircle, label: "Más conversaciones", to: 240, prefix: "+", suffix: "%", desc: "Contactos ordenados y respondidos a tiempo." },
+    { icon: CalendarCheck, label: "Más reservas", to: 180, prefix: "+", suffix: "%", desc: "Clientes que agendan sin fricción." },
+    { icon: Star, label: "Más reseñas", to: 5, prefix: "+", suffix: "x", desc: "Reputación que trabaja por tu marca." },
+    { icon: Clock, label: "Más tiempo", to: 15, prefix: "+", suffix: "h", desc: "Horas por semana para administrar tu negocio." },
+  ];
+
   return (
-    <section id="servicios" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section className="border-y border-border bg-white px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Servicios"
-          title="Herramientas simples. Resultados reales."
-          subtitle="Elige un servicio puntual o combínalos. Todo pensado para negocios locales que quieren crecer."
+          eyebrow="Resultados"
+          title="Lo que gana tu negocio cuando la tecnología trabaja por ti."
+          subtitle="No hablamos de características. Hablamos de lo que cambia en tu día a día."
         />
-
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          <ServiceCard
-            index={0}
-            icon={(p) => <MapPin {...p} className={`${p.className} text-[color:var(--color-g-blue)]`} />}
-            title="Optimización Google Maps"
-            price="$60.000"
-            color="var(--color-g-blue)"
-            illustration={serviceMapsImg}
-            features={[
-              "Optimización completa del perfil",
-              "SEO Local por zona y categoría",
-              "Categorías, productos y servicios",
-              "Fotos profesionales del negocio",
-              "Mini sitio Google integrado",
-              "QR de reseñas físico",
-              "Perfil listo para convertir",
-            ]}
-          />
-          <ServiceCard
-            index={1}
-            icon={(p) => <QrCode {...p} className={`${p.className} text-[color:var(--color-g-red)]`} />}
-            title="Carta Digital + QR"
-            price="$40.000"
-            color="var(--color-g-red)"
-            illustration={serviceMenuImg}
-            features={[
-              "Diseño 100% responsive",
-              "Integración con Google Business",
-              "Código QR imprimible incluido",
-              "Actualización simple del menú",
-            ]}
-          />
-          <ServiceCard
-            index={2}
-            icon={(p) => <Bot {...p} className={`${p.className} text-[color:var(--color-g-green)]`} />}
-            title="WhatsApp Automatizado"
-            price="$40.000"
-            color="var(--color-g-green)"
-            illustration={serviceWhatsappImg}
-            features={[
-              "Botón de WhatsApp en Google",
-              "Mensaje automático de bienvenida",
-              "Respuestas rápidas configuradas",
-              "Integración con carta digital",
-            ]}
-          />
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {items.map((s, i) => (
+            <Reveal key={s.label} delay={i * 100} variant="zoom">
+              <div className="group h-full rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:shadow-lg">
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  <s.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div className="font-display text-3xl font-extrabold text-foreground tabular-nums">
+                  <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
+                </div>
+                <div className="mt-1 text-sm font-semibold text-foreground">{s.label}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{s.desc}</div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -698,70 +629,62 @@ function ServicesSection() {
 }
 
 function PlanSection() {
-  const features = [
-    "Optimización continua del perfil",
-    "Publicaciones mensuales en Google",
-    "Actualización constante de fotos",
-    "Respuesta profesional a reseñas",
-    "Cambios de horarios y servicios",
-    "Monitoreo del posicionamiento",
-    "Recomendaciones para más clientes",
+  const pillars = [
+    { icon: Gauge, title: "Optimización continua", desc: "Ajustamos y mejoramos cada herramienta mes a mes." },
+    { icon: Rocket, title: "Nuevas mejoras", desc: "Incorporamos capacidades a medida que tu negocio evoluciona." },
+    { icon: LineChart, title: "Acompañamiento estratégico", desc: "Analizamos qué está funcionando y qué elevar al siguiente nivel." },
+    { icon: HeartHandshake, title: "Un equipo a tu lado", desc: "Contacto directo, humano y sin trámites intermedios." },
   ];
 
   return (
-    <section id="plan" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-5xl">
-        <div className="relative overflow-hidden rounded-[2rem] border border-border bg-[color:var(--elevation)] p-8 text-white shadow-2xl shadow-primary/20 sm:p-12 lg:p-14">
-          {/* Decorative glow */}
-          <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
-          <div aria-hidden className="absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
+    <section id="plan" className="px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-[color:var(--elevation)] p-8 text-white shadow-2xl shadow-primary/30 sm:p-14 lg:p-20">
+          <div aria-hidden className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/40 blur-3xl" />
+          <div aria-hidden className="absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-accent/30 blur-3xl" />
+          <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
 
-          <div className="relative grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center">
-            <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
-                <Sparkles className="h-3.5 w-3.5 text-[color:var(--color-g-yellow)]" />
-                Más recomendado
-              </span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-                Plan Impulso
-              </h2>
-              <p className="mt-4 max-w-md text-base text-white/70 sm:text-lg">
-                Nos encargamos de mantener tu negocio activo para que siga
-                apareciendo frente a nuevos clientes todos los meses.
-              </p>
-
-              <div className="mt-6 flex items-baseline gap-2">
-                <span className="font-display text-5xl font-extrabold sm:text-6xl">
-                  $39.990
+          <div className="relative">
+            <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
+                  <Sparkles className="h-3.5 w-3.5 text-accent" />
+                  El corazón de Eleva360
                 </span>
-                <span className="text-white/60">CLP / mes</span>
+                <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                  Plan <span className="gradient-text-animated">Impulso</span>
+                </h2>
+                <p className="mt-5 max-w-xl text-lg text-white/75">
+                  Implementar las herramientas es solo el comienzo. El verdadero valor está en el acompañamiento continuo: un plan que mantiene tu sistema optimizado, incorpora mejoras y acompaña la evolución de tu negocio.
+                </p>
               </div>
 
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
               >
-                Quiero mantener mi negocio creciendo
+                Quiero evolucionar mi negocio
                 <ArrowRight className="h-5 w-5" />
               </a>
             </div>
 
-            <div className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur">
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/60">
-                Incluye cada mes
-              </div>
-              <ul className="mt-4 space-y-3">
-                {features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm text-white/90">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[color:var(--color-g-green)]/20">
-                      <Check className="h-3 w-3 text-[color:var(--color-g-green)]" />
-                    </span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {pillars.map((p) => (
+                <div key={p.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15">
+                    <p.icon className="h-5 w-5 text-white" />
+                  </div>
+                  <h3 className="mt-4 font-display text-base font-bold text-white">{p.title}</h3>
+                  <p className="mt-1.5 text-sm text-white/70">{p.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 flex items-center gap-3 text-sm text-white/60">
+              <Check className="h-4 w-4 text-accent" />
+              No es mantención. Es evolución continua junto a tu negocio.
             </div>
           </div>
         </div>
@@ -770,39 +693,45 @@ function PlanSection() {
   );
 }
 
-function BenefitsSection() {
+function FutureSection() {
   const items = [
-    { icon: TrendingUp, label: "Más visibilidad", to: 320, prefix: "+", suffix: "%", color: "var(--color-g-blue)" },
-    { icon: Phone, label: "Más llamadas", to: 180, prefix: "+", suffix: "%", color: "var(--color-g-red)" },
-    { icon: MessageCircle, label: "Más mensajes", to: 240, prefix: "+", suffix: "%", color: "var(--color-g-green)" },
-    { icon: Star, label: "Más reseñas", to: 5, prefix: "+", suffix: "x", color: "var(--color-g-yellow)" },
-    { icon: Users, label: "Más clientes", to: 60, prefix: "+", suffix: "%", color: "var(--primary)" },
+    { icon: Cpu, title: "Inteligencia Artificial" },
+    { icon: Users, title: "CRM" },
+    { icon: CalendarCheck, title: "Reservas Online" },
+    { icon: LayoutDashboard, title: "Dashboards" },
+    { icon: Workflow, title: "Automatizaciones" },
+    { icon: Globe, title: "Landing Pages" },
+    { icon: ShoppingCart, title: "Comercio Electrónico" },
+    { icon: BarChart3, title: "Analítica avanzada" },
   ];
 
   return (
-    <section className="border-y border-border bg-white px-4 py-16 sm:px-6 lg:px-8">
+    <section id="futuro" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Beneficios"
-          title="Lo que consiguen nuestros clientes"
-          subtitle="Métricas promedio observadas en los primeros 90 días con el Sistema Eleva360."
+          eyebrow="Ecosistema"
+          title={
+            <>
+              Un ecosistema que{" "}
+              <span className="gradient-text-animated">sigue creciendo.</span>
+            </>
+          }
+          subtitle="Eleva360 evoluciona constantemente. Nuevas capacidades se suman al sistema para acompañar la próxima etapa de tu negocio."
         />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {items.map((s, i) => (
-            <Reveal key={s.label} delay={i * 100} variant="zoom">
-              <div className="group h-full rounded-2xl border border-border bg-white p-5 text-center shadow-sm tilt-hover hover:shadow-lg">
-                <div
-                  className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-                  style={{ background: `color-mix(in oklab, ${s.color} 15%, transparent)` }}
-                >
-                  <s.icon className="h-5 w-5" style={{ color: s.color }} />
+
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {items.map((it, i) => (
+            <Reveal key={it.title} delay={i * 70} variant="zoom">
+              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                    <it.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-display text-base font-bold text-foreground">{it.title}</h3>
                 </div>
-                <div className="font-display text-2xl font-extrabold text-foreground tabular-nums">
-                  <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
-                </div>
-                <div className="mt-1 text-sm font-medium text-muted-foreground">
-                  {s.label}
-                </div>
+                <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                  <Sparkles className="h-3 w-3" /> Próximamente
+                </span>
               </div>
             </Reveal>
           ))}
@@ -814,10 +743,10 @@ function BenefitsSection() {
 
 function WhySection() {
   const items = [
-    { icon: HeartHandshake, title: "Atención personalizada", desc: "Trato humano, no un ticket más en un CRM." },
-    { icon: MapPin, title: "Presencial y remoto", desc: "Vamos a tu local o coordinamos por videollamada." },
-    { icon: Target, title: "Especialistas en negocios locales", desc: "Sabemos cómo compite tu rubro en tu zona." },
-    { icon: BarChart3, title: "Resultados medibles", desc: "Reportes claros, sin humo ni palabras raras." },
+    { icon: HeartHandshake, title: "Atención cercana", desc: "Trato humano y directo, no un ticket más en un sistema." },
+    { icon: Layers, title: "Tecnología conectada", desc: "Un ecosistema donde cada pieza potencia a la siguiente." },
+    { icon: Target, title: "Enfocados en tu negocio", desc: "Adaptamos el sistema al rubro y momento de tu empresa." },
+    { icon: BarChart3, title: "Resultados medibles", desc: "Métricas claras, sin jerga técnica ni promesas vacías." },
   ];
 
   return (
@@ -825,7 +754,7 @@ function WhySection() {
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Por qué Eleva360"
-          title="Una agencia que trabaja como parte de tu equipo."
+          title="Una empresa tecnológica que trabaja como parte de tu equipo."
         />
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((it, i) => (
@@ -834,10 +763,8 @@ function WhySection() {
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                   <it.icon className="h-6 w-6" />
                 </div>
-              <h3 className="font-display text-lg font-bold text-foreground">
-                {it.title}
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
+                <h3 className="font-display text-lg font-bold text-foreground">{it.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -855,31 +782,32 @@ function CTASection() {
           <div aria-hidden className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
           <div aria-hidden className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
 
-          <div className="relative mx-auto max-w-2xl">
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-g-green)] shadow-lg">
-              <MessageCircle className="h-7 w-7 text-white" />
+          <div className="relative mx-auto max-w-3xl">
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-lg">
+              <Sparkles className="h-7 w-7 text-white" />
             </div>
             <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-              ¿Listo para conseguir más clientes desde Google?
+              No necesitas aprender marketing.
+              <br />
+              Necesitas un{" "}
+              <span className="gradient-text-animated">sistema digital</span>{" "}
+              que trabaje por tu negocio.
             </h2>
             <p className="mt-6 text-lg text-white/75">
-              Mientras tu competencia espera clientes, nosotros hacemos que te
-              encuentren primero.
+              Nosotros lo diseñamos, lo implementamos y lo mantenemos evolucionando. Tú te enfocas en lo que sabes hacer.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-g-green)] px-7 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
-                <MessageCircle className="h-5 w-5" />
-                Hablar por WhatsApp
+                Quiero hacer crecer mi negocio
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
-            <p className="mt-6 text-sm text-white/50">
-              Respuesta en menos de 1 hora hábil.
-            </p>
+            <p className="mt-6 text-sm text-white/50">Diagnóstico gratuito · Respuesta en menos de 1 hora hábil.</p>
           </div>
         </div>
       </div>
@@ -894,7 +822,7 @@ function Footer() {
         <div className="flex flex-col gap-3">
           <Logo />
           <p className="max-w-sm text-sm text-muted-foreground">
-            Haz que te encuentren. Convierte búsquedas en clientes.
+            Soluciones digitales que hacen crecer tu negocio, sin que tengas que hacerlo tú.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -921,7 +849,7 @@ function Footer() {
             target="_blank"
             rel="noreferrer"
             aria-label="WhatsApp"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[color:var(--color-g-green)] hover:text-[color:var(--color-g-green)]"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
           >
             <MessageCircle className="h-4 w-4" />
           </a>
