@@ -32,6 +32,7 @@ import {
   Rocket,
   Wrench,
   Gauge,
+  QrCode,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
@@ -150,6 +151,10 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { property: "og:image", content: heroImage },
+      { name: "twitter:title", content: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
+      { name: "twitter:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
+      { name: "twitter:image", content: heroImage },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -183,7 +188,7 @@ function Navbar() {
   const links = [
     { label: "Solución", href: "#solucion" },
     { label: "Cómo funciona", href: "#como-funciona" },
-    { label: "Plan Impulso", href: "#plan" },
+    { label: "Plan Crecimiento", href: "#plan" },
     { label: "Ecosistema", href: "#futuro" },
   ];
 
@@ -444,25 +449,145 @@ function ProblemSection() {
   );
 }
 
+/* ————— Mini mockups de interfaz real, en vez de iconos decorativos ————— */
+
+function GoogleProfileMockup() {
+  return (
+    <div className="rounded-xl border border-border bg-[color:var(--muted)] p-3">
+      <div className="flex items-start gap-2.5">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
+          <MapPin className="h-4 w-4 text-[color:var(--color-g-red)]" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-xs font-bold text-foreground">Panadería Los Aromas</div>
+          <div className="mt-0.5 flex items-center gap-1">
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className="h-2.5 w-2.5 fill-[color:var(--color-g-yellow)] text-[color:var(--color-g-yellow)]"
+                />
+              ))}
+            </div>
+            <span className="text-[10px] text-muted-foreground">4.9 · Panadería</span>
+          </div>
+          <span className="mt-1 inline-flex items-center gap-1 text-[10px] font-semibold text-accent">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Abierto ahora
+          </span>
+        </div>
+      </div>
+      <div className="mt-2.5 flex gap-1.5">
+        <span className="flex-1 rounded-md bg-primary py-1 text-center text-[10px] font-semibold text-white">
+          Cómo llegar
+        </span>
+        <span className="flex-1 rounded-md border border-border bg-white py-1 text-center text-[10px] font-semibold text-foreground">
+          Llamar
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function WhatsAppMockup() {
+  return (
+    <div className="overflow-hidden rounded-xl border border-border bg-[color:var(--muted)] p-3">
+      <div className="flex items-center gap-2 border-b border-border/70 pb-2">
+        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent">
+          <MessageCircle className="h-3 w-3 text-white" />
+        </div>
+        <span className="text-[10px] font-bold text-foreground">Eleva360 Bot</span>
+        <span className="ml-auto text-[9px] text-muted-foreground">en línea</span>
+      </div>
+      <div className="mt-2 space-y-1.5">
+        <div className="max-w-[75%] rounded-lg rounded-tl-sm bg-white px-2 py-1 text-[10px] text-foreground shadow-sm">
+          Hola, ¿tienen mesa para hoy?
+        </div>
+        <div className="ml-auto max-w-[78%] rounded-lg rounded-tr-sm bg-accent/15 px-2 py-1 text-[10px] text-foreground">
+          ¡Hola! Sí, tenemos disponibilidad 🙌 ¿Para cuántas personas?
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DigitalMenuMockup() {
+  const items = [
+    { name: "Café de especialidad", price: "$2.500" },
+    { name: "Sandwich artesanal", price: "$5.900" },
+  ];
+  return (
+    <div className="rounded-xl border border-border bg-[color:var(--muted)] p-3">
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-foreground">
+          Carta Digital
+        </span>
+        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-white shadow-sm">
+          <QrCode className="h-3.5 w-3.5 text-primary" />
+        </div>
+      </div>
+      <div className="mt-2 space-y-1.5">
+        {items.map((it) => (
+          <div
+            key={it.name}
+            className="flex items-center justify-between rounded-md bg-white px-2 py-1.5 text-[10px] shadow-sm"
+          >
+            <span className="font-medium text-foreground">{it.name}</span>
+            <span className="font-bold text-primary">{it.price}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EcosystemMockup() {
+  const bars = [55, 85, 40, 70];
+  return (
+    <div className="rounded-xl border border-border bg-[color:var(--muted)] p-3">
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-foreground">
+          Panel Eleva360
+        </span>
+        <LineChart className="h-3.5 w-3.5 text-accent" />
+      </div>
+      <div className="mt-2.5 flex h-14 items-end gap-1.5">
+        {bars.map((h, i) => (
+          <div
+            key={i}
+            className="flex-1 rounded-t-sm bg-gradient-to-t from-primary to-accent"
+            style={{ height: `${h}%` }}
+          />
+        ))}
+      </div>
+      <div className="mt-1.5 flex justify-between text-[9px] text-muted-foreground">
+        <span>Google</span>
+        <span>WhatsApp</span>
+        <span>Carta</span>
+        <span>CRM</span>
+      </div>
+    </div>
+  );
+}
+
 function SolutionSection() {
   const nodes = [
     {
-      icon: MapPin,
+      mockup: GoogleProfileMockup,
       title: "Google Business Profile",
       desc: "Presencia optimizada para que te encuentren cuando importa.",
     },
     {
-      icon: MessageCircle,
+      mockup: WhatsAppMockup,
       title: "WhatsApp Business",
       desc: "Comunicación automatizada que responde y ordena tus clientes.",
     },
     {
-      icon: Globe,
+      mockup: DigitalMenuMockup,
       title: "Carta y sitio digital",
       desc: "Información clara siempre disponible, en cualquier dispositivo.",
     },
     {
-      icon: Layers,
+      mockup: EcosystemMockup,
       title: "Un ecosistema conectado",
       desc: "Todas las piezas trabajan juntas dentro del sistema Eleva360.",
     },
@@ -512,14 +637,14 @@ function SolutionSection() {
             {nodes.map((n, i) => (
               <Reveal key={n.title} delay={i * 120} variant="zoom">
                 <div
-                  className="group relative h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 animate-float-slow"
+                  className="group relative h-full rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 animate-float-slow"
                   style={{ animationDelay: `${i * 400}ms` }}
                 >
-                  <div className="absolute -top-3 left-6 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                  <div className="absolute -top-3 left-5 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                     0{i + 1}
                   </div>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                    <n.icon className="h-6 w-6 text-primary" />
+                  <div className="mb-4 mt-1 transition-transform duration-300 group-hover:scale-[1.02]">
+                    <n.mockup />
                   </div>
                   <h3 className="font-display text-lg font-bold text-foreground">{n.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
@@ -652,7 +777,7 @@ function PlanSection() {
                   El corazón de Eleva360
                 </span>
                 <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                  Plan <span className="gradient-text-animated">Impulso</span>
+                  Plan <span className="gradient-text-animated">Crecimiento</span>
                 </h2>
                 <p className="mt-5 max-w-xl text-lg text-white/75">
                   Implementar las herramientas es solo el comienzo. El verdadero valor está en el acompañamiento continuo: un plan que mantiene tu sistema optimizado, incorpora mejoras y acompaña la evolución de tu negocio.
@@ -872,10 +997,10 @@ function WhatsAppFloating() {
       target="_blank"
       rel="noreferrer"
       aria-label="Hablar por WhatsApp"
-      className="animate-wa-bob fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-g-green)] text-white shadow-xl shadow-[color:var(--color-g-green)]/40 transition-transform hover:scale-110"
+      className="animate-wa-bob fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-xl shadow-accent/40 transition-transform hover:scale-110"
     >
       <MessageCircle className="h-6 w-6" />
-      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--color-g-green)]/40" />
+      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/40" />
     </a>
   );
 }
