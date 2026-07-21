@@ -355,24 +355,6 @@ function HeroSection() {
             />
           </div>
 
-          <div className="absolute -left-3 top-8 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-              <Gauge className="h-4 w-4 text-primary" />
-            </div>
-            <div>
-              <div className="text-xs text-muted-foreground">Sistema activo</div>
-              <div className="text-sm font-bold text-foreground">Automatizado 24/7</div>
-            </div>
-          </div>
-          <div className="absolute -right-3 bottom-10 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
-              <TrendingUp className="h-4 w-4 text-accent" />
-            </div>
-            <div>
-              <div className="text-xs text-muted-foreground">Este mes</div>
-              <div className="text-sm font-bold text-foreground">Crecimiento sostenido</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
