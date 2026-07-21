@@ -289,7 +289,7 @@ function HeroSection() {
         <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_1.25fr]">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
         <div className="flex flex-col items-start text-left">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-primary">
@@ -343,19 +343,19 @@ function HeroSection() {
         </div>
 
         <div className="animate-hero-fade-up animation-delay-300 relative">
-          <div className="animate-hero-float absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-primary/15 via-primary/5 to-accent/15 blur-3xl" />
-          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/15">
+          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
+          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
             <img
               src={heroImage}
-              alt="Ecosistema digital que conecta Google Business, WhatsApp, carta digital y automatización para hacer crecer tu negocio"
-              className="aspect-[16/9] w-full rounded-2xl object-cover"
-              width={1792}
+              alt="Ecosistema digital que impulsa el crecimiento de un negocio"
+              className="aspect-square w-full rounded-2xl object-cover"
+              width={1024}
               height={1024}
               loading="eager"
             />
           </div>
 
-          <div className="absolute -left-4 top-10 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
+          <div className="absolute -left-3 top-8 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
               <Gauge className="h-4 w-4 text-primary" />
             </div>
@@ -364,7 +364,7 @@ function HeroSection() {
               <div className="text-sm font-bold text-foreground">Automatizado 24/7</div>
             </div>
           </div>
-          <div className="absolute -right-4 bottom-12 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
+          <div className="absolute -right-3 bottom-10 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-lg backdrop-blur md:flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
               <TrendingUp className="h-4 w-4 text-accent" />
             </div>
