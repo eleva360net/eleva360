@@ -343,12 +343,12 @@ function HeroSection() {
         </div>
 
         <div className="animate-hero-fade-up animation-delay-300 relative">
-          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
-          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
+          <div className="animate-hero-float absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
+          <div className="animate-hero-float relative overflow-hidden rounded-[2rem] border border-border/50 bg-white/80 p-1 shadow-2xl shadow-primary/10 backdrop-blur-sm">
             <img
               src={heroImage}
-              alt="Ecosistema digital que impulsa el crecimiento de un negocio"
-              className="aspect-square w-full rounded-2xl object-cover"
+              alt="Mockup del ecosistema digital Eleva360: Google Business Profile, WhatsApp y Carta Digital conectados"
+              className="aspect-square w-full rounded-[1.75rem] object-cover"
               width={1024}
               height={1024}
               loading="eager"
