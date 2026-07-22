@@ -707,6 +707,280 @@ function PricingSection() {
     </section>
   );
 }
+function PricingSection() {
+  const implementaciones = [
+    {
+      title: "Google Business Profile",
+      price: "$50.000",
+      unit: "pago único",
+      desc: "Perfil optimizado, SEO Local, fotos, publicaciones y estrategia de reseñas.",
+      illustration: (
+        <svg viewBox="0 0 120 120" className="h-24 w-24">
+          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
+          <path
+            d="M60 24c-14 0-25 11-25 25 0 18 25 47 25 47s25-29 25-47c0-14-11-25-25-25Z"
+            fill="#2563EB"
+          />
+          <circle cx="60" cy="49" r="10" fill="white" />
+        </svg>
+      ),
+    },
+    {
+      title: "Captación por WhatsApp",
+      price: "$35.000",
+      unit: "pago único",
+      desc: "WhatsApp Business, mensajes automáticos, respuestas rápidas e integración con Google.",
+      illustration: (
+        <svg viewBox="0 0 120 120" className="h-24 w-24">
+          <circle cx="60" cy="60" r="52" fill="#22C55E" fillOpacity="0.08" />
+          <path
+            d="M60 28c-18 0-32 14-32 32 0 6 1.6 12 4.5 17L28 92l16-4.3c5 2.8 10.6 4.3 16 4.3 18 0 32-14 32-32s-14-32-32-32Z"
+            fill="#22C55E"
+          />
+          <path
+            d="M48 55c1-2 2-2 3-2h2c.7 0 1.6 0 2 1s3 7 3 8-1 1.5-1.5 2 1 3 4 6 5.5 5 6 4.5 1-2 2-2 7 3 8 3.5 0 4-1 5.5-2.5c1.5-1.5 1.5-3 1-4-.4-.8-8-7.6-11-10-1.5-1.2-3-1.3-4 0"
+            fill="white"
+            stroke="white"
+            strokeWidth="0"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: "Carta Digital + QR",
+      price: "$35.000",
+      unit: "pago único",
+      desc: "Carta responsive, QR personalizado, diseño moderno y actualización sin reimprimir.",
+      illustration: (
+        <svg viewBox="0 0 120 120" className="h-24 w-24">
+          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
+          <rect x="34" y="26" width="52" height="68" rx="8" fill="#2563EB" />
+          <rect x="42" y="36" width="36" height="6" rx="2" fill="white" />
+          <rect x="42" y="48" width="36" height="6" rx="2" fill="white" fillOpacity="0.7" />
+          <rect x="42" y="60" width="24" height="6" rx="2" fill="white" fillOpacity="0.7" />
+          <rect x="42" y="72" width="20" height="14" rx="3" fill="white" />
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <section id="precios" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Precios"
+          title={
+            <>
+              Implementación clara.{" "}
+              <span className="gradient-text-animated">Sin letra chica.</span>
+            </>
+          }
+          subtitle="Cada solución se implementa una vez y queda funcionando. El Plan Crecimiento la mantiene evolucionando mes a mes."
+        />
+
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {implementaciones.map((item, i) => (
+            <Reveal key={item.title} delay={i * 100} variant="zoom">
+              <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+                <div className="card-shine-inner" />
+                <div className="mb-5 flex justify-center">{item.illustration}</div>
+                <h3 className="text-center font-display text-lg font-bold text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-center">
+                  <span className="font-display text-3xl font-extrabold text-foreground">
+                    {item.price}
+                  </span>{" "}
+                  <span className="text-sm text-muted-foreground">CLP</span>
+                </p>
+                <p className="text-center text-xs font-semibold uppercase tracking-wider text-primary">
+                  {item.unit}
+                </p>
+                <p className="mt-4 text-center text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Plan Crecimiento destacado */}
+        <Reveal delay={300} className="mt-8">
+          <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-[color:var(--elevation)] p-8 text-white shadow-xl sm:p-10">
+            <div
+              aria-hidden
+              className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
+            />
+            <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider ring-1 ring-white/20">
+                  <Sparkles className="h-3.5 w-3.5 text-accent" />
+                  Producto principal
+                </span>
+                <h3 className="mt-4 font-display text-2xl font-extrabold sm:text-3xl">
+                  Plan Crecimiento
+                </h3>
+                <p className="mt-2 max-w-xl text-white/75">
+                  Optimización continua, gestión de reputación, ajustes de carta y WhatsApp, y
+                  soporte prioritario. Todo incluido, mes a mes.
+                </p>
+              </div>
+              <div className="flex flex-col items-start gap-3 lg:items-end">
+                <p className="font-display text-4xl font-extrabold">
+                  $25.000 <span className="text-lg font-medium text-white/60">CLP/mes</span>
+                </p>
+                
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5"
+                >
+                  Quiero el Plan Crecimiento
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}function PricingSection() {
+  const implementaciones = [
+    {
+      title: "Google Business Profile",
+      price: "$50.000",
+      unit: "pago único",
+      desc: "Perfil optimizado, SEO Local, fotos, publicaciones y estrategia de reseñas.",
+      illustration: (
+        <svg viewBox="0 0 120 120" className="h-24 w-24">
+          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
+          <path
+            d="M60 24c-14 0-25 11-25 25 0 18 25 47 25 47s25-29 25-47c0-14-11-25-25-25Z"
+            fill="#2563EB"
+          />
+          <circle cx="60" cy="49" r="10" fill="white" />
+        </svg>
+      ),
+    },
+    {
+      title: "Captación por WhatsApp",
+      price: "$35.000",
+      unit: "pago único",
+      desc: "WhatsApp Business, mensajes automáticos, respuestas rápidas e integración con Google.",
+      illustration: (
+        <svg viewBox="0 0 120 120" className="h-24 w-24">
+          <circle cx="60" cy="60" r="52" fill="#22C55E" fillOpacity="0.08" />
+          <path
+            d="M60 28c-18 0-32 14-32 32 0 6 1.6 12 4.5 17L28 92l16-4.3c5 2.8 10.6 4.3 16 4.3 18 0 32-14 32-32s-14-32-32-32Z"
+            fill="#22C55E"
+          />
+          <path
+            d="M48 55c1-2 2-2 3-2h2c.7 0 1.6 0 2 1s3 7 3 8-1 1.5-1.5 2 1 3 4 6 5.5 5 6 4.5 1-2 2-2 7 3 8 3.5 0 4-1 5.5-2.5c1.5-1.5 1.5-3 1-4-.4-.8-8-7.6-11-10-1.5-1.2-3-1.3-4 0"
+            fill="white"
+            stroke="white"
+            strokeWidth="0"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: "Carta Digital + QR",
+      price: "$35.000",
+      unit: "pago único",
+      desc: "Carta responsive, QR personalizado, diseño moderno y actualización sin reimprimir.",
+      illustration: (
+        <svg viewBox="0 0 120 120" className="h-24 w-24">
+          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
+          <rect x="34" y="26" width="52" height="68" rx="8" fill="#2563EB" />
+          <rect x="42" y="36" width="36" height="6" rx="2" fill="white" />
+          <rect x="42" y="48" width="36" height="6" rx="2" fill="white" fillOpacity="0.7" />
+          <rect x="42" y="60" width="24" height="6" rx="2" fill="white" fillOpacity="0.7" />
+          <rect x="42" y="72" width="20" height="14" rx="3" fill="white" />
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <section id="precios" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeader
+          eyebrow="Precios"
+          title={
+            <>
+              Implementación clara.{" "}
+              <span className="gradient-text-animated">Sin letra chica.</span>
+            </>
+          }
+          subtitle="Cada solución se implementa una vez y queda funcionando. El Plan Crecimiento la mantiene evolucionando mes a mes."
+        />
+
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {implementaciones.map((item, i) => (
+            <Reveal key={item.title} delay={i * 100} variant="zoom">
+              <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+                <div className="card-shine-inner" />
+                <div className="mb-5 flex justify-center">{item.illustration}</div>
+                <h3 className="text-center font-display text-lg font-bold text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-center">
+                  <span className="font-display text-3xl font-extrabold text-foreground">
+                    {item.price}
+                  </span>{" "}
+                  <span className="text-sm text-muted-foreground">CLP</span>
+                </p>
+                <p className="text-center text-xs font-semibold uppercase tracking-wider text-primary">
+                  {item.unit}
+                </p>
+                <p className="mt-4 text-center text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Plan Crecimiento destacado */}
+        <Reveal delay={300} className="mt-8">
+          <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-[color:var(--elevation)] p-8 text-white shadow-xl sm:p-10">
+            <div
+              aria-hidden
+              className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
+            />
+            <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider ring-1 ring-white/20">
+                  <Sparkles className="h-3.5 w-3.5 text-accent" />
+                  Producto principal
+                </span>
+                <h3 className="mt-4 font-display text-2xl font-extrabold sm:text-3xl">
+                  Plan Crecimiento
+                </h3>
+                <p className="mt-2 max-w-xl text-white/75">
+                  Optimización continua, gestión de reputación, ajustes de carta y WhatsApp, y
+                  soporte prioritario. Todo incluido, mes a mes.
+                </p>
+              </div>
+              <div className="flex flex-col items-start gap-3 lg:items-end">
+                <p className="font-display text-4xl font-extrabold">
+                  $25.000 <span className="text-lg font-medium text-white/60">CLP/mes</span>
+                </p>
+                
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5"
+                >
+                  Quiero el Plan Crecimiento
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function SolutionSection() {
   const nodes = [
     {
