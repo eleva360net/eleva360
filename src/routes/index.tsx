@@ -453,9 +453,13 @@ function SectionHeader({
   return (
     <div className={`mx-auto max-w-2xl ${align === "center" ? "text-center" : "text-left"}`}>
       {eyebrow && (
-        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-          {eyebrow}
-        </span>
+        <div className={`flex items-center gap-2 ${align === "center" ? "justify-center" : ""}`}>
+          <span className="eyebrow-bar" aria-hidden />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            {eyebrow}
+          </span>
+          <span className="eyebrow-bar" aria-hidden />
+        </div>
       )}
       <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
