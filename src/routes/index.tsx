@@ -330,6 +330,8 @@ function HeroSection() {
   return (
     <section className="relative flex min-h-[88vh] items-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
       <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="bg-dot-grid absolute inset-0 opacity-70" />
+        <div className="bg-mesh absolute inset-0 opacity-60" />
         <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
         <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
       </div>
@@ -385,15 +387,28 @@ function HeroSection() {
               <HeartHandshake className="h-4 w-4 text-primary" /> Acompañamiento continuo
             </span>
           </div>
+
+          <div className="animate-hero-fade-up animation-delay-400 mt-8 grid w-full max-w-lg grid-cols-3 gap-3">
+            {[
+              { k: "+320%", v: "Visibilidad" },
+              { k: "24/7", v: "Automatizado" },
+              { k: "<1h", v: "Respuesta" },
+            ].map((s) => (
+              <div key={s.v} className="ring-gradient rounded-2xl px-3 py-3 text-left shadow-soft">
+                <div className="font-display text-lg font-extrabold tracking-tight text-foreground">{s.k}</div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{s.v}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="animate-hero-fade-up animation-delay-300 relative">
-          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
-          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
+          <div className="animate-hero-float absolute -inset-6 -z-10 rounded-[2.25rem] bg-gradient-to-br from-primary/15 via-primary/5 to-accent/15 blur-3xl" />
+          <div className="ring-gradient animate-hero-float relative overflow-hidden rounded-[1.75rem] p-2 shadow-2xl shadow-primary/15">
             <img
               src={heroImage}
               alt="Ecosistema digital que impulsa el crecimiento de un negocio"
-              className="aspect-square w-full rounded-2xl object-cover"
+              className="aspect-square w-full rounded-[1.35rem] object-cover"
               width={1024}
               height={1024}
               loading="eager"
