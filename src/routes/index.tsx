@@ -1057,15 +1057,32 @@ function FutureSection() {
           subtitle="Eleva360 evoluciona constantemente. Nuevas capacidades se suman al sistema para acompañar la próxima etapa de tu negocio."
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {items.map((it, i) => (
-            <Reveal key={it.title} delay={i * 70} variant="zoom">
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg">
+            <Reveal
+              key={it.title}
+              delay={i * 70}
+              variant="zoom"
+              className={
+                i === 0
+                  ? "lg:col-span-3"
+                  : i === 1
+                  ? "lg:col-span-3"
+                  : "lg:col-span-2"
+              }
+            >
+              <div
+                className={`group relative h-full overflow-hidden rounded-2xl p-6 shadow-sm tilt-hover hover:shadow-lg ${
+                  i < 2
+                    ? "ring-gradient hover:shadow-primary/10"
+                    : "border border-border bg-white hover:border-primary/40"
+                }`}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <it.icon className="h-5 w-5" />
+                  <div className={`flex items-center justify-center rounded-xl text-primary transition-transform duration-300 group-hover:scale-110 ${i < 2 ? "h-12 w-12 bg-primary/10" : "h-10 w-10 bg-primary/10"}`}>
+                    <it.icon className={i < 2 ? "h-6 w-6" : "h-5 w-5"} />
                   </div>
-                  <h3 className="font-display text-base font-bold text-foreground">{it.title}</h3>
+                  <h3 className={`font-display font-bold text-foreground ${i < 2 ? "text-lg" : "text-base"}`}>{it.title}</h3>
                 </div>
                 <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
                   <Sparkles className="h-3 w-3" /> Próximamente
