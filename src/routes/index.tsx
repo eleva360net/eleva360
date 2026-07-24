@@ -330,6 +330,8 @@ function HeroSection() {
   return (
     <section className="relative flex min-h-[88vh] items-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
       <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="bg-dot-grid absolute inset-0 opacity-70" />
+        <div className="bg-mesh absolute inset-0 opacity-60" />
         <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
         <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
       </div>
@@ -385,15 +387,28 @@ function HeroSection() {
               <HeartHandshake className="h-4 w-4 text-primary" /> Acompañamiento continuo
             </span>
           </div>
+
+          <div className="animate-hero-fade-up animation-delay-400 mt-8 grid w-full max-w-lg grid-cols-3 gap-3">
+            {[
+              { k: "+320%", v: "Visibilidad" },
+              { k: "24/7", v: "Automatizado" },
+              { k: "<1h", v: "Respuesta" },
+            ].map((s) => (
+              <div key={s.v} className="ring-gradient rounded-2xl px-3 py-3 text-left shadow-soft">
+                <div className="font-display text-lg font-extrabold tracking-tight text-foreground">{s.k}</div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{s.v}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="animate-hero-fade-up animation-delay-300 relative">
-          <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
-          <div className="animate-hero-float relative overflow-hidden rounded-3xl border border-border bg-white p-2 shadow-2xl shadow-primary/10">
+          <div className="animate-hero-float absolute -inset-6 -z-10 rounded-[2.25rem] bg-gradient-to-br from-primary/15 via-primary/5 to-accent/15 blur-3xl" />
+          <div className="ring-gradient animate-hero-float relative overflow-hidden rounded-[1.75rem] p-2 shadow-2xl shadow-primary/15">
             <img
               src={heroImage}
               alt="Ecosistema digital que impulsa el crecimiento de un negocio"
-              className="aspect-square w-full rounded-2xl object-cover"
+              className="aspect-square w-full rounded-[1.35rem] object-cover"
               width={1024}
               height={1024}
               loading="eager"
@@ -438,9 +453,13 @@ function SectionHeader({
   return (
     <div className={`mx-auto max-w-2xl ${align === "center" ? "text-center" : "text-left"}`}>
       {eyebrow && (
-        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-          {eyebrow}
-        </span>
+        <div className={`flex items-center gap-2 ${align === "center" ? "justify-center" : ""}`}>
+          <span className="eyebrow-bar" aria-hidden />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            {eyebrow}
+          </span>
+          <span className="eyebrow-bar" aria-hidden />
+        </div>
       )}
       <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
@@ -688,7 +707,18 @@ function PricingSection() {
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {implementaciones.map((item, i) => (
             <Reveal key={item.title} delay={i * 100} variant="zoom">
-              <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+              <div
+                className={`card-shine group relative flex h-full flex-col rounded-3xl p-7 tilt-hover hover:shadow-xl hover:shadow-primary/10 ${
+                  i === 1
+                    ? "ring-gradient shadow-soft-lg"
+                    : "border border-border bg-white shadow-sm hover:border-primary/30"
+                }`}
+              >
+                {i === 1 && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-primary/30">
+                    Más elegido
+                  </span>
+                )}
                 <div className="card-shine-inner" />
                 <div className="mb-5 flex justify-center">{item.illustration}</div>
                 <h3 className="text-center font-display text-lg font-bold text-foreground">
@@ -1027,15 +1057,32 @@ function FutureSection() {
           subtitle="Eleva360 evoluciona constantemente. Nuevas capacidades se suman al sistema para acompañar la próxima etapa de tu negocio."
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {items.map((it, i) => (
-            <Reveal key={it.title} delay={i * 70} variant="zoom">
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg">
+            <Reveal
+              key={it.title}
+              delay={i * 70}
+              variant="zoom"
+              className={
+                i === 0
+                  ? "lg:col-span-3"
+                  : i === 1
+                  ? "lg:col-span-3"
+                  : "lg:col-span-2"
+              }
+            >
+              <div
+                className={`group relative h-full overflow-hidden rounded-2xl p-6 shadow-sm tilt-hover hover:shadow-lg ${
+                  i < 2
+                    ? "ring-gradient hover:shadow-primary/10"
+                    : "border border-border bg-white hover:border-primary/40"
+                }`}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <it.icon className="h-5 w-5" />
+                  <div className={`flex items-center justify-center rounded-xl text-primary transition-transform duration-300 group-hover:scale-110 ${i < 2 ? "h-12 w-12 bg-primary/10" : "h-10 w-10 bg-primary/10"}`}>
+                    <it.icon className={i < 2 ? "h-6 w-6" : "h-5 w-5"} />
                   </div>
-                  <h3 className="font-display text-base font-bold text-foreground">{it.title}</h3>
+                  <h3 className={`font-display font-bold text-foreground ${i < 2 ? "text-lg" : "text-base"}`}>{it.title}</h3>
                 </div>
                 <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
                   <Sparkles className="h-3 w-3" /> Próximamente
