@@ -707,7 +707,18 @@ function PricingSection() {
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {implementaciones.map((item, i) => (
             <Reveal key={item.title} delay={i * 100} variant="zoom">
-              <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+              <div
+                className={`card-shine group relative flex h-full flex-col rounded-3xl p-7 tilt-hover hover:shadow-xl hover:shadow-primary/10 ${
+                  i === 1
+                    ? "ring-gradient shadow-soft-lg"
+                    : "border border-border bg-white shadow-sm hover:border-primary/30"
+                }`}
+              >
+                {i === 1 && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-primary/30">
+                    Más elegido
+                  </span>
+                )}
                 <div className="card-shine-inner" />
                 <div className="mb-5 flex justify-center">{item.illustration}</div>
                 <h3 className="text-center font-display text-lg font-bold text-foreground">
