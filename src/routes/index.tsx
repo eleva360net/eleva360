@@ -76,6 +76,35 @@ function Reveal({
   );
 }
 
+function SpotlightCard({
+  children,
+  className = "",
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty("--mx", `${x}%`);
+    el.style.setProperty("--my", `${y}%`);
+  };
+
+  return (
+    <div ref={ref} onMouseMove={handleMove} style={style} className={`spotlight ${className}`}>
+      <div className="spotlight-glow" aria-hidden />
+      {children}
+    </div>
+  );
+}
+
 function CountUp({
   to,
   suffix = "",
@@ -163,6 +192,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="relative flex min-h-screen flex-col bg-background">
+      <div className="grain-overlay fixed inset-0 z-[1]" aria-hidden />
       <Navbar />
       <main className="flex-1">
         <HeroSection />
@@ -185,6 +215,14 @@ function Index() {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const links = [
     { label: "Solución", href: "#solucion" },
@@ -194,7 +232,13 @@ function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-all duration-300 ${
+        scrolled
+          ? "border-border/60 bg-background/90 shadow-soft"
+          : "border-transparent bg-background/60"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
@@ -433,7 +477,7 @@ function ProblemSection() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {problems.map((p, i) => (
             <Reveal key={p.title} delay={i * 80}>
-              <div className="group flex h-full gap-4 rounded-2xl border border-border bg-white p-5 tilt-hover hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <SpotlightCard className="group flex h-full gap-4 rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--destructive)]/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                   <p.icon className="h-5 w-5 text-[color:var(--destructive)]" />
                 </div>
@@ -441,7 +485,7 @@ function ProblemSection() {
                   <h3 className="font-display text-base font-bold text-foreground">{p.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
                 </div>
-              </div>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>
@@ -775,8 +819,8 @@ function SolutionSection() {
           <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {nodes.map((n, i) => (
               <Reveal key={n.title} delay={i * 120} variant="zoom">
-                <div
-                  className="group relative h-full rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 animate-float-slow"
+                <SpotlightCard
+                  className="group relative h-full rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30 animate-float-slow"
                   style={{ animationDelay: `${i * 400}ms` }}
                 >
                   <div className="absolute -top-3 left-5 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
@@ -787,7 +831,7 @@ function SolutionSection() {
                   </div>
                   <h3 className="font-display text-lg font-bold text-foreground">{n.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
-                </div>
+                </SpotlightCard>
               </Reveal>
             ))}
           </div>
@@ -874,7 +918,7 @@ function ResultsSection() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((s, i) => (
             <Reveal key={s.label} delay={i * 100} variant="zoom">
-              <div className="group h-full rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:shadow-lg">
+              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover">
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                   <s.icon className="h-5 w-5 text-primary" />
                 </div>
@@ -883,7 +927,7 @@ function ResultsSection() {
                 </div>
                 <div className="mt-1 text-sm font-semibold text-foreground">{s.label}</div>
                 <div className="mt-1 text-xs text-muted-foreground">{s.desc}</div>
-              </div>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>
@@ -1023,13 +1067,13 @@ function WhySection() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 100}>
-              <div className="group h-full rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-lg">
+              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-6 shadow-soft shadow-soft-hover hover:border-primary/30">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                   <it.icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-display text-lg font-bold text-foreground">{it.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
-              </div>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>
