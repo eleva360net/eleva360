@@ -325,22 +325,6 @@ function Logo() {
   );
 }
 
-function BrowserChrome({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white">
-      <div className="flex items-center gap-1.5 border-b border-border bg-[color:var(--muted)] px-3.5 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#22C55E]/70" />
-        <div className="ml-3 flex-1 truncate rounded-md bg-white px-3 py-1 text-[10px] text-muted-foreground shadow-sm">
-          panel.eleva360.cl
-        </div>
-      </div>
-      <div className="p-4">{children}</div>
-    </div>
-  );
-}
-
 function HeroShowcase() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -363,76 +347,74 @@ function HeroShowcase() {
     >
       <div className="animate-hero-float absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 blur-2xl" />
       <div
-        className="relative rounded-3xl border border-border bg-white p-2 shadow-soft-lg transition-transform duration-300 ease-out"
+        className="relative aspect-square rounded-3xl border border-border bg-white shadow-soft-lg transition-transform duration-300 ease-out"
         style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
       >
         <div className="grain-overlay absolute inset-0 rounded-3xl" aria-hidden />
-        <BrowserChrome>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[10px] text-muted-foreground">Panel del negocio</p>
-                <p className="font-display text-lg font-bold text-foreground">Café Aurora</p>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold text-accent">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" /> En vivo
-              </span>
-            </div>
 
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { label: "Visitas al perfil", value: "2.4K", delta: "+156%" },
-                { label: "Conversaciones", value: "318", delta: "+42%" },
-                { label: "Reservas", value: "27", delta: "+9" },
-              ].map((s) => (
-                <div key={s.label} className="rounded-xl bg-[color:var(--muted)] p-3">
-                  <p className="text-[9px] leading-tight text-muted-foreground">{s.label}</p>
-                  <p className="mt-1 font-display text-base font-extrabold text-foreground">
-                    {s.value}
-                  </p>
-                  <p className="text-[10px] font-semibold text-accent">{s.delta}</p>
-                </div>
-              ))}
-            </div>
+        {/* connector lines */}
+        <svg
+          aria-hidden
+          viewBox="0 0 400 400"
+          className="pointer-events-none absolute inset-0 h-full w-full"
+        >
+          <defs>
+            <linearGradient id="heroLineGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="var(--gradient-start)" />
+              <stop offset="100%" stopColor="var(--gradient-end)" />
+            </linearGradient>
+          </defs>
+          {[
+            [100, 100],
+            [300, 100],
+            [100, 300],
+            [300, 300],
+          ].map(([x, y], i) => (
+            <path
+              key={i}
+              d={`M200,200 L${x},${y}`}
+              fill="none"
+              stroke="url(#heroLineGrad)"
+              strokeWidth="2"
+              strokeDasharray="6 8"
+              opacity="0.5"
+              className="animate-dash-flow"
+            />
+          ))}
+        </svg>
 
-            <div className="rounded-xl bg-[color:var(--muted)] p-3">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="text-[10px] font-semibold text-muted-foreground">
-                  Crecimiento · últimos 7 días
-                </p>
-                <LineChart className="h-3.5 w-3.5 text-primary" />
-              </div>
-              <div className="flex h-16 items-end gap-1.5">
-                {[40, 65, 50, 80, 60, 95, 75].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-t-sm bg-gradient-to-t from-primary to-accent"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-            </div>
+        {/* center node: the business */}
+        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2">
+          <div className="animate-logo-glow absolute -inset-3 -z-10 rounded-full bg-primary/30 blur-xl" />
+          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-primary text-white shadow-soft-lg sm:h-24 sm:w-24">
+            <Store className="h-9 w-9 sm:h-10 sm:w-10" />
           </div>
-        </BrowserChrome>
-      </div>
+          <span className="rounded-full bg-foreground px-3 py-1 text-[11px] font-bold text-white">
+            Tu negocio
+          </span>
+        </div>
 
-      <div className="absolute -left-3 top-8 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-soft-lg backdrop-blur md:flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-          <Gauge className="h-4 w-4 text-primary" />
-        </div>
-        <div>
-          <div className="text-xs text-muted-foreground">Sistema activo</div>
-          <div className="text-sm font-bold text-foreground">Automatizado 24/7</div>
-        </div>
-      </div>
-      <div className="absolute -right-3 bottom-10 hidden rounded-2xl border border-border bg-white/95 px-3.5 py-2.5 shadow-soft-lg backdrop-blur md:flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
-          <TrendingUp className="h-4 w-4 text-accent" />
-        </div>
-        <div>
-          <div className="text-xs text-muted-foreground">Este mes</div>
-          <div className="text-sm font-bold text-foreground">Crecimiento sostenido</div>
-        </div>
+        {/* satellite nodes */}
+        {[
+          { icon: MapPin, label: "Google", pos: "left-[25%] top-[25%]", tint: "text-primary bg-primary/10" },
+          { icon: MessageCircle, label: "WhatsApp", pos: "left-[75%] top-[25%]", tint: "text-accent bg-accent/10" },
+          { icon: QrCode, label: "Carta digital", pos: "left-[25%] top-[75%]", tint: "text-primary bg-primary/10" },
+          { icon: TrendingUp, label: "Más clientes", pos: "left-[75%] top-[75%]", tint: "text-accent bg-accent/10" },
+        ].map((node) => (
+          <div
+            key={node.label}
+            className={`animate-float-slow absolute -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 ${node.pos} flex`}
+          >
+            <div
+              className={`flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-white shadow-soft sm:h-14 sm:w-14 ${node.tint}`}
+            >
+              <node.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+            </div>
+            <span className="whitespace-nowrap rounded-full border border-border bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-sm backdrop-blur">
+              {node.label}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
