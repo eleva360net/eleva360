@@ -368,12 +368,50 @@ function HeroShowcase() {
       >
         <div className="grain-overlay absolute inset-0 rounded-3xl" aria-hidden />
         <BrowserChrome>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-3">
-              <GoogleProfileMockup />
-              <WhatsAppMockup />
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] text-muted-foreground">Panel del negocio</p>
+                <p className="font-display text-lg font-bold text-foreground">Café Aurora</p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold text-accent">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" /> En vivo
+              </span>
             </div>
-            <EcosystemMockup />
+
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { label: "Visitas al perfil", value: "2.4K", delta: "+156%" },
+                { label: "Conversaciones", value: "318", delta: "+42%" },
+                { label: "Reservas", value: "27", delta: "+9" },
+              ].map((s) => (
+                <div key={s.label} className="rounded-xl bg-[color:var(--muted)] p-3">
+                  <p className="text-[9px] leading-tight text-muted-foreground">{s.label}</p>
+                  <p className="mt-1 font-display text-base font-extrabold text-foreground">
+                    {s.value}
+                  </p>
+                  <p className="text-[10px] font-semibold text-accent">{s.delta}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-xl bg-[color:var(--muted)] p-3">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="text-[10px] font-semibold text-muted-foreground">
+                  Crecimiento · últimos 7 días
+                </p>
+                <LineChart className="h-3.5 w-3.5 text-primary" />
+              </div>
+              <div className="flex h-16 items-end gap-1.5">
+                {[40, 65, 50, 80, 60, 95, 75].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-t-sm bg-gradient-to-t from-primary to-accent"
+                    style={{ height: `${h}%` }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </BrowserChrome>
       </div>
