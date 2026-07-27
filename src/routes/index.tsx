@@ -440,7 +440,8 @@ function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="animate-hero-fade-up font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl
+lg:text-[4.25rem]">
             Haz crecer tu negocio
             <br />
             mientras nosotros nos encargamos de tu{" "}
@@ -482,7 +483,7 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-image relative flex items-center justify-center">
+        <div className="hero-image relative -mt-12 flex items-center justify-center">
 
   {/* Halo principal */}
   <div
