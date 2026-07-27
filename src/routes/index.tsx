@@ -532,7 +532,7 @@ function ProblemSection() {
 
   return (
     <section className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1440px]">
         <SectionHeader
           eyebrow="El problema"
           title={
