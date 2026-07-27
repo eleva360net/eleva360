@@ -36,7 +36,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
-import heroImage from "../assets/hero-eleva360.jpg";
+import heroImage from "../assets/hero-eleva360.png";
 
 const WHATSAPP_URL =
   "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20negocio";
