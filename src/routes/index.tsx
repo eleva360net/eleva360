@@ -482,7 +482,7 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="animate-hero-fade-up animation-delay-300 relative">
+        <div className="hero-image w-full max-w-xl mx-auto drop-shadow-2xl">
   <img
     src={heroImage}
     alt="Eleva360"
