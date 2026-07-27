@@ -649,3 +649,14 @@
 .animate-hero-float {
   animation: heroFloat 10s ease-in-out infinite;
 }
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+
+  background-size: 48px 48px;
+  background-position: center;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+  opacity: .35;
+}
