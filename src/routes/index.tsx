@@ -512,7 +512,7 @@ lg:text-[4.25rem]">
 <img
     src={heroImage}
     alt="Eleva360"
-    className="relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
+    className="animate-hero-float relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
   />
 
 </div>
