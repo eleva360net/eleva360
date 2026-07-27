@@ -508,7 +508,11 @@ lg:text-[4.25rem]">
     rounded-full
     bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,rgba(37,99,235,0.04)_35%,transparent_75%)]
   "
-/> 
+/> {/* Base de profundidad */}
+<div
+  aria-hidden
+  className="absolute bottom-8 left-1/2 h-24 w-[70%] -translate-x-1/2 rounded-full bg-slate-900/5 blur-3xl"
+/>
 <img
     src={heroImage}
     alt="Eleva360"
