@@ -482,12 +482,26 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-image relative w-full max-w-none">
+        <div className="hero-image relative flex items-center justify-center">
+
+  {/* Halo principal */}
+  <div
+    aria-hidden
+    className="absolute h-[520px] w-[520px] rounded-full bg-primary/10 blur-[110px]"
+  />
+
+  {/* Halo secundario */}
+  <div
+    aria-hidden
+    className="absolute top-10 h-[320px] w-[320px] rounded-full bg-sky-400/10 blur-[80px]"
+  />
+
   <img
-  src={heroImage}
-  alt="Eleva360"
-  className="w-[125%] max-w-none ml-[-8%] drop-shadow-[0_40px_80px_rgba(15,23,42,.18)]"
-/>
+    src={heroImage}
+    alt="Eleva360"
+    className="relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_40px_80px_rgba(15,23,42,.18)]"
+  />
+
 </div>
       </div>
     </section>
