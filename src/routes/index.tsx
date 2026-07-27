@@ -497,10 +497,22 @@ lg:text-[4.25rem]">
     className="absolute top-10 h-[320px] w-[320px] rounded-full bg-sky-400/10 blur-[80px]"
   />
 
-  <img
+  {/* Gradiente radial de profundidad */}
+<div
+  aria-hidden
+  className="
+    absolute
+    inset-0
+    -z-10
+    scale-110
+    rounded-full
+    bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,rgba(37,99,235,0.04)_35%,transparent_75%)]
+  "
+/> 
+<img
     src={heroImage}
     alt="Eleva360"
-    className="relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_40px_80px_rgba(15,23,42,.18)]"
+    className="relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
   />
 
 </div>
