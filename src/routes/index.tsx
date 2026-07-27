@@ -422,14 +422,14 @@ function HeroShowcase() {
 
 function HeroSection() {
   return (
-    <section className="relative flex min-h-[88vh] items-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+    <section className="relative flex min-h-screen items-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
         <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="flex flex-col items-start text-left">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-primary">
@@ -482,12 +482,12 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-image w-full max-w-xl mx-auto drop-shadow-2xl">
+        <div className="hero-image relative w-full max-w-none">
   <img
-    src={heroImage}
-    alt="Eleva360"
-    className="w-full max-w-xl mx-auto drop-shadow-2xl"
-  />
+  src={heroImage}
+  alt="Eleva360"
+  className="w-[125%] max-w-none ml-[-8%] drop-shadow-[0_40px_80px_rgba(15,23,42,.18)]"
+/>
 </div>
       </div>
     </section>
@@ -506,7 +506,7 @@ function SectionHeader({
   align?: "center" | "left";
 }) {
   return (
-    <div className={`mx-auto max-w-2xl ${align === "center" ? "text-center" : "text-left"}`}>
+    <div className={`mx-auto max-w-xl ${align === "center" ? "text-center" : "text-left"}`}>
       {eyebrow && (
         <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
           {eyebrow}
