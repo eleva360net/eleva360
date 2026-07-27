@@ -632,3 +632,20 @@
 @utility reveal-blur-visible {
   animation: reveal-blur-up 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+@keyframes heroFloat {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-hero-float {
+  animation: heroFloat 10s ease-in-out infinite;
+}
