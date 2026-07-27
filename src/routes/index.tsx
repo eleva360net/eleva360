@@ -483,9 +483,12 @@ function HeroSection() {
         </div>
 
         <div className="animate-hero-fade-up animation-delay-300 relative">
-          <div aria-hidden className="dot-grid absolute -inset-10 -z-10 opacity-70" />
-          <HeroShowcase />
-        </div>
+  <img
+    src={heroImage}
+    alt="Eleva360"
+    className="w-full max-w-xl mx-auto drop-shadow-2xl"
+  />
+</div>
       </div>
     </section>
   );
