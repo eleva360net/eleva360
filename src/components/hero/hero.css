@@ -11,9 +11,9 @@
 }
 
 @keyframes hero-glow {
-  0% { opacity: 0.08; transform: scale(0.995); }
+  0% { opacity: 0.06; transform: scale(0.995); }
   50% { opacity: 0.12; transform: scale(1.005); }
-  100% { opacity: 0.08; transform: scale(0.995); }
+  100% { opacity: 0.06; transform: scale(0.995); }
 }
 
 @media (prefers-reduced-motion: reduce) {
