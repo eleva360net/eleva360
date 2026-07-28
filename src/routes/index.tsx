@@ -430,7 +430,7 @@ function HeroSection() {
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="flex flex-col items-start text-left">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-primary">
@@ -517,7 +517,7 @@ lg:text-[4.25rem]">
 <img
     src={heroImage}
     alt="Eleva360"
-    className="animate-hero-float relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
+    className="relative z-10 w-full max-w-[760px] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)] animate-hero-float"
   />
 
 </div>
