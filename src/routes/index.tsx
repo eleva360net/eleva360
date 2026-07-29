@@ -424,6 +424,7 @@ function HeroSection() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
       <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="hero-grid absolute inset-0" />
         <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
         <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl" />
@@ -508,11 +509,15 @@ lg:text-[4.25rem]">
     rounded-full
     bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,rgba(37,99,235,0.04)_35%,transparent_75%)]
   "
-/> 
+/> {/* Base de profundidad */}
+<div
+  aria-hidden
+  className="absolute bottom-8 left-1/2 h-24 w-[70%] -translate-x-1/2 rounded-full bg-slate-900/5 blur-3xl"
+/>
 <img
     src={heroImage}
     alt="Eleva360"
-    className="relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
+    className="animate-hero-float relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
   />
 
 </div>
