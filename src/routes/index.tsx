@@ -446,9 +446,9 @@ function HeroSection() {
           </h1>
 
           <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
+
 
           <div className="animate-hero-scale-in animation-delay-300 mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
             <a
@@ -468,8 +468,8 @@ function HeroSection() {
             </a>
           </div>
 
-
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-primary" /> Implementación sin fricción
             </span>
