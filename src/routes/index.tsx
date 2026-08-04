@@ -430,7 +430,7 @@ function HeroSection() {
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="mx-auto grid max-w-[1480px] items-center gap-20 lg:grid-cols-[0.82fr_1.18fr]">
         <div className="flex flex-col items-start text-left">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-primary">
