@@ -422,7 +422,7 @@ function HeroShowcase() {
 
 function HeroSection() {
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-white px-4 py-28 sm:px-6 lg:px-8 lg:py-36">
+    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-white px-4 py-32 sm:px-6 lg:px-8 lg:py-40">
       {/* Fondo blanco limpio con un solo halo sutil detrás de la ilustración */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute right-0 top-1/2 h-[640px] w-[640px] -translate-y-1/2 translate-x-1/4 rounded-full bg-primary/[0.04] blur-3xl" />
