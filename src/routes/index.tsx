@@ -422,17 +422,16 @@ function HeroShowcase() {
 
 function HeroSection() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="hero-grid absolute inset-0" />
-        <div className="animate-hero-gradient-drift absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/10 blur-3xl" />
-        <div className="animate-hero-gradient-drift animation-delay-400 absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl" />
+    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-white px-4 py-28 sm:px-6 lg:px-8 lg:py-36">
+      {/* Fondo blanco limpio con un solo halo sutil detrás de la ilustración */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute right-0 top-1/2 h-[640px] w-[640px] -translate-y-1/2 translate-x-1/4 rounded-full bg-primary/[0.04] blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-[1480px] items-center gap-20 lg:grid-cols-[0.82fr_1.18fr]">
+      <div className="mx-auto grid w-full max-w-[1400px] items-center gap-14 lg:grid-cols-[0.4fr_0.6fr] lg:gap-24">
+        {/* Bloque de texto: 40%, ancho controlado para legibilidad */}
         <div className="flex flex-col items-start text-left">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur-sm">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
             <span className="flex h-2 w-2 rounded-full bg-primary">
               <span className="h-2 w-2 animate-ping rounded-full bg-primary/60" />
             </span>
@@ -441,31 +440,28 @@ function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl
-lg:text-[4.25rem]">
-            Haz crecer tu negocio
-            <br />
-            mientras nosotros nos encargamos de tu{" "}
+          <h1 className="animate-hero-fade-up max-w-lg font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
+            Haz crecer tu negocio mientras nosotros nos encargamos de tu{" "}
             <span className="gradient-text-animated">presencia digital</span>.
           </h1>
 
-          <p className="animate-hero-fade-up animation-delay-200 mt-8 max-w-2xl text-xl leading-relaxed text-muted-foreground">
+          <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="animate-hero-scale-in animation-delay-300 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="animate-hero-scale-in animation-delay-300 group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_1px_2px_rgba(37,99,235,0.1),0_8px_20px_-6px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.12),0_20px_40px_-12px_rgba(37,99,235,0.3)]"
             >
               Solicitar diagnóstico gratuito
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <a
               href="#como-funciona"
-              className="animate-hero-fade-up animation-delay-400 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+              className="animate-hero-fade-up animation-delay-400 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-base font-semibold text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-primary/40 hover:text-primary hover:shadow-[0_8px_20px_-8px_rgba(15,23,42,0.1)]"
             >
               Ver cómo funciona
             </a>
@@ -484,47 +480,31 @@ lg:text-[4.25rem]">
           </div>
         </div>
 
-        <div className="hero-image relative -mt-12 flex items-center justify-center">
+        {/* Ilustración: 60%, protagonista pero equilibrada */}
+        <div className="relative flex items-center justify-center lg:justify-end">
+          {/* Halo de profundidad sutil */}
+          <div
+            aria-hidden
+            className="absolute h-[480px] w-[480px] rounded-full bg-primary/[0.06] blur-[100px] lg:h-[560px] lg:w-[560px]"
+          />
 
-  {/* Halo principal */}
-  <div
-    aria-hidden
-    className="absolute h-[520px] w-[520px] rounded-full bg-primary/10 blur-[110px]"
-  />
+          {/* Sombra de suelo para anclar la ilustración */}
+          <div
+            aria-hidden
+            className="absolute bottom-6 left-1/2 h-16 w-[60%] -translate-x-1/2 rounded-full bg-slate-900/[0.04] blur-2xl"
+          />
 
-  {/* Halo secundario */}
-  <div
-    aria-hidden
-    className="absolute top-10 h-[320px] w-[320px] rounded-full bg-sky-400/10 blur-[80px]"
-  />
-
-  {/* Gradiente radial de profundidad */}
-<div
-  aria-hidden
-  className="
-    absolute
-    inset-0
-    -z-10
-    scale-110
-    rounded-full
-    bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,rgba(37,99,235,0.04)_35%,transparent_75%)]
-  "
-/> {/* Base de profundidad */}
-<div
-  aria-hidden
-  className="absolute bottom-8 left-1/2 h-24 w-[70%] -translate-x-1/2 rounded-full bg-slate-900/5 blur-3xl"
-/>
-<img
-    src={heroImage}
-    alt="Eleva360"
-    className="animate-hero-float relative z-10 w-[125%] max-w-none ml-[-8%] drop-shadow-[0_55px_90px_rgba(15,23,42,.14)]"
-  />
-
-</div>
+          <img
+            src={heroImage}
+            alt="Eleva360"
+            className="animate-hero-float relative z-10 w-[110%] max-w-none drop-shadow-[0_40px_70px_rgba(15,23,42,0.12)] lg:w-[105%]"
+          />
+        </div>
       </div>
     </section>
   );
 }
+
 
 function SectionHeader({
   eyebrow,
