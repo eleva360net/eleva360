@@ -423,13 +423,13 @@ function HeroShowcase() {
 function HeroSection() {
   return (
     <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-white px-4 py-32 sm:px-6 lg:px-8 lg:py-40">
-      {/* Fondo blanco limpio con un solo halo sutil detrás de la ilustración */}
+      {/* Fondo predominantemente blanco con un halo apenas perceptible */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute right-0 top-1/2 h-[640px] w-[640px] -translate-y-1/2 translate-x-1/4 rounded-full bg-primary/[0.04] blur-3xl" />
+        <div className="absolute right-0 top-1/2 h-[520px] w-[520px] -translate-y-1/2 translate-x-1/3 rounded-full bg-primary/[0.03] blur-3xl" />
       </div>
 
       <div className="mx-auto grid w-full max-w-[1400px] items-center gap-14 lg:grid-cols-[0.4fr_0.6fr] lg:gap-28">
-        {/* Bloque de texto: 40%, ancho controlado para legibilidad */}
+        {/* Bloque de texto: 40%, altura visual reducida */}
         <div className="flex flex-col items-start text-left">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
             <span className="flex h-2 w-2 rounded-full bg-primary">
@@ -445,31 +445,29 @@ function HeroSection() {
             <span className="gradient-text-animated">presencia digital</span>.
           </h1>
 
-          <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+          <p className="animate-hero-fade-up animation-delay-200 mt-8 max-w-md text-lg leading-relaxed text-muted-foreground">
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
 
-
-          <div className="animate-hero-scale-in animation-delay-300 mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <div className="animate-hero-scale-in animation-delay-300 mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_1px_2px_rgba(37,99,235,0.1),0_8px_20px_-6px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.12),0_20px_40px_-12px_rgba(37,99,235,0.3)] sm:w-auto"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_1px_2px_rgba(37,99,235,0.08),0_6px_16px_-4px_rgba(37,99,235,0.18)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.1),0_16px_32px_-10px_rgba(37,99,235,0.22)] sm:w-auto"
             >
               Solicitar diagnóstico gratuito
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" />
             </a>
             <a
               href="#como-funciona"
-              className="animate-hero-fade-up animation-delay-400 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-base font-semibold text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-primary/40 hover:text-primary hover:shadow-[0_8px_20px_-8px_rgba(15,23,42,0.1)] sm:w-auto"
+              className="animate-hero-fade-up animation-delay-400 inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-7 py-3.5 text-base font-semibold text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:border-primary/30 hover:text-primary hover:shadow-[0_8px_20px_-8px_rgba(15,23,42,0.08)] sm:w-auto"
             >
               Ver cómo funciona
             </a>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-primary" /> Implementación sin fricción
             </span>
@@ -482,24 +480,30 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Ilustración: 60%, protagonista pero equilibrada */}
-        <div className="relative flex items-center justify-center lg:justify-end">
+        {/* Ilustración: ligero protagonismo extra con posición y profundidad */}
+        <div className="relative flex items-center justify-center lg:justify-end lg:pr-4">
           {/* Halo de profundidad sutil */}
           <div
             aria-hidden
-            className="absolute h-[480px] w-[480px] rounded-full bg-primary/[0.06] blur-[100px] lg:h-[560px] lg:w-[560px]"
+            className="absolute h-[480px] w-[480px] rounded-full bg-primary/[0.04] blur-[100px] lg:h-[540px] lg:w-[540px]"
           />
 
           {/* Sombra de suelo para anclar la ilustración */}
           <div
             aria-hidden
-            className="absolute bottom-6 left-1/2 h-16 w-[60%] -translate-x-1/2 rounded-full bg-slate-900/[0.04] blur-2xl"
+            className="absolute bottom-8 left-1/2 h-14 w-[55%] -translate-x-1/2 rounded-full bg-slate-900/[0.03] blur-2xl"
+          />
+
+          {/* Iluminación lateral sutil */}
+          <div
+            aria-hidden
+            className="absolute -right-8 top-1/2 h-[60%] w-24 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl"
           />
 
           <img
             src={heroImage}
             alt="Eleva360"
-            className="animate-hero-float relative z-10 w-[110%] max-w-none drop-shadow-[0_40px_70px_rgba(15,23,42,0.12)] lg:w-[115%]"
+            className="animate-hero-float relative z-10 w-[112%] max-w-none drop-shadow-[0_32px_60px_rgba(15,23,42,0.10)] lg:w-[118%]"
           />
         </div>
       </div>
