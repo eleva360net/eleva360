@@ -500,8 +500,8 @@ function HeroSection() {
             alt="Eleva360"
             className="animate-hero-float relative z-10 w-[110%] max-w-none drop-shadow-[0_40px_70px_rgba(15,23,42,0.12)] lg:w-[115%]"
           />
-
         </div>
+
       </div>
     </section>
   );
