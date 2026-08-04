@@ -445,8 +445,8 @@ function HeroSection() {
             <span className="gradient-text-animated">presencia digital</span>.
           </h1>
 
-
           <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
 
