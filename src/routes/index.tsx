@@ -450,23 +450,24 @@ function HeroSection() {
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
 
-          <div className="animate-hero-scale-in animation-delay-300 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="animate-hero-scale-in animation-delay-300 mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_1px_2px_rgba(37,99,235,0.1),0_8px_20px_-6px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.12),0_20px_40px_-12px_rgba(37,99,235,0.3)]"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_1px_2px_rgba(37,99,235,0.1),0_8px_20px_-6px_rgba(37,99,235,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.12),0_20px_40px_-12px_rgba(37,99,235,0.3)] sm:w-auto"
             >
               Solicitar diagnóstico gratuito
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <a
               href="#como-funciona"
-              className="animate-hero-fade-up animation-delay-400 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-base font-semibold text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-primary/40 hover:text-primary hover:shadow-[0_8px_20px_-8px_rgba(15,23,42,0.1)]"
+              className="animate-hero-fade-up animation-delay-400 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-base font-semibold text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:border-primary/40 hover:text-primary hover:shadow-[0_8px_20px_-8px_rgba(15,23,42,0.1)] sm:w-auto"
             >
               Ver cómo funciona
             </a>
           </div>
+
 
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
             <span className="flex items-center gap-1.5">
