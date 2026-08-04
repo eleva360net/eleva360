@@ -440,10 +440,11 @@ function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up max-w-lg font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
+          <h1 className="animate-hero-fade-up max-w-lg font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-[2.75rem] lg:text-[3.15rem]">
             Haz crecer tu negocio mientras nosotros nos encargamos de tu{" "}
             <span className="gradient-text-animated">presencia digital</span>.
           </h1>
+
 
           <p className="animate-hero-fade-up animation-delay-200 mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
