@@ -421,90 +421,121 @@ function HeroShowcase() {
 }
 
 function HeroSection() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
+
+  const handleParallax = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = stageRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setParallax({ x, y });
+  };
+
   return (
     <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-white px-4 py-32 sm:px-6 lg:px-8 lg:py-40">
-      {/* Fondo predominantemente blanco con un halo apenas perceptible */}
+      {/* Fondo: gradientes radiales suaves + luz ambiental en capas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute right-0 top-1/2 h-[520px] w-[520px] -translate-y-1/2 translate-x-1/3 rounded-full bg-primary/[0.03] blur-3xl" />
+        {/* base cálida-neutra, casi imperceptible */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgba(37,99,235,0.045),transparent_60%)]" />
+        {/* luz ambiental derecha, detrás de la ilustración */}
+        <div className="hero-ambient absolute right-[-6%] top-1/2 h-[620px] w-[620px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.10),transparent_68%)] blur-[70px]" />
+        {/* acento teal muy tenue para dar profundidad */}
+        <div className="hero-ambient absolute bottom-[-12%] left-[38%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(20,184,166,0.07),transparent_70%)] blur-[80px] [animation-delay:-6s]" />
+        {/* velo blanco superior para preservar el minimalismo */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-[1400px] items-center gap-14 lg:grid-cols-[0.4fr_0.6fr] lg:gap-28">
+      <div className="mx-auto grid w-full max-w-[1360px] items-center gap-16 lg:grid-cols-[0.46fr_0.54fr] lg:gap-20 xl:gap-24">
         {/* Bloque de texto: 40%, altura visual reducida */}
         <div className="flex flex-col items-start text-left">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-            <span className="flex h-2 w-2 rounded-full bg-primary">
-              <span className="h-2 w-2 animate-ping rounded-full bg-primary/60" />
+          <div className="animate-hero-fade-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur">
+            <span className="relative flex h-1.5 w-1.5 rounded-full bg-primary">
+              <span className="absolute inset-0 animate-ping rounded-full bg-primary/50" />
             </span>
-            <span className="text-xs font-semibold tracking-wide text-muted-foreground">
+            <span className="text-[0.7rem] font-semibold tracking-[0.02em] text-muted-foreground">
               Soluciones digitales para negocios · Chile
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up max-w-lg font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-[2.75rem] lg:text-[3.15rem]">
+          <h1 className="animate-hero-fade-up animation-delay-50 max-w-[19ch] font-display text-[2.35rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-foreground sm:text-[2.7rem] lg:text-[3.05rem]">
             Haz crecer tu negocio mientras nosotros nos encargamos de tu{" "}
             <span className="gradient-text-animated">presencia digital</span>.
           </h1>
 
-          <p className="animate-hero-fade-up animation-delay-200 mt-8 max-w-md text-lg leading-relaxed text-muted-foreground">
+          <p className="animate-hero-fade-up animation-delay-200 mt-7 max-w-[46ch] text-[1.0625rem] leading-[1.7] text-muted-foreground">
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
 
-          <div className="animate-hero-scale-in animation-delay-300 mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <div className="animate-hero-scale-in animation-delay-300 mt-9 flex w-full flex-wrap items-center gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_1px_2px_rgba(37,99,235,0.08),0_6px_16px_-4px_rgba(37,99,235,0.18)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.1),0_16px_32px_-10px_rgba(37,99,235,0.22)] sm:w-auto"
+              className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto"
             >
               Solicitar diagnóstico gratuito
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+              <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
             </a>
             <a
               href="#como-funciona"
-              className="animate-hero-fade-up animation-delay-400 inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-7 py-3.5 text-base font-semibold text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:border-primary/30 hover:text-primary hover:shadow-[0_8px_20px_-8px_rgba(15,23,42,0.08)] sm:w-auto"
+              className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto"
             >
               Ver cómo funciona
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4 text-primary" /> Implementación sin fricción
+          <div className="animate-hero-fade-up animation-delay-400 mt-11 flex flex-wrap items-center gap-x-6 gap-y-2.5 border-t border-slate-100 pt-6 text-[0.8125rem] text-muted-foreground">
+            <span className="flex items-center gap-2">
+              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Implementación sin fricción
             </span>
-            <span className="flex items-center gap-1.5">
-              <Zap className="h-4 w-4 text-accent" /> Resultados desde el primer mes
+            <span className="flex items-center gap-2">
+              <Zap className="h-[0.9rem] w-[0.9rem] text-accent/80" /> Resultados desde el primer mes
             </span>
-            <span className="flex items-center gap-1.5">
-              <HeartHandshake className="h-4 w-4 text-primary" /> Acompañamiento continuo
+            <span className="flex items-center gap-2">
+              <HeartHandshake className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Acompañamiento continuo
             </span>
           </div>
         </div>
 
-        {/* Ilustración: ligero protagonismo extra con posición y profundidad */}
-        <div className="relative flex items-center justify-center lg:justify-end lg:pr-4">
-          {/* Halo de profundidad sutil */}
+        {/* Ilustración: parallax sutil, luz ambiental y flujo de luz */}
+        <div
+          ref={stageRef}
+          onMouseMove={handleParallax}
+          onMouseLeave={() => setParallax({ x: 0, y: 0 })}
+          className="relative flex items-center justify-center [perspective:1400px] lg:justify-end lg:pr-2"
+        >
+          {/* Halo de profundidad que separa el edificio del fondo */}
           <div
             aria-hidden
-            className="absolute h-[480px] w-[480px] rounded-full bg-primary/[0.04] blur-[100px] lg:h-[540px] lg:w-[540px]"
+            className="absolute h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0)_70%)] blur-2xl lg:h-[580px] lg:w-[580px]"
           />
 
           {/* Sombra de suelo para anclar la ilustración */}
           <div
             aria-hidden
-            className="absolute bottom-8 left-1/2 h-14 w-[55%] -translate-x-1/2 rounded-full bg-slate-900/[0.03] blur-2xl"
+            className="absolute bottom-10 left-1/2 h-12 w-[52%] -translate-x-1/2 rounded-[100%] bg-slate-900/[0.045] blur-2xl"
           />
 
-          {/* Iluminación lateral sutil */}
           <div
-            aria-hidden
-            className="absolute -right-8 top-1/2 h-[60%] w-24 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-3xl"
-          />
+            className="hero-parallax animate-hero-drift relative z-10 w-[110%] max-w-none lg:w-[116%]"
+            style={{
+              transform: `translate3d(${parallax.x * 14}px, ${parallax.y * 10}px, 0) rotateY(${parallax.x * -2.2}deg) rotateX(${parallax.y * 1.6}deg)`,
+            }}
+          >
+            <img
+              src={heroImage}
+              alt="Ecosistema digital Eleva360: Google Business, WhatsApp, carta digital y panel de métricas"
+              className="w-full drop-shadow-[0_40px_70px_rgba(15,23,42,0.09)]"
+            />
 
-          <img
-            src={heroImage}
-            alt="Eleva360"
-            className="animate-hero-float relative z-10 w-[112%] max-w-none drop-shadow-[0_32px_60px_rgba(15,23,42,0.10)] lg:w-[118%]"
-          />
+            {/* Flujo de luz discreto sobre las conexiones */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="hero-light-flow absolute inset-y-[18%] -left-1/4 w-1/3 bg-gradient-to-r from-transparent via-white/45 to-transparent blur-md" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
