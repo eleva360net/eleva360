@@ -448,7 +448,7 @@ function HeroSection() {
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-[1360px] items-center gap-16 lg:grid-cols-[0.42fr_0.58fr] lg:gap-24 xl:gap-28">
+      <div className="mx-auto grid w-full max-w-[1360px] items-center gap-16 lg:grid-cols-[0.46fr_0.54fr] lg:gap-20 xl:gap-24">
         {/* Bloque de texto: 40%, altura visual reducida */}
         <div className="flex flex-col items-start text-left">
           <div className="animate-hero-fade-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur">
