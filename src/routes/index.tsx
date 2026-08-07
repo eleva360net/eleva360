@@ -311,7 +311,7 @@ function Logo() {
       <img
         src={logoEleva360}
         alt="Eleva360"
-        className="h-18 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
+        className="h-20 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
       />
     </Link>
   );
