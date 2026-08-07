@@ -1,4 +1,4 @@
-import logoEleva360 from "../assets/logo-eleva360.png";
+import logoEleva360 from "../assets/LogoEleva360-transparente.png";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -311,7 +311,7 @@ function Logo() {
       <img
         src={logoEleva360}
         alt="Eleva360"
-        className="h-18 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
+        className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
       />
     </Link>
   );
