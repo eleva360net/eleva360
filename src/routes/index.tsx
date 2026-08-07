@@ -413,6 +413,14 @@ function HeroShowcase() {
   );
 }
 
+const HERO_NODES = [
+  { title: "Google Business", value: "Perfil optimizado", icon: MapPin, tint: "bg-[#4285F4]/10 text-[#4285F4]", x: 12, y: 20, ax: 22, ay: 30, dur: 13, delay: 0 },
+  { title: "WhatsApp", value: "Respuestas automáticas", icon: MessageCircle, tint: "bg-accent/10 text-accent", x: 88, y: 16, ax: 76, ay: 27, dur: 16, delay: -3.2 },
+  { title: "Carta digital", value: "QR siempre al día", icon: QrCode, tint: "bg-primary/10 text-primary", x: 16, y: 76, ax: 27, ay: 68, dur: 15, delay: -6.5 },
+  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 89, y: 68, ax: 76, ay: 62, dur: 12, delay: -1.8 },
+  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 56, y: 92, ax: 54, ay: 78, dur: 17, delay: -9 },
+] as const;
+
 function HeroSection() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
