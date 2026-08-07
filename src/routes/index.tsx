@@ -506,7 +506,7 @@ function HeroSection() {
           ref={stageRef}
           onMouseMove={handleParallax}
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
-          className="relative mx-auto w-full max-w-[760px] [perspective:1600px] lg:max-w-none lg:w-[125%] lg:-ml-[12%]"
+          className="relative mx-auto w-full max-w-[560px] [perspective:1600px] lg:max-w-none lg:w-[108%]"
         >
           <div className="relative aspect-[4/3.05] w-full">
             {/* Halo suave que integra el edificio con el fondo */}
@@ -558,7 +558,7 @@ function HeroSection() {
 
             {/* Edificio con parallax muy suave */}
             <div
-              className="hero-parallax animate-hero-drift absolute left-1/2 top-1/2 z-10 w-[74%] -translate-x-1/2 -translate-y-1/2"
+              className="hero-parallax animate-hero-drift absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2"
               style={{
                 transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
               }}
@@ -583,7 +583,7 @@ function HeroSection() {
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group flex w-[150px] items-start gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 p-3 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[168px]">
+                <div className="group flex w-[132px] items-start gap-2 rounded-2xl border border-slate-200/80 bg-white/90 p-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[152px]">
                   <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.tint}`}>
                     <n.icon className="h-[0.9rem] w-[0.9rem]" />
                   </div>
