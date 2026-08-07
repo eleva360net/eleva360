@@ -417,8 +417,8 @@ const HERO_NODES = [
   { title: "Google Business", value: "Perfil optimizado", icon: MapPin, tint: "bg-[#4285F4]/10 text-[#4285F4]", x: 9, y: 17, ax: 20, ay: 28, dur: 13, delay: 0 },
   { title: "WhatsApp", value: "Respuestas al instante", icon: MessageCircle, tint: "bg-accent/10 text-accent", x: 91, y: 13, ax: 78, ay: 25, dur: 16, delay: -3.2 },
   { title: "Carta digital", value: "QR siempre al día", icon: QrCode, tint: "bg-primary/10 text-primary", x: 11, y: 74, ax: 24, ay: 66, dur: 15, delay: -6.5 },
-  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 92, y: 66, ax: 78, ay: 60, dur: 12, delay: -1.8 },
-  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 52, y: 95, ax: 52, ay: 80, dur: 17, delay: -9 },
+  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 93, y: 64, ax: 79, ay: 58, dur: 12, delay: -1.8 },
+  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 44, y: 97, ax: 47, ay: 82, dur: 17, delay: -9 },
 ] as const;
 
 function HeroSection() {
