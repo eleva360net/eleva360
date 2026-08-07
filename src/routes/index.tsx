@@ -427,7 +427,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-white px-4 py-32 sm:px-6 lg:px-8 lg:py-40">
+    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-20 lg:pb-24">
       {/* Fondo: gradientes radiales suaves + luz ambiental en capas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         {/* base cálida-neutra, casi imperceptible */}
