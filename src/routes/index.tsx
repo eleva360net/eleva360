@@ -493,41 +493,103 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Ilustración: parallax sutil, luz ambiental y flujo de luz */}
+        {/* Escenario: edificio + tarjetas independientes conectadas */}
         <div
           ref={stageRef}
           onMouseMove={handleParallax}
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
-          className="relative flex items-center justify-center [perspective:1400px] lg:justify-end lg:pr-2"
+          className="relative mx-auto w-full max-w-[760px] [perspective:1600px] lg:max-w-none lg:w-[125%] lg:-ml-[12%]"
         >
-          {/* Halo de profundidad que separa el edificio del fondo */}
-          <div
-            aria-hidden
-            className="absolute h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0)_70%)] blur-2xl lg:h-[580px] lg:w-[580px]"
-          />
-
-          {/* Sombra de suelo para anclar la ilustración */}
-          <div
-            aria-hidden
-            className="absolute bottom-10 left-1/2 h-12 w-[52%] -translate-x-1/2 rounded-[100%] bg-slate-900/[0.045] blur-2xl"
-          />
-
-          <div
-            className="hero-parallax animate-hero-drift relative z-10 w-[110%] max-w-none lg:w-[116%]"
-            style={{
-              transform: `translate3d(${parallax.x * 14}px, ${parallax.y * 10}px, 0) rotateY(${parallax.x * -2.2}deg) rotateX(${parallax.y * 1.6}deg)`,
-            }}
-          >
-            <img
-              src={heroImage}
-              alt="Ecosistema digital Eleva360: Google Business, WhatsApp, carta digital y panel de métricas"
-              className="w-full drop-shadow-[0_40px_70px_rgba(15,23,42,0.09)]"
+          <div className="relative aspect-[4/3.05] w-full">
+            {/* Halo suave que integra el edificio con el fondo */}
+            <div
+              aria-hidden
+              className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.06),rgba(255,255,255,0)_70%)] blur-2xl"
             />
 
-            {/* Flujo de luz discreto sobre las conexiones */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="hero-light-flow absolute inset-y-[18%] -left-1/4 w-1/3 bg-gradient-to-r from-transparent via-white/45 to-transparent blur-md" />
+            {/* Conexiones discretas con pulso de luz */}
+            <svg
+              aria-hidden
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              className="pointer-events-none absolute inset-0 h-full w-full"
+            >
+              <defs>
+                <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="rgba(37,99,235,0.30)" />
+                  <stop offset="100%" stopColor="rgba(20,184,166,0.22)" />
+                </linearGradient>
+              </defs>
+              {HERO_NODES.map((n, i) => (
+                <g key={n.title}>
+                  <path
+                    d={`M50 52 L${n.ax} ${n.ay}`}
+                    stroke="url(#heroLink)"
+                    strokeWidth="0.28"
+                    fill="none"
+                  />
+                  <path
+                    d={`M50 52 L${n.ax} ${n.ay}`}
+                    stroke="rgba(37,99,235,0.75)"
+                    strokeWidth="0.32"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeDasharray="3 97"
+                    className="hero-link-pulse"
+                    style={{ animationDelay: `${i * 1.4}s` }}
+                  />
+                </g>
+              ))}
+            </svg>
+
+            {/* Sombra de suelo para anclar el edificio */}
+            <div
+              aria-hidden
+              className="absolute bottom-[10%] left-1/2 h-10 w-[46%] -translate-x-1/2 rounded-[100%] bg-slate-900/[0.05] blur-2xl"
+            />
+
+            {/* Edificio con parallax muy suave */}
+            <div
+              className="hero-parallax animate-hero-drift absolute left-1/2 top-1/2 z-10 w-[74%] -translate-x-1/2 -translate-y-1/2"
+              style={{
+                transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
+              }}
+            >
+              <img
+                src={heroBuilding}
+                alt="Negocio local conectado al ecosistema digital de Eleva360"
+                className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
+                loading="eager"
+              />
             </div>
+
+            {/* Tarjetas independientes */}
+            {HERO_NODES.map((n, i) => (
+              <div
+                key={n.title}
+                className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
+                style={{
+                  left: `${n.x}%`,
+                  top: `${n.y}%`,
+                  animationDuration: `${n.dur}s`,
+                  animationDelay: `${n.delay}s`,
+                }}
+              >
+                <div className="group flex w-[150px] items-start gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 p-3 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[168px]">
+                  <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.tint}`}>
+                    <n.icon className="h-[0.9rem] w-[0.9rem]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                      {n.title}
+                    </p>
+                    <p className="mt-0.5 truncate text-[0.8rem] font-semibold tracking-[-0.01em] text-foreground">
+                      {n.value}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
