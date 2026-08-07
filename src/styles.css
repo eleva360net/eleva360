@@ -703,3 +703,30 @@
     animation: none !important;
   }
 }
+
+/* ————— Hero: tarjetas flotantes independientes y pulso de conexión ————— */
+@keyframes hero-card-float {
+  0%, 100% { transform: translate3d(-50%, -50%, 0); }
+  50% { transform: translate3d(-50%, calc(-50% - 9px), 0); }
+}
+@utility animate-hero-card-float {
+  animation: hero-card-float 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes hero-link-pulse {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  12% { opacity: 0.75; }
+  88% { opacity: 0.75; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+.hero-link-pulse {
+  animation: hero-link-pulse 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-card-float,
+  .hero-link-pulse {
+    animation: none !important;
+  }
+}
