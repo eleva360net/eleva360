@@ -1,3 +1,4 @@
+import logoEleva360 from "../assets/logo-eleva360.png";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -306,21 +307,12 @@ function Navbar() {
 
 function Logo() {
   return (
-    <Link to="/" className="animate-logo-appear group flex items-center gap-2.5">
-      <div className="relative">
-        <span
-          aria-hidden
-          className="animate-logo-glow absolute -inset-2 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 blur-lg"
-        />
-        <div className="logo-gradient animate-logo-gradient-shift animate-logo-float relative flex h-10 w-10 items-center justify-center rounded-full shadow-lg shadow-primary/15">
-          <div className="animate-logo-icon-rotate">
-            <Sparkles className="h-5 w-5 text-white" strokeWidth={2.5} />
-          </div>
-        </div>
-      </div>
-      <span className="animate-logo-text-appear font-display text-xl font-extrabold tracking-tight text-foreground">
-        Eleva<span className="text-primary">360</span>
-      </span>
+    <Link to="/" className="group flex items-center">
+      <img
+        src={logoEleva360}
+        alt="Eleva360"
+        className="h-10 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
+      />
     </Link>
   );
 }
