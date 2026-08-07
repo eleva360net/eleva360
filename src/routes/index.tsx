@@ -583,7 +583,7 @@ function HeroSection() {
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group flex w-[132px] items-start gap-2 rounded-2xl border border-slate-200/80 bg-white/90 p-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[152px]">
+                <div className="group flex w-[150px] items-start gap-2 rounded-2xl border border-slate-200/80 bg-white/90 p-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[170px]">
                   <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.tint}`}>
                     <n.icon className="h-[0.9rem] w-[0.9rem]" />
                   </div>
