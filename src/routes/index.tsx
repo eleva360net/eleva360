@@ -414,11 +414,11 @@ function HeroShowcase() {
 }
 
 const HERO_NODES = [
-  { title: "Google Business", value: "Perfil optimizado", icon: MapPin, tint: "bg-[#4285F4]/10 text-[#4285F4]", x: 12, y: 20, ax: 22, ay: 30, dur: 13, delay: 0 },
-  { title: "WhatsApp", value: "Respuestas automáticas", icon: MessageCircle, tint: "bg-accent/10 text-accent", x: 88, y: 16, ax: 76, ay: 27, dur: 16, delay: -3.2 },
-  { title: "Carta digital", value: "QR siempre al día", icon: QrCode, tint: "bg-primary/10 text-primary", x: 16, y: 76, ax: 27, ay: 68, dur: 15, delay: -6.5 },
-  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 89, y: 68, ax: 76, ay: 62, dur: 12, delay: -1.8 },
-  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 56, y: 92, ax: 54, ay: 78, dur: 17, delay: -9 },
+  { title: "Google Business", value: "Perfil optimizado", icon: MapPin, tint: "bg-[#4285F4]/10 text-[#4285F4]", x: 9, y: 17, ax: 20, ay: 28, dur: 13, delay: 0 },
+  { title: "WhatsApp", value: "Respuestas al instante", icon: MessageCircle, tint: "bg-accent/10 text-accent", x: 91, y: 13, ax: 78, ay: 25, dur: 16, delay: -3.2 },
+  { title: "Carta digital", value: "QR siempre al día", icon: QrCode, tint: "bg-primary/10 text-primary", x: 11, y: 74, ax: 24, ay: 66, dur: 15, delay: -6.5 },
+  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 92, y: 66, ax: 78, ay: 60, dur: 12, delay: -1.8 },
+  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 52, y: 95, ax: 52, ay: 80, dur: 17, delay: -9 },
 ] as const;
 
 function HeroSection() {
@@ -558,7 +558,7 @@ function HeroSection() {
 
             {/* Edificio con parallax muy suave */}
             <div
-              className="hero-parallax animate-hero-drift absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2"
+              className="hero-parallax animate-hero-drift absolute left-1/2 top-1/2 z-10 w-[88%] -translate-x-1/2 -translate-y-1/2"
               style={{
                 transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
               }}
@@ -591,7 +591,7 @@ function HeroSection() {
                     <p className="text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                       {n.title}
                     </p>
-                    <p className="mt-0.5 truncate text-[0.8rem] font-semibold tracking-[-0.01em] text-foreground">
+                    <p className="mt-0.5 text-[0.8rem] font-semibold leading-snug tracking-[-0.01em] text-foreground">
                       {n.value}
                     </p>
                   </div>
