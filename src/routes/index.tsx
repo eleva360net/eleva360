@@ -35,6 +35,7 @@ import {
   Gauge,
   QrCode,
 } from "lucide-react";
+import { Navigation, CheckCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
