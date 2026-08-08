@@ -35,6 +35,7 @@ import {
   Gauge,
   QrCode,
 } from "lucide-react";
+import { Navigation, CheckCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
@@ -414,12 +415,174 @@ function HeroShowcase() {
 }
 
 const HERO_NODES = [
-  { title: "Google Business", value: "Perfil optimizado", icon: MapPin, tint: "bg-[#4285F4]/10 text-[#4285F4]", x: 9, y: 17, ax: 20, ay: 28, dur: 13, delay: 0 },
-  { title: "WhatsApp", value: "Respuestas al instante", icon: MessageCircle, tint: "bg-accent/10 text-accent", x: 91, y: 13, ax: 78, ay: 25, dur: 16, delay: -3.2 },
-  { title: "Carta digital", value: "QR siempre al día", icon: QrCode, tint: "bg-primary/10 text-primary", x: 11, y: 74, ax: 24, ay: 66, dur: 15, delay: -6.5 },
-  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 93, y: 64, ax: 79, ay: 58, dur: 12, delay: -1.8 },
-  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 44, y: 97, ax: 47, ay: 82, dur: 17, delay: -9 },
+  { id: "google", x: 9, y: 17, ax: 20, ay: 28, dur: 13, delay: 0 },
+  { id: "whatsapp", x: 91, y: 13, ax: 78, ay: 25, dur: 16, delay: -3.2 },
+  { id: "carta", x: 11, y: 74, ax: 24, ay: 66, dur: 15, delay: -6.5 },
+  { id: "dashboard", x: 93, y: 64, ax: 79, ay: 58, dur: 12, delay: -1.8 },
+  { id: "resena", x: 44, y: 97, ax: 47, ay: 82, dur: 17, delay: -9 },
 ] as const;
+
+const HERO_STARS = (size = "h-2 w-2") => (
+  <span className="flex items-center gap-[1px] text-[#FBBC05]">
+    {[0, 1, 2, 3, 4].map((i) => (
+      <Star key={i} className={`${size} fill-current`} />
+    ))}
+  </span>
+);
+
+function HeroNodeContent({ id }: { id: (typeof HERO_NODES)[number]["id"] }) {
+  if (id === "google") {
+    return (
+      <div className="w-[178px] lg:w-[196px]">
+        <div className="flex items-center gap-1.5 border-b border-slate-100 px-2.5 py-1.5">
+          <MapPin className="h-3 w-3 text-[#4285F4]" />
+          <span className="text-[0.55rem] font-semibold uppercase tracking-[0.09em] text-muted-foreground">
+            Google Business
+          </span>
+        </div>
+        <div className="flex gap-2 px-2.5 py-2">
+          <div className="h-9 w-9 shrink-0 overflow-hidden rounded-md bg-gradient-to-br from-[#4285F4]/20 via-slate-200 to-[#14B8A6]/25" />
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-[0.72rem] font-semibold leading-tight text-foreground">Café Pacífico</p>
+            <div className="mt-0.5 flex items-center gap-1">
+              <span className="text-[0.6rem] font-semibold text-foreground">4,9</span>
+              {HERO_STARS()}
+            </div>
+            <p className="mt-0.5 text-[0.55rem] text-muted-foreground">Abierto · Cafetería</p>
+          </div>
+        </div>
+        <div className="px-2.5 pb-2">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#4285F4]/10 px-2 py-[3px] text-[0.55rem] font-semibold text-[#1a73e8]">
+            <Navigation className="h-2.5 w-2.5" /> Cómo llegar
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (id === "whatsapp") {
+    return (
+      <div className="w-[180px] lg:w-[196px]">
+        <div className="flex items-center gap-1.5 border-b border-slate-100 px-2.5 py-1.5">
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#25D366]/15">
+            <MessageCircle className="h-2.5 w-2.5 text-[#128C7E]" />
+          </span>
+          <span className="text-[0.55rem] font-semibold uppercase tracking-[0.09em] text-muted-foreground">
+            WhatsApp Business
+          </span>
+        </div>
+        <div className="space-y-1.5 px-2.5 py-2">
+          <div className="max-w-[78%] rounded-lg rounded-tl-sm bg-slate-100 px-2 py-1 text-[0.6rem] leading-snug text-slate-700">
+            ¿Tienen mesa para hoy?
+          </div>
+          <div className="ml-auto max-w-[82%] rounded-lg rounded-tr-sm bg-[#25D366]/15 px-2 py-1 text-[0.6rem] leading-snug text-slate-800">
+            ¡Sí! Te reservo a las 20:00
+            <CheckCheck className="ml-1 inline h-2.5 w-2.5 text-[#128C7E]" />
+          </div>
+        </div>
+        <div className="flex items-center gap-1 px-2.5 pb-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" />
+          <span className="text-[0.55rem] font-medium text-muted-foreground">Respuesta en 30 s</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (id === "carta") {
+    return (
+      <div className="w-[176px] lg:w-[192px]">
+        <div className="flex items-center justify-between border-b border-slate-100 px-2.5 py-1.5">
+          <span className="text-[0.55rem] font-semibold uppercase tracking-[0.09em] text-muted-foreground">
+            Carta digital
+          </span>
+          <QrCode className="h-3 w-3 text-primary" />
+        </div>
+        <div className="space-y-1 px-2.5 py-2">
+          {[
+            { n: "Espresso doble", p: "$3.200", c: "from-amber-200 to-amber-400" },
+            { n: "Sándwich pollo", p: "$6.900", c: "from-orange-200 to-rose-300" },
+            { n: "Cheesecake", p: "$4.500", c: "from-sky-200 to-teal-300" },
+          ].map((it) => (
+            <div key={it.n} className="flex items-center gap-1.5">
+              <span className={`h-4 w-4 shrink-0 rounded bg-gradient-to-br ${it.c}`} />
+              <span className="min-w-0 flex-1 truncate text-[0.6rem] font-medium text-slate-700">{it.n}</span>
+              <span className="text-[0.6rem] font-semibold text-foreground">{it.p}</span>
+            </div>
+          ))}
+        </div>
+        <div className="px-2.5 pb-2">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-[3px] text-[0.55rem] font-semibold text-primary">
+            <QrCode className="h-2.5 w-2.5" /> Escanea y abre
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (id === "dashboard") {
+    return (
+      <div className="w-[178px] lg:w-[194px]">
+        <div className="flex items-center gap-1.5 border-b border-slate-100 px-2.5 py-1.5">
+          <BarChart3 className="h-3 w-3 text-primary" />
+          <span className="text-[0.55rem] font-semibold uppercase tracking-[0.09em] text-muted-foreground">
+            Dashboard
+          </span>
+          <span className="ml-auto text-[0.55rem] font-semibold text-accent">+38%</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 px-2.5 pt-2">
+          <div>
+            <p className="text-[0.5rem] uppercase tracking-[0.08em] text-muted-foreground">Visitas</p>
+            <p className="text-[0.78rem] font-bold leading-tight text-foreground">1.842</p>
+          </div>
+          <div>
+            <p className="text-[0.5rem] uppercase tracking-[0.08em] text-muted-foreground">Reservas</p>
+            <p className="text-[0.78rem] font-bold leading-tight text-foreground">126</p>
+          </div>
+        </div>
+        <div className="px-2.5 pb-2 pt-1.5">
+          <svg viewBox="0 0 100 26" className="h-6 w-full" preserveAspectRatio="none" aria-hidden>
+            <defs>
+              <linearGradient id="heroSpark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="rgba(37,99,235,0.22)" />
+                <stop offset="100%" stopColor="rgba(37,99,235,0)" />
+              </linearGradient>
+            </defs>
+            <path d="M0 22 L18 18 L34 20 L52 12 L70 13 L86 6 L100 3 L100 26 L0 26 Z" fill="url(#heroSpark)" />
+            <path
+              d="M0 22 L18 18 L34 20 L52 12 L70 13 L86 6 L100 3"
+              fill="none"
+              stroke="var(--primary)"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-[180px] lg:w-[196px]">
+      <div className="flex items-center gap-1.5 border-b border-slate-100 px-2.5 py-1.5">
+        <span className="text-[0.6rem] font-bold text-foreground">4,9</span>
+        {HERO_STARS()}
+        <span className="ml-auto text-[0.5rem] font-medium text-muted-foreground">128 reseñas</span>
+      </div>
+      <div className="px-2.5 py-2">
+        <p className="text-[0.62rem] leading-snug text-slate-700">
+          “Reservé por WhatsApp en un minuto. Atención impecable.”
+        </p>
+        <div className="mt-1.5 flex items-center gap-1.5">
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary/10 text-[0.5rem] font-bold text-primary">
+            C
+          </span>
+          <span className="text-[0.55rem] font-medium text-muted-foreground">Camila R. · hace 2 días</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function HeroSection() {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -529,7 +692,7 @@ function HeroSection() {
                 </linearGradient>
               </defs>
               {HERO_NODES.map((n, i) => (
-                <g key={n.title}>
+                <g key={n.id}>
                   <path
                     d={`M50 52 L${n.ax} ${n.ay}`}
                     stroke="url(#heroLink)"
@@ -574,7 +737,7 @@ function HeroSection() {
             {/* Tarjetas independientes */}
             {HERO_NODES.map((n, i) => (
               <div
-                key={n.title}
+                key={n.id}
                 className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
                 style={{
                   left: `${n.x}%`,
@@ -583,18 +746,8 @@ function HeroSection() {
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group flex w-[150px] items-start gap-2 rounded-2xl border border-slate-200/80 bg-white/90 p-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[170px]">
-                  <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.tint}`}>
-                    <n.icon className="h-[0.9rem] w-[0.9rem]" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                      {n.title}
-                    </p>
-                    <p className="mt-0.5 text-[0.8rem] font-semibold leading-snug tracking-[-0.01em] text-foreground">
-                      {n.value}
-                    </p>
-                  </div>
+                <div className="group overflow-hidden rounded-2xl border border-slate-200/70 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_24px_48px_-18px_rgba(15,23,42,0.30)]">
+                  <HeroNodeContent id={n.id} />
                 </div>
               </div>
             ))}
