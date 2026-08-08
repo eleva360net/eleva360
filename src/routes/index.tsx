@@ -692,7 +692,7 @@ function HeroSection() {
                 </linearGradient>
               </defs>
               {HERO_NODES.map((n, i) => (
-                <g key={n.title}>
+                <g key={n.id}>
                   <path
                     d={`M50 52 L${n.ax} ${n.ay}`}
                     stroke="url(#heroLink)"
@@ -737,7 +737,7 @@ function HeroSection() {
             {/* Tarjetas independientes */}
             {HERO_NODES.map((n, i) => (
               <div
-                key={n.title}
+                key={n.id}
                 className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
                 style={{
                   left: `${n.x}%`,
@@ -746,18 +746,8 @@ function HeroSection() {
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group flex w-[150px] items-start gap-2 rounded-2xl border border-slate-200/80 bg-white/90 p-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[170px]">
-                  <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.tint}`}>
-                    <n.icon className="h-[0.9rem] w-[0.9rem]" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                      {n.title}
-                    </p>
-                    <p className="mt-0.5 text-[0.8rem] font-semibold leading-snug tracking-[-0.01em] text-foreground">
-                      {n.value}
-                    </p>
-                  </div>
+                <div className="group overflow-hidden rounded-2xl border border-slate-200/70 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_24px_48px_-18px_rgba(15,23,42,0.30)]">
+                  <HeroNodeContent id={n.id} />
                 </div>
               </div>
             ))}
