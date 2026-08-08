@@ -345,37 +345,65 @@ function HeroShowcase() {
       >
         <div className="grain-overlay absolute inset-0 rounded-3xl" aria-hidden />
 
-        {/* connector lines */}
-        <svg
-          aria-hidden
-          viewBox="0 0 400 400"
-          className="pointer-events-none absolute inset-0 h-full w-full"
-        >
-          <defs>
-            <linearGradient id="heroLineGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="var(--gradient-start)" />
-              <stop offset="100%" stopColor="var(--gradient-end)" />
-            </linearGradient>
-          </defs>
-          {[
-            [100, 100],
-            [300, 100],
-            [100, 300],
-            [300, 300],
-          ].map(([x, y], i) => (
-            <path
-              key={i}
-              d={`M200,200 L${x},${y}`}
-              fill="none"
-              stroke="url(#heroLineGrad)"
-              strokeWidth="2"
-              strokeDasharray="6 8"
-              opacity="0.5"
-              className="animate-dash-flow"
-            />
-          ))}
-        </svg>
+       {/* connector lines + light pulses */}
+<svg
+  aria-hidden
+  viewBox="0 0 400 400"
+className="pointer-events-none absolute inset-0 z-20 h-full w-full overflow-visible">
+  <defs>
+    <linearGradient id="heroLineGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="var(--gradient-start)" />
+      <stop offset="100%" stopColor="var(--gradient-end)" />
+    </linearGradient>
 
+    <filter
+      id="heroPulseGlow"
+      x="-200%"
+      y="-200%"
+      width="400%"
+      height="400%"
+    >
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  {[
+    [100, 100],
+    [300, 100],
+    [100, 300],
+    [300, 300],
+  ].map(([x, y], i) => (
+    <g key={i}>
+      <path
+        d={`M200,200 L${x},${y}`}
+        fill="none"
+        stroke="url(#heroLineGrad)"
+        strokeWidth="1.5"
+        strokeDasharray="5 8"
+        opacity="0.42"
+      />
+
+      <circle
+        r="2.8"
+        fill="white"
+        stroke="var(--gradient-end)"
+        strokeWidth="1.5"
+        filter="url(#heroPulseGlow)"
+      >
+        <animateMotion
+          dur={`${3.2 + i * 0.35}s`}
+          begin={`${i * 0.7}s`}
+          repeatCount="indefinite"
+          path={`M200,200 L${x},${y}`}
+        />
+      </circle>
+    </g>
+  ))}
+</svg>
         {/* center node: the business */}
         <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2">
           <div className="animate-logo-glow absolute -inset-3 -z-10 rounded-full bg-primary/30 blur-xl" />
@@ -414,11 +442,66 @@ function HeroShowcase() {
 }
 
 const HERO_NODES = [
-  { title: "Google Business", value: "Perfil optimizado", icon: MapPin, tint: "bg-[#4285F4]/10 text-[#4285F4]", x: 9, y: 17, ax: 20, ay: 28, dur: 13, delay: 0 },
-  { title: "WhatsApp", value: "Respuestas al instante", icon: MessageCircle, tint: "bg-accent/10 text-accent", x: 91, y: 13, ax: 78, ay: 25, dur: 16, delay: -3.2 },
-  { title: "Carta digital", value: "QR siempre al día", icon: QrCode, tint: "bg-primary/10 text-primary", x: 11, y: 74, ax: 24, ay: 66, dur: 15, delay: -6.5 },
-  { title: "Dashboard", value: "+38% visitas", icon: BarChart3, tint: "bg-primary/10 text-primary", x: 93, y: 64, ax: 79, ay: 58, dur: 12, delay: -1.8 },
-  { title: "Reseñas", value: "4,9 · 128 opiniones", icon: Star, tint: "bg-[#FBBC05]/15 text-[#B7860B]", x: 44, y: 97, ax: 47, ay: 82, dur: 17, delay: -9 },
+  {
+    type: "google",
+    title: "Google Business",
+    icon: MapPin,
+    tint: "bg-[#4285F4]/10 text-[#4285F4]",
+    x: 10,
+    y: 16,
+    ax: 21,
+    ay: 28,
+    dur: 13,
+    delay: 0,
+  },
+  {
+    type: "whatsapp",
+    title: "WhatsApp",
+    icon: MessageCircle,
+    tint: "bg-accent/10 text-accent",
+    x: 90,
+    y: 15,
+    ax: 79,
+    ay: 27,
+    dur: 16,
+    delay: -3.2,
+  },
+  {
+    type: "menu",
+    title: "Carta digital",
+    icon: QrCode,
+    tint: "bg-primary/10 text-primary",
+    x: 11,
+    y: 74,
+    ax: 24,
+    ay: 67,
+    dur: 15,
+    delay: -6.5,
+  },
+  {
+    type: "dashboard",
+    title: "Dashboard",
+    icon: BarChart3,
+    tint: "bg-primary/10 text-primary",
+    x: 91,
+    y: 65,
+    ax: 79,
+    ay: 59,
+    dur: 12,
+    delay: -1.8,
+  },
+  {
+    type: "review",
+    title: "Reseñas",
+    icon: Star,
+    tint: "bg-[#FBBC05]/15 text-[#B7860B]",
+    x: 48,
+    y: 96,
+    ax: 50,
+    ay: 82,
+    dur: 17,
+    delay: -9,
+  },
 ] as const;
 
 function HeroSection() {
@@ -515,40 +598,52 @@ function HeroSection() {
               className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.06),rgba(255,255,255,0)_70%)] blur-2xl"
             />
 
-            {/* Conexiones discretas con pulso de luz */}
-            <svg
-              aria-hidden
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            >
-              <defs>
-                <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="rgba(37,99,235,0.30)" />
-                  <stop offset="100%" stopColor="rgba(20,184,166,0.22)" />
-                </linearGradient>
-              </defs>
-              {HERO_NODES.map((n, i) => (
-                <g key={n.title}>
-                  <path
-                    d={`M50 52 L${n.ax} ${n.ay}`}
-                    stroke="url(#heroLink)"
-                    strokeWidth="0.28"
-                    fill="none"
-                  />
-                  <path
-                    d={`M50 52 L${n.ax} ${n.ay}`}
-                    stroke="rgba(37,99,235,0.75)"
-                    strokeWidth="0.32"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeDasharray="3 97"
-                    className="hero-link-pulse"
-                    style={{ animationDelay: `${i * 1.4}s` }}
-                  />
-                </g>
-              ))}
-            </svg>
+            {/* Conexiones del ecosistema + pulso de luz */}
+<svg
+  aria-hidden
+  viewBox="0 0 100 100"
+  preserveAspectRatio="none"
+  className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
+>
+  <defs>
+    <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="rgba(37,99,235,0.18)" />
+      <stop offset="55%" stopColor="rgba(37,99,235,0.48)" />
+      <stop offset="100%" stopColor="rgba(20,184,166,0.28)" />
+    </linearGradient>
+  </defs>
+
+  {HERO_NODES.map((n, i) => {
+    const path = `M50 52 Q${(50 + n.ax) / 2} ${
+      (52 + n.ay) / 2 - 5
+    } ${n.ax} ${n.ay}`;
+
+    return (
+      <g key={n.title}>
+        {/* Conexión */}
+        <path
+          d={path}
+          fill="none"
+          stroke="url(#heroLink)"
+          strokeWidth="0.32"
+          strokeLinecap="round"
+        />
+
+        {/* Nodo final */}
+        <circle
+          cx={n.ax}
+          cy={n.ay}
+          r="0.8"
+          fill="white"
+          stroke="#2563EB"
+          strokeWidth="0.35"
+        />
+
+        
+      </g>
+    );
+  })}
+</svg>
 
             {/* Sombra de suelo para anclar el edificio */}
             <div
@@ -572,32 +667,317 @@ function HeroSection() {
             </div>
 
             {/* Tarjetas independientes */}
-            {HERO_NODES.map((n, i) => (
+{/* Tarjetas independientes — UI del ecosistema Eleva360 */}
+{HERO_NODES.map((n, i) => (
+  <div
+    key={n.title}
+    className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
+    style={{
+      left: `${n.x}%`,
+      top: `${n.y}%`,
+      animationDuration: `${n.dur}s`,
+      animationDelay: `${n.delay}s`,
+    }}
+  >
+    <div
+      className="
+        group relative overflow-hidden rounded-2xl
+        border border-slate-200/80
+        bg-white/95
+        shadow-[0_8px_30px_-16px_rgba(15,23,42,0.28)]
+        backdrop-blur-xl
+        transition-all duration-500 ease-out
+        hover:-translate-y-1
+        hover:scale-[1.025]
+        hover:border-slate-300
+        hover:shadow-[0_18px_45px_-18px_rgba(15,23,42,0.30)]
+      "
+    >
+      {/* brillo ambiental */}
+      <div
+        className="
+          pointer-events-none absolute -right-10 -top-10
+          h-20 w-20 rounded-full
+          bg-primary/5 blur-2xl
+          transition-opacity duration-500
+          group-hover:opacity-100
+        "
+      />
+
+      {/* GOOGLE BUSINESS */}
+      {n.title.toLowerCase().includes("google") && (
+        <div className="w-[245px] p-3.5">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
+              <MapPin className="h-4 w-4 text-primary" />
+            </div>
+
+            <div className="min-w-0">
+              <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                Google Business Profile
+              </p>
+              <p className="mt-0.5 text-[13px] font-bold text-slate-900">
+                Café Pacífico
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-2.5 flex items-center gap-1.5">
+            <span className="text-[12px] font-semibold text-slate-700">
+              4.9
+            </span>
+
+            <span className="text-[11px] tracking-tight text-amber-400">
+              ★★★★★
+            </span>
+
+            <span className="text-[10px] text-slate-400">
+              (238)
+            </span>
+          </div>
+
+          <div className="mt-1 flex items-center gap-1.5 text-[9px]">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span className="font-medium text-emerald-600">
+              Abierto
+            </span>
+            <span className="text-slate-400">
+              · Cierra a las 23:00
+            </span>
+          </div>
+
+          <div className="mt-3 flex items-center gap-2">
+            <div className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/70 px-2.5 py-1.5 text-[9px] font-semibold text-primary">
+              <MapPin className="h-3 w-3" />
+              Cómo llegar
+            </div>
+
+            <div className="h-10 w-12 overflow-hidden rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 opacity-80">
+              <div className="h-full w-full bg-[radial-gradient(circle_at_60%_40%,rgba(37,99,235,0.15),transparent_45%)]" />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* WHATSAPP */}
+      {n.title.toLowerCase().includes("whatsapp") && (
+        <div className="w-[210px] p-3.5">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 text-emerald-500">
+              <MessageCircle className="h-4 w-4" />
+            </div>
+
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                WhatsApp Business
+              </p>
+              <div className="mt-0.5 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span className="text-[9px] font-medium text-emerald-600">
+                  En línea
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-3 rounded-xl rounded-tl-sm bg-slate-50 p-2.5">
+            <p className="text-[10px] leading-[1.45] text-slate-700">
+              Hola 👋
+              <br />
+              Quiero reservar una mesa
+              <br />
+              para este sábado a las 20:00.
+            </p>
+
+            <div className="mt-1 text-right text-[8px] text-slate-400">
+              11:48
+            </div>
+          </div>
+
+          <div className="mt-2 flex items-center gap-2">
+            <div className="flex h-5 items-center gap-1 rounded-full bg-slate-50 px-2">
+              <span className="h-1 w-1 rounded-full bg-slate-400" />
+              <span className="h-1 w-1 rounded-full bg-slate-400" />
+              <span className="h-1 w-1 rounded-full bg-slate-400" />
+            </div>
+
+            <span className="text-[8px] text-slate-400">
+              Escribiendo...
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* CARTA DIGITAL */}
+{n.title.toLowerCase().includes("carta") && (
+  <div className="w-[225px] p-3.5">
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
+          <QrCode className="h-4 w-4" />
+        </div>
+
+        <div>
+          <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-slate-400">
+            Carta Digital
+          </p>
+          <p className="mt-0.5 text-[11px] font-semibold text-slate-800">
+            Escanea y descubre
+          </p>
+        </div>
+      </div>
+
+      <span className="rounded-full bg-emerald-50 px-2 py-1 text-[7px] font-bold text-emerald-600">
+        ACTIVA
+      </span>
+    </div>
+
+    <div className="mt-3 flex gap-3 rounded-xl bg-slate-50/80 p-2.5">
+      {/* QR */}
+      <div className="flex h-[74px] w-[74px] shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-sm ring-1 ring-slate-100">
+        <div className="grid grid-cols-5 gap-[2px]">
+          {[
+            1,1,1,0,1,
+            1,0,1,1,1,
+            1,1,0,1,0,
+            0,1,1,0,1,
+            1,0,1,1,1,
+          ].map((cell, index) => (
+            <span
+              key={index}
+              className={`h-[8px] w-[8px] rounded-[1px] ${
+                cell ? "bg-slate-900" : "bg-transparent"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* contenido */}
+      <div className="min-w-0 flex-1">
+        <p className="text-[9px] font-bold text-slate-800">
+          Menú del negocio
+        </p>
+
+        <p className="mt-1 text-[8px] leading-[1.4] text-slate-400">
+          Consulta productos, precios y opciones desde tu celular.
+        </p>
+
+        <div className="mt-2 flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          <span className="text-[8px] font-semibold text-primary">
+            Acceso instantáneo
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-2.5 flex items-center justify-between rounded-lg border border-slate-100 bg-white px-2.5 py-2">
+      <span className="text-[8px] font-medium text-slate-500">
+        Actualización en tiempo real
+      </span>
+
+      <ArrowRight className="h-3 w-3 text-primary" />
+    </div>
+  </div>
+)}
+
+      {/* DASHBOARD */}
+      {n.title.toLowerCase().includes("dashboard") && (
+        <div className="w-[215px] p-3.5">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
+              <TrendingUp className="h-4 w-4" />
+            </div>
+
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                Dashboard
+              </p>
+              <p className="text-[11px] font-semibold text-slate-800">
+                Resultados
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-3 space-y-1">
+            {[
+              ["Consultas", "24", "+18%"],
+              ["Reservas", "12", "+29%"],
+              ["Visitas al perfil", "326", "+31%"],
+            ].map(([label, value, growth]) => (
               <div
-                key={n.title}
-                className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
-                style={{
-                  left: `${n.x}%`,
-                  top: `${n.y}%`,
-                  animationDuration: `${n.dur}s`,
-                  animationDelay: `${n.delay}s`,
-                }}
+                key={label}
+                className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0"
               >
-                <div className="group flex w-[150px] items-start gap-2 rounded-2xl border border-slate-200/80 bg-white/90 p-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_28px_-14px_rgba(15,23,42,0.22)] backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-slate-300 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_22px_44px_-18px_rgba(15,23,42,0.28)] lg:w-[170px]">
-                  <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${n.tint}`}>
-                    <n.icon className="h-[0.9rem] w-[0.9rem]" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                      {n.title}
-                    </p>
-                    <p className="mt-0.5 text-[0.8rem] font-semibold leading-snug tracking-[-0.01em] text-foreground">
-                      {n.value}
-                    </p>
-                  </div>
+                <span className="text-[9px] text-slate-500">
+                  {label}
+                </span>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-slate-800">
+                    {value}
+                  </span>
+
+                  <span className="text-[8px] font-semibold text-emerald-500">
+                    ↑ {growth.replace("+", "")}
+                  </span>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* RESEÑA */}
+      {!n.title.toLowerCase().includes("google") &&
+        !n.title.toLowerCase().includes("whatsapp") &&
+        !n.title.toLowerCase().includes("carta") &&
+        !n.title.toLowerCase().includes("dashboard") && (
+          <div className="w-[215px] p-3.5">
+            <div className="flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-50 text-amber-500">
+                <span className="text-sm">★</span>
+              </div>
+
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                  Nueva reseña
+                </p>
+                <p className="text-[10px] font-semibold text-slate-800">
+                  Cliente satisfecho
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-2 text-[12px] tracking-[0.08em] text-amber-400">
+              ★★★★★
+            </div>
+
+            <p className="mt-2 text-[9px] leading-[1.5] text-slate-600">
+              "Excelente atención, rica comida y muy buen ambiente.
+              ¡Totalmente recomendado!"
+            </p>
+
+            <div className="mt-3 flex items-center gap-2">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-[8px] font-bold text-slate-500">
+                MG
+              </div>
+
+              <div>
+                <p className="text-[9px] font-semibold text-slate-700">
+                  María González
+                </p>
+                <p className="text-[8px] text-slate-400">
+                  Hoy
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+    </div>
+  </div>
+))}
           </div>
         </div>
       </div>
