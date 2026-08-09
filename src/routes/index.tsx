@@ -34,11 +34,13 @@ import {
   Wrench,
   Gauge,
   QrCode,
-} from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+  Smartphone,
+  ChevronRight,
+} from "lucide-react";import { useEffect, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
 import heroImage from "../assets/hero-eleva360.png";
+
 
 const WHATSAPP_URL =
   "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20negocio";
@@ -447,10 +449,10 @@ const HERO_NODES = [
     title: "Google Business",
     icon: MapPin,
     tint: "bg-[#4285F4]/10 text-[#4285F4]",
-    x: 10,
-    y: 16,
-    ax: 21,
-    ay: 28,
+    x: 25,
+    y: 15,
+    ax: 32,
+    ay: 30,
     dur: 13,
     delay: 0,
   },
@@ -459,10 +461,10 @@ const HERO_NODES = [
     title: "WhatsApp",
     icon: MessageCircle,
     tint: "bg-accent/10 text-accent",
-    x: 90,
-    y: 15,
-    ax: 79,
-    ay: 27,
+    x: 10,
+    y: 46,
+    ax: 26,
+    ay: 46,
     dur: 16,
     delay: -3.2,
   },
@@ -471,10 +473,10 @@ const HERO_NODES = [
     title: "Carta digital",
     icon: QrCode,
     tint: "bg-primary/10 text-primary",
-    x: 11,
-    y: 74,
-    ax: 24,
-    ay: 67,
+    x: 10,
+    y: 85,
+    ax: 27,
+    ay: 68,
     dur: 15,
     delay: -6.5,
   },
@@ -483,10 +485,10 @@ const HERO_NODES = [
     title: "Dashboard",
     icon: BarChart3,
     tint: "bg-primary/10 text-primary",
-    x: 91,
-    y: 65,
-    ax: 79,
-    ay: 59,
+    x: 89,
+    y: 18,
+    ax: 75,
+    ay: 28,
     dur: 12,
     delay: -1.8,
   },
@@ -495,10 +497,10 @@ const HERO_NODES = [
     title: "Reseñas",
     icon: Star,
     tint: "bg-[#FBBC05]/15 text-[#B7860B]",
-    x: 48,
-    y: 96,
-    ax: 50,
-    ay: 82,
+    x: 89,
+    y: 82,
+    ax: 74,
+    ay: 70,
     dur: 17,
     delay: -9,
   },
@@ -522,18 +524,14 @@ function HeroSection() {
     <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-20 lg:pb-24">
       {/* Fondo: gradientes radiales suaves + luz ambiental en capas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        {/* base cálida-neutra, casi imperceptible */}
         <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgba(37,99,235,0.045),transparent_60%)]" />
-        {/* luz ambiental derecha, detrás de la ilustración */}
         <div className="hero-ambient absolute right-[-6%] top-1/2 h-[620px] w-[620px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.10),transparent_68%)] blur-[70px]" />
-        {/* acento teal muy tenue para dar profundidad */}
         <div className="hero-ambient absolute bottom-[-12%] left-[38%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(20,184,166,0.07),transparent_70%)] blur-[80px] [animation-delay:-6s]" />
-        {/* velo blanco superior para preservar el minimalismo */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-[1360px] items-center gap-16 lg:grid-cols-[0.46fr_0.54fr] lg:gap-20 xl:gap-24">
-        {/* Bloque de texto: 40%, altura visual reducida */}
+        {/* Bloque de texto */}
         <div className="flex flex-col items-start text-left">
           <div className="animate-hero-fade-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur">
             <span className="relative flex h-1.5 w-1.5 rounded-full bg-primary">
@@ -554,22 +552,23 @@ function HeroSection() {
           </p>
 
           <div className="animate-hero-scale-in animation-delay-300 mt-9 flex w-full flex-wrap items-center gap-3">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto"
-            >
-              Solicitar diagnóstico gratuito
-              <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#como-funciona"
-              className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto"
-            >
-              Ver cómo funciona
-            </a>
-          </div>
+  <a
+    href={WHATSAPP_URL}
+    target="_blank"
+    rel="noreferrer"
+    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto"
+  >
+    Solicitar diagnóstico gratuito
+    <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
+  </a>
+
+  <a
+    href="#como-funciona"
+    className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto"
+  >
+    Ver cómo funciona
+  </a>
+</div>
 
           <div className="animate-hero-fade-up animation-delay-400 mt-11 flex flex-wrap items-center gap-x-6 gap-y-2.5 border-t border-slate-100 pt-6 text-[0.8125rem] text-muted-foreground">
             <span className="flex items-center gap-2">
@@ -599,51 +598,46 @@ function HeroSection() {
             />
 
             {/* Conexiones del ecosistema + pulso de luz */}
-<svg
-  aria-hidden
-  viewBox="0 0 100 100"
-  preserveAspectRatio="none"
-  className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
->
-  <defs>
-    <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stopColor="rgba(37,99,235,0.18)" />
-      <stop offset="55%" stopColor="rgba(37,99,235,0.48)" />
-      <stop offset="100%" stopColor="rgba(20,184,166,0.28)" />
-    </linearGradient>
-  </defs>
+            <svg
+              aria-hidden
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
+            >
+              <defs>
+                <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="rgba(37,99,235,0.18)" />
+                  <stop offset="55%" stopColor="rgba(37,99,235,0.48)" />
+                  <stop offset="100%" stopColor="rgba(20,184,166,0.28)" />
+                </linearGradient>
+              </defs>
 
-  {HERO_NODES.map((n, i) => {
-    const path = `M50 52 Q${(50 + n.ax) / 2} ${
-      (52 + n.ay) / 2 - 5
-    } ${n.ax} ${n.ay}`;
+              {HERO_NODES.map((n) => {
+                const path = `M50 52 Q${(50 + n.ax) / 2} ${
+                  (52 + n.ay) / 2 - 5
+                } ${n.ax} ${n.ay}`;
 
-    return (
-      <g key={n.title}>
-        {/* Conexión */}
-        <path
-          d={path}
-          fill="none"
-          stroke="url(#heroLink)"
-          strokeWidth="0.32"
-          strokeLinecap="round"
-        />
-
-        {/* Nodo final */}
-        <circle
-          cx={n.ax}
-          cy={n.ay}
-          r="0.8"
-          fill="white"
-          stroke="#2563EB"
-          strokeWidth="0.35"
-        />
-
-        
-      </g>
-    );
-  })}
-</svg>
+                return (
+                  <g key={n.title}>
+                    <path
+                      d={path}
+                      fill="none"
+                      stroke="url(#heroLink)"
+                      strokeWidth="0.32"
+                      strokeLinecap="round"
+                    />
+                    <circle
+                      cx={n.ax}
+                      cy={n.ay}
+                      r="0.8"
+                      fill="white"
+                      stroke="#2563EB"
+                      strokeWidth="0.35"
+                    />
+                  </g>
+                );
+              })}
+            </svg>
 
             {/* Sombra de suelo para anclar el edificio */}
             <div
@@ -666,327 +660,213 @@ function HeroSection() {
               />
             </div>
 
-            {/* Tarjetas independientes */}
-{/* Tarjetas independientes — UI del ecosistema Eleva360 */}
-{HERO_NODES.map((n, i) => (
-  <div
-    key={n.title}
-    className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
-    style={{
-      left: `${n.x}%`,
-      top: `${n.y}%`,
-      animationDuration: `${n.dur}s`,
-      animationDelay: `${n.delay}s`,
-    }}
-  >
-    <div
-      className="
-        group relative overflow-hidden rounded-2xl
-        border border-slate-200/80
-        bg-white/95
-        shadow-[0_8px_30px_-16px_rgba(15,23,42,0.28)]
-        backdrop-blur-xl
-        transition-all duration-500 ease-out
-        hover:-translate-y-1
-        hover:scale-[1.025]
-        hover:border-slate-300
-        hover:shadow-[0_18px_45px_-18px_rgba(15,23,42,0.30)]
-      "
-    >
-      {/* brillo ambiental */}
-      <div
-        className="
-          pointer-events-none absolute -right-10 -top-10
-          h-20 w-20 rounded-full
-          bg-primary/5 blur-2xl
-          transition-opacity duration-500
-          group-hover:opacity-100
-        "
-      />
-
-      {/* GOOGLE BUSINESS */}
-      {n.title.toLowerCase().includes("google") && (
-        <div className="w-[245px] p-3.5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
-              <MapPin className="h-4 w-4 text-primary" />
-            </div>
-
-            <div className="min-w-0">
-              <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-slate-400">
-                Google Business Profile
-              </p>
-              <p className="mt-0.5 text-[13px] font-bold text-slate-900">
-                Café Pacífico
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-2.5 flex items-center gap-1.5">
-            <span className="text-[12px] font-semibold text-slate-700">
-              4.9
-            </span>
-
-            <span className="text-[11px] tracking-tight text-amber-400">
-              ★★★★★
-            </span>
-
-            <span className="text-[10px] text-slate-400">
-              (238)
-            </span>
-          </div>
-
-          <div className="mt-1 flex items-center gap-1.5 text-[9px]">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <span className="font-medium text-emerald-600">
-              Abierto
-            </span>
-            <span className="text-slate-400">
-              · Cierra a las 23:00
-            </span>
-          </div>
-
-          <div className="mt-3 flex items-center gap-2">
-            <div className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/70 px-2.5 py-1.5 text-[9px] font-semibold text-primary">
-              <MapPin className="h-3 w-3" />
-              Cómo llegar
-            </div>
-
-            <div className="h-10 w-12 overflow-hidden rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 opacity-80">
-              <div className="h-full w-full bg-[radial-gradient(circle_at_60%_40%,rgba(37,99,235,0.15),transparent_45%)]" />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* WHATSAPP */}
-      {n.title.toLowerCase().includes("whatsapp") && (
-        <div className="w-[210px] p-3.5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 text-emerald-500">
-              <MessageCircle className="h-4 w-4" />
-            </div>
-
-            <div>
-              <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
-                WhatsApp Business
-              </p>
-              <div className="mt-0.5 flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span className="text-[9px] font-medium text-emerald-600">
-                  En línea
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-3 rounded-xl rounded-tl-sm bg-slate-50 p-2.5">
-            <p className="text-[10px] leading-[1.45] text-slate-700">
-              Hola 👋
-              <br />
-              Quiero reservar una mesa
-              <br />
-              para este sábado a las 20:00.
-            </p>
-
-            <div className="mt-1 text-right text-[8px] text-slate-400">
-              11:48
-            </div>
-          </div>
-
-          <div className="mt-2 flex items-center gap-2">
-            <div className="flex h-5 items-center gap-1 rounded-full bg-slate-50 px-2">
-              <span className="h-1 w-1 rounded-full bg-slate-400" />
-              <span className="h-1 w-1 rounded-full bg-slate-400" />
-              <span className="h-1 w-1 rounded-full bg-slate-400" />
-            </div>
-
-            <span className="text-[8px] text-slate-400">
-              Escribiendo...
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* CARTA DIGITAL */}
-{n.title.toLowerCase().includes("carta") && (
-  <div className="w-[225px] p-3.5">
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
-          <QrCode className="h-4 w-4" />
-        </div>
-
-        <div>
-          <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-slate-400">
-            Carta Digital
-          </p>
-          <p className="mt-0.5 text-[11px] font-semibold text-slate-800">
-            Escanea y descubre
-          </p>
-        </div>
-      </div>
-
-      <span className="rounded-full bg-emerald-50 px-2 py-1 text-[7px] font-bold text-emerald-600">
-        ACTIVA
-      </span>
-    </div>
-
-    <div className="mt-3 flex gap-3 rounded-xl bg-slate-50/80 p-2.5">
-      {/* QR */}
-      <div className="flex h-[74px] w-[74px] shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-sm ring-1 ring-slate-100">
-        <div className="grid grid-cols-5 gap-[2px]">
-          {[
-            1,1,1,0,1,
-            1,0,1,1,1,
-            1,1,0,1,0,
-            0,1,1,0,1,
-            1,0,1,1,1,
-          ].map((cell, index) => (
-            <span
-              key={index}
-              className={`h-[8px] w-[8px] rounded-[1px] ${
-                cell ? "bg-slate-900" : "bg-transparent"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* contenido */}
-      <div className="min-w-0 flex-1">
-        <p className="text-[9px] font-bold text-slate-800">
-          Menú del negocio
-        </p>
-
-        <p className="mt-1 text-[8px] leading-[1.4] text-slate-400">
-          Consulta productos, precios y opciones desde tu celular.
-        </p>
-
-        <div className="mt-2 flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-[8px] font-semibold text-primary">
-            Acceso instantáneo
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div className="mt-2.5 flex items-center justify-between rounded-lg border border-slate-100 bg-white px-2.5 py-2">
-      <span className="text-[8px] font-medium text-slate-500">
-        Actualización en tiempo real
-      </span>
-
-      <ArrowRight className="h-3 w-3 text-primary" />
-    </div>
-  </div>
-)}
-
-      {/* DASHBOARD */}
-      {n.title.toLowerCase().includes("dashboard") && (
-        <div className="w-[215px] p-3.5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
-              <TrendingUp className="h-4 w-4" />
-            </div>
-
-            <div>
-              <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
-                Dashboard
-              </p>
-              <p className="text-[11px] font-semibold text-slate-800">
-                Resultados
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-3 space-y-1">
-            {[
-              ["Consultas", "24", "+18%"],
-              ["Reservas", "12", "+29%"],
-              ["Visitas al perfil", "326", "+31%"],
-            ].map(([label, value, growth]) => (
+            {/* Tarjetas independientes — UI del ecosistema Eleva360 */}
+            {HERO_NODES.map((n) => (
               <div
-                key={label}
-                className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0"
+                key={n.title}
+                className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
+                style={{
+                  left: `${n.x}%`,
+                  top: `${n.y}%`,
+                  animationDuration: `${n.dur}s`,
+                  animationDelay: `${n.delay}s`,
+                }}
               >
-                <span className="text-[9px] text-slate-500">
-                  {label}
-                </span>
+                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 shadow-[0_8px_30px_-16px_rgba(15,23,42,0.28)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:border-slate-300 hover:shadow-[0_18px_45px_-18px_rgba(15,23,42,0.30)]">
+                  <div className="pointer-events-none absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/5 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-slate-800">
-                    {value}
-                  </span>
+                  {/* GOOGLE BUSINESS */}
+                  {n.title.toLowerCase().includes("google") && (
+                    <div className="w-[250px] p-3.5">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex min-w-0 items-center gap-2">
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
+                            <MapPin className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[7.5px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                              Google Business Profile
+                            </p>
+                            <p className="mt-0.5 truncate text-[13px] font-bold text-slate-900">
+                              Café Pacífico
+                            </p>
+                          </div>
+                        </div>
+                        <div className="h-11 w-14 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-amber-100 via-orange-100 to-slate-200" />
+                      </div>
 
-                  <span className="text-[8px] font-semibold text-emerald-500">
-                    ↑ {growth.replace("+", "")}
-                  </span>
+                      <div className="mt-2.5 flex items-center gap-1.5">
+                        <span className="text-[12px] font-semibold text-slate-700">4.9</span>
+                        <span className="text-[11px] tracking-tight text-amber-400">★★★★★</span>
+                        <span className="text-[10px] text-slate-400">(238)</span>
+                      </div>
+
+                      <div className="mt-1 flex items-center gap-1.5 text-[9px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                        <span className="font-medium text-emerald-600">Abierto</span>
+                        <span className="text-slate-400">· Cierra a las 23:00</span>
+                      </div>
+
+                      <div className="mt-3 flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/70 px-3 py-1.5 text-[9px] font-semibold text-primary">
+                        <span className="text-[8px]">▶</span>
+                        Cómo llegar
+                      </div>
+                    </div>
+                  )}
+
+                  {/* WHATSAPP */}
+                  {n.title.toLowerCase().includes("whatsapp") && (
+                    <div className="w-[210px] p-3.5">
+                      <div className="flex items-center gap-2">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 text-emerald-500">
+                          <MessageCircle className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                            WhatsApp Business
+                          </p>
+                          <div className="mt-0.5 flex items-center gap-1.5">
+                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                            <span className="text-[9px] font-medium text-emerald-600">En línea</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 rounded-xl rounded-tl-sm bg-slate-50 p-2.5">
+                        <p className="text-[10px] leading-[1.45] text-slate-700">
+                          Hola 👋
+                          <br />
+                          Quiero reservar una mesa
+                          <br />
+                          para este sábado a las 20:00.
+                        </p>
+                        <div className="mt-1 text-right text-[8px] text-slate-400">11:18</div>
+                      </div>
+
+                      <div className="mt-2 flex items-center gap-2">
+                        <div className="flex h-5 items-center gap-1 rounded-full bg-slate-50 px-2">
+                          <span className="h-1 w-1 rounded-full bg-slate-400" />
+                          <span className="h-1 w-1 rounded-full bg-slate-400" />
+                          <span className="h-1 w-1 rounded-full bg-slate-400" />
+                        </div>
+                        <span className="text-[8px] text-slate-400">Escribiendo...</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* CARTA DIGITAL */}
+                  {n.title.toLowerCase().includes("carta") && (
+                    <div className="w-[225px] p-3.5">
+                      <div className="flex items-center gap-2">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
+                          <Smartphone className="h-4 w-4" />
+                        </div>
+                        <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                          Carta Digital
+                        </p>
+                      </div>
+
+                      <div className="mt-2.5 divide-y divide-slate-100">
+                        {[
+                          { label: "Entradas", count: "8 opciones" },
+                          { label: "Platos", count: "14 opciones" },
+                          { label: "Bebidas", count: "10 opciones" },
+                        ].map((item) => (
+                          <div key={item.label} className="flex items-center gap-2.5 py-1.5 first:pt-0 last:pb-0">
+                            <div className="h-8 w-8 shrink-0 rounded-md bg-gradient-to-br from-amber-100 to-orange-200" />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[10px] font-semibold text-slate-800">{item.label}</p>
+                              <p className="text-[8px] text-slate-400">{item.count}</p>
+                            </div>
+                            <ChevronRight className="h-3 w-3 shrink-0 text-slate-300" />
+                          </div>
+                        ))}
+                      </div>
+
+                      <button className="mt-2.5 flex w-full items-center justify-center gap-1 rounded-full bg-primary py-1.5 text-[9px] font-semibold text-white">
+                        Ver carta completa
+                        <ArrowRight className="h-2.5 w-2.5" />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* DASHBOARD */}
+                  {n.title.toLowerCase().includes("dashboard") && (
+                    <div className="w-[215px] p-3.5">
+                      <div className="flex items-center gap-2">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
+                          <BarChart3 className="h-4 w-4" />
+                        </div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                          Dashboard
+                        </p>
+                      </div>
+
+                      <div className="mt-3 space-y-1">
+                        {[
+                          { icon: Clock, label: "Consultas", value: "24", growth: "18%" },
+                          { icon: CalendarCheck, label: "Reservas", value: "12", growth: "29%" },
+                          { icon: Users, label: "Visitas al perfil", value: "326", growth: "31%" },
+                        ].map(({ icon: Icon, label, value, growth }) => (
+                          <div
+                            key={label}
+                            className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0"
+                          >
+                            <div className="flex items-center gap-1.5">
+                              <Icon className="h-3 w-3 text-slate-400" />
+                              <span className="text-[9px] text-slate-500">{label}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[11px] font-bold text-slate-800">{value}</span>
+                              <span className="text-[8px] font-semibold text-emerald-500">↑ {growth}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* RESEÑA */}
+                  {!n.title.toLowerCase().includes("google") &&
+                    !n.title.toLowerCase().includes("whatsapp") &&
+                    !n.title.toLowerCase().includes("carta") &&
+                    !n.title.toLowerCase().includes("dashboard") && (
+                      <div className="w-[215px] p-3.5">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-50 text-amber-500">
+                            <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                          </div>
+                          <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                            Nueva reseña
+                          </p>
+                        </div>
+
+                        <div className="mt-2.5 text-[12px] tracking-[0.08em] text-amber-400">★★★★★</div>
+
+                        <p className="mt-2 text-[9px] leading-[1.5] text-slate-600">
+                          Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+                        </p>
+
+                        <div className="mt-3 flex items-center gap-2">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-[8px] font-bold text-slate-500">
+                            MG
+                          </div>
+                          <div>
+                            <p className="text-[9px] font-semibold text-slate-700">María González</p>
+                            <p className="text-[8px] text-slate-400">Hoy</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                 </div>
               </div>
-            ))}
-          </div>
+                 ))}
         </div>
-      )}
-
-      {/* RESEÑA */}
-      {!n.title.toLowerCase().includes("google") &&
-        !n.title.toLowerCase().includes("whatsapp") &&
-        !n.title.toLowerCase().includes("carta") &&
-        !n.title.toLowerCase().includes("dashboard") && (
-          <div className="w-[215px] p-3.5">
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-50 text-amber-500">
-                <span className="text-sm">★</span>
-              </div>
-
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
-                  Nueva reseña
-                </p>
-                <p className="text-[10px] font-semibold text-slate-800">
-                  Cliente satisfecho
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-2 text-[12px] tracking-[0.08em] text-amber-400">
-              ★★★★★
-            </div>
-
-            <p className="mt-2 text-[9px] leading-[1.5] text-slate-600">
-              "Excelente atención, rica comida y muy buen ambiente.
-              ¡Totalmente recomendado!"
-            </p>
-
-            <div className="mt-3 flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-[8px] font-bold text-slate-500">
-                MG
-              </div>
-
-              <div>
-                <p className="text-[9px] font-semibold text-slate-700">
-                  María González
-                </p>
-                <p className="text-[8px] text-slate-400">
-                  Hoy
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-    </div>
-  </div>
-))}
-          </div>
-        </div>
+      </div>
       </div>
     </section>
   );
 }
-
-
-
 function SectionHeader({
   eyebrow,
   title,
