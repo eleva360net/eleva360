@@ -616,7 +616,7 @@ function HeroSection() {
               aria-hidden
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full overflow-visible sm:block"
+              className="pointer-events-none absolute inset-0 z-[15] hidden h-full w-full overflow-visible sm:block"
             >
               <defs>
                 <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
