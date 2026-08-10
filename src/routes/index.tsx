@@ -597,46 +597,83 @@ function HeroSection() {
               className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.06),rgba(255,255,255,0)_70%)] blur-2xl"
             />
 
-            {/* Conexiones del ecosistema + pulso de luz */}
+            {/* Conexiones del ecosistema — curvas neón independientes */}
             <svg
               aria-hidden
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
+              className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full overflow-visible sm:block"
             >
               <defs>
                 <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="rgba(37,99,235,0.18)" />
-                  <stop offset="55%" stopColor="rgba(37,99,235,0.48)" />
-                  <stop offset="100%" stopColor="rgba(20,184,166,0.28)" />
+                  <stop offset="0%" stopColor="rgba(37,99,235,0.85)" />
+                  <stop offset="60%" stopColor="rgba(37,99,235,0.55)" />
+                  <stop offset="100%" stopColor="rgba(20,184,166,0.45)" />
                 </linearGradient>
+                <filter id="heroLinkGlow" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="0.9" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
 
-              {HERO_NODES.map((n) => {
-                const path = `M50 52 Q${(50 + n.ax) / 2} ${
-                  (52 + n.ay) / 2 - 5
-                } ${n.ax} ${n.ay}`;
-
-                return (
-                  <g key={n.title}>
-                    <path
-                      d={path}
-                      fill="none"
-                      stroke="url(#heroLink)"
-                      strokeWidth="0.32"
-                      strokeLinecap="round"
+              {HERO_LINKS.map((l, i) => (
+                <g key={l.d} filter="url(#heroLinkGlow)">
+                  {/* halo suave */}
+                  <path
+                    d={l.d}
+                    fill="none"
+                    stroke="rgba(37,99,235,0.16)"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                  />
+                  {/* línea segmentada */}
+                  <path
+                    d={l.d}
+                    fill="none"
+                    stroke="url(#heroLink)"
+                    strokeWidth="0.4"
+                    strokeLinecap="round"
+                    strokeDasharray="1.6 2.2"
+                  >
+                    <animate
+                      attributeName="stroke-dashoffset"
+                      from="0"
+                      to="-15.2"
+                      dur={`${9 + i}s`}
+                      repeatCount="indefinite"
                     />
-                    <circle
-                      cx={n.ax}
-                      cy={n.ay}
-                      r="0.8"
-                      fill="white"
-                      stroke="#2563EB"
-                      strokeWidth="0.35"
+                  </path>
+                  {/* nodos luminosos en los extremos */}
+                  <circle cx={l.from[0]} cy={l.from[1]} r="0.75" fill="#2563EB" opacity="0.9" />
+                  <circle cx={l.from[0]} cy={l.from[1]} r="1.7" fill="rgba(37,99,235,0.18)" />
+                  <circle cx={l.to[0]} cy={l.to[1]} r="0.65" fill="#14B8A6" opacity="0.9" />
+                  <circle cx={l.to[0]} cy={l.to[1]} r="1.5" fill="rgba(20,184,166,0.16)" />
+                  {/* pulso de luz recorriendo la curva */}
+                  <circle r="0.55" fill="#ffffff" stroke="#2563EB" strokeWidth="0.3">
+                    <animateMotion
+                      dur={`${6.5 + i * 0.9}s`}
+                      begin={`${i * 1.3}s`}
+                      repeatCount="indefinite"
+                      path={l.d}
+                      keyPoints="0;1"
+                      keyTimes="0;1"
+                      calcMode="spline"
+                      keySplines="0.4 0 0.2 1"
                     />
-                  </g>
-                );
-              })}
+                    <animate
+                      attributeName="opacity"
+                      values="0;1;1;0"
+                      keyTimes="0;0.12;0.85;1"
+                      dur={`${6.5 + i * 0.9}s`}
+                      begin={`${i * 1.3}s`}
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </g>
+              ))}
             </svg>
 
             {/* Sombra de suelo para anclar el edificio */}
