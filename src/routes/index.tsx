@@ -640,7 +640,7 @@ function HeroSection() {
                     d={l.d}
                     fill="none"
                     stroke="rgba(37,99,235,0.16)"
-                    strokeWidth="1.4"
+                    strokeWidth="2.2"
                     strokeLinecap="round"
                   />
                   {/* línea segmentada */}
@@ -648,7 +648,7 @@ function HeroSection() {
                     d={l.d}
                     fill="none"
                     stroke="url(#heroLink)"
-                    strokeWidth="0.4"
+                    strokeWidth="0.55"
                     strokeLinecap="round"
                     strokeDasharray="1.6 2.2"
                   >
