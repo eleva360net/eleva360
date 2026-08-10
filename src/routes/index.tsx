@@ -509,15 +509,15 @@ const HERO_NODES = [
 /** Conexiones curvas independientes: tarjeta -> perímetro del edificio */
 const HERO_LINKS: { from: [number, number]; to: [number, number]; d: string }[] = [
   // Google Business -> borde superior del edificio
-  { from: [39, 27], to: [50, 24], d: "M39 27 C43 28, 46 22, 50 24" },
+  { from: [24.5, 10], to: [38, 12.5], d: "M24.5 10 C30 5.5, 34 7, 38 12.5" },
   // WhatsApp -> lateral izquierdo
-  { from: [27, 40], to: [30, 45], d: "M27 40 C29.5 40.5, 28.5 43.5, 30 45" },
+  { from: [10.8, 30], to: [13.5, 44], d: "M10.8 30 C14 34, 12 40, 13.5 44" },
   // Carta digital -> zona inferior izquierda
-  { from: [27, 70], to: [31, 78], d: "M27 70 C30 71, 29 76, 31 78" },
+  { from: [10, 63], to: [15, 79], d: "M10 63 C13.5 68, 12.5 75, 15 79" },
   // Dashboard -> lateral superior derecho
-  { from: [70, 29], to: [85, 34], d: "M70 29 C76 28, 80 36, 85 34" },
+  { from: [60, 14.5], to: [83, 29], d: "M60 14.5 C67 19, 77 25, 83 29" },
   // Nueva reseña -> zona inferior derecha
-  { from: [70, 76], to: [84, 84], d: "M70 76 C75 79, 79 80, 84 84" },
+  { from: [60, 81], to: [72, 88], d: "M60 81 C64 85.5, 68 87, 72 88" },
 ];
 
 function HeroSection() {
