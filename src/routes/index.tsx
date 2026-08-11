@@ -40,6 +40,8 @@ import {
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
 import heroImage from "../assets/hero-eleva360.png";
+import serviceMaps from "../assets/service-maps.jpg";
+import serviceMenu from "../assets/service-menu.jpg";
 
 
 const WHATSAPP_URL =
@@ -449,8 +451,8 @@ const HERO_NODES = [
     title: "Google Business",
     icon: MapPin,
     tint: "bg-[#4285F4]/10 text-[#4285F4]",
-    x: 25,
-    y: 15,
+    x: 19,
+    y: 9,
     ax: 32,
     ay: 30,
     dur: 13,
@@ -461,8 +463,8 @@ const HERO_NODES = [
     title: "WhatsApp",
     icon: MessageCircle,
     tint: "bg-accent/10 text-accent",
-    x: 10,
-    y: 46,
+    x: 2,
+    y: 44,
     ax: 26,
     ay: 46,
     dur: 16,
@@ -473,8 +475,8 @@ const HERO_NODES = [
     title: "Carta digital",
     icon: QrCode,
     tint: "bg-primary/10 text-primary",
-    x: 10,
-    y: 85,
+    x: 4,
+    y: 88,
     ax: 27,
     ay: 68,
     dur: 15,
@@ -485,8 +487,8 @@ const HERO_NODES = [
     title: "Dashboard",
     icon: BarChart3,
     tint: "bg-primary/10 text-primary",
-    x: 89,
-    y: 18,
+    x: 99,
+    y: 22,
     ax: 75,
     ay: 28,
     dur: 12,
@@ -497,8 +499,8 @@ const HERO_NODES = [
     title: "Reseñas",
     icon: Star,
     tint: "bg-[#FBBC05]/15 text-[#B7860B]",
-    x: 89,
-    y: 82,
+    x: 99,
+    y: 72,
     ax: 74,
     ay: 70,
     dur: 17,
@@ -508,16 +510,16 @@ const HERO_NODES = [
 
 /** Conexiones curvas independientes: tarjeta -> perímetro del edificio */
 const HERO_LINKS: { from: [number, number]; to: [number, number]; d: string }[] = [
-  // Google Business -> borde superior del edificio
-  { from: [18, 15.5], to: [40, 17.5], d: "M18 15.5 C26 12, 33 12.5, 40 17.5" },
+  // Google Business -> borde superior izquierdo del edificio
+  { from: [19, 0], to: [31, 11], d: "M19 0 C25 0, 27 8, 31 11" },
   // WhatsApp -> lateral izquierdo
-  { from: [10.5, 30], to: [23, 41], d: "M10.5 30 C16 31, 19 35, 23 41" },
+  { from: [2, 26], to: [14, 33], d: "M2 26 C8 26, 10 30, 14 33" },
   // Carta digital -> zona inferior izquierda
-  { from: [10.5, 66], to: [24, 78], d: "M10.5 66 C16 69, 20 73, 24 78" },
+  { from: [4, 64], to: [15, 68], d: "M4 64 C9 64, 11 67, 15 68" },
   // Dashboard -> lateral superior derecho
-  { from: [63, 17.5], to: [81, 31], d: "M63 17.5 C70 21, 76 25, 81 31" },
+  { from: [60, 6], to: [72, 15], d: "M60 6 C65 6, 68 12, 72 15" },
   // Nueva reseña -> zona inferior derecha
-  { from: [70, 81.5], to: [82, 89], d: "M70 81.5 C74 85, 78 86.5, 82 89" },
+  { from: [60, 57], to: [58, 71], d: "M60 57 C56.5 59, 56 67, 58 71" },
 ];
 
 function HeroSection() {
@@ -602,9 +604,9 @@ function HeroSection() {
           ref={stageRef}
           onMouseMove={handleParallax}
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
-          className="relative mx-auto w-full max-w-[560px] [perspective:1600px] lg:max-w-none lg:w-[108%]"
+          className="relative mx-auto w-full max-w-[560px] [perspective:1600px] lg:max-w-none lg:w-[104%]"
         >
-          <div className="relative aspect-[4/3.05] w-full">
+          <div className="relative aspect-[4/3.5] w-full">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
               aria-hidden
@@ -723,43 +725,49 @@ function HeroSection() {
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 shadow-[0_8px_30px_-16px_rgba(15,23,42,0.28)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:border-slate-300 hover:shadow-[0_18px_45px_-18px_rgba(15,23,42,0.30)]">
+                <div className="group relative overflow-hidden rounded-[20px] border border-slate-200/70 bg-white shadow-[0_2px_6px_rgba(15,23,42,0.04),0_18px_46px_-16px_rgba(15,23,42,0.22)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-slate-300 hover:shadow-[0_4px_10px_rgba(15,23,42,0.05),0_28px_60px_-18px_rgba(15,23,42,0.28)]">
                   <div className="pointer-events-none absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/5 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* GOOGLE BUSINESS */}
                   {n.title.toLowerCase().includes("google") && (
-                    <div className="w-[250px] p-3.5">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-2">
-                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-slate-100">
-                            <MapPin className="h-4 w-4 text-primary" />
-                          </div>
-                          <div className="min-w-0">
-                            <p className="text-[7.5px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                    <div className="w-[320px] p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" aria-hidden>
+                              <path fill="#34A853" d="M12 23s-1.6-2.2-3.3-4.9l6.6-3.8C13.9 17.7 12 23 12 23z" />
+                              <path fill="#FBBC05" d="M5.2 14.2C4.3 12.6 3.7 11.2 3.7 10c0-.8.1-1.5.4-2.2l7.2 4.1-6.1 2.3z" />
+                              <path fill="#4285F4" d="M20.3 10c0 1.6-1 3.5-2.3 5.6l-6-3.4 6.9-4c.9 1 1.4 2.3 1.4 3.4z" />
+                              <path fill="#1A73E8" d="M4.1 7.8C5.1 5 7.8 3 12 3c2.6 0 4.9 1.1 6.4 2.9l-6.4 3.6-7.9-1.7z" />
+                              <circle cx="12" cy="10" r="2.6" fill="#FFFFFF" />
+                            </svg>
+                            <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400">
                               Google Business Profile
                             </p>
-                            <p className="mt-0.5 truncate text-[13px] font-bold text-slate-900">
-                              Café Pacífico
-                            </p>
+                          </div>
+                          <p className="mt-1.5 truncate text-[17px] font-bold tracking-[-0.01em] text-slate-900">
+                            Café Pacífico
+                          </p>
+
+                          <div className="mt-1.5 flex items-center gap-1.5">
+                            <span className="text-[13px] font-semibold text-slate-800">4.9</span>
+                            <span className="text-[13px] leading-none tracking-tight text-amber-400">★★★★★</span>
+                            <span className="text-[11px] text-slate-400">(238)</span>
+                          </div>
+
+                          <div className="mt-1 flex items-center gap-1.5 text-[10.5px]">
+                            <span className="font-semibold text-emerald-600">Abierto</span>
+                            <span className="text-slate-400">· Cierra a las 23:00</span>
                           </div>
                         </div>
-                        <div className="h-11 w-14 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-amber-100 via-orange-100 to-slate-200" />
+
+                        <div className="h-[86px] w-[86px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
+                          <img src={serviceMaps} alt="" className="h-full w-full object-cover" />
+                        </div>
                       </div>
 
-                      <div className="mt-2.5 flex items-center gap-1.5">
-                        <span className="text-[12px] font-semibold text-slate-700">4.9</span>
-                        <span className="text-[11px] tracking-tight text-amber-400">★★★★★</span>
-                        <span className="text-[10px] text-slate-400">(238)</span>
-                      </div>
-
-                      <div className="mt-1 flex items-center gap-1.5 text-[9px]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                        <span className="font-medium text-emerald-600">Abierto</span>
-                        <span className="text-slate-400">· Cierra a las 23:00</span>
-                      </div>
-
-                      <div className="mt-3 flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/70 px-3 py-1.5 text-[9px] font-semibold text-primary">
-                        <span className="text-[8px]">▶</span>
+                      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-[11px] font-semibold text-primary shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[7px] text-white">▶</span>
                         Cómo llegar
                       </div>
                     </div>
@@ -767,93 +775,95 @@ function HeroSection() {
 
                   {/* WHATSAPP */}
                   {n.title.toLowerCase().includes("whatsapp") && (
-                    <div className="w-[210px] p-3.5">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 text-emerald-500">
-                          <MessageCircle className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
-                            WhatsApp Business
-                          </p>
-                          <div className="mt-0.5 flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            <span className="text-[9px] font-medium text-emerald-600">En línea</span>
-                          </div>
-                        </div>
+                    <div className="w-[258px] p-4">
+                      <div className="flex items-center gap-2.5">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366]">
+                          <svg viewBox="0 0 32 32" className="h-5 w-5" aria-hidden>
+                            <path
+                              fill="#FFFFFF"
+                              d="M16 5.3c-5.9 0-10.7 4.8-10.7 10.7 0 1.9.5 3.7 1.4 5.3L5.3 26.7l5.6-1.4c1.5.8 3.3 1.3 5.1 1.3 5.9 0 10.7-4.8 10.7-10.7S21.9 5.3 16 5.3zm0 19.1c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.3.9.9-3.2-.2-.3c-.9-1.4-1.4-3.1-1.4-4.8 0-4.9 4-8.9 8.9-8.9s8.9 4 8.9 8.9-4 8.9-8.8 8.9zm5-6.5c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"
+                            />
+                          </svg>
+                        </span>
+                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                          WhatsApp Business
+                        </p>
+                        <span className="ml-auto h-2 w-2 rounded-full bg-[#25D366]" />
                       </div>
 
-                      <div className="mt-3 rounded-xl rounded-tl-sm bg-slate-50 p-2.5">
-                        <p className="text-[10px] leading-[1.45] text-slate-700">
+                      <div className="mt-3 rounded-2xl rounded-tl-md bg-slate-50 p-3">
+                        <p className="text-[11.5px] leading-[1.5] text-slate-700">
                           Hola 👋
                           <br />
                           Quiero reservar una mesa
                           <br />
                           para este sábado a las 20:00.
                         </p>
-                        <div className="mt-1 text-right text-[8px] text-slate-400">11:18</div>
+                        <div className="mt-1 text-right text-[9px] text-slate-400">11:18</div>
                       </div>
 
-                      <div className="mt-2 flex items-center gap-2">
-                        <div className="flex h-5 items-center gap-1 rounded-full bg-slate-50 px-2">
-                          <span className="h-1 w-1 rounded-full bg-slate-400" />
-                          <span className="h-1 w-1 rounded-full bg-slate-400" />
-                          <span className="h-1 w-1 rounded-full bg-slate-400" />
+                      <div className="mt-2.5 flex items-center gap-2.5">
+                        <div className="flex h-6 items-center gap-1 rounded-full bg-slate-100 px-2.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
                         </div>
-                        <span className="text-[8px] text-slate-400">Escribiendo...</span>
+                        <span className="text-[10px] text-slate-400">Escribiendo...</span>
                       </div>
                     </div>
                   )}
 
                   {/* CARTA DIGITAL */}
                   {n.title.toLowerCase().includes("carta") && (
-                    <div className="w-[225px] p-3.5">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
-                          <Smartphone className="h-4 w-4" />
+                    <div className="w-[258px] p-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
+                          <Smartphone className="h-[18px] w-[18px]" />
                         </div>
-                        <p className="text-[8px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
                           Carta Digital
                         </p>
                       </div>
 
-                      <div className="mt-2.5 divide-y divide-slate-100">
+                      <div className="mt-3 space-y-2">
                         {[
                           { label: "Entradas", count: "8 opciones" },
                           { label: "Platos", count: "14 opciones" },
                           { label: "Bebidas", count: "10 opciones" },
                         ].map((item) => (
-                          <div key={item.label} className="flex items-center gap-2.5 py-1.5 first:pt-0 last:pb-0">
-                            <div className="h-8 w-8 shrink-0 rounded-md bg-gradient-to-br from-amber-100 to-orange-200" />
-                            <div className="min-w-0 flex-1">
-                              <p className="text-[10px] font-semibold text-slate-800">{item.label}</p>
-                              <p className="text-[8px] text-slate-400">{item.count}</p>
+                          <div key={item.label} className="flex items-center gap-3">
+                            <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg ring-1 ring-slate-100">
+                              <img src={serviceMenu} alt="" className="h-full w-full object-cover" />
                             </div>
-                            <ChevronRight className="h-3 w-3 shrink-0 text-slate-300" />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[12px] font-semibold text-slate-800">{item.label}</p>
+                              <p className="text-[9.5px] text-slate-400">{item.count}</p>
+                            </div>
+                            <ChevronRight className="h-4 w-4 shrink-0 text-slate-300" />
                           </div>
                         ))}
                       </div>
 
-                      <button className="mt-2.5 flex w-full items-center justify-center gap-1 rounded-full bg-primary py-1.5 text-[9px] font-semibold text-white">
+                      <div className="mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white py-2 text-[11px] font-semibold text-primary shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                         Ver carta completa
-                        <ArrowRight className="h-2.5 w-2.5" />
-                      </button>
+                        <ArrowRight className="h-3 w-3" />
+                      </div>
                     </div>
                   )}
 
                   {/* DASHBOARD */}
                   {n.title.toLowerCase().includes("dashboard") && (
-                    <div className="w-[215px] p-3.5">
-                      <div className="flex items-center gap-2">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-primary">
-                          <BarChart3 className="h-4 w-4" />
+                    <div className="w-[272px] p-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
+                          <BarChart3 className="h-[18px] w-[18px]" />
                         </div>
-                        <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
                           Dashboard
                         </p>
                       </div>
 
-                      <div className="mt-3 space-y-1">
+                      <div className="mt-2.5 space-y-1">
                         {[
                           { icon: Clock, label: "Consultas", value: "24", growth: "18%" },
                           { icon: CalendarCheck, label: "Reservas", value: "12", growth: "29%" },
@@ -861,15 +871,17 @@ function HeroSection() {
                         ].map(({ icon: Icon, label, value, growth }) => (
                           <div
                             key={label}
-                            className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0"
+                            className="flex items-center justify-between border-b border-slate-100 py-2.5 last:border-0"
                           >
-                            <div className="flex items-center gap-1.5">
-                              <Icon className="h-3 w-3 text-slate-400" />
-                              <span className="text-[9px] text-slate-500">{label}</span>
+                            <div className="flex items-center gap-2">
+                              <Icon className="h-3.5 w-3.5 text-primary/70" />
+                              <span className="text-[11.5px] text-slate-600">{label}</span>
                             </div>
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-[11px] font-bold text-slate-800">{value}</span>
-                              <span className="text-[8px] font-semibold text-emerald-500">↑ {growth}</span>
+                            <div className="flex items-center gap-2 tabular-nums">
+                              <span className="w-8 text-right text-[14px] font-bold text-slate-900">{value}</span>
+                              <span className="w-10 text-right text-[10.5px] font-semibold text-emerald-500">
+                                ↑ {growth}
+                              </span>
                             </div>
                           </div>
                         ))}
@@ -882,29 +894,27 @@ function HeroSection() {
                     !n.title.toLowerCase().includes("whatsapp") &&
                     !n.title.toLowerCase().includes("carta") &&
                     !n.title.toLowerCase().includes("dashboard") && (
-                      <div className="w-[215px] p-3.5">
-                        <div className="flex items-center gap-2">
-                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-50 text-amber-500">
-                            <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                          </div>
-                          <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400">
+                      <div className="w-[272px] p-4">
+                        <div className="flex items-center gap-2.5">
+                          <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                          <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
                             Nueva reseña
                           </p>
                         </div>
 
-                        <div className="mt-2.5 text-[12px] tracking-[0.08em] text-amber-400">★★★★★</div>
+                        <div className="mt-2.5 text-[19px] leading-none tracking-[0.06em] text-amber-400">★★★★★</div>
 
-                        <p className="mt-2 text-[9px] leading-[1.5] text-slate-600">
+                        <p className="mt-2.5 text-[11.5px] leading-[1.55] text-slate-700">
                           Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
                         </p>
 
-                        <div className="mt-3 flex items-center gap-2">
-                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-[8px] font-bold text-slate-500">
+                        <div className="mt-3 flex items-center gap-2.5">
+                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-[9px] font-bold text-slate-500">
                             MG
                           </div>
                           <div>
-                            <p className="text-[9px] font-semibold text-slate-700">María González</p>
-                            <p className="text-[8px] text-slate-400">Hoy</p>
+                            <p className="text-[11.5px] font-semibold text-slate-800">María González</p>
+                            <p className="text-[9.5px] text-slate-400">Hoy</p>
                           </div>
                         </div>
                       </div>
