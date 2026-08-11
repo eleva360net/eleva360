@@ -451,8 +451,8 @@ const HERO_NODES = [
     title: "Google Business",
     icon: MapPin,
     tint: "bg-[#4285F4]/10 text-[#4285F4]",
-    x: 16,
-    y: 11,
+    x: 19,
+    y: 9,
     ax: 32,
     ay: 30,
     dur: 13,
@@ -463,7 +463,7 @@ const HERO_NODES = [
     title: "WhatsApp",
     icon: MessageCircle,
     tint: "bg-accent/10 text-accent",
-    x: -2,
+    x: 2,
     y: 44,
     ax: 26,
     ay: 46,
@@ -475,8 +475,8 @@ const HERO_NODES = [
     title: "Carta digital",
     icon: QrCode,
     tint: "bg-primary/10 text-primary",
-    x: 1,
-    y: 82,
+    x: 4,
+    y: 88,
     ax: 27,
     ay: 68,
     dur: 15,
@@ -511,15 +511,15 @@ const HERO_NODES = [
 /** Conexiones curvas independientes: tarjeta -> perímetro del edificio */
 const HERO_LINKS: { from: [number, number]; to: [number, number]; d: string }[] = [
   // Google Business -> borde superior izquierdo del edificio
-  { from: [33, 18], to: [46, 13], d: "M33 18 C39 18, 41 14.5, 46 13" },
+  { from: [19, 0], to: [31, 11], d: "M19 0 C25 0, 27 8, 31 11" },
   // WhatsApp -> lateral izquierdo
-  { from: [16, 44], to: [28, 42], d: "M16 44 C21 44, 23 42, 28 42" },
+  { from: [2, 26], to: [14, 33], d: "M2 26 C8 26, 10 30, 14 33" },
   // Carta digital -> zona inferior izquierda
-  { from: [18, 76], to: [31, 71], d: "M18 76 C24 76, 26 72, 31 71" },
+  { from: [4, 64], to: [15, 68], d: "M4 64 C9 64, 11 67, 15 68" },
   // Dashboard -> lateral superior derecho
-  { from: [81, 28], to: [66, 19], d: "M81 28 C74 28, 71 23, 66 19" },
+  { from: [60, 6], to: [72, 15], d: "M60 6 C65 6, 68 12, 72 15" },
   // Nueva reseña -> zona inferior derecha
-  { from: [81, 64], to: [67, 71], d: "M81 64 C75 64, 72 68, 67 71" },
+  { from: [60, 57], to: [58, 71], d: "M60 57 C56.5 59, 56 67, 58 71" },
 ];
 
 function HeroSection() {
