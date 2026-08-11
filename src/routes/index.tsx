@@ -451,8 +451,8 @@ const HERO_NODES = [
     title: "Google Business",
     icon: MapPin,
     tint: "bg-[#4285F4]/10 text-[#4285F4]",
-    x: 21,
-    y: 12,
+    x: 16,
+    y: 11,
     ax: 32,
     ay: 30,
     dur: 13,
@@ -463,8 +463,8 @@ const HERO_NODES = [
     title: "WhatsApp",
     icon: MessageCircle,
     tint: "bg-accent/10 text-accent",
-    x: 6,
-    y: 41,
+    x: -2,
+    y: 44,
     ax: 26,
     ay: 46,
     dur: 16,
@@ -475,8 +475,8 @@ const HERO_NODES = [
     title: "Carta digital",
     icon: QrCode,
     tint: "bg-primary/10 text-primary",
-    x: 8,
-    y: 77,
+    x: 1,
+    y: 82,
     ax: 27,
     ay: 68,
     dur: 15,
@@ -487,8 +487,8 @@ const HERO_NODES = [
     title: "Dashboard",
     icon: BarChart3,
     tint: "bg-primary/10 text-primary",
-    x: 87,
-    y: 24,
+    x: 99,
+    y: 22,
     ax: 75,
     ay: 28,
     dur: 12,
@@ -499,8 +499,8 @@ const HERO_NODES = [
     title: "Reseñas",
     icon: Star,
     tint: "bg-[#FBBC05]/15 text-[#B7860B]",
-    x: 87,
-    y: 70,
+    x: 99,
+    y: 72,
     ax: 74,
     ay: 70,
     dur: 17,
@@ -511,15 +511,15 @@ const HERO_NODES = [
 /** Conexiones curvas independientes: tarjeta -> perímetro del edificio */
 const HERO_LINKS: { from: [number, number]; to: [number, number]; d: string }[] = [
   // Google Business -> borde superior izquierdo del edificio
-  { from: [37, 20], to: [47, 15], d: "M37 20 C42 20, 43 16.5, 47 15" },
+  { from: [33, 18], to: [46, 13], d: "M33 18 C39 18, 41 14.5, 46 13" },
   // WhatsApp -> lateral izquierdo
-  { from: [17, 41], to: [28, 40], d: "M17 41 C21.5 41, 23.5 39.5, 28 40" },
+  { from: [16, 44], to: [28, 42], d: "M16 44 C21 44, 23 42, 28 42" },
   // Carta digital -> zona inferior izquierda
-  { from: [19, 74], to: [30, 71], d: "M19 74 C24 74, 26 71.5, 30 71" },
+  { from: [18, 76], to: [31, 71], d: "M18 76 C24 76, 26 72, 31 71" },
   // Dashboard -> lateral superior derecho
-  { from: [74, 30], to: [64, 21], d: "M74 30 C69.5 30, 68 24.5, 64 21" },
+  { from: [81, 28], to: [66, 19], d: "M81 28 C74 28, 71 23, 66 19" },
   // Nueva reseña -> zona inferior derecha
-  { from: [74, 62], to: [65, 70], d: "M74 62 C69.5 62, 68.5 66.5, 65 70" },
+  { from: [81, 64], to: [67, 71], d: "M81 64 C75 64, 72 68, 67 71" },
 ];
 
 function HeroSection() {
@@ -606,7 +606,7 @@ function HeroSection() {
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
           className="relative mx-auto w-full max-w-[560px] [perspective:1600px] lg:max-w-none lg:w-[104%]"
         >
-          <div className="relative aspect-[4/3.35] w-full">
+          <div className="relative aspect-[4/3.5] w-full">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
               aria-hidden
