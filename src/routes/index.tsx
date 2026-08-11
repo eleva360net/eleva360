@@ -40,6 +40,8 @@ import {
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
 import heroImage from "../assets/hero-eleva360.png";
+import serviceMaps from "../assets/service-maps.jpg";
+import serviceMenu from "../assets/service-menu.jpg";
 
 
 const WHATSAPP_URL =
