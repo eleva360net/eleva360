@@ -725,7 +725,7 @@ function HeroSection() {
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 shadow-[0_8px_30px_-16px_rgba(15,23,42,0.28)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:border-slate-300 hover:shadow-[0_18px_45px_-18px_rgba(15,23,42,0.30)]">
+                <div className="group relative overflow-hidden rounded-[20px] border border-slate-200/70 bg-white shadow-[0_2px_6px_rgba(15,23,42,0.04),0_18px_46px_-16px_rgba(15,23,42,0.22)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-slate-300 hover:shadow-[0_4px_10px_rgba(15,23,42,0.05),0_28px_60px_-18px_rgba(15,23,42,0.28)]">
                   <div className="pointer-events-none absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/5 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* GOOGLE BUSINESS */}
