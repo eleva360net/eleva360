@@ -449,7 +449,7 @@ const HERO_NODES = [
     title: "Google Business",
     icon: MapPin,
     tint: "bg-[#4285F4]/10 text-[#4285F4]",
-    x: 25,
+    x: 22,
     y: 15,
     ax: 32,
     ay: 30,
@@ -461,8 +461,8 @@ const HERO_NODES = [
     title: "WhatsApp",
     icon: MessageCircle,
     tint: "bg-accent/10 text-accent",
-    x: 10,
-    y: 46,
+    x: 8,
+    y: 48,
     ax: 26,
     ay: 46,
     dur: 16,
@@ -473,8 +473,8 @@ const HERO_NODES = [
     title: "Carta digital",
     icon: QrCode,
     tint: "bg-primary/10 text-primary",
-    x: 10,
-    y: 85,
+    x: 8,
+    y: 80,
     ax: 27,
     ay: 68,
     dur: 15,
@@ -485,8 +485,8 @@ const HERO_NODES = [
     title: "Dashboard",
     icon: BarChart3,
     tint: "bg-primary/10 text-primary",
-    x: 89,
-    y: 18,
+    x: 85,
+    y: 27,
     ax: 75,
     ay: 28,
     dur: 12,
@@ -497,8 +497,8 @@ const HERO_NODES = [
     title: "Reseñas",
     icon: Star,
     tint: "bg-[#FBBC05]/15 text-[#B7860B]",
-    x: 89,
-    y: 82,
+    x: 85,
+    y: 73,
     ax: 74,
     ay: 70,
     dur: 17,
@@ -508,16 +508,16 @@ const HERO_NODES = [
 
 /** Conexiones curvas independientes: tarjeta -> perímetro del edificio */
 const HERO_LINKS: { from: [number, number]; to: [number, number]; d: string }[] = [
-  // Google Business -> borde superior del edificio
-  { from: [18, 15.5], to: [40, 17.5], d: "M18 15.5 C26 12, 33 12.5, 40 17.5" },
+  // Google Business -> borde superior izquierdo del edificio
+  { from: [38, 22], to: [49, 16.5], d: "M38 22 C43.5 22, 44.5 18.5, 49 16.5" },
   // WhatsApp -> lateral izquierdo
-  { from: [10.5, 30], to: [23, 41], d: "M10.5 30 C16 31, 19 35, 23 41" },
+  { from: [19, 47], to: [28.5, 44], d: "M19 47 C23.5 47, 24.5 44.5, 28.5 44" },
   // Carta digital -> zona inferior izquierda
-  { from: [10.5, 66], to: [24, 78], d: "M10.5 66 C16 69, 20 73, 24 78" },
+  { from: [19, 79], to: [31, 76], d: "M19 79 C24 79, 26 76.5, 31 76" },
   // Dashboard -> lateral superior derecho
-  { from: [63, 17.5], to: [81, 31], d: "M63 17.5 C70 21, 76 25, 81 31" },
+  { from: [72, 31], to: [62, 22], d: "M72 31 C67.5 31, 66 25.5, 62 22" },
   // Nueva reseña -> zona inferior derecha
-  { from: [70, 81.5], to: [82, 89], d: "M70 81.5 C74 85, 78 86.5, 82 89" },
+  { from: [72, 63], to: [63.5, 72], d: "M72 63 C67.5 63, 67 68.5, 63.5 72" },
 ];
 
 function HeroSection() {
