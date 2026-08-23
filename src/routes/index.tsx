@@ -615,228 +615,184 @@ function GoogleMapsPinIcon({ className = "h-8 w-6" }: { className?: string }) {
   );
 }
 
-function MobileHeroCards() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const touchStartX = useRef<number | null>(null);
+type MobileHeroCardType = "google" | "whatsapp" | "menu" | "dashboard" | "review";
+
+function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
   const cardClass =
-    "min-h-[196px] w-full overflow-hidden rounded-[24px] border border-white/80 bg-white/95 p-4 shadow-[0_24px_54px_-24px_rgba(15,23,42,0.34),0_8px_20px_-16px_rgba(37,99,235,0.28)] backdrop-blur-xl";
+    "h-[158px] w-[252px] shrink-0 overflow-hidden rounded-[20px] border border-white/85 bg-white/95 p-3.5 shadow-[0_18px_38px_-22px_rgba(15,23,42,0.34),0_6px_18px_-16px_rgba(37,99,235,0.28)] backdrop-blur-xl";
 
-  useEffect(() => {
-    if (hasInteracted || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % 5);
-    }, 5500);
-
-    return () => window.clearInterval(interval);
-  }, [hasInteracted]);
-
-  const selectCard = (index: number) => {
-    setActiveIndex(index);
-    setHasInteracted(true);
-  };
-
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
-  };
-
-  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current === null) return;
-
-    const delta = touchStartX.current - (event.changedTouches[0]?.clientX ?? touchStartX.current);
-    touchStartX.current = null;
-    if (Math.abs(delta) < 40) return;
-
-    setActiveIndex((current) => (delta > 0 ? (current + 1) % 5 : (current + 4) % 5));
-    setHasInteracted(true);
-  };
-
-  const cards = [
-    <article className={cardClass} aria-label="Google Business Profile de Café Pacífico">
-      <div className="flex items-start gap-3">
-        <GoogleMapsPinIcon className="h-9 w-7" />
-        <div className="min-w-0 flex-1">
-          <p className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-400">Google Business Profile</p>
-          <p className="mt-1 text-[1rem] font-bold tracking-[-0.01em] text-slate-900">Café Pacífico</p>
-          <div className="mt-1 flex items-center gap-1.5">
-            <span className="text-[0.75rem] font-semibold text-slate-700">4.9</span>
-            <span className="text-[0.75rem] tracking-tight text-amber-400">★★★★★</span>
-            <span className="text-[0.65rem] text-slate-400">(238)</span>
+  if (type === "google") {
+    return (
+      <article className={cardClass} aria-label="Google Business Profile de Café Pacífico">
+        <div className="flex items-start gap-2.5">
+          <GoogleMapsPinIcon className="h-8 w-6" />
+          <div className="min-w-0 flex-1">
+            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-slate-400">Google Business Profile</p>
+            <p className="mt-1 text-[0.9rem] font-bold tracking-[-0.01em] text-slate-900">Café Pacífico</p>
+            <div className="mt-1 flex items-center gap-1">
+              <span className="text-[0.68rem] font-semibold text-slate-700">4.9</span>
+              <span className="text-[0.66rem] tracking-tight text-amber-400">★★★★★</span>
+              <span className="text-[0.56rem] text-slate-400">(238)</span>
+            </div>
+            <p className="mt-1 text-[0.57rem] text-slate-400">
+              <span className="font-semibold text-emerald-600">Abierto</span> · Cierra 23:00
+            </p>
           </div>
-          <p className="mt-1 text-[0.65rem] text-slate-400">
-            <span className="font-semibold text-emerald-600">Abierto</span> · Cierra a las 23:00
-          </p>
-        </div>
-        <div className="h-[68px] w-[72px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-          <img src={heroBuilding} alt="Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
-        </div>
-      </div>
-      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-[0.68rem] font-semibold text-primary">
-        <MapPin className="h-3.5 w-3.5" /> Cómo llegar
-      </div>
-    </article>,
-
-    <article className={cardClass} aria-label="Conversación automatizada por WhatsApp Business">
-      <div className="flex items-center gap-2.5">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
-          <MessageCircle className="h-[18px] w-[18px]" />
-        </span>
-        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">WhatsApp Business</p>
-        <span className="ml-auto h-2 w-2 rounded-full bg-[#25D366]" />
-      </div>
-      <div className="mt-3 rounded-2xl rounded-tl-md bg-slate-50 p-3.5 text-[0.78rem] leading-[1.5] text-slate-700">
-        Hola 👋<br />Quiero reservar una mesa para este sábado a las 20:00.
-        <div className="mt-1 text-right text-[0.58rem] text-slate-400">11:18</div>
-      </div>
-      <div className="mt-2.5 flex items-center gap-2 text-[0.65rem] text-slate-400">
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 tracking-[0.2em]">•••</span> Escribiendo...
-      </div>
-    </article>,
-
-    <article className={cardClass} aria-label="Carta digital de Café Pacífico">
-      <div className="flex items-center gap-2.5">
-        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
-          <Smartphone className="h-[18px] w-[18px]" />
-        </span>
-        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">Carta Digital</p>
-      </div>
-      <div className="mt-3 grid grid-cols-3 gap-3">
-        {[
-          { label: "Entradas", image: menuEntradaPremium },
-          { label: "Platos", image: menuPlatoPremium },
-          { label: "Bebidas", image: menuBebidaPremium },
-        ].map((item) => (
-          <div key={item.label} className="text-center">
-            <img src={item.image} alt={item.label} className="mx-auto h-14 w-14 rounded-xl object-cover shadow-sm ring-1 ring-slate-100" />
-            <p className="mt-1.5 text-[0.68rem] font-semibold text-slate-700">{item.label}</p>
+          <div className="h-[57px] w-[60px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
+            <img src={heroBuilding} alt="Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
           </div>
-        ))}
-      </div>
-      <div className="mt-3 flex items-center justify-center gap-1 rounded-full border border-slate-200 py-1.5 text-[0.68rem] font-semibold text-primary">
-        Ver carta completa <ArrowRight className="h-3 w-3" />
-      </div>
-    </article>,
-
-    <article className={cardClass} aria-label="Dashboard de resultados">
-      <div className="flex items-center gap-2.5">
-        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
-          <BarChart3 className="h-[18px] w-[18px]" />
-        </span>
-        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">Dashboard</p>
-      </div>
-      <div className="mt-4 grid grid-cols-3 divide-x divide-slate-100 text-center">
-        {[
-          { label: "Consultas", value: "24", growth: "+18%" },
-          { label: "Reservas", value: "12", growth: "+29%" },
-          { label: "Visitas", value: "326", growth: "+31%" },
-        ].map((item) => (
-          <div key={item.label} className="px-2">
-            <p className="text-[1.05rem] font-bold text-slate-900">{item.value}</p>
-            <p className="mt-0.5 text-[0.6rem] text-slate-400">{item.label}</p>
-            <p className="mt-1 text-[0.62rem] font-semibold text-emerald-500">↑ {item.growth}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-100">
-        <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-accent" />
-      </div>
-    </article>,
-
-    <article className={cardClass} aria-label="Nueva reseña de María González">
-      <div className="flex items-center gap-2.5">
-        <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">Nueva reseña</p>
-      </div>
-      <div className="mt-2 text-[1.05rem] tracking-[0.08em] text-amber-400">★★★★★</div>
-      <p className="mt-2 text-[0.76rem] leading-[1.55] text-slate-700">
-        Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
-      </p>
-      <div className="mt-3 flex items-center gap-2.5">
-        <img src={reviewMariaGonzalez} alt="María González" className="h-8 w-8 rounded-full object-cover shadow-sm ring-1 ring-white" />
-        <div>
-          <p className="text-[0.72rem] font-semibold text-slate-800">María González</p>
-          <p className="text-[0.6rem] text-slate-400">Hoy</p>
         </div>
-      </div>
-    </article>,
-  ];
+        <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-[0.6rem] font-semibold text-primary">
+          <MapPin className="h-3 w-3" /> Cómo llegar
+        </div>
+      </article>
+    );
+  }
 
-  const tabs = [
-    { label: "Google Business", icon: MapPin },
-    { label: "WhatsApp", icon: MessageCircle },
-    { label: "Carta digital", icon: Smartphone },
-    { label: "Dashboard", icon: BarChart3 },
-    { label: "Reseñas", icon: Star },
-  ];
+  if (type === "whatsapp") {
+    return (
+      <article className={cardClass} aria-label="Conversación automatizada por WhatsApp Business">
+        <div className="flex items-center gap-2">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
+            <MessageCircle className="h-4 w-4" />
+          </span>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">WhatsApp Business</p>
+          <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#25D366]" />
+        </div>
+        <div className="mt-2.5 rounded-2xl rounded-tl-md bg-slate-50 px-3 py-2.5 text-[0.69rem] leading-[1.45] text-slate-700">
+          Hola 👋<br />Quiero reservar una mesa para este sábado a las 20:00.
+          <div className="mt-0.5 text-right text-[0.52rem] text-slate-400">11:18</div>
+        </div>
+        <div className="mt-2 flex items-center gap-2 text-[0.56rem] text-slate-400">
+          <span className="rounded-full bg-slate-100 px-2 py-0.5 tracking-[0.18em]">•••</span> Escribiendo...
+        </div>
+      </article>
+    );
+  }
+
+  if (type === "menu") {
+    return (
+      <article className={cardClass} aria-label="Carta digital de Café Pacífico">
+        <div className="flex items-center gap-2">
+          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
+            <Smartphone className="h-4 w-4" />
+          </span>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Carta Digital</p>
+        </div>
+        <div className="mt-2.5 grid grid-cols-3 gap-2.5">
+          {[
+            { label: "Entradas", image: menuEntradaPremium },
+            { label: "Platos", image: menuPlatoPremium },
+            { label: "Bebidas", image: menuBebidaPremium },
+          ].map((item) => (
+            <div key={item.label} className="text-center">
+              <img src={item.image} alt={item.label} className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-100" />
+              <p className="mt-1 text-[0.58rem] font-semibold text-slate-700">{item.label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 flex items-center justify-center gap-1 rounded-full border border-slate-200 py-1 text-[0.58rem] font-semibold text-primary">
+          Ver carta <ArrowRight className="h-2.5 w-2.5" />
+        </div>
+      </article>
+    );
+  }
+
+  if (type === "dashboard") {
+    return (
+      <article className={cardClass} aria-label="Dashboard de resultados">
+        <div className="flex items-center gap-2">
+          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
+            <BarChart3 className="h-4 w-4" />
+          </span>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Dashboard</p>
+        </div>
+        <div className="mt-3.5 grid grid-cols-3 divide-x divide-slate-100 text-center">
+          {[
+            { label: "Consultas", value: "24", growth: "+18%" },
+            { label: "Reservas", value: "12", growth: "+29%" },
+            { label: "Visitas", value: "326", growth: "+31%" },
+          ].map((item) => (
+            <div key={item.label} className="px-1.5">
+              <p className="text-[0.9rem] font-bold text-slate-900">{item.value}</p>
+              <p className="mt-0.5 text-[0.52rem] text-slate-400">{item.label}</p>
+              <p className="mt-1 text-[0.54rem] font-semibold text-emerald-500">↑ {item.growth}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3.5 h-1 overflow-hidden rounded-full bg-slate-100">
+          <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-accent" />
+        </div>
+      </article>
+    );
+  }
 
   return (
-    <div className="relative z-30 -mt-8 px-1 xl:hidden">
-      <div className="mx-auto mb-3 flex max-w-[330px] items-center justify-between px-1">
-        <span className="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-slate-400">
+    <article className={cardClass} aria-label="Nueva reseña de María González">
+      <div className="flex items-center gap-2">
+        <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Nueva reseña</p>
+      </div>
+      <div className="mt-1.5 text-[0.92rem] tracking-[0.07em] text-amber-400">★★★★★</div>
+      <p className="mt-1.5 text-[0.67rem] leading-[1.45] text-slate-700">
+        Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+      </p>
+      <div className="mt-2.5 flex items-center gap-2">
+        <img src={reviewMariaGonzalez} alt="María González" className="h-7 w-7 rounded-full object-cover shadow-sm ring-1 ring-white" />
+        <div>
+          <p className="text-[0.62rem] font-semibold text-slate-800">María González</p>
+          <p className="text-[0.52rem] text-slate-400">Hoy</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MobileHeroCards() {
+  const cards: MobileHeroCardType[] = ["google", "whatsapp", "menu", "dashboard", "review"];
+  const row = [...cards, ...cards];
+
+  return (
+    <div className="relative z-30 mt-3 xl:hidden">
+      <div className="mx-1 mb-3 flex items-center justify-between">
+        <span className="text-[0.66rem] font-bold uppercase tracking-[0.12em] text-slate-400">
           Ecosistema conectado
         </span>
-        <span className="text-[0.68rem] font-semibold tabular-nums text-primary">{activeIndex + 1} / 5</span>
+        <span className="flex items-center gap-1 text-[0.64rem] font-semibold text-primary">
+          En movimiento <ChevronRight className="h-3 w-3" />
+        </span>
       </div>
 
-      <div
-        className="relative mx-auto mt-7 max-w-[330px] touch-pan-y"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <svg
-          aria-hidden
-          viewBox="0 0 72 42"
-          className="pointer-events-none absolute left-1/2 top-[-34px] h-10 w-[72px] -translate-x-1/2 overflow-visible"
-        >
+      <div className="relative -mx-4 overflow-hidden pb-5 pt-3 sm:-mx-6 lg:-mx-8">
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 bg-gradient-to-r from-white to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 bg-gradient-to-l from-white to-transparent" />
+
+        <svg aria-hidden viewBox="0 0 58 24" className="pointer-events-none absolute left-1/2 top-0 z-10 h-6 w-[58px] -translate-x-1/2 overflow-visible">
           <defs>
-            <filter id="mobile-card-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="1.8" result="blur" />
+            <filter id="mobile-carousel-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.5" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           </defs>
-          <path d="M8 3 C8 21 36 14 36 39" fill="none" stroke="rgba(37,99,235,0.16)" strokeWidth="5" strokeLinecap="round" />
-          <path d="M8 3 C8 21 36 14 36 39" fill="none" stroke="#3B82F6" strokeWidth="1.6" strokeDasharray="4 5" strokeLinecap="round" filter="url(#mobile-card-glow)">
+          <path d="M4 2 C16 2 18 21 29 21" fill="none" stroke="rgba(37,99,235,0.16)" strokeWidth="4.5" strokeLinecap="round" />
+          <path d="M4 2 C16 2 18 21 29 21" fill="none" stroke="#3B82F6" strokeWidth="1.4" strokeDasharray="4 5" strokeLinecap="round" filter="url(#mobile-carousel-glow)">
             <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="8s" repeatCount="indefinite" />
           </path>
-          <circle cx="8" cy="3" r="2.7" fill="#14B8A6" />
-          <circle cx="36" cy="39" r="2.8" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.5" />
+          <circle cx="4" cy="2" r="2.2" fill="#14B8A6" />
+          <circle cx="29" cy="21" r="2.4" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.3" />
         </svg>
 
-        <div key={activeIndex} aria-live="polite" className="animate-hero-fade-up">
-          {cards[activeIndex]}
+        <div className="animate-marquee flex w-max gap-3 pt-3">
+          {row.map((type, index) => (
+            <div key={`${type}-${index}`} aria-hidden={index >= cards.length || undefined}>
+              <MobileHeroCarouselCard type={type} />
+            </div>
+          ))}
         </div>
       </div>
-
-      <div className="mx-auto mt-4 flex max-w-[330px] items-center justify-center gap-2" role="tablist" aria-label="Soluciones digitales">
-        {tabs.map((tab, index) => {
-          const Icon = tab.icon;
-          const isActive = index === activeIndex;
-
-          return (
-            <button
-              key={tab.label}
-              type="button"
-              role="tab"
-              aria-label={`Mostrar ${tab.label}`}
-              aria-selected={isActive}
-              onClick={() => selectCard(index)}
-              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${
-                isActive
-                  ? "scale-105 border-primary bg-primary text-white shadow-[0_10px_24px_-10px_rgba(37,99,235,0.7)]"
-                  : "border-slate-200/90 bg-white text-slate-400 shadow-sm active:scale-95"
-              }`}
-            >
-              <Icon className={`h-[17px] w-[17px] ${isActive && index === 4 ? "fill-white" : ""}`} />
-            </button>
-          );
-        })}
-      </div>
-
-      <p className="mt-2 text-center text-[0.66rem] font-medium text-slate-400">Desliza o toca un icono para explorar</p>
     </div>
   );
 }
@@ -940,7 +896,7 @@ function HeroSection() {
 
             {/* Edificio con parallax muy suave */}
             <div
-              className="hero-parallax animate-hero-drift absolute left-1/2 top-[50%] z-10 w-[74%] -translate-x-1/2 -translate-y-1/2 2xl:top-[53%] 2xl:w-[86%]"
+              className="hero-parallax animate-hero-drift absolute left-1/2 top-[50%] z-10 w-[82%] -translate-x-1/2 -translate-y-1/2 sm:w-[80%] lg:w-[78%] xl:w-[74%] 2xl:top-[53%] 2xl:w-[86%]"
               style={{
                 transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
               }}
