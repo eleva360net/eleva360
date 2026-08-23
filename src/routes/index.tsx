@@ -1125,26 +1125,21 @@ function SectionHeader({
 
 function ProblemSection() {
   const problems = [
-    { icon: Search, title: "No aparecen bien en Google", desc: "Nuevos clientes buscan y encuentran a otros primero." },
-    { icon: MessageCircle, title: "Responden tarde por WhatsApp", desc: "Los mensajes se pierden y las oportunidades también." },
-    { icon: Store, title: "Sus clientes no encuentran información", desc: "Horarios, servicios o precios que nunca están claros." },
-    { icon: Wrench, title: "Siguen usando procesos manuales", desc: "Agendas en papel, planillas sueltas, todo desconectado." },
-    { icon: Clock, title: "Pierden tiempo en tareas repetitivas", desc: "Horas al día en cosas que un sistema podría resolver." },
-    { icon: Star, title: "Su reputación no se cuida", desc: "Reseñas sin responder, marca invisible frente a la competencia." },
+    { icon: Search, title: "Te encuentran poco", desc: "Tu negocio no aparece con suficiente claridad cuando alguien busca lo que ofreces." },
+    { icon: Target, title: "No queda claro por qué elegirte", desc: "La información disponible no explica bien qué haces, para quién o qué te diferencia." },
+    { icon: MessageCircle, title: "Contactarte cuesta más de lo necesario", desc: "El cliente debe esperar, repetir información o dar demasiados pasos para consultar." },
+    { icon: ShieldCheck, title: "Faltan señales de confianza", desc: "Perfiles incompletos, información inconsistente o una reputación poco visible dificultan la decisión." },
+    { icon: Layers, title: "Tus canales no trabajan juntos", desc: "Google, redes sociales, web y WhatsApp entregan información distinta o funcionan por separado." },
+    { icon: Gauge, title: "Inviertes sin una prioridad clara", desc: "Se implementan herramientas o acciones sin saber qué problema conviene resolver primero." },
   ];
 
   return (
     <section className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-[1440px]">
         <SectionHeader
-          eyebrow="El problema"
-          title={
-            <>
-              Muchos negocios pierden clientes todos los días{" "}
-              <span className="text-primary">sin darse cuenta.</span>
-            </>
-          }
-          subtitle="La mayoría de los negocios no tiene un problema de esfuerzo. Tiene un problema de sistema."
+          eyebrow="Antes de elegir una solución"
+          title="El problema no siempre es falta de herramientas."
+          subtitle="Un negocio puede tener redes sociales, WhatsApp o presencia en Google y aun así perder oportunidades. La clave es identificar dónde está la fricción antes de invertir en otra solución."
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -1162,6 +1157,9 @@ function ProblemSection() {
             </Reveal>
           ))}
         </div>
+        <p className="mx-auto mt-10 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground/75">
+          El diagnóstico permite distinguir qué necesita atención ahora, qué puede esperar y qué no vale la pena implementar todavía.
+        </p>
       </div>
     </section>
   );
