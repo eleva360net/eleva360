@@ -28,7 +28,6 @@ import {
   Cpu,
   LayoutDashboard,
   Globe,
-  Rocket,
   Wrench,
   Gauge,
   QrCode,
@@ -1361,44 +1360,6 @@ function PricingSection() {
           </a>
         </div>
 
-        {/* Plan Crecimiento destacado */}
-        <Reveal delay={300} className="mt-8">
-          <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-[color:var(--elevation)] p-8 text-white shadow-xl sm:p-10">
-            <div
-              aria-hidden
-              className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
-            />
-            <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider ring-1 ring-white/20">
-                  <Sparkles className="h-3.5 w-3.5 text-accent" />
-                  Producto principal
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-extrabold sm:text-3xl">
-                  Plan Crecimiento
-                </h3>
-                <p className="mt-2 max-w-xl text-white/75">
-                  Optimización continua, gestión de reputación, ajustes de carta y WhatsApp, y
-                  soporte prioritario. Todo incluido, mes a mes.
-                </p>
-              </div>
-              <div className="flex flex-col items-start gap-3 lg:items-end">
-                <p className="font-display text-4xl font-extrabold">
-                  $25.000 <span className="text-lg font-medium text-white/60">CLP/mes</span>
-                </p>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5"
-                >
-                  Quiero el Plan Crecimiento
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
@@ -1620,10 +1581,11 @@ function ResultsSection() {
 
 function PlanSection() {
   const pillars = [
-    { icon: Gauge, title: "Optimización continua", desc: "Ajustamos y mejoramos cada herramienta mes a mes." },
-    { icon: Rocket, title: "Nuevas mejoras", desc: "Incorporamos capacidades a medida que tu negocio evoluciona." },
-    { icon: LineChart, title: "Acompañamiento estratégico", desc: "Analizamos qué está funcionando y qué elevar al siguiente nivel." },
-    { icon: HeartHandshake, title: "Un equipo a tu lado", desc: "Contacto directo, humano y sin trámites intermedios." },
+    { icon: Check, title: "Revisión de lo implementado." },
+    { icon: LineChart, title: "Seguimiento de las señales relevantes." },
+    { icon: Wrench, title: "Ajustes y mejoras priorizadas." },
+    { icon: Target, title: "Recomendaciones para la siguiente etapa." },
+    { icon: HeartHandshake, title: "Comunicación directa durante el proceso." },
   ];
 
   return (
@@ -1635,46 +1597,61 @@ function PlanSection() {
           <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
 
           <div className="relative">
-            <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-2xl">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
-                  <Sparkles className="h-3.5 w-3.5 text-accent" />
-                  El corazón de Eleva360
-                </span>
-                <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                  Plan <span className="gradient-text-animated">Crecimiento</span>
+            <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-3xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
+                    <Sparkles className="h-3.5 w-3.5 text-accent" />
+                    Después de implementar
+                  </span>
+                  <span className="inline-flex rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent ring-1 ring-accent/25">
+                    Etapa opcional
+                  </span>
+                </div>
+                <p className="mt-6 text-sm font-bold uppercase tracking-[0.18em] text-white/60">
+                  Acompañamiento continuo
+                </p>
+                <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                  Seguimos mejorando contigo, cuando tenga sentido.
                 </h2>
-                <p className="mt-5 max-w-xl text-lg text-white/75">
-                  Implementar las herramientas es solo el comienzo. El verdadero valor está en el acompañamiento continuo: un plan que mantiene tu sistema optimizado, incorpora mejoras y acompaña la evolución de tu negocio.
+                <p className="mt-5 max-w-2xl text-lg text-white/75">
+                  Algunas soluciones necesitan seguimiento, medición y ajustes. En esos casos, podemos continuar trabajando contigo después de la implementación inicial.
                 </p>
               </div>
 
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
-              >
-                Quiero evolucionar mi negocio
-                <ArrowRight className="h-5 w-5" />
-              </a>
+              <div className="flex max-w-sm flex-col items-start lg:items-end lg:text-right">
+                <p className="text-sm leading-relaxed text-white/65">
+                  El alcance y la inversión se definen según el seguimiento que realmente necesite cada negocio.
+                </p>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
+                >
+                  Solicitar diagnóstico inicial
+                  <ArrowRight className="h-5 w-5" />
+                </a>
+                <p className="mt-3 text-xs leading-relaxed text-white/55">
+                  El acompañamiento se propone después de la implementación inicial y solo cuando aporta valor.
+                </p>
+              </div>
             </div>
 
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {pillars.map((p) => (
                 <div key={p.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15">
-                    <p.icon className="h-5 w-5 text-white" />
+                    <p.icon className="h-5 w-5 text-white" aria-hidden />
                   </div>
-                  <h3 className="mt-4 font-display text-base font-bold text-white">{p.title}</h3>
-                  <p className="mt-1.5 text-sm text-white/70">{p.desc}</p>
+                  <h3 className="mt-4 font-display text-base font-bold leading-snug text-white">{p.title}</h3>
                 </div>
               ))}
             </div>
 
-            <div className="mt-10 flex items-center gap-3 text-sm text-white/60">
-              <Check className="h-4 w-4 text-accent" />
-              No es mantención. Es evolución continua junto a tu negocio.
+            <div className="mt-10 flex items-start gap-3 text-sm leading-relaxed text-white/60">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+              Medimos, aprendemos y priorizamos nuevos pasos solo cuando el diagnóstico y lo implementado muestran que vale la pena continuar.
             </div>
           </div>
         </div>
