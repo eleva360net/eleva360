@@ -137,20 +137,20 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
+      { title: "Eleva360 | Soluciones digitales para negocios" },
       {
         name: "description",
         content:
-          "Eleva360 implementa soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Tú te enfocas en tu negocio, nosotros en su presencia digital.",
+          "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a su realidad.",
       },
       { name: "keywords", content: "Soluciones digitales, tecnología para negocios, automatización, presencia digital, transformación digital, Chile" },
-      { property: "og:title", content: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
-      { property: "og:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
+      { property: "og:title", content: "Eleva360 | Soluciones digitales para negocios" },
+      { property: "og:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a su realidad." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { property: "og:image", content: heroImage },
-      { name: "twitter:title", content: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
-      { name: "twitter:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
+      { name: "twitter:title", content: "Eleva360 | Soluciones digitales para negocios" },
+      { name: "twitter:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a su realidad." },
       { name: "twitter:image", content: heroImage },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -583,11 +583,11 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "google") {
     return (
-      <article className={cardClass} aria-label="Google Business Profile de Café Pacífico">
+      <article className={cardClass} aria-label="Ejemplo de visibilidad local de Café Pacífico">
         <div className="flex items-start gap-2.5">
           <GoogleMapsPinIcon className="h-8 w-6" />
           <div className="min-w-0 flex-1">
-            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-slate-400">Google Business Profile</p>
+            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-slate-400">Visibilidad local</p>
             <p className="mt-1 text-[0.9rem] font-bold tracking-[-0.01em] text-slate-900">Café Pacífico</p>
             <div className="mt-1 flex items-center gap-1">
               <span className="text-[0.68rem] font-semibold text-slate-700">4.9</span>
@@ -611,12 +611,12 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "whatsapp") {
     return (
-      <article className={cardClass} aria-label="Conversación automatizada por WhatsApp Business">
+      <article className={cardClass} aria-label="Ejemplo de contacto y atención por WhatsApp">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
             <MessageCircle className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">WhatsApp Business</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Contacto y atención</p>
           <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#25D366]" />
         </div>
         <div className="mt-2.5 rounded-2xl rounded-tl-md bg-slate-50 px-3 py-2.5 text-[0.69rem] leading-[1.45] text-slate-700">
@@ -632,12 +632,12 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "menu") {
     return (
-      <article className={cardClass} aria-label="Carta digital de Café Pacífico">
+      <article className={cardClass} aria-label="Ejemplo de experiencia del cliente de Café Pacífico">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
             <Smartphone className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Carta Digital</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Experiencia del cliente</p>
         </div>
         <div className="mt-2.5 grid grid-cols-3 gap-2.5">
           {[
@@ -660,12 +660,12 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "dashboard") {
     return (
-      <article className={cardClass} aria-label="Dashboard de resultados">
+      <article className={cardClass} aria-label="Ejemplo de seguimiento y mejora">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
             <BarChart3 className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Dashboard</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Seguimiento y mejora</p>
         </div>
         <div className="mt-3.5 grid grid-cols-3 divide-x divide-slate-100 text-center">
           {[
@@ -712,7 +712,7 @@ function MobileHeroCards() {
     <div className="relative z-30 mt-3 xl:hidden">
       <div className="mx-1 mb-3 flex items-center justify-between">
         <span className="text-[0.66rem] font-bold uppercase tracking-[0.12em] text-slate-400">
-          Ecosistema conectado
+          Tu negocio en el centro
         </span>
         <span className="flex items-center gap-1 text-[0.64rem] font-semibold text-primary">
           En movimiento <ChevronRight className="h-3 w-3" />
@@ -785,17 +785,17 @@ function HeroSection() {
               <span className="absolute inset-0 animate-ping rounded-full bg-primary/50" />
             </span>
             <span className="text-[0.7rem] font-semibold tracking-[0.02em] text-muted-foreground">
-              Soluciones digitales para negocios · Chile
+              Soluciones digitales para negocios
             </span>
           </div>
 
           <h1 className="animate-hero-fade-up animation-delay-50 max-w-[19ch] font-display text-[2.35rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-foreground sm:text-[2.7rem] lg:text-[2.55rem] xl:text-[2.65rem] 2xl:text-[3.05rem]">
-            Haz crecer tu negocio mientras nosotros nos encargamos de tu{" "}
-            <span className="gradient-text-animated">presencia digital</span>.
+            Antes de proponer soluciones,{" "}
+            <span className="gradient-text-animated">entendemos tu negocio.</span>
           </h1>
 
           <p className="animate-hero-fade-up animation-delay-200 mt-5 max-w-[46ch] text-[1rem] leading-[1.65] text-muted-foreground 2xl:mt-7 2xl:text-[1.0625rem] 2xl:leading-[1.7]">
-            Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
+            Analizamos cómo funciona tu negocio para detectar qué necesita mejorar. Luego priorizamos e implementamos soluciones digitales simples, por etapas y adaptadas a tu realidad.
           </p>
 
           <div className="animate-hero-scale-in animation-delay-300 mt-7 flex w-full flex-wrap items-center gap-3 2xl:mt-9">
@@ -805,7 +805,7 @@ function HeroSection() {
     rel="noreferrer"
     className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
-    Solicitar diagnóstico gratuito
+    Solicitar diagnóstico inicial
     <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
   </a>
 
@@ -813,7 +813,7 @@ function HeroSection() {
     href="#como-funciona"
     className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
-    Ver cómo funciona
+    Conocer cómo trabajamos
   </a>
 </div>
 
@@ -837,9 +837,11 @@ function HeroSection() {
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
           className="relative z-10 isolate mx-auto min-w-0 w-full max-w-[680px] [perspective:1600px] lg:max-w-none lg:w-full"
         >
-          <span className="absolute right-2 top-2 z-40 rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold text-slate-500 shadow-sm backdrop-blur sm:right-4 sm:top-4">
-            Ejemplo ilustrativo
-          </span>
+          <div className="relative z-40 flex justify-start px-2 pb-1 sm:justify-end sm:px-4 sm:pb-2">
+            <span className="rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold text-slate-500 shadow-sm backdrop-blur">
+              Ejemplo ilustrativo
+            </span>
+          </div>
           <div className="relative aspect-[3/2] w-full sm:aspect-[4/3] 2xl:aspect-[5/4]">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
@@ -910,7 +912,7 @@ function HeroSection() {
                               <circle cx="24" cy="22" r="3.2" fill="#E8F0FE" />
                             </svg>
                             <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                              Google Business Profile
+                              Visibilidad local
                             </p>
                           </div>
                           <p className="mt-1.5 truncate text-[17px] font-bold tracking-[-0.01em] text-slate-900">
@@ -958,7 +960,7 @@ function HeroSection() {
                           </svg>
                         </span>
                         <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                          WhatsApp Business
+                          Contacto y atención
                         </p>
                         <span className="ml-auto h-2 w-2 rounded-full bg-[#25D366]" />
                       </div>
@@ -993,7 +995,7 @@ function HeroSection() {
                           <Smartphone className="h-[18px] w-[18px]" />
                         </div>
                         <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                          Carta Digital
+                          Experiencia del cliente
                         </p>
                       </div>
 
@@ -1035,7 +1037,7 @@ function HeroSection() {
                           <BarChart3 className="h-[18px] w-[18px]" />
                         </div>
                         <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                          Dashboard
+                          Seguimiento y mejora
                         </p>
                       </div>
 
