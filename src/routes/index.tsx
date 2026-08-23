@@ -3,8 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Check,
-  Instagram,
-  Facebook,
   MapPin,
   MessageCircle,
   Menu,
@@ -44,7 +42,6 @@ import heroImage from "../assets/hero-eleva360.png";
 import menuEntradaPremium from "../assets/menu-entrada-premium.webp";
 import menuPlatoPremium from "../assets/menu-plato-premium.webp";
 import menuBebidaPremium from "../assets/menu-bebida-premium.webp";
-import reviewMariaGonzalez from "../assets/review-maria-gonzalez.webp";
 
 
 const WHATSAPP_URL =
@@ -110,43 +107,6 @@ function SpotlightCard({
       <div className="spotlight-glow" aria-hidden />
       {children}
     </div>
-  );
-}
-
-function CountUp({
-  to,
-  suffix = "",
-  prefix = "",
-  duration = 1600,
-}: {
-  to: number;
-  suffix?: string;
-  prefix?: string;
-  duration?: number;
-}) {
-  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.4 }, true);
-  const [value, setValue] = useState(0);
-  const started = useRef(false);
-  useEffect(() => {
-    if (!inView || started.current) return;
-    started.current = true;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setValue(Math.round(to * eased));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, to, duration]);
-  return (
-    <span ref={ref}>
-      {prefix}
-      {value}
-      {suffix}
-    </span>
   );
 }
 
@@ -498,10 +458,10 @@ const HERO_NODES = [
     delay: -1.8,
   },
   {
-    type: "review",
-    title: "Reseñas",
-    icon: Star,
-    tint: "bg-[#FBBC05]/15 text-[#B7860B]",
+    type: "support",
+    title: "Acompañamiento",
+    icon: HeartHandshake,
+    tint: "bg-accent/10 text-accent",
     positionClass: "xl:left-[76%] 2xl:left-[90%]",
     y: 81,
     ax: 74,
@@ -543,7 +503,7 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
       start: [142, 24],
       end: [6, 82],
     },
-    review: {
+    support: {
       className: "right-[calc(100%_-_3px)] top-[24%] h-[82px] w-[142px] -translate-y-1/2",
       d: "M138 54 C92 54 54 40 6 20",
       start: [138, 54],
@@ -557,7 +517,7 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
   return (
     <svg
       aria-hidden
-      viewBox={`0 0 ${type === "menu" ? 166 : type === "google" ? 170 : type === "dashboard" ? 146 : type === "review" ? 142 : 126} ${type === "dashboard" ? 94 : type === "google" ? 150 : type === "review" || type === "whatsapp" ? 82 : 76}`}
+      viewBox={`0 0 ${type === "menu" ? 166 : type === "google" ? 170 : type === "dashboard" ? 146 : type === "support" ? 142 : 126} ${type === "dashboard" ? 94 : type === "google" ? 150 : type === "support" || type === "whatsapp" ? 82 : 76}`}
       preserveAspectRatio="none"
       className={`pointer-events-none absolute hidden overflow-visible xl:block ${connector.className}`}
     >
@@ -615,7 +575,7 @@ function GoogleMapsPinIcon({ className = "h-8 w-6" }: { className?: string }) {
   );
 }
 
-type MobileHeroCardType = "google" | "whatsapp" | "menu" | "dashboard" | "review";
+type MobileHeroCardType = "google" | "whatsapp" | "menu" | "dashboard" | "support";
 
 function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
   const cardClass =
@@ -709,47 +669,43 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
         </div>
         <div className="mt-3.5 grid grid-cols-3 divide-x divide-slate-100 text-center">
           {[
-            { label: "Consultas", value: "24", growth: "+18%" },
-            { label: "Reservas", value: "12", growth: "+29%" },
-            { label: "Visitas", value: "326", growth: "+31%" },
+            { label: "Consultas", status: "Orden" },
+            { label: "Reservas", status: "Seguimiento" },
+            { label: "Visibilidad", status: "Lectura clara" },
           ].map((item) => (
             <div key={item.label} className="px-1.5">
-              <p className="text-[0.9rem] font-bold text-slate-900">{item.value}</p>
+              <p className="text-[0.64rem] font-bold text-primary">{item.status}</p>
               <p className="mt-0.5 text-[0.52rem] text-slate-400">{item.label}</p>
-              <p className="mt-1 text-[0.54rem] font-semibold text-emerald-500">↑ {item.growth}</p>
             </div>
           ))}
         </div>
-        <div className="mt-3.5 h-1 overflow-hidden rounded-full bg-slate-100">
-          <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-accent" />
+        <div className="mt-3.5 rounded-full bg-slate-50 px-3 py-1 text-center text-[0.56rem] font-semibold text-slate-500">
+          Vista de seguimiento
         </div>
       </article>
     );
   }
 
   return (
-    <article className={cardClass} aria-label="Nueva reseña de María González">
+    <article className={cardClass} aria-label="Acompañamiento de Eleva360">
       <div className="flex items-center gap-2">
-        <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Nueva reseña</p>
+        <HeartHandshake className="h-4 w-4 text-accent" />
+        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Acompañamiento Eleva360</p>
       </div>
-      <div className="mt-1.5 text-[0.92rem] tracking-[0.07em] text-amber-400">★★★★★</div>
-      <p className="mt-1.5 text-[0.67rem] leading-[1.45] text-slate-700">
-        Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+      <p className="mt-3 text-[0.68rem] leading-[1.5] text-slate-700">
+        Revisamos avances y ajustamos las soluciones según las necesidades reales del negocio.
       </p>
-      <div className="mt-2.5 flex items-center gap-2">
-        <img src={reviewMariaGonzalez} alt="María González" className="h-7 w-7 rounded-full object-cover shadow-sm ring-1 ring-white" />
-        <div>
-          <p className="text-[0.62rem] font-semibold text-slate-800">María González</p>
-          <p className="text-[0.52rem] text-slate-400">Hoy</p>
-        </div>
+      <div className="mt-3 flex flex-wrap gap-1.5 text-[0.55rem] font-semibold text-primary">
+        <span className="rounded-full bg-blue-50 px-2 py-1">Medir</span>
+        <span className="rounded-full bg-blue-50 px-2 py-1">Ajustar</span>
+        <span className="rounded-full bg-blue-50 px-2 py-1">Acompañar</span>
       </div>
     </article>
   );
 }
 
 function MobileHeroCards() {
-  const cards: MobileHeroCardType[] = ["google", "whatsapp", "menu", "dashboard", "review"];
+  const cards: MobileHeroCardType[] = ["google", "whatsapp", "menu", "dashboard", "support"];
   const row = [...cards, ...cards];
 
   return (
@@ -863,10 +819,10 @@ function HeroSection() {
 
           <div className="animate-hero-fade-up animation-delay-400 mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-5 text-[0.75rem] text-muted-foreground 2xl:mt-11 2xl:gap-x-6 2xl:gap-y-2.5 2xl:pt-6 2xl:text-[0.8125rem]">
             <span className="flex items-center gap-2">
-              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Implementación sin fricción
+              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Diagnóstico antes de proponer
             </span>
             <span className="flex items-center gap-2">
-              <Zap className="h-[0.9rem] w-[0.9rem] text-accent/80" /> Resultados desde el primer mes
+              <Zap className="h-[0.9rem] w-[0.9rem] text-accent/80" /> Implementación por etapas
             </span>
             <span className="flex items-center gap-2">
               <HeartHandshake className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Acompañamiento continuo
@@ -881,6 +837,9 @@ function HeroSection() {
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
           className="relative z-10 isolate mx-auto min-w-0 w-full max-w-[680px] [perspective:1600px] lg:max-w-none lg:w-full"
         >
+          <span className="absolute right-2 top-2 z-40 rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold text-slate-500 shadow-sm backdrop-blur sm:right-4 sm:top-4">
+            Ejemplo ilustrativo
+          </span>
           <div className="relative aspect-[3/2] w-full sm:aspect-[4/3] 2xl:aspect-[5/4]">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
@@ -922,7 +881,7 @@ function HeroSection() {
               >
                 <div
                   className={`relative scale-[0.72] 2xl:scale-[0.9] ${
-                    n.type === "dashboard" || n.type === "review" ? "origin-right" : "origin-left"
+                    n.type === "dashboard" || n.type === "support" ? "origin-right" : "origin-left"
                   }`}
                 >
                   <HeroCardConnector type={n.type} />
@@ -1082,10 +1041,10 @@ function HeroSection() {
 
                       <div className="mt-2.5 space-y-1">
                         {[
-                          { icon: Clock, label: "Consultas", value: "24", growth: "18%" },
-                          { icon: CalendarCheck, label: "Reservas", value: "12", growth: "29%" },
-                          { icon: Users, label: "Visitas al perfil", value: "326", growth: "31%" },
-                        ].map(({ icon: Icon, label, value, growth }) => (
+                          { icon: Clock, label: "Consultas", status: "Organización" },
+                          { icon: CalendarCheck, label: "Reservas", status: "Seguimiento" },
+                          { icon: Users, label: "Visibilidad", status: "Lectura clara" },
+                        ].map(({ icon: Icon, label, status }) => (
                           <div
                             key={label}
                             className="flex items-center justify-between border-b border-slate-100 py-2.5 last:border-0"
@@ -1094,49 +1053,34 @@ function HeroSection() {
                               <Icon className="h-3.5 w-3.5 text-primary/70" />
                               <span className="text-[11.5px] text-slate-600">{label}</span>
                             </div>
-                            <div className="flex items-center gap-2 tabular-nums">
-                              <span className="w-8 text-right text-[14px] font-bold text-slate-900">{value}</span>
-                              <span className="w-10 text-right text-[10.5px] font-semibold text-emerald-500">
-                                ↑ {growth}
-                              </span>
-                            </div>
+                            <span className="text-right text-[10.5px] font-semibold text-primary">{status}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* RESEÑA */}
+                  {/* ACOMPAÑAMIENTO */}
                   {!n.title.toLowerCase().includes("google") &&
                     !n.title.toLowerCase().includes("whatsapp") &&
                     !n.title.toLowerCase().includes("carta") &&
                     !n.title.toLowerCase().includes("dashboard") && (
                       <div className="w-[272px] p-4">
                         <div className="flex items-center gap-2.5">
-                          <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                          <HeartHandshake className="h-5 w-5 text-accent" />
                           <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                            Nueva reseña
+                            Acompañamiento Eleva360
                           </p>
                         </div>
 
-                        <div className="mt-2.5 text-[19px] leading-none tracking-[0.06em] text-amber-400">★★★★★</div>
-
-                        <p className="mt-2.5 text-[11.5px] leading-[1.55] text-slate-700">
-                          Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+                        <p className="mt-3 text-[11.5px] leading-[1.55] text-slate-700">
+                          Revisamos avances y ajustamos las soluciones según las necesidades reales del negocio.
                         </p>
 
-                        <div className="mt-3 flex items-center gap-2.5">
-                          <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-slate-100 ring-1 ring-white shadow-[0_2px_8px_rgba(15,23,42,0.14)]">
-                            <img
-                              src={reviewMariaGonzalez}
-                              alt="María González"
-                              className="h-full w-full object-cover object-center"
-                            />
-                          </div>
-                          <div>
-                            <p className="text-[11.5px] font-semibold text-slate-800">María González</p>
-                            <p className="text-[9.5px] text-slate-400">Hoy</p>
-                          </div>
+                        <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-semibold text-primary">
+                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Medir</span>
+                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Ajustar</span>
+                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Acompañar</span>
                         </div>
                       </div>
                     )}
@@ -1256,6 +1200,9 @@ function GoogleProfileMockup() {
           Llamar
         </span>
       </div>
+      <p className="mt-2 text-right text-[9px] font-semibold text-muted-foreground">
+        Ejemplo ilustrativo
+      </p>
     </div>
   );
 }
@@ -1627,20 +1574,20 @@ function HowItWorksSection() {
 
 function ResultsSection() {
   const items = [
-    { icon: TrendingUp, label: "Más visibilidad", to: 320, prefix: "+", suffix: "%", desc: "Frente a más clientes potenciales cada día." },
-    { icon: MessageCircle, label: "Más conversaciones", to: 240, prefix: "+", suffix: "%", desc: "Contactos ordenados y respondidos a tiempo." },
-    { icon: CalendarCheck, label: "Más reservas", to: 180, prefix: "+", suffix: "%", desc: "Clientes que agendan sin fricción." },
-    { icon: Star, label: "Más reseñas", to: 5, prefix: "+", suffix: "x", desc: "Reputación que trabaja por tu marca." },
-    { icon: Clock, label: "Más tiempo", to: 15, prefix: "+", suffix: "h", desc: "Horas por semana para administrar tu negocio." },
+    { icon: Search, label: "Presencia y visibilidad", desc: "Facilitar que más personas encuentren y entiendan tu negocio." },
+    { icon: MessageCircle, label: "Contacto y atención", desc: "Reducir fricciones cuando un potencial cliente quiere consultar o comprar." },
+    { icon: HeartHandshake, label: "Experiencia del cliente", desc: "Hacer más simple y coherente la interacción con el negocio." },
+    { icon: ShieldCheck, label: "Confianza y reputación", desc: "Fortalecer las señales que ayudan a un cliente a tomar una decisión." },
+    { icon: Clock, label: "Procesos y tiempo", desc: "Simplificar tareas repetitivas cuando realmente exista una oportunidad de mejora." },
   ];
 
   return (
     <section className="border-y border-border bg-white px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Resultados"
-          title="Lo que gana tu negocio cuando la tecnología trabaja por ti."
-          subtitle="No hablamos de características. Hablamos de lo que cambia en tu día a día."
+          eyebrow="Áreas de mejora"
+          title="Qué podemos ayudarte a mejorar"
+          subtitle="El diagnóstico permite identificar dónde tiene sentido intervenir y qué conviene priorizar."
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((s, i) => (
@@ -1649,15 +1596,15 @@ function ResultsSection() {
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                   <s.icon className="h-5 w-5 text-primary" />
                 </div>
-                <div className="font-display text-3xl font-extrabold text-foreground tabular-nums">
-                  <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
-                </div>
-                <div className="mt-1 text-sm font-semibold text-foreground">{s.label}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{s.desc}</div>
+                <div className="text-sm font-semibold text-foreground">{s.label}</div>
+                <div className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.desc}</div>
               </SpotlightCard>
             </Reveal>
           ))}
         </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm font-medium text-muted-foreground">
+          Las prioridades y soluciones dependen del diagnóstico de cada negocio.
+        </p>
       </div>
     </section>
   );
@@ -1842,7 +1789,7 @@ function CTASection() {
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
-            <p className="mt-6 text-sm text-white/50">Diagnóstico gratuito · Respuesta en menos de 1 hora hábil.</p>
+            <p className="mt-6 text-sm text-white/50">Diagnóstico inicial sin costo · Atención directa por WhatsApp</p>
           </div>
         </div>
       </div>
@@ -1860,25 +1807,7 @@ function Footer() {
             Soluciones digitales que hacen crecer tu negocio, sin que tengas que hacerlo tú.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <Instagram className="h-4 w-4" />
-          </a>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Facebook"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <Facebook className="h-4 w-4" />
-          </a>
+        <div className="flex items-center">
           <a
             href={WHATSAPP_URL}
             target="_blank"
