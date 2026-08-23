@@ -1744,23 +1744,50 @@ function FutureSection() {
 
 function WhySection() {
   const items = [
-    { icon: HeartHandshake, title: "Atención cercana", desc: "Trato humano y directo, no un ticket más en un sistema." },
-    { icon: Layers, title: "Tecnología conectada", desc: "Un ecosistema donde cada pieza potencia a la siguiente." },
-    { icon: Target, title: "Enfocados en tu negocio", desc: "Adaptamos el sistema al rubro y momento de tu empresa." },
-    { icon: BarChart3, title: "Resultados medibles", desc: "Métricas claras, sin jerga técnica ni promesas vacías." },
+    {
+      icon: Search,
+      title: "Diagnóstico antes de proponer",
+      desc: "Primero comprendemos el contexto y el problema. Después evaluamos qué capacidades pueden ayudar.",
+    },
+    {
+      icon: Target,
+      title: "Prioridades comprensibles",
+      desc: "Explicamos qué conviene resolver primero, qué puede esperar y por qué.",
+    },
+    {
+      icon: Layers,
+      title: "Soluciones adaptadas",
+      desc: "El alcance considera los objetivos, recursos y realidad de cada negocio, sin copiar un paquete estándar.",
+    },
+    {
+      icon: Workflow,
+      title: "Implementación gradual",
+      desc: "Comenzamos por la prioridad acordada y ampliamos la solución solamente cuando se justifica.",
+    },
+    {
+      icon: MessageCircle,
+      title: "Comunicación directa",
+      desc: "Mantenemos una comunicación clara y comprensible antes, durante y después de implementar.",
+    },
+    {
+      icon: LineChart,
+      title: "Mejora basada en lo aprendido",
+      desc: "Revisamos lo implementado para decidir ajustes y posibles siguientes pasos con mayor claridad.",
+    },
   ];
 
   return (
     <section id="porque" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Por qué Eleva360"
-          title="Una empresa tecnológica que trabaja como parte de tu equipo."
+          eyebrow="Una forma distinta de trabajar"
+          title="Porque la solución comienza antes de elegir una herramienta."
+          subtitle="Partimos entendiendo el negocio, ordenamos las prioridades y proponemos una forma realista de avanzar."
         />
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 100}>
-              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-6 shadow-soft shadow-soft-hover hover:border-primary/30">
+              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-6 shadow-soft shadow-soft-hover hover:border-primary/30 lg:min-h-[14rem]">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                   <it.icon className="h-6 w-6" />
                 </div>
@@ -1770,6 +1797,10 @@ function WhySection() {
             </Reveal>
           ))}
         </div>
+
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
+          No se trata de contratar más, sino de saber qué vale la pena implementar y en qué momento.
+        </p>
       </div>
     </section>
   );
