@@ -40,8 +40,10 @@ import {
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
 import heroImage from "../assets/hero-eleva360.png";
-import serviceMaps from "../assets/service-maps.jpg";
-import serviceMenu from "../assets/service-menu.jpg";
+import menuEntradaPremium from "../assets/menu-entrada-premium.webp";
+import menuPlatoPremium from "../assets/menu-plato-premium.webp";
+import menuBebidaPremium from "../assets/menu-bebida-premium.webp";
+import reviewMariaGonzalez from "../assets/review-maria-gonzalez.webp";
 
 
 const WHATSAPP_URL =
@@ -244,7 +246,7 @@ function Navbar() {
           : "border-transparent bg-background/60"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
         <nav className="hidden items-center gap-7 md:flex">
@@ -451,8 +453,8 @@ const HERO_NODES = [
     title: "Google Business",
     icon: MapPin,
     tint: "bg-[#4285F4]/10 text-[#4285F4]",
-    x: 19,
-    y: 9,
+    positionClass: "xl:left-[20%] 2xl:left-[14%]",
+    y: 22,
     ax: 32,
     ay: 30,
     dur: 13,
@@ -463,8 +465,8 @@ const HERO_NODES = [
     title: "WhatsApp",
     icon: MessageCircle,
     tint: "bg-accent/10 text-accent",
-    x: 2,
-    y: 44,
+    positionClass: "xl:left-[20%] 2xl:left-[10%]",
+    y: 51,
     ax: 26,
     ay: 46,
     dur: 16,
@@ -475,8 +477,8 @@ const HERO_NODES = [
     title: "Carta digital",
     icon: QrCode,
     tint: "bg-primary/10 text-primary",
-    x: 4,
-    y: 88,
+    positionClass: "xl:left-[20%] 2xl:left-[10%]",
+    y: 87,
     ax: 27,
     ay: 68,
     dur: 15,
@@ -487,8 +489,8 @@ const HERO_NODES = [
     title: "Dashboard",
     icon: BarChart3,
     tint: "bg-primary/10 text-primary",
-    x: 99,
-    y: 22,
+    positionClass: "xl:left-[76%] 2xl:left-[90%]",
+    y: 29,
     ax: 75,
     ay: 28,
     dur: 12,
@@ -499,8 +501,8 @@ const HERO_NODES = [
     title: "Reseñas",
     icon: Star,
     tint: "bg-[#FBBC05]/15 text-[#B7860B]",
-    x: 99,
-    y: 72,
+    positionClass: "xl:left-[76%] 2xl:left-[90%]",
+    y: 81,
     ax: 74,
     ay: 70,
     dur: 17,
@@ -508,19 +510,87 @@ const HERO_NODES = [
   },
 ] as const;
 
-/** Conexiones curvas independientes: tarjeta -> perímetro del edificio */
-const HERO_LINKS: { from: [number, number]; to: [number, number]; d: string }[] = [
-  // Google Business -> borde superior izquierdo del edificio
-  { from: [19, 0], to: [31, 11], d: "M19 0 C25 0, 27 8, 31 11" },
-  // WhatsApp -> lateral izquierdo
-  { from: [2, 26], to: [14, 33], d: "M2 26 C8 26, 10 30, 14 33" },
-  // Carta digital -> zona inferior izquierda
-  { from: [4, 64], to: [15, 68], d: "M4 64 C9 64, 11 67, 15 68" },
-  // Dashboard -> lateral superior derecho
-  { from: [60, 6], to: [72, 15], d: "M60 6 C65 6, 68 12, 72 15" },
-  // Nueva reseña -> zona inferior derecha
-  { from: [60, 57], to: [58, 71], d: "M60 57 C56.5 59, 56 67, 58 71" },
-];
+type HeroNodeType = (typeof HERO_NODES)[number]["type"];
+
+/**
+ * Cada línea vive dentro de su tarjeta. Así el primer punto permanece pegado
+ * al borde de la tarjeta aunque cambien el ancho de pantalla o la posición.
+ */
+function HeroCardConnector({ type }: { type: HeroNodeType }) {
+  const connectors: Record<HeroNodeType, { className: string; d: string; start: [number, number]; end: [number, number] }> = {
+    google: {
+      className: "left-[calc(100%_-_3px)] top-[58%] h-[150px] w-[170px] -translate-y-1/2",
+      d: "M4 30 C58 30 112 67 164 142",
+      start: [4, 30],
+      end: [164, 142],
+    },
+    whatsapp: {
+      className: "left-[calc(100%_-_3px)] top-[58%] h-[82px] w-[126px] -translate-y-1/2",
+      d: "M4 34 C44 34 82 37 120 68",
+      start: [4, 34],
+      end: [120, 68],
+    },
+    menu: {
+      className: "left-[calc(100%_-_3px)] top-[54%] h-[76px] w-[166px] -translate-y-1/2",
+      d: "M4 39 C56 39 108 40 160 18",
+      start: [4, 39],
+      end: [160, 18],
+    },
+    dashboard: {
+      className: "right-[calc(100%_-_3px)] top-[70%] h-[94px] w-[146px] -translate-y-1/2",
+      d: "M142 24 C104 24 57 35 6 82",
+      start: [142, 24],
+      end: [6, 82],
+    },
+    review: {
+      className: "right-[calc(100%_-_3px)] top-[24%] h-[82px] w-[142px] -translate-y-1/2",
+      d: "M138 54 C92 54 54 40 6 20",
+      start: [138, 54],
+      end: [6, 20],
+    },
+  };
+
+  const connector = connectors[type];
+  const glowId = `hero-card-connector-${type}`;
+
+  return (
+    <svg
+      aria-hidden
+      viewBox={`0 0 ${type === "menu" ? 166 : type === "google" ? 170 : type === "dashboard" ? 146 : type === "review" ? 142 : 126} ${type === "dashboard" ? 94 : type === "google" ? 150 : type === "review" || type === "whatsapp" ? 82 : 76}`}
+      preserveAspectRatio="none"
+      className={`pointer-events-none absolute hidden overflow-visible xl:block ${connector.className}`}
+    >
+      <defs>
+        <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path d={connector.d} fill="none" stroke="rgba(37,99,235,0.12)" strokeWidth="4" strokeLinecap="round" />
+      <path
+        d={connector.d}
+        fill="none"
+        stroke="#3B82F6"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeDasharray="4 5"
+        filter={`url(#${glowId})`}
+      >
+        <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="8s" repeatCount="indefinite" />
+      </path>
+      <circle cx={connector.start[0]} cy={connector.start[1]} r="4.5" fill="rgba(59,130,246,0.14)" />
+      <circle cx={connector.start[0]} cy={connector.start[1]} r="2.1" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.4" />
+      <circle cx={connector.end[0]} cy={connector.end[1]} r="5" fill="rgba(20,184,166,0.14)" />
+      <circle cx={connector.end[0]} cy={connector.end[1]} r="2.2" fill="#14B8A6" />
+      <circle r="2" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1">
+        <animateMotion dur="6.5s" repeatCount="indefinite" path={connector.d} />
+      </circle>
+    </svg>
+  );
+}
 
 function HeroSection() {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -537,7 +607,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-20 lg:pb-24">
+    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-14 pb-16 sm:px-6 lg:px-8 lg:pt-12 lg:pb-16 2xl:pt-20 2xl:pb-24">
       {/* Fondo: gradientes radiales suaves + luz ambiental en capas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgba(37,99,235,0.045),transparent_60%)]" />
@@ -546,10 +616,10 @@ function HeroSection() {
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-[1360px] items-center gap-16 lg:grid-cols-[0.46fr_0.54fr] lg:gap-20 xl:gap-24">
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-16 lg:grid-cols-[0.36fr_0.64fr] lg:gap-10 xl:gap-12 2xl:grid-cols-[0.34fr_0.66fr]">
         {/* Bloque de texto */}
-        <div className="flex flex-col items-start text-left">
-          <div className="animate-hero-fade-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur">
+        <div className="relative z-30 min-w-0 flex flex-col items-start text-left xl:-translate-y-8 2xl:translate-y-0">
+          <div className="animate-hero-fade-up mb-5 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur 2xl:mb-7">
             <span className="relative flex h-1.5 w-1.5 rounded-full bg-primary">
               <span className="absolute inset-0 animate-ping rounded-full bg-primary/50" />
             </span>
@@ -558,21 +628,21 @@ function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-hero-fade-up animation-delay-50 max-w-[19ch] font-display text-[2.35rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-foreground sm:text-[2.7rem] lg:text-[3.05rem]">
+          <h1 className="animate-hero-fade-up animation-delay-50 max-w-[19ch] font-display text-[2.35rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-foreground sm:text-[2.7rem] lg:text-[2.55rem] xl:text-[2.65rem] 2xl:text-[3.05rem]">
             Haz crecer tu negocio mientras nosotros nos encargamos de tu{" "}
             <span className="gradient-text-animated">presencia digital</span>.
           </h1>
 
-          <p className="animate-hero-fade-up animation-delay-200 mt-7 max-w-[46ch] text-[1.0625rem] leading-[1.7] text-muted-foreground">
+          <p className="animate-hero-fade-up animation-delay-200 mt-5 max-w-[46ch] text-[1rem] leading-[1.65] text-muted-foreground 2xl:mt-7 2xl:text-[1.0625rem] 2xl:leading-[1.7]">
             Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
           </p>
 
-          <div className="animate-hero-scale-in animation-delay-300 mt-9 flex w-full flex-wrap items-center gap-3">
+          <div className="animate-hero-scale-in animation-delay-300 mt-7 flex w-full flex-wrap items-center gap-3 2xl:mt-9">
   <a
     href={WHATSAPP_URL}
     target="_blank"
     rel="noreferrer"
-    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto"
+    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
     Solicitar diagnóstico gratuito
     <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
@@ -580,13 +650,13 @@ function HeroSection() {
 
   <a
     href="#como-funciona"
-    className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-6 py-3.5 whitespace-nowrap text-[0.95rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto"
+    className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
     Ver cómo funciona
   </a>
 </div>
 
-          <div className="animate-hero-fade-up animation-delay-400 mt-11 flex flex-wrap items-center gap-x-6 gap-y-2.5 border-t border-slate-100 pt-6 text-[0.8125rem] text-muted-foreground">
+          <div className="animate-hero-fade-up animation-delay-400 mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-5 text-[0.75rem] text-muted-foreground 2xl:mt-11 2xl:gap-x-6 2xl:gap-y-2.5 2xl:pt-6 2xl:text-[0.8125rem]">
             <span className="flex items-center gap-2">
               <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Implementación sin fricción
             </span>
@@ -604,93 +674,14 @@ function HeroSection() {
           ref={stageRef}
           onMouseMove={handleParallax}
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
-          className="relative mx-auto w-full max-w-[560px] [perspective:1600px] lg:max-w-none lg:w-[104%]"
+          className="relative z-10 isolate mx-auto min-w-0 w-full max-w-[680px] [perspective:1600px] lg:max-w-none lg:w-full"
         >
-          <div className="relative aspect-[4/3.5] w-full">
+          <div className="relative aspect-[4/3] w-full 2xl:aspect-[5/4]">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
               aria-hidden
               className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.06),rgba(255,255,255,0)_70%)] blur-2xl"
             />
-
-            {/* Conexiones del ecosistema — curvas neón independientes */}
-            <svg
-              aria-hidden
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 z-[15] hidden h-full w-full overflow-visible sm:block"
-            >
-              <defs>
-                <linearGradient id="heroLink" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="rgba(37,99,235,0.85)" />
-                  <stop offset="60%" stopColor="rgba(37,99,235,0.55)" />
-                  <stop offset="100%" stopColor="rgba(20,184,166,0.45)" />
-                </linearGradient>
-                <filter id="heroLinkGlow" x="-60%" y="-60%" width="220%" height="220%">
-                  <feGaussianBlur stdDeviation="0.9" result="b" />
-                  <feMerge>
-                    <feMergeNode in="b" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {HERO_LINKS.map((l, i) => (
-                <g key={l.d} filter="url(#heroLinkGlow)">
-                  {/* halo suave */}
-                  <path
-                    d={l.d}
-                    fill="none"
-                    stroke="rgba(37,99,235,0.16)"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                  />
-                  {/* línea segmentada */}
-                  <path
-                    d={l.d}
-                    fill="none"
-                    stroke="url(#heroLink)"
-                    strokeWidth="0.55"
-                    strokeLinecap="round"
-                    strokeDasharray="1.6 2.2"
-                  >
-                    <animate
-                      attributeName="stroke-dashoffset"
-                      from="0"
-                      to="-15.2"
-                      dur={`${9 + i}s`}
-                      repeatCount="indefinite"
-                    />
-                  </path>
-                  {/* nodos luminosos en los extremos */}
-                  <circle cx={l.from[0]} cy={l.from[1]} r="0.75" fill="#2563EB" opacity="0.9" />
-                  <circle cx={l.from[0]} cy={l.from[1]} r="1.7" fill="rgba(37,99,235,0.18)" />
-                  <circle cx={l.to[0]} cy={l.to[1]} r="0.65" fill="#14B8A6" opacity="0.9" />
-                  <circle cx={l.to[0]} cy={l.to[1]} r="1.5" fill="rgba(20,184,166,0.16)" />
-                  {/* pulso de luz recorriendo la curva */}
-                  <circle r="0.55" fill="#ffffff" stroke="#2563EB" strokeWidth="0.3">
-                    <animateMotion
-                      dur={`${6.5 + i * 0.9}s`}
-                      begin={`${i * 1.3}s`}
-                      repeatCount="indefinite"
-                      path={l.d}
-                      keyPoints="0;1"
-                      keyTimes="0;1"
-                      calcMode="spline"
-                      keySplines="0.4 0 0.2 1"
-                    />
-                    <animate
-                      attributeName="opacity"
-                      values="0;1;1;0"
-                      keyTimes="0;0.12;0.85;1"
-                      dur={`${6.5 + i * 0.9}s`}
-                      begin={`${i * 1.3}s`}
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                </g>
-              ))}
-            </svg>
 
             {/* Sombra de suelo para anclar el edificio */}
             <div
@@ -700,7 +691,7 @@ function HeroSection() {
 
             {/* Edificio con parallax muy suave */}
             <div
-              className="hero-parallax animate-hero-drift absolute left-1/2 top-1/2 z-10 w-[88%] -translate-x-1/2 -translate-y-1/2"
+              className="hero-parallax animate-hero-drift absolute left-1/2 top-[50%] z-10 w-[74%] -translate-x-1/2 -translate-y-1/2 2xl:top-[53%] 2xl:w-[86%]"
               style={{
                 transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
               }}
@@ -717,29 +708,42 @@ function HeroSection() {
             {HERO_NODES.map((n) => (
               <div
                 key={n.title}
-                className="animate-hero-card-float absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
+                className={`animate-hero-card-float absolute z-20 hidden -translate-y-1/2 xl:block ${n.positionClass}`}
                 style={{
-                  left: `${n.x}%`,
                   top: `${n.y}%`,
                   animationDuration: `${n.dur}s`,
                   animationDelay: `${n.delay}s`,
                 }}
               >
-                <div className="group relative overflow-hidden rounded-[20px] border border-slate-200/70 bg-white shadow-[0_2px_6px_rgba(15,23,42,0.04),0_18px_46px_-16px_rgba(15,23,42,0.22)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-slate-300 hover:shadow-[0_4px_10px_rgba(15,23,42,0.05),0_28px_60px_-18px_rgba(15,23,42,0.28)]">
+                <div
+                  className={`relative scale-[0.72] 2xl:scale-[0.9] ${
+                    n.type === "dashboard" || n.type === "review" ? "origin-right" : "origin-left"
+                  }`}
+                >
+                  <HeroCardConnector type={n.type} />
+                  <div className="group relative z-10 overflow-hidden rounded-[20px] border border-slate-200/70 bg-white shadow-[0_2px_6px_rgba(15,23,42,0.04),0_18px_46px_-16px_rgba(15,23,42,0.22)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-slate-300 hover:shadow-[0_4px_10px_rgba(15,23,42,0.05),0_28px_60px_-18px_rgba(15,23,42,0.28)]">
                   <div className="pointer-events-none absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/5 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* GOOGLE BUSINESS */}
                   {n.title.toLowerCase().includes("google") && (
-                    <div className="w-[320px] p-4">
+                    <div className="w-[340px] p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
-                            <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" aria-hidden>
-                              <path fill="#34A853" d="M12 23s-1.6-2.2-3.3-4.9l6.6-3.8C13.9 17.7 12 23 12 23z" />
-                              <path fill="#FBBC05" d="M5.2 14.2C4.3 12.6 3.7 11.2 3.7 10c0-.8.1-1.5.4-2.2l7.2 4.1-6.1 2.3z" />
-                              <path fill="#4285F4" d="M20.3 10c0 1.6-1 3.5-2.3 5.6l-6-3.4 6.9-4c.9 1 1.4 2.3 1.4 3.4z" />
-                              <path fill="#1A73E8" d="M4.1 7.8C5.1 5 7.8 3 12 3c2.6 0 4.9 1.1 6.4 2.9l-6.4 3.6-7.9-1.7z" />
-                              <circle cx="12" cy="10" r="2.6" fill="#FFFFFF" />
+                            <svg viewBox="0 0 48 64" className="h-8 w-6 shrink-0 drop-shadow-sm" aria-hidden>
+                              <defs>
+                                <clipPath id="google-maps-pin-shape">
+                                  <path d="M24 2C12.95 2 4 10.95 4 22c0 15.4 20 40 20 40s20-24.6 20-40C44 10.95 35.05 2 24 2Z" />
+                                </clipPath>
+                              </defs>
+                              <g clipPath="url(#google-maps-pin-shape)">
+                                <rect width="48" height="64" fill="#EA4335" />
+                                <path d="M0 0h25v33L7 48H0Z" fill="#4285F4" />
+                                <path d="m25 33 23-10v24L30 55Z" fill="#FBBC04" />
+                                <path d="M0 48 25 33l23 14v17H0Z" fill="#34A853" />
+                              </g>
+                              <circle cx="24" cy="22" r="8.5" fill="#FFFFFF" />
+                              <circle cx="24" cy="22" r="3.2" fill="#E8F0FE" />
                             </svg>
                             <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400">
                               Google Business Profile
@@ -761,8 +765,12 @@ function HeroSection() {
                           </div>
                         </div>
 
-                        <div className="h-[86px] w-[86px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-                          <img src={serviceMaps} alt="" className="h-full w-full object-cover" />
+                        <div className="h-[94px] w-[104px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
+                          <img
+                            src={heroBuilding}
+                            alt="Vista del Café Pacífico"
+                            className="h-full w-full scale-[1.7] object-cover object-[53%_62%]"
+                          />
                         </div>
                       </div>
 
@@ -827,13 +835,17 @@ function HeroSection() {
 
                       <div className="mt-3 space-y-2">
                         {[
-                          { label: "Entradas", count: "8 opciones" },
-                          { label: "Platos", count: "14 opciones" },
-                          { label: "Bebidas", count: "10 opciones" },
+                          { label: "Entradas", count: "8 opciones", image: menuEntradaPremium },
+                          { label: "Platos", count: "14 opciones", image: menuPlatoPremium },
+                          { label: "Bebidas", count: "10 opciones", image: menuBebidaPremium },
                         ].map((item) => (
                           <div key={item.label} className="flex items-center gap-3">
-                            <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg ring-1 ring-slate-100">
-                              <img src={serviceMenu} alt="" className="h-full w-full object-cover" />
+                            <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.12),0_2px_8px_rgba(15,23,42,0.10)]">
+                              <img
+                                src={item.image}
+                                alt={`${item.label} del menú de Café Pacífico`}
+                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="text-[12px] font-semibold text-slate-800">{item.label}</p>
@@ -909,8 +921,12 @@ function HeroSection() {
                         </p>
 
                         <div className="mt-3 flex items-center gap-2.5">
-                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-[9px] font-bold text-slate-500">
-                            MG
+                          <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-slate-100 ring-1 ring-white shadow-[0_2px_8px_rgba(15,23,42,0.14)]">
+                            <img
+                              src={reviewMariaGonzalez}
+                              alt="María González"
+                              className="h-full w-full object-cover object-center"
+                            />
                           </div>
                           <div>
                             <p className="text-[11.5px] font-semibold text-slate-800">María González</p>
@@ -919,6 +935,7 @@ function HeroSection() {
                         </div>
                       </div>
                     )}
+                  </div>
                 </div>
               </div>
                  ))}
