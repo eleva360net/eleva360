@@ -23,10 +23,7 @@ import {
   Layers,
   Workflow,
   LineChart,
-  ShoppingCart,
   CalendarCheck,
-  Cpu,
-  LayoutDashboard,
   Globe,
   Wrench,
   Gauge,
@@ -1662,47 +1659,84 @@ function PlanSection() {
 
 function FutureSection() {
   const items = [
-    { icon: Cpu, title: "Inteligencia Artificial" },
-    { icon: Users, title: "CRM" },
-    { icon: CalendarCheck, title: "Reservas Online" },
-    { icon: LayoutDashboard, title: "Dashboards" },
-    { icon: Workflow, title: "Automatizaciones" },
-    { icon: Globe, title: "Landing Pages" },
-    { icon: ShoppingCart, title: "Comercio Electrónico" },
-    { icon: BarChart3, title: "Analítica avanzada" },
+    {
+      icon: ShieldCheck,
+      title: "Marca y confianza",
+      desc: "Fortalecer la identidad y las señales que ayudan a un cliente a reconocer y confiar en el negocio.",
+      tools: ["Branding", "Identidad visual", "Sistemas de reseñas"],
+    },
+    {
+      icon: Smartphone,
+      title: "Contenido y presencia",
+      desc: "Comunicar de forma más clara y consistente cuando el negocio necesita fortalecer su presencia.",
+      tools: ["Instagram", "Facebook", "Contenido", "Reels"],
+    },
+    {
+      icon: Globe,
+      title: "Web y conversión",
+      desc: "Crear espacios digitales que informen, orienten o faciliten una acción concreta.",
+      tools: ["Landing pages", "Sitios web", "Experiencias digitales"],
+    },
+    {
+      icon: Target,
+      title: "Captación pagada",
+      desc: "Activar publicidad solamente cuando existe una base preparada para recibir y convertir nuevas oportunidades.",
+      tools: ["Google Ads", "Meta Ads"],
+    },
+    {
+      icon: Workflow,
+      title: "Procesos y automatización",
+      desc: "Simplificar tareas repetitivas cuando hacerlo aporta tiempo, orden o una mejor atención.",
+      tools: ["Automatizaciones", "Integraciones", "Flujos de contacto"],
+    },
+    {
+      icon: BarChart3,
+      title: "Medición y optimización",
+      desc: "Observar lo implementado para detectar ajustes y decidir con mayor claridad el siguiente paso.",
+      tools: ["Seguimiento", "Análisis", "Mejoras priorizadas"],
+    },
   ];
 
   return (
     <section id="futuro" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Ecosistema"
-          title={
-            <>
-              Un ecosistema que{" "}
-              <span className="gradient-text-animated">sigue creciendo.</span>
-            </>
-          }
-          subtitle="Eleva360 evoluciona constantemente. Nuevas capacidades se suman al sistema para acompañar la próxima etapa de tu negocio."
+          eyebrow="Cuando la siguiente etapa lo requiere"
+          title="La solución puede evolucionar junto con tu negocio."
+          subtitle="Después de resolver la prioridad inicial, podemos incorporar nuevas capacidades si los objetivos y lo aprendido durante el proceso muestran que tienen sentido."
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 70} variant="zoom">
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg">
+              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg lg:min-h-[15.5rem]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <it.icon className="h-5 w-5" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                    <it.icon className="h-5 w-5" aria-hidden />
                   </div>
-                  <h3 className="font-display text-base font-bold text-foreground">{it.title}</h3>
+                  <h3 className="font-display text-lg font-bold text-foreground">{it.title}</h3>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  <Sparkles className="h-3 w-3" /> Próximamente
-                </span>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+                <div className="mt-auto pt-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                    Puede incluir
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {it.tools.map((tool) => (
+                      <li key={tool} className="rounded-full bg-primary/5 px-2.5 py-1 text-xs font-medium text-muted-foreground ring-1 ring-primary/10">
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
+          No necesitas activar todas estas capacidades. La siguiente etapa se define por lo que tu negocio necesita, puede sostener y tiene sentido priorizar.
+        </p>
       </div>
     </section>
   );
