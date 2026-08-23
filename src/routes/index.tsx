@@ -1511,24 +1511,34 @@ function SolutionSection() {
 function HowItWorksSection() {
   const steps = [
     {
+      number: "01",
+      icon: Users,
+      title: "Entender",
+      desc: "Conocemos cómo funciona tu negocio, cuáles son sus objetivos y cómo atrae, atiende y acompaña actualmente a sus clientes.",
+    },
+    {
+      number: "02",
       icon: Search,
-      title: "Analizamos tu negocio",
-      desc: "Entendemos tu rubro, tus clientes y qué está frenando tu crecimiento.",
+      title: "Diagnosticar",
+      desc: "Verificamos su presencia digital, proceso de contacto, señales de confianza, competidores y posibles puntos de fricción.",
     },
     {
+      number: "03",
+      icon: Target,
+      title: "Priorizar",
+      desc: "Definimos qué necesita atención primero, qué puede esperar y qué no conviene implementar por ahora.",
+    },
+    {
+      number: "04",
       icon: Wrench,
-      title: "Implementamos las herramientas",
-      desc: "Dejamos funcionando cada pieza del sistema, sin que tengas que hacer nada.",
+      title: "Implementar",
+      desc: "Diseñamos y ponemos en marcha la solución inicial acordada, de forma simple y por etapas.",
     },
     {
-      icon: Workflow,
-      title: "Automatizamos procesos",
-      desc: "Convertimos tareas manuales en flujos que trabajan solos por tu negocio.",
-    },
-    {
-      icon: LineChart,
-      title: "Optimizamos continuamente",
-      desc: "Medimos, ajustamos y mejoramos para que sigas creciendo mes a mes.",
+      number: "05",
+      icon: HeartHandshake,
+      title: "Acompañar",
+      desc: "Medimos lo implementado, revisamos lo aprendido y planteamos siguientes pasos solamente cuando tengan sentido.",
     },
   ];
 
@@ -1536,30 +1546,35 @@ function HowItWorksSection() {
     <section id="como-funciona" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Cómo funciona"
-          title="Un proceso simple. Un impacto real."
-          subtitle="Cuatro pasos, cero complicaciones. Nosotros hacemos el trabajo técnico, tú ves los resultados."
+          eyebrow="Cómo trabajamos"
+          title="Un proceso claro para decidir mejor antes de implementar."
+          subtitle="Cada etapa tiene un propósito: comprender el negocio, identificar oportunidades y avanzar por prioridades, sin implementar herramientas porque sí."
         />
 
         <div className="relative mt-16">
+          <div aria-hidden className="absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-transparent via-border to-transparent lg:hidden" />
           <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block" />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 lg:grid-cols-5">
             {steps.map((s, i) => (
               <Reveal key={s.title} delay={i * 120}>
-                <div className="relative flex flex-col items-start">
-                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-white shadow-sm">
-                    <span className="font-display text-sm font-bold text-primary">0{i + 1}</span>
+                <div className="relative flex h-full flex-col items-start pl-16 lg:pl-0">
+                  <div className="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-white shadow-sm lg:relative">
+                    <span className="font-display text-sm font-bold text-primary">{s.number}</span>
                   </div>
-                  <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10">
-                    <s.icon className="h-5 w-5 text-primary" />
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 lg:mt-6">
+                    <s.icon className="h-5 w-5 text-primary" aria-hidden />
                   </div>
                   <h3 className="mt-4 font-display text-lg font-bold text-foreground">{s.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
+
+        <p className="mx-auto mt-12 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground/75">
+          La meta no es implementar más herramientas, sino tomar mejores decisiones sobre qué hacer primero.
+        </p>
       </div>
     </section>
   );
