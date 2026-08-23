@@ -36,7 +36,8 @@ import {
   QrCode,
   Smartphone,
   ChevronRight,
-} from "lucide-react";import { useEffect, useRef, useState } from "react";
+} from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
 import heroImage from "../assets/hero-eleva360.png";
@@ -592,6 +593,254 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
   );
 }
 
+function GoogleMapsPinIcon({ className = "h-8 w-6" }: { className?: string }) {
+  const clipId = useId().replace(/:/g, "");
+
+  return (
+    <svg viewBox="0 0 48 64" className={`${className} shrink-0 drop-shadow-sm`} aria-hidden>
+      <defs>
+        <clipPath id={clipId}>
+          <path d="M24 2C12.95 2 4 10.95 4 22c0 15.4 20 40 20 40s20-24.6 20-40C44 10.95 35.05 2 24 2Z" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${clipId})`}>
+        <rect width="48" height="64" fill="#EA4335" />
+        <path d="M0 0h25v33L7 48H0Z" fill="#4285F4" />
+        <path d="m25 33 23-10v24L30 55Z" fill="#FBBC04" />
+        <path d="M0 48 25 33l23 14v17H0Z" fill="#34A853" />
+      </g>
+      <circle cx="24" cy="22" r="8.5" fill="#FFFFFF" />
+      <circle cx="24" cy="22" r="3.2" fill="#E8F0FE" />
+    </svg>
+  );
+}
+
+function MobileHeroCards() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const cardClass =
+    "min-h-[196px] w-full overflow-hidden rounded-[24px] border border-white/80 bg-white/95 p-4 shadow-[0_24px_54px_-24px_rgba(15,23,42,0.34),0_8px_20px_-16px_rgba(37,99,235,0.28)] backdrop-blur-xl";
+
+  useEffect(() => {
+    if (hasInteracted || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % 5);
+    }, 5500);
+
+    return () => window.clearInterval(interval);
+  }, [hasInteracted]);
+
+  const selectCard = (index: number) => {
+    setActiveIndex(index);
+    setHasInteracted(true);
+  };
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+
+    const delta = touchStartX.current - (event.changedTouches[0]?.clientX ?? touchStartX.current);
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+
+    setActiveIndex((current) => (delta > 0 ? (current + 1) % 5 : (current + 4) % 5));
+    setHasInteracted(true);
+  };
+
+  const cards = [
+    <article className={cardClass} aria-label="Google Business Profile de Café Pacífico">
+      <div className="flex items-start gap-3">
+        <GoogleMapsPinIcon className="h-9 w-7" />
+        <div className="min-w-0 flex-1">
+          <p className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-400">Google Business Profile</p>
+          <p className="mt-1 text-[1rem] font-bold tracking-[-0.01em] text-slate-900">Café Pacífico</p>
+          <div className="mt-1 flex items-center gap-1.5">
+            <span className="text-[0.75rem] font-semibold text-slate-700">4.9</span>
+            <span className="text-[0.75rem] tracking-tight text-amber-400">★★★★★</span>
+            <span className="text-[0.65rem] text-slate-400">(238)</span>
+          </div>
+          <p className="mt-1 text-[0.65rem] text-slate-400">
+            <span className="font-semibold text-emerald-600">Abierto</span> · Cierra a las 23:00
+          </p>
+        </div>
+        <div className="h-[68px] w-[72px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
+          <img src={heroBuilding} alt="Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
+        </div>
+      </div>
+      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-[0.68rem] font-semibold text-primary">
+        <MapPin className="h-3.5 w-3.5" /> Cómo llegar
+      </div>
+    </article>,
+
+    <article className={cardClass} aria-label="Conversación automatizada por WhatsApp Business">
+      <div className="flex items-center gap-2.5">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
+          <MessageCircle className="h-[18px] w-[18px]" />
+        </span>
+        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">WhatsApp Business</p>
+        <span className="ml-auto h-2 w-2 rounded-full bg-[#25D366]" />
+      </div>
+      <div className="mt-3 rounded-2xl rounded-tl-md bg-slate-50 p-3.5 text-[0.78rem] leading-[1.5] text-slate-700">
+        Hola 👋<br />Quiero reservar una mesa para este sábado a las 20:00.
+        <div className="mt-1 text-right text-[0.58rem] text-slate-400">11:18</div>
+      </div>
+      <div className="mt-2.5 flex items-center gap-2 text-[0.65rem] text-slate-400">
+        <span className="rounded-full bg-slate-100 px-2.5 py-1 tracking-[0.2em]">•••</span> Escribiendo...
+      </div>
+    </article>,
+
+    <article className={cardClass} aria-label="Carta digital de Café Pacífico">
+      <div className="flex items-center gap-2.5">
+        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
+          <Smartphone className="h-[18px] w-[18px]" />
+        </span>
+        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">Carta Digital</p>
+      </div>
+      <div className="mt-3 grid grid-cols-3 gap-3">
+        {[
+          { label: "Entradas", image: menuEntradaPremium },
+          { label: "Platos", image: menuPlatoPremium },
+          { label: "Bebidas", image: menuBebidaPremium },
+        ].map((item) => (
+          <div key={item.label} className="text-center">
+            <img src={item.image} alt={item.label} className="mx-auto h-14 w-14 rounded-xl object-cover shadow-sm ring-1 ring-slate-100" />
+            <p className="mt-1.5 text-[0.68rem] font-semibold text-slate-700">{item.label}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center justify-center gap-1 rounded-full border border-slate-200 py-1.5 text-[0.68rem] font-semibold text-primary">
+        Ver carta completa <ArrowRight className="h-3 w-3" />
+      </div>
+    </article>,
+
+    <article className={cardClass} aria-label="Dashboard de resultados">
+      <div className="flex items-center gap-2.5">
+        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
+          <BarChart3 className="h-[18px] w-[18px]" />
+        </span>
+        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">Dashboard</p>
+      </div>
+      <div className="mt-4 grid grid-cols-3 divide-x divide-slate-100 text-center">
+        {[
+          { label: "Consultas", value: "24", growth: "+18%" },
+          { label: "Reservas", value: "12", growth: "+29%" },
+          { label: "Visitas", value: "326", growth: "+31%" },
+        ].map((item) => (
+          <div key={item.label} className="px-2">
+            <p className="text-[1.05rem] font-bold text-slate-900">{item.value}</p>
+            <p className="mt-0.5 text-[0.6rem] text-slate-400">{item.label}</p>
+            <p className="mt-1 text-[0.62rem] font-semibold text-emerald-500">↑ {item.growth}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-100">
+        <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-accent" />
+      </div>
+    </article>,
+
+    <article className={cardClass} aria-label="Nueva reseña de María González">
+      <div className="flex items-center gap-2.5">
+        <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+        <p className="text-[0.66rem] font-bold uppercase tracking-[0.11em] text-slate-400">Nueva reseña</p>
+      </div>
+      <div className="mt-2 text-[1.05rem] tracking-[0.08em] text-amber-400">★★★★★</div>
+      <p className="mt-2 text-[0.76rem] leading-[1.55] text-slate-700">
+        Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+      </p>
+      <div className="mt-3 flex items-center gap-2.5">
+        <img src={reviewMariaGonzalez} alt="María González" className="h-8 w-8 rounded-full object-cover shadow-sm ring-1 ring-white" />
+        <div>
+          <p className="text-[0.72rem] font-semibold text-slate-800">María González</p>
+          <p className="text-[0.6rem] text-slate-400">Hoy</p>
+        </div>
+      </div>
+    </article>,
+  ];
+
+  const tabs = [
+    { label: "Google Business", icon: MapPin },
+    { label: "WhatsApp", icon: MessageCircle },
+    { label: "Carta digital", icon: Smartphone },
+    { label: "Dashboard", icon: BarChart3 },
+    { label: "Reseñas", icon: Star },
+  ];
+
+  return (
+    <div className="relative z-30 -mt-8 px-1 xl:hidden">
+      <div className="mx-auto mb-3 flex max-w-[330px] items-center justify-between px-1">
+        <span className="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-slate-400">
+          Ecosistema conectado
+        </span>
+        <span className="text-[0.68rem] font-semibold tabular-nums text-primary">{activeIndex + 1} / 5</span>
+      </div>
+
+      <div
+        className="relative mx-auto mt-7 max-w-[330px] touch-pan-y"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <svg
+          aria-hidden
+          viewBox="0 0 72 42"
+          className="pointer-events-none absolute left-1/2 top-[-34px] h-10 w-[72px] -translate-x-1/2 overflow-visible"
+        >
+          <defs>
+            <filter id="mobile-card-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.8" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <path d="M8 3 C8 21 36 14 36 39" fill="none" stroke="rgba(37,99,235,0.16)" strokeWidth="5" strokeLinecap="round" />
+          <path d="M8 3 C8 21 36 14 36 39" fill="none" stroke="#3B82F6" strokeWidth="1.6" strokeDasharray="4 5" strokeLinecap="round" filter="url(#mobile-card-glow)">
+            <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="8s" repeatCount="indefinite" />
+          </path>
+          <circle cx="8" cy="3" r="2.7" fill="#14B8A6" />
+          <circle cx="36" cy="39" r="2.8" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.5" />
+        </svg>
+
+        <div key={activeIndex} aria-live="polite" className="animate-hero-fade-up">
+          {cards[activeIndex]}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-4 flex max-w-[330px] items-center justify-center gap-2" role="tablist" aria-label="Soluciones digitales">
+        {tabs.map((tab, index) => {
+          const Icon = tab.icon;
+          const isActive = index === activeIndex;
+
+          return (
+            <button
+              key={tab.label}
+              type="button"
+              role="tab"
+              aria-label={`Mostrar ${tab.label}`}
+              aria-selected={isActive}
+              onClick={() => selectCard(index)}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 ${
+                isActive
+                  ? "scale-105 border-primary bg-primary text-white shadow-[0_10px_24px_-10px_rgba(37,99,235,0.7)]"
+                  : "border-slate-200/90 bg-white text-slate-400 shadow-sm active:scale-95"
+              }`}
+            >
+              <Icon className={`h-[17px] w-[17px] ${isActive && index === 4 ? "fill-white" : ""}`} />
+            </button>
+          );
+        })}
+      </div>
+
+      <p className="mt-2 text-center text-[0.66rem] font-medium text-slate-400">Desliza o toca un icono para explorar</p>
+    </div>
+  );
+}
+
 function HeroSection() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
@@ -607,7 +856,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-14 pb-16 sm:px-6 lg:px-8 lg:pt-12 lg:pb-16 2xl:pt-20 2xl:pb-24">
+    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-14 pb-10 sm:px-6 sm:pb-16 lg:px-8 lg:pt-12 lg:pb-16 2xl:pt-20 2xl:pb-24">
       {/* Fondo: gradientes radiales suaves + luz ambiental en capas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgba(37,99,235,0.045),transparent_60%)]" />
@@ -616,7 +865,7 @@ function HeroSection() {
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-16 lg:grid-cols-[0.36fr_0.64fr] lg:gap-10 xl:gap-12 2xl:grid-cols-[0.34fr_0.66fr]">
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-10 sm:gap-16 lg:grid-cols-[0.36fr_0.64fr] lg:gap-10 xl:gap-12 2xl:grid-cols-[0.34fr_0.66fr]">
         {/* Bloque de texto */}
         <div className="relative z-30 min-w-0 flex flex-col items-start text-left xl:-translate-y-8 2xl:translate-y-0">
           <div className="animate-hero-fade-up mb-5 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur 2xl:mb-7">
@@ -676,7 +925,7 @@ function HeroSection() {
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
           className="relative z-10 isolate mx-auto min-w-0 w-full max-w-[680px] [perspective:1600px] lg:max-w-none lg:w-full"
         >
-          <div className="relative aspect-[4/3] w-full 2xl:aspect-[5/4]">
+          <div className="relative aspect-[3/2] w-full sm:aspect-[4/3] 2xl:aspect-[5/4]">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
               aria-hidden
@@ -939,8 +1188,9 @@ function HeroSection() {
                 </div>
               </div>
                  ))}
+          </div>
+          <MobileHeroCards />
         </div>
-      </div>
       </div>
     </section>
   );
