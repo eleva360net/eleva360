@@ -1430,23 +1430,27 @@ function SolutionSection() {
   const nodes = [
     {
       mockup: GoogleProfileMockup,
-      title: "Google Business Profile",
-      desc: "Presencia optimizada para que te encuentren cuando importa.",
+      title: "Presencia y visibilidad local",
+      desc: "Mejoramos la forma en que tu negocio aparece y se presenta cuando alguien busca lo que ofreces.",
+      tools: ["Google Business Profile", "Google Maps", "Información local"],
     },
     {
       mockup: WhatsAppMockup,
-      title: "WhatsApp Business",
-      desc: "Comunicación automatizada que responde y ordena tus clientes.",
+      title: "Contacto y atención",
+      desc: "Ordenamos el proceso de contacto para que consultar, responder y avanzar resulte más simple.",
+      tools: ["WhatsApp Business", "Respuestas y mensajes", "Flujos de contacto"],
     },
     {
       mockup: DigitalMenuMockup,
-      title: "Carta y sitio digital",
-      desc: "Información clara siempre disponible, en cualquier dispositivo.",
+      title: "Experiencia digital",
+      desc: "Creamos puntos de información o conversión claros, útiles y adaptados a la forma en que compra tu cliente.",
+      tools: ["Carta digital", "Landing pages", "Sitios web"],
     },
     {
       mockup: EcosystemMockup,
-      title: "Un ecosistema conectado",
-      desc: "Todas las piezas trabajan juntas dentro del sistema Eleva360.",
+      title: "Conexión y mejora continua",
+      desc: "Conectamos canales, simplificamos tareas y medimos para decidir qué conviene mejorar después.",
+      tools: ["Sistemas de reseñas", "Automatizaciones", "Seguimiento"],
     },
   ];
 
@@ -1454,15 +1458,9 @@ function SolutionSection() {
     <section id="solucion" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="La solución"
-          title={
-            <>
-              Un{" "}
-              <span className="gradient-text-animated">sistema digital</span>{" "}
-              diseñado para hacer crecer tu negocio.
-            </>
-          }
-          subtitle="Eleva360 implementa un ecosistema donde todas las herramientas trabajan juntas. No son productos sueltos: son piezas de un mismo sistema."
+          eyebrow="Capacidades según el diagnóstico"
+          title="La solución adecuada depende de lo que tu negocio necesita mejorar."
+          subtitle="No todos los negocios necesitan las mismas herramientas. Después de diagnosticar y priorizar, combinamos únicamente las capacidades que tienen sentido para cada etapa."
         />
 
         <div className="relative mt-16">
@@ -1494,7 +1492,7 @@ function SolutionSection() {
             {nodes.map((n, i) => (
               <Reveal key={n.title} delay={i * 120} variant="zoom">
                 <SpotlightCard
-                  className="group relative h-full rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30 animate-float-slow"
+                  className="group relative flex h-full flex-col rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30 animate-float-slow"
                   style={{ animationDelay: `${i * 400}ms` }}
                 >
                   <div className="absolute -top-3 left-5 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
@@ -1505,11 +1503,28 @@ function SolutionSection() {
                   </div>
                   <h3 className="font-display text-lg font-bold text-foreground">{n.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
+                  <div className="mt-auto pt-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                      Puede incluir
+                    </p>
+                    <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
+                      {n.tools.map((tool) => (
+                        <li key={tool} className="flex items-start gap-2">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" aria-hidden />
+                          <span>{tool}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </SpotlightCard>
               </Reveal>
             ))}
           </div>
         </div>
+
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Estas capacidades no forman un paquete obligatorio. Se recomiendan únicamente cuando ayudan a resolver una prioridad real del negocio.
+        </p>
       </div>
     </section>
   );
