@@ -1289,59 +1289,24 @@ function EcosystemMockup() {
 }
 
 function PricingSection() {
-  const implementaciones = [
+  const etapas = [
     {
-      title: "Google Business Profile",
-      price: "$50.000",
-      unit: "pago único",
-      desc: "Perfil optimizado, SEO Local, fotos, publicaciones y estrategia de reseñas.",
-      illustration: (
-        <svg viewBox="0 0 120 120" className="h-24 w-24">
-          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
-          <path
-            d="M60 24c-14 0-25 11-25 25 0 18 25 47 25 47s25-29 25-47c0-14-11-25-25-25Z"
-            fill="#2563EB"
-          />
-          <circle cx="60" cy="49" r="10" fill="white" />
-        </svg>
-      ),
+      icon: Search,
+      title: "Diagnóstico inicial",
+      desc: "Entendemos cómo funciona tu negocio, cuál es su objetivo y dónde podrían existir las principales oportunidades de mejora.",
+      highlight: "Sin costo",
     },
     {
-      title: "Captación por WhatsApp",
-      price: "$35.000",
-      unit: "pago único",
-      desc: "WhatsApp Business, mensajes automáticos, respuestas rápidas e integración con Google.",
-      illustration: (
-        <svg viewBox="0 0 120 120" className="h-24 w-24" aria-hidden>
-          <circle cx="60" cy="60" r="52" fill="#25D366" fillOpacity="0.1" />
-          <g transform="translate(27 27) scale(2.75)">
-            <path
-              fill="#25D366"
-              d="M12.04 0C5.4 0 0 5.4 0 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.1-1.6a12 12 0 0 0 5.93 1.51h.01c6.64 0 12.04-5.4 12.04-12.04A12.04 12.04 0 0 0 12.04 0Zm0 21.88h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.62.95.97-3.53-.24-.38a9.8 9.8 0 0 1-1.5-5.23c0-5.42 4.4-9.83 9.83-9.83a9.82 9.82 0 0 1 9.82 9.83c0 5.42-4.41 9.83-9.88 9.77Z"
-            />
-            <path
-              fill="#25D366"
-              d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"
-            />
-          </g>
-        </svg>
-      ),
+      icon: Target,
+      title: "Propuesta priorizada",
+      desc: "Definimos la solución inicial, qué incluye y por qué tiene sentido implementarla antes que otras alternativas.",
+      highlight: "Alcance e inversión claros",
     },
     {
-      title: "Carta Digital + QR",
-      price: "$35.000",
-      unit: "pago único",
-      desc: "Carta responsive, QR personalizado, diseño moderno y actualización sin reimprimir.",
-      illustration: (
-        <svg viewBox="0 0 120 120" className="h-24 w-24">
-          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
-          <rect x="34" y="26" width="52" height="68" rx="8" fill="#2563EB" />
-          <rect x="42" y="36" width="36" height="6" rx="2" fill="white" />
-          <rect x="42" y="48" width="36" height="6" rx="2" fill="white" fillOpacity="0.7" />
-          <rect x="42" y="60" width="24" height="6" rx="2" fill="white" fillOpacity="0.7" />
-          <rect x="42" y="72" width="20" height="14" rx="3" fill="white" />
-        </svg>
-      ),
+      icon: Wrench,
+      title: "Implementación por etapas",
+      desc: "Avanzamos con la prioridad acordada y dejamos otras posibles mejoras para etapas posteriores.",
+      highlight: "Sin contratar de más",
     },
   ];
 
@@ -1349,38 +1314,51 @@ function PricingSection() {
     <section id="precios" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Precios"
-          title={
-            <>
-              Implementación clara.{" "}
-              <span className="gradient-text-animated">Sin letra chica.</span>
-            </>
-          }
-          subtitle="Cada solución se implementa una vez y queda funcionando. El Plan Crecimiento la mantiene evolucionando mes a mes."
+          eyebrow="Una propuesta a tu medida"
+          title="Invierte primero en lo que más sentido tiene."
+          subtitle="El diagnóstico inicial nos permite definir qué conviene resolver ahora y qué puede esperar. Antes de implementar, recibirás una propuesta clara con alcance, etapas e inversión."
         />
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {implementaciones.map((item, i) => (
+          {etapas.map((item, i) => (
             <Reveal key={item.title} delay={i * 100} variant="zoom">
               <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
                 <div className="card-shine-inner" />
-                <div className="mb-5 flex justify-center">{item.illustration}</div>
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">
+                    <item.icon className="h-7 w-7" aria-hidden />
+                  </div>
+                  <span className="font-display text-sm font-extrabold tracking-[0.2em] text-primary/55">
+                    0{i + 1}
+                  </span>
+                </div>
                 <h3 className="text-center font-display text-lg font-bold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-4 text-center">
-                  <span className="font-display text-3xl font-extrabold text-foreground">
-                    {item.price}
-                  </span>{" "}
-                  <span className="text-sm text-muted-foreground">CLP</span>
-                </p>
-                <p className="text-center text-xs font-semibold uppercase tracking-wider text-primary">
-                  {item.unit}
-                </p>
                 <p className="mt-4 text-center text-sm text-muted-foreground">{item.desc}</p>
+                <div className="mt-auto flex justify-center pt-6">
+                  <span className="inline-flex rounded-full bg-primary/10 px-3 py-1.5 text-center text-xs font-bold text-primary ring-1 ring-primary/15">
+                    {item.highlight}
+                  </span>
+                </div>
               </div>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mx-auto mt-10 flex max-w-3xl flex-col items-center text-center">
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+            No necesitas contratar todas nuestras capacidades. La propuesta se construye según las prioridades reales de tu negocio.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--gradient-start)] to-[color:var(--gradient-end)] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            Solicitar diagnóstico inicial
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
 
         {/* Plan Crecimiento destacado */}
