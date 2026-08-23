@@ -189,10 +189,9 @@ function Navbar() {
   }, []);
 
   const links = [
-    { label: "Solución", href: "#solucion" },
-    { label: "Cómo funciona", href: "#como-funciona" },
-    { label: "Plan Crecimiento", href: "#plan" },
-    { label: "Ecosistema", href: "#futuro" },
+    { label: "Capacidades", href: "#capacidades" },
+    { label: "Cómo trabajamos", href: "#como-funciona" },
+    { label: "Por qué Eleva360", href: "#porque" },
   ];
 
   return (
@@ -206,7 +205,7 @@ function Navbar() {
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Navegación principal" className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
@@ -225,7 +224,7 @@ function Navbar() {
             rel="noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
           >
-            Diagnóstico gratis
+            Solicitar diagnóstico
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -235,14 +234,16 @@ function Navbar() {
           onClick={() => setOpen(!open)}
           className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background md:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
         >
           {open ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5 text-foreground" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background px-4 py-4 md:hidden">
-          <nav className="flex flex-col gap-4">
+        <div id="mobile-navigation" className="border-t border-border bg-background px-4 py-4 md:hidden">
+          <nav aria-label="Navegación móvil" className="flex flex-col gap-4">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -260,7 +261,7 @@ function Navbar() {
               onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
             >
-              Solicitar diagnóstico gratuito
+              Solicitar diagnóstico
             </a>
           </nav>
         </div>
@@ -1391,7 +1392,7 @@ function SolutionSection() {
   ];
 
   return (
-    <section id="solucion" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section id="capacidades" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Capacidades según el diagnóstico"
@@ -1815,18 +1816,15 @@ function CTASection() {
           <div aria-hidden className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
 
           <div className="relative mx-auto max-w-3xl">
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-lg">
-              <Sparkles className="h-7 w-7 text-white" />
-            </div>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-              No necesitas aprender marketing.
-              <br />
-              Necesitas un{" "}
-              <span className="gradient-text-animated">sistema digital</span>{" "}
-              que trabaje por tu negocio.
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white/80 ring-1 ring-white/15">
+              <Sparkles className="h-4 w-4" aria-hidden />
+              El primer paso es entender
+            </span>
+            <h2 className="mt-6 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+              Conversemos sobre lo que tu negocio necesita mejorar.
             </h2>
             <p className="mt-6 text-lg text-white/75">
-              Nosotros lo diseñamos, lo implementamos y lo mantenemos evolucionando. Tú te enfocas en lo que sabes hacer.
+              Cuéntanos cómo funciona hoy, qué quieres lograr y dónde sientes que están las principales dificultades. Revisaremos si Eleva360 puede ayudarte y cuál podría ser el siguiente paso.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <a
@@ -1835,11 +1833,13 @@ function CTASection() {
                 rel="noreferrer"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
-                Quiero hacer crecer mi negocio
+                Solicitar diagnóstico inicial
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
-            <p className="mt-6 text-sm text-white/50">Diagnóstico inicial sin costo · Atención directa por WhatsApp</p>
+            <p className="mt-6 text-sm text-white/50">
+              Una conversación inicial para conocer tu negocio y evaluar si tiene sentido avanzar.
+            </p>
           </div>
         </div>
       </div>
@@ -1854,20 +1854,29 @@ function Footer() {
         <div className="flex flex-col gap-3">
           <Logo />
           <p className="max-w-sm text-sm text-muted-foreground">
-            Soluciones digitales que hacen crecer tu negocio, sin que tengas que hacerlo tú.
+            Soluciones digitales para negocios que comienzan por entender qué necesita mejorar.
           </p>
         </div>
-        <div className="flex items-center">
+        <nav aria-label="Enlaces del pie de página" className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-muted-foreground md:justify-end">
+          <a href="#capacidades" className="transition-colors hover:text-foreground">
+            Capacidades
+          </a>
+          <a href="#como-funciona" className="transition-colors hover:text-foreground">
+            Cómo trabajamos
+          </a>
+          <a href="#porque" className="transition-colors hover:text-foreground">
+            Por qué Eleva360
+          </a>
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            aria-label="WhatsApp"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            className="inline-flex items-center gap-2 text-primary transition-colors hover:text-primary/80"
           >
             <MessageCircle className="h-4 w-4" />
+            WhatsApp
           </a>
-        </div>
+        </nav>
       </div>
       <div className="mx-auto mt-8 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
         <span>© {new Date().getFullYear()} Eleva360. Todos los derechos reservados.</span>
@@ -1885,11 +1894,11 @@ function WhatsAppFloating() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="Hablar por WhatsApp"
-      className="animate-wa-bob fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-xl shadow-accent/40 transition-transform hover:scale-110"
+      aria-label="Conversar con Eleva360 por WhatsApp"
+      className="animate-wa-bob fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 transition-transform hover:scale-110 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
     >
       <MessageCircle className="h-6 w-6" />
-      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/40" />
+      <span className="absolute hidden h-full w-full animate-ping rounded-full bg-accent/40 sm:inline-flex" />
     </a>
   );
 }
