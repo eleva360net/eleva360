@@ -1414,24 +1414,32 @@ function SolutionSection() {
   const nodes = [
     {
       mockup: GoogleProfileMockup,
+      icon: MapPin,
+      tone: "blue",
       title: "Presencia y visibilidad local",
       desc: "Mejoramos la forma en que tu negocio aparece y se presenta cuando alguien busca lo que ofreces.",
       tools: ["Google Business Profile", "Google Maps", "Información local"],
     },
     {
       mockup: WhatsAppMockup,
+      icon: MessageCircle,
+      tone: "green",
       title: "Contacto y atención",
       desc: "Ordenamos el proceso de contacto para que consultar, responder y avanzar resulte más simple.",
       tools: ["WhatsApp Business", "Respuestas y mensajes", "Flujos de contacto"],
     },
     {
       mockup: DigitalMenuMockup,
+      icon: Smartphone,
+      tone: "cyan",
       title: "Experiencia digital",
       desc: "Creamos puntos de información o conversión claros, útiles y adaptados a la forma en que compra tu cliente.",
       tools: ["Carta digital", "Landing pages", "Sitios web"],
     },
     {
       mockup: EcosystemMockup,
+      icon: Workflow,
+      tone: "indigo",
       title: "Conexión y mejora continua",
       desc: "Conectamos canales, simplificamos tareas y medimos para decidir qué conviene mejorar después.",
       tools: ["Sistemas de reseñas", "Automatizaciones", "Seguimiento"],
@@ -1439,71 +1447,83 @@ function SolutionSection() {
   ];
 
   return (
-    <section id="capacidades" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
+    <section
+      id="capacidades"
+      className="capabilities-premium-section relative isolate overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+    >
+      <div className="capabilities-section-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="capabilities-section-light capabilities-section-light-left" aria-hidden="true" />
+      <div className="capabilities-section-light capabilities-section-light-right" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Capacidades según el diagnóstico"
           title="La solución adecuada depende de lo que tu negocio necesita mejorar."
           subtitle="No todos los negocios necesitan las mismas herramientas. Después de diagnosticar y priorizar, combinamos únicamente las capacidades que tienen sentido para cada etapa."
         />
 
-        <div className="relative mt-16">
-          <span className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold whitespace-nowrap text-slate-500 shadow-sm backdrop-blur">
-            Ejemplos ilustrativos
-          </span>
-          <svg
-            aria-hidden
-            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-            preserveAspectRatio="none"
-            viewBox="0 0 1000 400"
-          >
-            <defs>
-              <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="var(--gradient-start)" />
-                <stop offset="50%" stopColor="var(--gradient-mid)" />
-                <stop offset="100%" stopColor="var(--gradient-end)" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M 130 200 C 300 60, 400 340, 500 200 S 700 60, 870 200"
-              fill="none"
-              stroke="url(#lineGrad)"
-              strokeWidth="2"
-              strokeDasharray="6 8"
-              opacity="0.55"
-              className="animate-dash-flow"
-            />
-          </svg>
+        <div className="relative mt-12">
+          <div className="flex justify-center">
+            <span className="rounded-full border border-slate-200/80 bg-white/90 px-3 py-1 text-[0.65rem] font-semibold whitespace-nowrap text-slate-500 shadow-sm backdrop-blur">
+              Ejemplos ilustrativos
+            </span>
+          </div>
 
-          <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="capability-card-grid relative mt-5 grid gap-6 md:grid-cols-2 lg:gap-7">
             {nodes.map((n, i) => (
-              <Reveal key={n.title} delay={i * 120} variant="zoom">
-                <SpotlightCard
-                  className="group relative flex h-full flex-col rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30 animate-float-slow"
-                  style={{ animationDelay: `${i * 400}ms` }}
+              <Reveal
+                key={n.title}
+                delay={i * 100}
+                variant="zoom"
+                className="h-full"
+              >
+                <article
+                  className={`capability-premium-card capability-tone-${n.tone} group flex h-full flex-col rounded-[2rem] p-5 sm:p-6 lg:p-7`}
                 >
-                  <div className="absolute -top-3 left-5 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                    0{i + 1}
+                  <div className="capability-card-glow" aria-hidden="true" />
+                  <div className="capability-card-shine" aria-hidden="true" />
+
+                  <div className="relative z-10 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <span className="capability-number font-display text-xs font-extrabold tracking-[0.2em]">
+                        0{i + 1}
+                      </span>
+                      <span className="capability-status-dot" aria-hidden="true" />
+                    </div>
+                    <div className="capability-icon flex h-10 w-10 items-center justify-center rounded-xl" aria-hidden="true">
+                      <n.icon className="h-4.5 w-4.5" />
+                    </div>
                   </div>
-                  <div className="mb-4 mt-1 transition-transform duration-300 group-hover:scale-[1.02]">
-                    <n.mockup />
+
+                  <div className="capability-mockup-shell relative z-10 mt-4 flex min-h-48 items-center rounded-[1.4rem] p-4 sm:min-h-52 sm:p-5">
+                    <div className="capability-mockup-grid pointer-events-none absolute inset-0 rounded-[inherit]" aria-hidden="true" />
+                    <div className="capability-connection-line pointer-events-none absolute inset-x-7 top-7 h-px" aria-hidden="true" />
+                    <div className="capability-mockup relative z-10 mx-auto w-full max-w-lg">
+                      <n.mockup />
+                    </div>
                   </div>
-                  <h3 className="font-display text-lg font-bold text-foreground">{n.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
-                  <div className="mt-auto pt-5">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
-                      Puede incluir
+
+                  <div className="relative z-10 mt-6 flex flex-1 flex-col">
+                    <h3 className="font-display text-xl font-bold leading-snug text-foreground sm:text-[1.35rem]">
+                      {n.title}
+                    </h3>
+                    <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
+                      {n.desc}
                     </p>
-                    <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
-                      {n.tools.map((tool) => (
-                        <li key={tool} className="flex items-start gap-2">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" aria-hidden />
-                          <span>{tool}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="mt-auto pt-5">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                        Puede incluir
+                      </p>
+                      <ul className="mt-2.5 flex flex-wrap gap-2">
+                        {n.tools.map((tool) => (
+                          <li key={tool} className="capability-chip rounded-full px-3 py-1.5 text-xs font-semibold">
+                            {tool}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </SpotlightCard>
+                </article>
               </Reveal>
             ))}
           </div>
