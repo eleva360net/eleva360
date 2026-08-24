@@ -1,10 +1,9 @@
 import logoEleva360 from "../assets/LogoEleva360-transparente.png";
+import logoEleva360Webp from "../assets/LogoEleva360-transparente.webp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Check,
-  Instagram,
-  Facebook,
   MapPin,
   MessageCircle,
   Menu,
@@ -25,12 +24,8 @@ import {
   Layers,
   Workflow,
   LineChart,
-  ShoppingCart,
   CalendarCheck,
-  Cpu,
-  LayoutDashboard,
   Globe,
-  Rocket,
   Wrench,
   Gauge,
   QrCode,
@@ -40,15 +35,17 @@ import {
 import { useEffect, useId, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
-import heroImage from "../assets/hero-eleva360.png";
+import heroBuildingWebp from "../assets/hero-building.webp";
 import menuEntradaPremium from "../assets/menu-entrada-premium.webp";
 import menuPlatoPremium from "../assets/menu-plato-premium.webp";
 import menuBebidaPremium from "../assets/menu-bebida-premium.webp";
-import reviewMariaGonzalez from "../assets/review-maria-gonzalez.webp";
 
 
+const SITE_URL = "https://www.eleva360.net";
+const HOME_URL = `${SITE_URL}/`;
+const SOCIAL_IMAGE_URL = `${SITE_URL}${logoEleva360}`;
 const WHATSAPP_URL =
-  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20negocio";
+  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20inicial%20para%20mi%20negocio.";
 
 /* ————— Motion helpers ————— */
 function Reveal({
@@ -113,43 +110,6 @@ function SpotlightCard({
   );
 }
 
-function CountUp({
-  to,
-  suffix = "",
-  prefix = "",
-  duration = 1600,
-}: {
-  to: number;
-  suffix?: string;
-  prefix?: string;
-  duration?: number;
-}) {
-  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.4 }, true);
-  const [value, setValue] = useState(0);
-  const started = useRef(false);
-  useEffect(() => {
-    if (!inView || started.current) return;
-    started.current = true;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setValue(Math.round(to * eased));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, to, duration]);
-  return (
-    <span ref={ref}>
-      {prefix}
-      {value}
-      {suffix}
-    </span>
-  );
-}
-
 function IndustryMarquee() {
   const items = [
     "Restaurantes", "Cafeterías", "Peluquerías", "Barberías", "Clínicas dentales",
@@ -177,23 +137,23 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
+      { title: "Eleva360 | Soluciones digitales para negocios" },
       {
         name: "description",
         content:
-          "Eleva360 implementa soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Tú te enfocas en tu negocio, nosotros en su presencia digital.",
+          "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a tu realidad.",
       },
       { name: "keywords", content: "Soluciones digitales, tecnología para negocios, automatización, presencia digital, transformación digital, Chile" },
-      { property: "og:title", content: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
-      { property: "og:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
+      { property: "og:title", content: "Eleva360 | Soluciones digitales para negocios" },
+      { property: "og:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a tu realidad." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: heroImage },
-      { name: "twitter:title", content: "Eleva360 — Soluciones digitales para hacer crecer tu negocio" },
-      { name: "twitter:description", content: "Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia. Concéntrate en tu negocio, del resto nos encargamos nosotros." },
-      { name: "twitter:image", content: heroImage },
+      { property: "og:url", content: HOME_URL },
+      { property: "og:image", content: SOCIAL_IMAGE_URL },
+      { name: "twitter:title", content: "Eleva360 | Soluciones digitales para negocios" },
+      { name: "twitter:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a tu realidad." },
+      { name: "twitter:image", content: SOCIAL_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: HOME_URL }],
   }),
 });
 
@@ -233,10 +193,9 @@ function Navbar() {
   }, []);
 
   const links = [
-    { label: "Solución", href: "#solucion" },
-    { label: "Cómo funciona", href: "#como-funciona" },
-    { label: "Plan Crecimiento", href: "#plan" },
-    { label: "Ecosistema", href: "#futuro" },
+    { label: "Capacidades", href: "#capacidades" },
+    { label: "Cómo trabajamos", href: "#como-funciona" },
+    { label: "Por qué Eleva360", href: "#porque" },
   ];
 
   return (
@@ -250,12 +209,12 @@ function Navbar() {
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Navegación principal" className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </a>
@@ -267,9 +226,9 @@ function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
           >
-            Diagnóstico gratis
+            Solicitar diagnóstico
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -277,22 +236,24 @@ function Navbar() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background md:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
         >
           {open ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5 text-foreground" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background px-4 py-4 md:hidden">
-          <nav className="flex flex-col gap-4">
+        <div id="mobile-navigation" className="border-t border-border bg-background px-4 py-4 md:hidden">
+          <nav aria-label="Navegación móvil" className="flex flex-col gap-4">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex min-h-11 items-center text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -302,9 +263,9 @@ function Navbar() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
             >
-              Solicitar diagnóstico gratuito
+              Solicitar diagnóstico
             </a>
           </nav>
         </div>
@@ -313,14 +274,21 @@ function Navbar() {
   );
 }
 
-function Logo() {
+function Logo({ loading = "eager" }: { loading?: "eager" | "lazy" }) {
   return (
     <Link to="/" className="group flex items-center">
-      <img
-        src={logoEleva360}
-        alt="Eleva360"
-        className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
-      />
+      <picture>
+        <source srcSet={logoEleva360Webp} type="image/webp" />
+        <img
+          src={logoEleva360}
+          alt="Eleva360"
+          width={1809}
+          height={576}
+          loading={loading}
+          decoding="async"
+          className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </picture>
     </Link>
   );
 }
@@ -498,10 +466,10 @@ const HERO_NODES = [
     delay: -1.8,
   },
   {
-    type: "review",
-    title: "Reseñas",
-    icon: Star,
-    tint: "bg-[#FBBC05]/15 text-[#B7860B]",
+    type: "support",
+    title: "Acompañamiento",
+    icon: HeartHandshake,
+    tint: "bg-accent/10 text-accent",
     positionClass: "xl:left-[76%] 2xl:left-[90%]",
     y: 81,
     ax: 74,
@@ -543,7 +511,7 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
       start: [142, 24],
       end: [6, 82],
     },
-    review: {
+    support: {
       className: "right-[calc(100%_-_3px)] top-[24%] h-[82px] w-[142px] -translate-y-1/2",
       d: "M138 54 C92 54 54 40 6 20",
       start: [138, 54],
@@ -557,7 +525,7 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
   return (
     <svg
       aria-hidden
-      viewBox={`0 0 ${type === "menu" ? 166 : type === "google" ? 170 : type === "dashboard" ? 146 : type === "review" ? 142 : 126} ${type === "dashboard" ? 94 : type === "google" ? 150 : type === "review" || type === "whatsapp" ? 82 : 76}`}
+      viewBox={`0 0 ${type === "menu" ? 166 : type === "google" ? 170 : type === "dashboard" ? 146 : type === "support" ? 142 : 126} ${type === "dashboard" ? 94 : type === "google" ? 150 : type === "support" || type === "whatsapp" ? 82 : 76}`}
       preserveAspectRatio="none"
       className={`pointer-events-none absolute hidden overflow-visible xl:block ${connector.className}`}
     >
@@ -615,7 +583,7 @@ function GoogleMapsPinIcon({ className = "h-8 w-6" }: { className?: string }) {
   );
 }
 
-type MobileHeroCardType = "google" | "whatsapp" | "menu" | "dashboard" | "review";
+type MobileHeroCardType = "google" | "whatsapp" | "menu" | "dashboard" | "support";
 
 function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
   const cardClass =
@@ -623,11 +591,11 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "google") {
     return (
-      <article className={cardClass} aria-label="Google Business Profile de Café Pacífico">
+      <article className={cardClass} aria-label="Maqueta ilustrativa de un perfil de Google para Café Pacífico">
         <div className="flex items-start gap-2.5">
           <GoogleMapsPinIcon className="h-8 w-6" />
           <div className="min-w-0 flex-1">
-            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-slate-400">Google Business Profile</p>
+            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-slate-400">Visibilidad local</p>
             <p className="mt-1 text-[0.9rem] font-bold tracking-[-0.01em] text-slate-900">Café Pacífico</p>
             <div className="mt-1 flex items-center gap-1">
               <span className="text-[0.68rem] font-semibold text-slate-700">4.9</span>
@@ -639,7 +607,18 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             </p>
           </div>
           <div className="h-[57px] w-[60px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-            <img src={heroBuilding} alt="Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
+            <picture className="block h-full w-full">
+              <source srcSet={heroBuildingWebp} type="image/webp" />
+              <img
+                src={heroBuilding}
+                alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico"
+                width={1156}
+                height={940}
+                loading="eager"
+                decoding="async"
+                className="h-full w-full scale-[1.65] object-cover object-[53%_62%]"
+              />
+            </picture>
           </div>
         </div>
         <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-[0.6rem] font-semibold text-primary">
@@ -651,12 +630,12 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "whatsapp") {
     return (
-      <article className={cardClass} aria-label="Conversación automatizada por WhatsApp Business">
+      <article className={cardClass} aria-label="Ejemplo de contacto y atención por WhatsApp">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
             <MessageCircle className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">WhatsApp Business</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Contacto y atención</p>
           <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#25D366]" />
         </div>
         <div className="mt-2.5 rounded-2xl rounded-tl-md bg-slate-50 px-3 py-2.5 text-[0.69rem] leading-[1.45] text-slate-700">
@@ -672,12 +651,12 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "menu") {
     return (
-      <article className={cardClass} aria-label="Carta digital de Café Pacífico">
+      <article className={cardClass} aria-label="Maqueta ilustrativa de una carta digital para Café Pacífico">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
             <Smartphone className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Carta Digital</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Experiencia del cliente</p>
         </div>
         <div className="mt-2.5 grid grid-cols-3 gap-2.5">
           {[
@@ -686,7 +665,14 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             { label: "Bebidas", image: menuBebidaPremium },
           ].map((item) => (
             <div key={item.label} className="text-center">
-              <img src={item.image} alt={item.label} className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-100" />
+              <img
+                src={item.image}
+                alt={item.label}
+                width={384}
+                height={384}
+                decoding="async"
+                className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-100"
+              />
               <p className="mt-1 text-[0.58rem] font-semibold text-slate-700">{item.label}</p>
             </div>
           ))}
@@ -700,63 +686,59 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "dashboard") {
     return (
-      <article className={cardClass} aria-label="Dashboard de resultados">
+      <article className={cardClass} aria-label="Ejemplo de seguimiento y mejora">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
             <BarChart3 className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Dashboard</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Seguimiento y mejora</p>
         </div>
         <div className="mt-3.5 grid grid-cols-3 divide-x divide-slate-100 text-center">
           {[
-            { label: "Consultas", value: "24", growth: "+18%" },
-            { label: "Reservas", value: "12", growth: "+29%" },
-            { label: "Visitas", value: "326", growth: "+31%" },
+            { label: "Consultas", status: "Orden" },
+            { label: "Reservas", status: "Seguimiento" },
+            { label: "Visibilidad", status: "Lectura clara" },
           ].map((item) => (
             <div key={item.label} className="px-1.5">
-              <p className="text-[0.9rem] font-bold text-slate-900">{item.value}</p>
+              <p className="text-[0.64rem] font-bold text-primary">{item.status}</p>
               <p className="mt-0.5 text-[0.52rem] text-slate-400">{item.label}</p>
-              <p className="mt-1 text-[0.54rem] font-semibold text-emerald-500">↑ {item.growth}</p>
             </div>
           ))}
         </div>
-        <div className="mt-3.5 h-1 overflow-hidden rounded-full bg-slate-100">
-          <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-accent" />
+        <div className="mt-3.5 rounded-full bg-slate-50 px-3 py-1 text-center text-[0.56rem] font-semibold text-slate-500">
+          Vista de seguimiento
         </div>
       </article>
     );
   }
 
   return (
-    <article className={cardClass} aria-label="Nueva reseña de María González">
+    <article className={cardClass} aria-label="Acompañamiento de Eleva360">
       <div className="flex items-center gap-2">
-        <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Nueva reseña</p>
+        <HeartHandshake className="h-4 w-4 text-accent" />
+        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Acompañamiento Eleva360</p>
       </div>
-      <div className="mt-1.5 text-[0.92rem] tracking-[0.07em] text-amber-400">★★★★★</div>
-      <p className="mt-1.5 text-[0.67rem] leading-[1.45] text-slate-700">
-        Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+      <p className="mt-3 text-[0.68rem] leading-[1.5] text-slate-700">
+        Revisamos avances y ajustamos las soluciones según las necesidades reales del negocio.
       </p>
-      <div className="mt-2.5 flex items-center gap-2">
-        <img src={reviewMariaGonzalez} alt="María González" className="h-7 w-7 rounded-full object-cover shadow-sm ring-1 ring-white" />
-        <div>
-          <p className="text-[0.62rem] font-semibold text-slate-800">María González</p>
-          <p className="text-[0.52rem] text-slate-400">Hoy</p>
-        </div>
+      <div className="mt-3 flex flex-wrap gap-1.5 text-[0.55rem] font-semibold text-primary">
+        <span className="rounded-full bg-blue-50 px-2 py-1">Medir</span>
+        <span className="rounded-full bg-blue-50 px-2 py-1">Ajustar</span>
+        <span className="rounded-full bg-blue-50 px-2 py-1">Acompañar</span>
       </div>
     </article>
   );
 }
 
 function MobileHeroCards() {
-  const cards: MobileHeroCardType[] = ["google", "whatsapp", "menu", "dashboard", "review"];
+  const cards: MobileHeroCardType[] = ["google", "whatsapp", "menu", "dashboard", "support"];
   const row = [...cards, ...cards];
 
   return (
     <div className="relative z-30 mt-3 xl:hidden">
       <div className="mx-1 mb-3 flex items-center justify-between">
         <span className="text-[0.66rem] font-bold uppercase tracking-[0.12em] text-slate-400">
-          Ecosistema conectado
+          Tu negocio en el centro
         </span>
         <span className="flex items-center gap-1 text-[0.64rem] font-semibold text-primary">
           En movimiento <ChevronRight className="h-3 w-3" />
@@ -829,17 +811,17 @@ function HeroSection() {
               <span className="absolute inset-0 animate-ping rounded-full bg-primary/50" />
             </span>
             <span className="text-[0.7rem] font-semibold tracking-[0.02em] text-muted-foreground">
-              Soluciones digitales para negocios · Chile
+              Soluciones digitales para negocios
             </span>
           </div>
 
           <h1 className="animate-hero-fade-up animation-delay-50 max-w-[19ch] font-display text-[2.35rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-foreground sm:text-[2.7rem] lg:text-[2.55rem] xl:text-[2.65rem] 2xl:text-[3.05rem]">
-            Haz crecer tu negocio mientras nosotros nos encargamos de tu{" "}
-            <span className="gradient-text-animated">presencia digital</span>.
+            Antes de proponer soluciones,{" "}
+            <span className="gradient-text-animated">entendemos tu negocio.</span>
           </h1>
 
           <p className="animate-hero-fade-up animation-delay-200 mt-5 max-w-[46ch] text-[1rem] leading-[1.65] text-muted-foreground 2xl:mt-7 2xl:text-[1.0625rem] 2xl:leading-[1.7]">
-            Implementamos soluciones digitales que atraen más clientes, automatizan procesos y mejoran la experiencia de tus clientes, para que puedas concentrarte en hacer crecer tu negocio.
+            Analizamos cómo funciona tu negocio para detectar qué necesita mejorar. Luego priorizamos e implementamos soluciones digitales simples, por etapas y adaptadas a tu realidad.
           </p>
 
           <div className="animate-hero-scale-in animation-delay-300 mt-7 flex w-full flex-wrap items-center gap-3 2xl:mt-9">
@@ -849,7 +831,7 @@ function HeroSection() {
     rel="noreferrer"
     className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
-    Solicitar diagnóstico gratuito
+    Solicitar diagnóstico inicial
     <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
   </a>
 
@@ -857,16 +839,16 @@ function HeroSection() {
     href="#como-funciona"
     className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
-    Ver cómo funciona
+    Conocer cómo trabajamos
   </a>
 </div>
 
           <div className="animate-hero-fade-up animation-delay-400 mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-5 text-[0.75rem] text-muted-foreground 2xl:mt-11 2xl:gap-x-6 2xl:gap-y-2.5 2xl:pt-6 2xl:text-[0.8125rem]">
             <span className="flex items-center gap-2">
-              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Implementación sin fricción
+              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Diagnóstico antes de proponer
             </span>
             <span className="flex items-center gap-2">
-              <Zap className="h-[0.9rem] w-[0.9rem] text-accent/80" /> Resultados desde el primer mes
+              <Zap className="h-[0.9rem] w-[0.9rem] text-accent/80" /> Implementación por etapas
             </span>
             <span className="flex items-center gap-2">
               <HeartHandshake className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Acompañamiento continuo
@@ -881,6 +863,11 @@ function HeroSection() {
           onMouseLeave={() => setParallax({ x: 0, y: 0 })}
           className="relative z-10 isolate mx-auto min-w-0 w-full max-w-[680px] [perspective:1600px] lg:max-w-none lg:w-full"
         >
+          <div className="relative z-40 flex justify-start px-2 pb-1 sm:justify-end sm:px-4 sm:pb-2">
+            <span className="rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold text-slate-500 shadow-sm backdrop-blur">
+              Ejemplo ilustrativo
+            </span>
+          </div>
           <div className="relative aspect-[3/2] w-full sm:aspect-[4/3] 2xl:aspect-[5/4]">
             {/* Halo suave que integra el edificio con el fondo */}
             <div
@@ -901,12 +888,19 @@ function HeroSection() {
                 transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
               }}
             >
-              <img
-                src={heroBuilding}
-                alt="Negocio local conectado al ecosistema digital de Eleva360"
-                className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
-                loading="eager"
-              />
+              <picture>
+                <source srcSet={heroBuildingWebp} type="image/webp" />
+                <img
+                  src={heroBuilding}
+                  alt="Maqueta ilustrativa de un negocio llamado Café Pacífico"
+                  width={1156}
+                  height={940}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
+                />
+              </picture>
             </div>
 
             {/* Tarjetas independientes — UI del ecosistema Eleva360 */}
@@ -922,7 +916,7 @@ function HeroSection() {
               >
                 <div
                   className={`relative scale-[0.72] 2xl:scale-[0.9] ${
-                    n.type === "dashboard" || n.type === "review" ? "origin-right" : "origin-left"
+                    n.type === "dashboard" || n.type === "support" ? "origin-right" : "origin-left"
                   }`}
                 >
                   <HeroCardConnector type={n.type} />
@@ -951,7 +945,7 @@ function HeroSection() {
                               <circle cx="24" cy="22" r="3.2" fill="#E8F0FE" />
                             </svg>
                             <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                              Google Business Profile
+                              Visibilidad local
                             </p>
                           </div>
                           <p className="mt-1.5 truncate text-[17px] font-bold tracking-[-0.01em] text-slate-900">
@@ -971,11 +965,18 @@ function HeroSection() {
                         </div>
 
                         <div className="h-[94px] w-[104px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-                          <img
-                            src={heroBuilding}
-                            alt="Vista del Café Pacífico"
-                            className="h-full w-full scale-[1.7] object-cover object-[53%_62%]"
-                          />
+                          <picture className="block h-full w-full">
+                            <source srcSet={heroBuildingWebp} type="image/webp" />
+                            <img
+                              src={heroBuilding}
+                              alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico"
+                              width={1156}
+                              height={940}
+                              loading="eager"
+                              decoding="async"
+                              className="h-full w-full scale-[1.7] object-cover object-[53%_62%]"
+                            />
+                          </picture>
                         </div>
                       </div>
 
@@ -999,7 +1000,7 @@ function HeroSection() {
                           </svg>
                         </span>
                         <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                          WhatsApp Business
+                          Contacto y atención
                         </p>
                         <span className="ml-auto h-2 w-2 rounded-full bg-[#25D366]" />
                       </div>
@@ -1034,7 +1035,7 @@ function HeroSection() {
                           <Smartphone className="h-[18px] w-[18px]" />
                         </div>
                         <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                          Carta Digital
+                          Experiencia del cliente
                         </p>
                       </div>
 
@@ -1048,7 +1049,10 @@ function HeroSection() {
                             <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.12),0_2px_8px_rgba(15,23,42,0.10)]">
                               <img
                                 src={item.image}
-                                alt={`${item.label} del menú de Café Pacífico`}
+                                alt={`Maqueta ilustrativa: ${item.label} del menú de Café Pacífico`}
+                                width={384}
+                                height={384}
+                                decoding="async"
                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
@@ -1076,16 +1080,16 @@ function HeroSection() {
                           <BarChart3 className="h-[18px] w-[18px]" />
                         </div>
                         <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                          Dashboard
+                          Seguimiento y mejora
                         </p>
                       </div>
 
                       <div className="mt-2.5 space-y-1">
                         {[
-                          { icon: Clock, label: "Consultas", value: "24", growth: "18%" },
-                          { icon: CalendarCheck, label: "Reservas", value: "12", growth: "29%" },
-                          { icon: Users, label: "Visitas al perfil", value: "326", growth: "31%" },
-                        ].map(({ icon: Icon, label, value, growth }) => (
+                          { icon: Clock, label: "Consultas", status: "Organización" },
+                          { icon: CalendarCheck, label: "Reservas", status: "Seguimiento" },
+                          { icon: Users, label: "Visibilidad", status: "Lectura clara" },
+                        ].map(({ icon: Icon, label, status }) => (
                           <div
                             key={label}
                             className="flex items-center justify-between border-b border-slate-100 py-2.5 last:border-0"
@@ -1094,49 +1098,34 @@ function HeroSection() {
                               <Icon className="h-3.5 w-3.5 text-primary/70" />
                               <span className="text-[11.5px] text-slate-600">{label}</span>
                             </div>
-                            <div className="flex items-center gap-2 tabular-nums">
-                              <span className="w-8 text-right text-[14px] font-bold text-slate-900">{value}</span>
-                              <span className="w-10 text-right text-[10.5px] font-semibold text-emerald-500">
-                                ↑ {growth}
-                              </span>
-                            </div>
+                            <span className="text-right text-[10.5px] font-semibold text-primary">{status}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* RESEÑA */}
+                  {/* ACOMPAÑAMIENTO */}
                   {!n.title.toLowerCase().includes("google") &&
                     !n.title.toLowerCase().includes("whatsapp") &&
                     !n.title.toLowerCase().includes("carta") &&
                     !n.title.toLowerCase().includes("dashboard") && (
                       <div className="w-[272px] p-4">
                         <div className="flex items-center gap-2.5">
-                          <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                          <HeartHandshake className="h-5 w-5 text-accent" />
                           <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
-                            Nueva reseña
+                            Acompañamiento Eleva360
                           </p>
                         </div>
 
-                        <div className="mt-2.5 text-[19px] leading-none tracking-[0.06em] text-amber-400">★★★★★</div>
-
-                        <p className="mt-2.5 text-[11.5px] leading-[1.55] text-slate-700">
-                          Excelente atención, rica comida y muy buen ambiente. ¡Totalmente recomendado!
+                        <p className="mt-3 text-[11.5px] leading-[1.55] text-slate-700">
+                          Revisamos avances y ajustamos las soluciones según las necesidades reales del negocio.
                         </p>
 
-                        <div className="mt-3 flex items-center gap-2.5">
-                          <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-slate-100 ring-1 ring-white shadow-[0_2px_8px_rgba(15,23,42,0.14)]">
-                            <img
-                              src={reviewMariaGonzalez}
-                              alt="María González"
-                              className="h-full w-full object-cover object-center"
-                            />
-                          </div>
-                          <div>
-                            <p className="text-[11.5px] font-semibold text-slate-800">María González</p>
-                            <p className="text-[9.5px] text-slate-400">Hoy</p>
-                          </div>
+                        <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-semibold text-primary">
+                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Medir</span>
+                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Ajustar</span>
+                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Acompañar</span>
                         </div>
                       </div>
                     )}
@@ -1179,26 +1168,21 @@ function SectionHeader({
 
 function ProblemSection() {
   const problems = [
-    { icon: Search, title: "No aparecen bien en Google", desc: "Nuevos clientes buscan y encuentran a otros primero." },
-    { icon: MessageCircle, title: "Responden tarde por WhatsApp", desc: "Los mensajes se pierden y las oportunidades también." },
-    { icon: Store, title: "Sus clientes no encuentran información", desc: "Horarios, servicios o precios que nunca están claros." },
-    { icon: Wrench, title: "Siguen usando procesos manuales", desc: "Agendas en papel, planillas sueltas, todo desconectado." },
-    { icon: Clock, title: "Pierden tiempo en tareas repetitivas", desc: "Horas al día en cosas que un sistema podría resolver." },
-    { icon: Star, title: "Su reputación no se cuida", desc: "Reseñas sin responder, marca invisible frente a la competencia." },
+    { icon: Search, title: "Te encuentran poco", desc: "Tu negocio no aparece con suficiente claridad cuando alguien busca lo que ofreces." },
+    { icon: Target, title: "No queda claro por qué elegirte", desc: "La información disponible no explica bien qué haces, para quién o qué te diferencia." },
+    { icon: MessageCircle, title: "Contactarte cuesta más de lo necesario", desc: "El cliente debe esperar, repetir información o dar demasiados pasos para consultar." },
+    { icon: ShieldCheck, title: "Faltan señales de confianza", desc: "Perfiles incompletos, información inconsistente o una reputación poco visible dificultan la decisión." },
+    { icon: Layers, title: "Tus canales no trabajan juntos", desc: "Google, redes sociales, web y WhatsApp entregan información distinta o funcionan por separado." },
+    { icon: Gauge, title: "Inviertes sin una prioridad clara", desc: "Se implementan herramientas o acciones sin saber qué problema conviene resolver primero." },
   ];
 
   return (
     <section className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-[1440px]">
         <SectionHeader
-          eyebrow="El problema"
-          title={
-            <>
-              Muchos negocios pierden clientes todos los días{" "}
-              <span className="text-primary">sin darse cuenta.</span>
-            </>
-          }
-          subtitle="La mayoría de los negocios no tiene un problema de esfuerzo. Tiene un problema de sistema."
+          eyebrow="Antes de elegir una solución"
+          title="El problema no siempre es falta de herramientas."
+          subtitle="Un negocio puede tener redes sociales, WhatsApp o presencia en Google y aun así perder oportunidades. La clave es identificar dónde está la fricción antes de invertir en otra solución."
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -1216,6 +1200,9 @@ function ProblemSection() {
             </Reveal>
           ))}
         </div>
+        <p className="mx-auto mt-10 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground/75">
+          El diagnóstico permite distinguir qué necesita atención ahora, qué puede esperar y qué no vale la pena implementar todavía.
+        </p>
       </div>
     </section>
   );
@@ -1225,7 +1212,11 @@ function ProblemSection() {
 
 function GoogleProfileMockup() {
   return (
-    <div className="rounded-xl border border-border bg-[color:var(--muted)] p-3">
+    <div
+      className="rounded-xl border border-border bg-[color:var(--muted)] p-3"
+      role="img"
+      aria-label="Maqueta ilustrativa de presencia local para Panadería Los Aromas"
+    >
       <div className="flex items-start gap-2.5">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
           <MapPin className="h-4 w-4 text-[color:var(--color-g-red)]" />
@@ -1342,59 +1333,24 @@ function EcosystemMockup() {
 }
 
 function PricingSection() {
-  const implementaciones = [
+  const etapas = [
     {
-      title: "Google Business Profile",
-      price: "$50.000",
-      unit: "pago único",
-      desc: "Perfil optimizado, SEO Local, fotos, publicaciones y estrategia de reseñas.",
-      illustration: (
-        <svg viewBox="0 0 120 120" className="h-24 w-24">
-          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
-          <path
-            d="M60 24c-14 0-25 11-25 25 0 18 25 47 25 47s25-29 25-47c0-14-11-25-25-25Z"
-            fill="#2563EB"
-          />
-          <circle cx="60" cy="49" r="10" fill="white" />
-        </svg>
-      ),
+      icon: Search,
+      title: "Diagnóstico inicial",
+      desc: "Entendemos cómo funciona tu negocio, qué quieres lograr y dónde podrían existir las principales oportunidades de mejora.",
+      highlight: "Sin costo",
     },
     {
-      title: "Captación por WhatsApp",
-      price: "$35.000",
-      unit: "pago único",
-      desc: "WhatsApp Business, mensajes automáticos, respuestas rápidas e integración con Google.",
-      illustration: (
-        <svg viewBox="0 0 120 120" className="h-24 w-24" aria-hidden>
-          <circle cx="60" cy="60" r="52" fill="#25D366" fillOpacity="0.1" />
-          <g transform="translate(27 27) scale(2.75)">
-            <path
-              fill="#25D366"
-              d="M12.04 0C5.4 0 0 5.4 0 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.1-1.6a12 12 0 0 0 5.93 1.51h.01c6.64 0 12.04-5.4 12.04-12.04A12.04 12.04 0 0 0 12.04 0Zm0 21.88h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.62.95.97-3.53-.24-.38a9.8 9.8 0 0 1-1.5-5.23c0-5.42 4.4-9.83 9.83-9.83a9.82 9.82 0 0 1 9.82 9.83c0 5.42-4.41 9.83-9.88 9.77Z"
-            />
-            <path
-              fill="#25D366"
-              d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"
-            />
-          </g>
-        </svg>
-      ),
+      icon: Target,
+      title: "Propuesta priorizada",
+      desc: "Definimos la solución inicial, qué incluye y por qué tiene sentido implementarla antes que otras alternativas.",
+      highlight: "Alcance e inversión claros",
     },
     {
-      title: "Carta Digital + QR",
-      price: "$35.000",
-      unit: "pago único",
-      desc: "Carta responsive, QR personalizado, diseño moderno y actualización sin reimprimir.",
-      illustration: (
-        <svg viewBox="0 0 120 120" className="h-24 w-24">
-          <circle cx="60" cy="60" r="52" fill="#2563EB" fillOpacity="0.08" />
-          <rect x="34" y="26" width="52" height="68" rx="8" fill="#2563EB" />
-          <rect x="42" y="36" width="36" height="6" rx="2" fill="white" />
-          <rect x="42" y="48" width="36" height="6" rx="2" fill="white" fillOpacity="0.7" />
-          <rect x="42" y="60" width="24" height="6" rx="2" fill="white" fillOpacity="0.7" />
-          <rect x="42" y="72" width="20" height="14" rx="3" fill="white" />
-        </svg>
-      ),
+      icon: Wrench,
+      title: "Implementación por etapas",
+      desc: "Avanzamos con la prioridad acordada y dejamos otras posibles mejoras para etapas posteriores.",
+      highlight: "Sin contratar de más",
     },
   ];
 
@@ -1402,78 +1358,53 @@ function PricingSection() {
     <section id="precios" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Precios"
-          title={
-            <>
-              Implementación clara.{" "}
-              <span className="gradient-text-animated">Sin letra chica.</span>
-            </>
-          }
-          subtitle="Cada solución se implementa una vez y queda funcionando. El Plan Crecimiento la mantiene evolucionando mes a mes."
+          eyebrow="Una propuesta a tu medida"
+          title="Invierte primero en lo que más sentido tiene."
+          subtitle="El diagnóstico inicial nos permite definir qué conviene resolver ahora y qué puede esperar. Antes de implementar, recibirás una propuesta clara con alcance, etapas e inversión."
         />
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {implementaciones.map((item, i) => (
+          {etapas.map((item, i) => (
             <Reveal key={item.title} delay={i * 100} variant="zoom">
               <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
                 <div className="card-shine-inner" />
-                <div className="mb-5 flex justify-center">{item.illustration}</div>
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">
+                    <item.icon className="h-7 w-7" aria-hidden />
+                  </div>
+                  <span className="font-display text-sm font-extrabold tracking-[0.2em] text-primary/55">
+                    0{i + 1}
+                  </span>
+                </div>
                 <h3 className="text-center font-display text-lg font-bold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-4 text-center">
-                  <span className="font-display text-3xl font-extrabold text-foreground">
-                    {item.price}
-                  </span>{" "}
-                  <span className="text-sm text-muted-foreground">CLP</span>
-                </p>
-                <p className="text-center text-xs font-semibold uppercase tracking-wider text-primary">
-                  {item.unit}
-                </p>
                 <p className="mt-4 text-center text-sm text-muted-foreground">{item.desc}</p>
+                <div className="mt-auto flex justify-center pt-6">
+                  <span className="inline-flex rounded-full bg-primary/10 px-3 py-1.5 text-center text-xs font-bold text-primary ring-1 ring-primary/15">
+                    {item.highlight}
+                  </span>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
 
-        {/* Plan Crecimiento destacado */}
-        <Reveal delay={300} className="mt-8">
-          <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-[color:var(--elevation)] p-8 text-white shadow-xl sm:p-10">
-            <div
-              aria-hidden
-              className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
-            />
-            <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider ring-1 ring-white/20">
-                  <Sparkles className="h-3.5 w-3.5 text-accent" />
-                  Producto principal
-                </span>
-                <h3 className="mt-4 font-display text-2xl font-extrabold sm:text-3xl">
-                  Plan Crecimiento
-                </h3>
-                <p className="mt-2 max-w-xl text-white/75">
-                  Optimización continua, gestión de reputación, ajustes de carta y WhatsApp, y
-                  soporte prioritario. Todo incluido, mes a mes.
-                </p>
-              </div>
-              <div className="flex flex-col items-start gap-3 lg:items-end">
-                <p className="font-display text-4xl font-extrabold">
-                  $25.000 <span className="text-lg font-medium text-white/60">CLP/mes</span>
-                </p>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5"
-                >
-                  Quiero el Plan Crecimiento
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        <div className="mx-auto mt-10 flex max-w-3xl flex-col items-center text-center">
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+            No necesitas contratar todas nuestras capacidades. La propuesta se construye según las prioridades reales de tu negocio.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--gradient-start)] to-[color:var(--gradient-end)] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            Solicitar diagnóstico inicial
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+
       </div>
     </section>
   );
@@ -1483,42 +1414,43 @@ function SolutionSection() {
   const nodes = [
     {
       mockup: GoogleProfileMockup,
-      title: "Google Business Profile",
-      desc: "Presencia optimizada para que te encuentren cuando importa.",
+      title: "Presencia y visibilidad local",
+      desc: "Mejoramos la forma en que tu negocio aparece y se presenta cuando alguien busca lo que ofreces.",
+      tools: ["Google Business Profile", "Google Maps", "Información local"],
     },
     {
       mockup: WhatsAppMockup,
-      title: "WhatsApp Business",
-      desc: "Comunicación automatizada que responde y ordena tus clientes.",
+      title: "Contacto y atención",
+      desc: "Ordenamos el proceso de contacto para que consultar, responder y avanzar resulte más simple.",
+      tools: ["WhatsApp Business", "Respuestas y mensajes", "Flujos de contacto"],
     },
     {
       mockup: DigitalMenuMockup,
-      title: "Carta y sitio digital",
-      desc: "Información clara siempre disponible, en cualquier dispositivo.",
+      title: "Experiencia digital",
+      desc: "Creamos puntos de información o conversión claros, útiles y adaptados a la forma en que compra tu cliente.",
+      tools: ["Carta digital", "Landing pages", "Sitios web"],
     },
     {
       mockup: EcosystemMockup,
-      title: "Un ecosistema conectado",
-      desc: "Todas las piezas trabajan juntas dentro del sistema Eleva360.",
+      title: "Conexión y mejora continua",
+      desc: "Conectamos canales, simplificamos tareas y medimos para decidir qué conviene mejorar después.",
+      tools: ["Sistemas de reseñas", "Automatizaciones", "Seguimiento"],
     },
   ];
 
   return (
-    <section id="solucion" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section id="capacidades" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="La solución"
-          title={
-            <>
-              Un{" "}
-              <span className="gradient-text-animated">sistema digital</span>{" "}
-              diseñado para hacer crecer tu negocio.
-            </>
-          }
-          subtitle="Eleva360 implementa un ecosistema donde todas las herramientas trabajan juntas. No son productos sueltos: son piezas de un mismo sistema."
+          eyebrow="Capacidades según el diagnóstico"
+          title="La solución adecuada depende de lo que tu negocio necesita mejorar."
+          subtitle="No todos los negocios necesitan las mismas herramientas. Después de diagnosticar y priorizar, combinamos únicamente las capacidades que tienen sentido para cada etapa."
         />
 
         <div className="relative mt-16">
+          <span className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold whitespace-nowrap text-slate-500 shadow-sm backdrop-blur">
+            Ejemplos ilustrativos
+          </span>
           <svg
             aria-hidden
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
@@ -1547,7 +1479,7 @@ function SolutionSection() {
             {nodes.map((n, i) => (
               <Reveal key={n.title} delay={i * 120} variant="zoom">
                 <SpotlightCard
-                  className="group relative h-full rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30 animate-float-slow"
+                  className="group relative flex h-full flex-col rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover hover:border-primary/30 animate-float-slow"
                   style={{ animationDelay: `${i * 400}ms` }}
                 >
                   <div className="absolute -top-3 left-5 rounded-full bg-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
@@ -1558,11 +1490,28 @@ function SolutionSection() {
                   </div>
                   <h3 className="font-display text-lg font-bold text-foreground">{n.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
+                  <div className="mt-auto pt-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                      Puede incluir
+                    </p>
+                    <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
+                      {n.tools.map((tool) => (
+                        <li key={tool} className="flex items-start gap-2">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" aria-hidden />
+                          <span>{tool}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </SpotlightCard>
               </Reveal>
             ))}
           </div>
         </div>
+
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Estas capacidades no forman un paquete obligatorio. Se recomiendan únicamente cuando ayudan a resolver una prioridad real del negocio.
+        </p>
       </div>
     </section>
   );
@@ -1571,24 +1520,34 @@ function SolutionSection() {
 function HowItWorksSection() {
   const steps = [
     {
+      number: "01",
+      icon: Users,
+      title: "Entender",
+      desc: "Conocemos cómo funciona tu negocio, qué quieres lograr y cómo atraes, atiendes y acompañas actualmente a tus clientes.",
+    },
+    {
+      number: "02",
       icon: Search,
-      title: "Analizamos tu negocio",
-      desc: "Entendemos tu rubro, tus clientes y qué está frenando tu crecimiento.",
+      title: "Diagnosticar",
+      desc: "Revisamos tu presencia digital, proceso de contacto, señales de confianza, competidores y posibles puntos de fricción.",
     },
     {
+      number: "03",
+      icon: Target,
+      title: "Priorizar",
+      desc: "Definimos qué necesita atención primero, qué puede esperar y qué no conviene implementar por ahora.",
+    },
+    {
+      number: "04",
       icon: Wrench,
-      title: "Implementamos las herramientas",
-      desc: "Dejamos funcionando cada pieza del sistema, sin que tengas que hacer nada.",
+      title: "Implementar",
+      desc: "Diseñamos y ponemos en marcha la solución inicial acordada, de forma simple y por etapas.",
     },
     {
-      icon: Workflow,
-      title: "Automatizamos procesos",
-      desc: "Convertimos tareas manuales en flujos que trabajan solos por tu negocio.",
-    },
-    {
-      icon: LineChart,
-      title: "Optimizamos continuamente",
-      desc: "Medimos, ajustamos y mejoramos para que sigas creciendo mes a mes.",
+      number: "05",
+      icon: HeartHandshake,
+      title: "Acompañar",
+      desc: "Medimos lo implementado, revisamos lo aprendido y planteamos siguientes pasos solamente cuando tengan sentido.",
     },
   ];
 
@@ -1596,30 +1555,35 @@ function HowItWorksSection() {
     <section id="como-funciona" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Cómo funciona"
-          title="Un proceso simple. Un impacto real."
-          subtitle="Cuatro pasos, cero complicaciones. Nosotros hacemos el trabajo técnico, tú ves los resultados."
+          eyebrow="Cómo trabajamos"
+          title="Un proceso claro para decidir mejor antes de implementar."
+          subtitle="Cada etapa tiene un propósito: comprender el negocio, identificar oportunidades y avanzar por prioridades, sin implementar herramientas porque sí."
         />
 
         <div className="relative mt-16">
+          <div aria-hidden className="absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-transparent via-border to-transparent lg:hidden" />
           <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block" />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 lg:grid-cols-5">
             {steps.map((s, i) => (
               <Reveal key={s.title} delay={i * 120}>
-                <div className="relative flex flex-col items-start">
-                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-white shadow-sm">
-                    <span className="font-display text-sm font-bold text-primary">0{i + 1}</span>
+                <div className="relative flex h-full flex-col items-start pl-16 lg:pl-0">
+                  <div className="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-white shadow-sm lg:relative">
+                    <span className="font-display text-sm font-bold text-primary">{s.number}</span>
                   </div>
-                  <div className="mt-6 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10">
-                    <s.icon className="h-5 w-5 text-primary" />
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 lg:mt-6">
+                    <s.icon className="h-5 w-5 text-primary" aria-hidden />
                   </div>
                   <h3 className="mt-4 font-display text-lg font-bold text-foreground">{s.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
+
+        <p className="mx-auto mt-12 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground/75">
+          La meta no es implementar más herramientas, sino tomar mejores decisiones sobre qué hacer primero.
+        </p>
       </div>
     </section>
   );
@@ -1627,20 +1591,20 @@ function HowItWorksSection() {
 
 function ResultsSection() {
   const items = [
-    { icon: TrendingUp, label: "Más visibilidad", to: 320, prefix: "+", suffix: "%", desc: "Frente a más clientes potenciales cada día." },
-    { icon: MessageCircle, label: "Más conversaciones", to: 240, prefix: "+", suffix: "%", desc: "Contactos ordenados y respondidos a tiempo." },
-    { icon: CalendarCheck, label: "Más reservas", to: 180, prefix: "+", suffix: "%", desc: "Clientes que agendan sin fricción." },
-    { icon: Star, label: "Más reseñas", to: 5, prefix: "+", suffix: "x", desc: "Reputación que trabaja por tu marca." },
-    { icon: Clock, label: "Más tiempo", to: 15, prefix: "+", suffix: "h", desc: "Horas por semana para administrar tu negocio." },
+    { icon: Search, label: "Presencia y visibilidad", desc: "Facilitar que más personas encuentren y entiendan tu negocio." },
+    { icon: MessageCircle, label: "Contacto y atención", desc: "Reducir fricciones cuando un potencial cliente quiere consultar o comprar." },
+    { icon: HeartHandshake, label: "Experiencia del cliente", desc: "Hacer más simple y coherente la interacción con el negocio." },
+    { icon: ShieldCheck, label: "Confianza y reputación", desc: "Fortalecer las señales que ayudan a un cliente a tomar una decisión." },
+    { icon: Clock, label: "Procesos y tiempo", desc: "Simplificar tareas repetitivas cuando realmente exista una oportunidad de mejora." },
   ];
 
   return (
     <section className="border-y border-border bg-white px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Resultados"
-          title="Lo que gana tu negocio cuando la tecnología trabaja por ti."
-          subtitle="No hablamos de características. Hablamos de lo que cambia en tu día a día."
+          eyebrow="Áreas de mejora"
+          title="Qué podemos ayudarte a mejorar"
+          subtitle="El diagnóstico permite identificar dónde tiene sentido intervenir y qué conviene priorizar."
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((s, i) => (
@@ -1649,15 +1613,15 @@ function ResultsSection() {
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                   <s.icon className="h-5 w-5 text-primary" />
                 </div>
-                <div className="font-display text-3xl font-extrabold text-foreground tabular-nums">
-                  <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
-                </div>
-                <div className="mt-1 text-sm font-semibold text-foreground">{s.label}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{s.desc}</div>
+                <div className="text-sm font-semibold text-foreground">{s.label}</div>
+                <div className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.desc}</div>
               </SpotlightCard>
             </Reveal>
           ))}
         </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm font-medium text-muted-foreground">
+          Las prioridades y soluciones dependen del diagnóstico de cada negocio.
+        </p>
       </div>
     </section>
   );
@@ -1665,10 +1629,11 @@ function ResultsSection() {
 
 function PlanSection() {
   const pillars = [
-    { icon: Gauge, title: "Optimización continua", desc: "Ajustamos y mejoramos cada herramienta mes a mes." },
-    { icon: Rocket, title: "Nuevas mejoras", desc: "Incorporamos capacidades a medida que tu negocio evoluciona." },
-    { icon: LineChart, title: "Acompañamiento estratégico", desc: "Analizamos qué está funcionando y qué elevar al siguiente nivel." },
-    { icon: HeartHandshake, title: "Un equipo a tu lado", desc: "Contacto directo, humano y sin trámites intermedios." },
+    { icon: Check, title: "Revisión de lo implementado." },
+    { icon: LineChart, title: "Seguimiento de las señales relevantes." },
+    { icon: Wrench, title: "Ajustes y mejoras priorizadas." },
+    { icon: Target, title: "Recomendaciones para la siguiente etapa." },
+    { icon: HeartHandshake, title: "Comunicación directa durante el proceso." },
   ];
 
   return (
@@ -1680,46 +1645,61 @@ function PlanSection() {
           <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "24px 24px" }} />
 
           <div className="relative">
-            <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-2xl">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
-                  <Sparkles className="h-3.5 w-3.5 text-accent" />
-                  El corazón de Eleva360
-                </span>
-                <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                  Plan <span className="gradient-text-animated">Crecimiento</span>
+            <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-3xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
+                    <Sparkles className="h-3.5 w-3.5 text-accent" />
+                    Después de implementar
+                  </span>
+                  <span className="inline-flex rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent ring-1 ring-accent/25">
+                    Etapa opcional
+                  </span>
+                </div>
+                <p className="mt-6 text-sm font-bold uppercase tracking-[0.18em] text-white/60">
+                  Acompañamiento continuo
+                </p>
+                <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                  Seguimos mejorando contigo, cuando tenga sentido.
                 </h2>
-                <p className="mt-5 max-w-xl text-lg text-white/75">
-                  Implementar las herramientas es solo el comienzo. El verdadero valor está en el acompañamiento continuo: un plan que mantiene tu sistema optimizado, incorpora mejoras y acompaña la evolución de tu negocio.
+                <p className="mt-5 max-w-2xl text-lg text-white/75">
+                  Algunas soluciones necesitan seguimiento, medición y ajustes. En esos casos, podemos continuar trabajando contigo después de la implementación inicial.
                 </p>
               </div>
 
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
-              >
-                Quiero evolucionar mi negocio
-                <ArrowRight className="h-5 w-5" />
-              </a>
+              <div className="flex max-w-sm flex-col items-start lg:items-end lg:text-right">
+                <p className="text-sm leading-relaxed text-white/65">
+                  El alcance y la inversión se definen según el seguimiento que realmente necesite cada negocio.
+                </p>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
+                >
+                  Solicitar diagnóstico inicial
+                  <ArrowRight className="h-5 w-5" />
+                </a>
+                <p className="mt-3 text-xs leading-relaxed text-white/55">
+                  El acompañamiento se propone después de la implementación inicial y solo cuando aporta valor.
+                </p>
+              </div>
             </div>
 
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {pillars.map((p) => (
                 <div key={p.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15">
-                    <p.icon className="h-5 w-5 text-white" />
+                    <p.icon className="h-5 w-5 text-white" aria-hidden />
                   </div>
-                  <h3 className="mt-4 font-display text-base font-bold text-white">{p.title}</h3>
-                  <p className="mt-1.5 text-sm text-white/70">{p.desc}</p>
+                  <h3 className="mt-4 font-display text-base font-bold leading-snug text-white">{p.title}</h3>
                 </div>
               ))}
             </div>
 
-            <div className="mt-10 flex items-center gap-3 text-sm text-white/60">
-              <Check className="h-4 w-4 text-accent" />
-              No es mantención. Es evolución continua junto a tu negocio.
+            <div className="mt-10 flex items-start gap-3 text-sm leading-relaxed text-white/60">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+              Medimos, aprendemos y priorizamos nuevos pasos solo cuando el diagnóstico y lo implementado muestran que vale la pena continuar.
             </div>
           </div>
         </div>
@@ -1730,47 +1710,84 @@ function PlanSection() {
 
 function FutureSection() {
   const items = [
-    { icon: Cpu, title: "Inteligencia Artificial" },
-    { icon: Users, title: "CRM" },
-    { icon: CalendarCheck, title: "Reservas Online" },
-    { icon: LayoutDashboard, title: "Dashboards" },
-    { icon: Workflow, title: "Automatizaciones" },
-    { icon: Globe, title: "Landing Pages" },
-    { icon: ShoppingCart, title: "Comercio Electrónico" },
-    { icon: BarChart3, title: "Analítica avanzada" },
+    {
+      icon: ShieldCheck,
+      title: "Marca y confianza",
+      desc: "Fortalecer la identidad y las señales que ayudan a un cliente a reconocer y confiar en el negocio.",
+      tools: ["Branding", "Identidad visual", "Sistemas de reseñas"],
+    },
+    {
+      icon: Smartphone,
+      title: "Contenido y presencia",
+      desc: "Comunicar de forma más clara y consistente cuando el negocio necesita fortalecer su presencia.",
+      tools: ["Instagram", "Facebook", "Contenido", "Reels"],
+    },
+    {
+      icon: Globe,
+      title: "Web y conversión",
+      desc: "Crear espacios digitales que informen, orienten o faciliten una acción concreta.",
+      tools: ["Landing pages", "Sitios web", "Experiencias digitales"],
+    },
+    {
+      icon: Target,
+      title: "Captación pagada",
+      desc: "Activar publicidad solamente cuando existe una base preparada para recibir y convertir nuevas oportunidades.",
+      tools: ["Google Ads", "Meta Ads"],
+    },
+    {
+      icon: Workflow,
+      title: "Procesos y automatización",
+      desc: "Simplificar tareas repetitivas cuando hacerlo aporta tiempo, orden o una mejor atención.",
+      tools: ["Automatizaciones", "Integraciones", "Flujos de contacto"],
+    },
+    {
+      icon: BarChart3,
+      title: "Medición y optimización",
+      desc: "Observar lo implementado para detectar ajustes y decidir con mayor claridad el siguiente paso.",
+      tools: ["Seguimiento", "Análisis", "Mejoras priorizadas"],
+    },
   ];
 
   return (
     <section id="futuro" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Ecosistema"
-          title={
-            <>
-              Un ecosistema que{" "}
-              <span className="gradient-text-animated">sigue creciendo.</span>
-            </>
-          }
-          subtitle="Eleva360 evoluciona constantemente. Nuevas capacidades se suman al sistema para acompañar la próxima etapa de tu negocio."
+          eyebrow="Cuando la siguiente etapa lo requiere"
+          title="La solución puede evolucionar junto con tu negocio."
+          subtitle="Después de resolver la prioridad inicial, podemos incorporar nuevas capacidades si los objetivos y lo aprendido durante el proceso muestran que tienen sentido."
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 70} variant="zoom">
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg">
+              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg lg:min-h-[15.5rem]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <it.icon className="h-5 w-5" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                    <it.icon className="h-5 w-5" aria-hidden />
                   </div>
-                  <h3 className="font-display text-base font-bold text-foreground">{it.title}</h3>
+                  <h3 className="font-display text-lg font-bold text-foreground">{it.title}</h3>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-primary/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  <Sparkles className="h-3 w-3" /> Próximamente
-                </span>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+                <div className="mt-auto pt-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                    Puede incluir
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {it.tools.map((tool) => (
+                      <li key={tool} className="rounded-full bg-primary/5 px-2.5 py-1 text-xs font-medium text-muted-foreground ring-1 ring-primary/10">
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
+          No necesitas activar todas estas capacidades. La siguiente etapa se define por lo que tu negocio necesita, puede sostener y tiene sentido priorizar.
+        </p>
       </div>
     </section>
   );
@@ -1778,23 +1795,50 @@ function FutureSection() {
 
 function WhySection() {
   const items = [
-    { icon: HeartHandshake, title: "Atención cercana", desc: "Trato humano y directo, no un ticket más en un sistema." },
-    { icon: Layers, title: "Tecnología conectada", desc: "Un ecosistema donde cada pieza potencia a la siguiente." },
-    { icon: Target, title: "Enfocados en tu negocio", desc: "Adaptamos el sistema al rubro y momento de tu empresa." },
-    { icon: BarChart3, title: "Resultados medibles", desc: "Métricas claras, sin jerga técnica ni promesas vacías." },
+    {
+      icon: Search,
+      title: "Diagnóstico antes de proponer",
+      desc: "Primero comprendemos el contexto y el problema. Después evaluamos qué capacidades pueden ayudar.",
+    },
+    {
+      icon: Target,
+      title: "Prioridades comprensibles",
+      desc: "Explicamos qué conviene resolver primero, qué puede esperar y por qué.",
+    },
+    {
+      icon: Layers,
+      title: "Soluciones adaptadas",
+      desc: "El alcance considera los objetivos, recursos y realidad de cada negocio, sin copiar un paquete estándar.",
+    },
+    {
+      icon: Workflow,
+      title: "Implementación gradual",
+      desc: "Comenzamos por la prioridad acordada y ampliamos la solución solamente cuando se justifica.",
+    },
+    {
+      icon: MessageCircle,
+      title: "Comunicación directa",
+      desc: "Mantenemos una comunicación clara y comprensible antes, durante y después de implementar.",
+    },
+    {
+      icon: LineChart,
+      title: "Mejora basada en lo aprendido",
+      desc: "Revisamos lo implementado para decidir ajustes y posibles siguientes pasos con mayor claridad.",
+    },
   ];
 
   return (
     <section id="porque" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Por qué Eleva360"
-          title="Una empresa tecnológica que trabaja como parte de tu equipo."
+          eyebrow="Una forma distinta de trabajar"
+          title="Porque la solución comienza antes de elegir una herramienta."
+          subtitle="Partimos entendiendo el negocio, ordenamos las prioridades y proponemos una forma realista de avanzar."
         />
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 100}>
-              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-6 shadow-soft shadow-soft-hover hover:border-primary/30">
+              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-6 shadow-soft shadow-soft-hover hover:border-primary/30 lg:min-h-[14rem]">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                   <it.icon className="h-6 w-6" />
                 </div>
@@ -1804,6 +1848,10 @@ function WhySection() {
             </Reveal>
           ))}
         </div>
+
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
+          No se trata de contratar más, sino de saber qué vale la pena implementar y en qué momento.
+        </p>
       </div>
     </section>
   );
@@ -1818,18 +1866,15 @@ function CTASection() {
           <div aria-hidden className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
 
           <div className="relative mx-auto max-w-3xl">
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-lg">
-              <Sparkles className="h-7 w-7 text-white" />
-            </div>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-              No necesitas aprender marketing.
-              <br />
-              Necesitas un{" "}
-              <span className="gradient-text-animated">sistema digital</span>{" "}
-              que trabaje por tu negocio.
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white/80 ring-1 ring-white/15">
+              <Sparkles className="h-4 w-4" aria-hidden />
+              El primer paso es entender
+            </span>
+            <h2 className="mt-6 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+              Conversemos sobre lo que tu negocio necesita mejorar.
             </h2>
             <p className="mt-6 text-lg text-white/75">
-              Nosotros lo diseñamos, lo implementamos y lo mantenemos evolucionando. Tú te enfocas en lo que sabes hacer.
+              Cuéntanos cómo funciona hoy, qué quieres lograr y dónde sientes que están las principales dificultades. Revisaremos si Eleva360 puede ayudarte y cuál podría ser el siguiente paso.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <a
@@ -1838,11 +1883,13 @@ function CTASection() {
                 rel="noreferrer"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
-                Quiero hacer crecer mi negocio
+                Solicitar diagnóstico inicial
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
-            <p className="mt-6 text-sm text-white/50">Diagnóstico gratuito · Respuesta en menos de 1 hora hábil.</p>
+            <p className="mt-6 text-sm text-white/50">
+              Una conversación inicial para conocer tu negocio y evaluar si tiene sentido avanzar.
+            </p>
           </div>
         </div>
       </div>
@@ -1855,40 +1902,31 @@ function Footer() {
     <footer className="border-t border-border bg-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
         <div className="flex flex-col gap-3">
-          <Logo />
+          <Logo loading="lazy" />
           <p className="max-w-sm text-sm text-muted-foreground">
-            Soluciones digitales que hacen crecer tu negocio, sin que tengas que hacerlo tú.
+            Soluciones digitales para negocios que comienzan por entender qué necesita mejorar.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <Instagram className="h-4 w-4" />
+        <nav aria-label="Enlaces del pie de página" className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-muted-foreground md:justify-end">
+          <a href="#capacidades" className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
+            Capacidades
           </a>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Facebook"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <Facebook className="h-4 w-4" />
+          <a href="#como-funciona" className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
+            Cómo trabajamos
+          </a>
+          <a href="#porque" className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
+            Por qué Eleva360
           </a>
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            aria-label="WhatsApp"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            className="inline-flex min-h-11 items-center gap-2 text-primary transition-colors hover:text-primary/80"
           >
             <MessageCircle className="h-4 w-4" />
+            WhatsApp
           </a>
-        </div>
+        </nav>
       </div>
       <div className="mx-auto mt-8 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
         <span>© {new Date().getFullYear()} Eleva360. Todos los derechos reservados.</span>
@@ -1906,11 +1944,11 @@ function WhatsAppFloating() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="Hablar por WhatsApp"
-      className="animate-wa-bob fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-xl shadow-accent/40 transition-transform hover:scale-110"
+      aria-label="Conversar con Eleva360 por WhatsApp"
+      className="animate-wa-bob fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 transition-transform hover:scale-110 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
     >
       <MessageCircle className="h-6 w-6" />
-      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/40" />
+      <span className="absolute hidden h-full w-full animate-ping rounded-full bg-accent/40 sm:inline-flex" />
     </a>
   );
 }
