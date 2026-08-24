@@ -1762,29 +1762,65 @@ function ResultsSection() {
   ];
 
   return (
-    <section className="border-y border-border bg-white px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="Áreas de mejora"
-          title="Qué podemos ayudarte a mejorar"
-          subtitle="El diagnóstico permite identificar dónde tiene sentido intervenir y qué conviene priorizar."
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <section className="improvements-editorial-section relative isolate overflow-hidden border-y border-border px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="improvements-editorial-light pointer-events-none absolute -right-48 top-12 h-[34rem] w-[34rem] rounded-full" aria-hidden="true" />
+
+      <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16 xl:gap-24">
+        <div>
+          <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            Áreas de mejora
+          </span>
+          <h2 className="mt-4 max-w-xl font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+            Qué podemos ayudarte a mejorar
+          </h2>
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
+            El diagnóstico permite identificar dónde tiene sentido intervenir y qué conviene priorizar.
+          </p>
+
+          <div className="improvements-editorial-signal mt-8 h-1 w-16 rounded-full" aria-hidden="true" />
+
+          <div className="mt-10 flex max-w-lg items-start gap-4 border-t border-slate-200/80 pt-6">
+            <span className="improvements-closing-marker mt-2 h-2 w-2 shrink-0 rounded-full" aria-hidden="true" />
+            <p className="text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
+              Las prioridades y soluciones dependen del diagnóstico de cada negocio.
+            </p>
+          </div>
+        </div>
+
+        <div className="improvement-list-surface relative overflow-hidden rounded-[2rem]">
+          <div className="improvement-list-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+          <div className="improvement-list-line pointer-events-none absolute bottom-8 left-[2.55rem] top-8 w-px sm:left-[3.05rem]" aria-hidden="true" />
+
+          <ol className="relative z-10">
           {items.map((s, i) => (
-            <Reveal key={s.label} delay={i * 100} variant="zoom">
-              <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-5 shadow-soft shadow-soft-hover">
-                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <s.icon className="h-5 w-5 text-primary" />
+            <Reveal
+              as="li"
+              key={s.label}
+              delay={i * 70}
+              className="improvement-row group relative"
+            >
+              <div className="improvement-row-accent pointer-events-none absolute bottom-5 left-0 top-5 w-0.5 rounded-full" aria-hidden="true" />
+              <div className="improvement-row-inner grid min-w-0 grid-cols-[2.25rem_2.75rem_1fr] items-start gap-3 px-5 py-6 sm:grid-cols-[2.5rem_3rem_1fr] sm:gap-4 sm:px-7 sm:py-7">
+                <span className="improvement-number relative z-10 pt-3 font-mono text-[0.65rem] font-bold tracking-[0.18em]">
+                  0{i + 1}
+                </span>
+                <div className="improvement-icon relative z-10 flex h-11 w-11 items-center justify-center rounded-xl sm:h-12 sm:w-12" aria-hidden="true">
+                  <s.icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
+                  <span className="improvement-node absolute -left-[1.8rem] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full sm:-left-[2.05rem]" />
                 </div>
-                <div className="text-sm font-semibold text-foreground">{s.label}</div>
-                <div className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.desc}</div>
-              </SpotlightCard>
+                <div className="min-w-0 pt-1.5">
+                  <h3 className="font-display text-base font-bold leading-snug text-foreground sm:text-lg">
+                    {s.label}
+                  </h3>
+                  <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                    {s.desc}
+                  </p>
+                </div>
+              </div>
             </Reveal>
           ))}
+          </ol>
         </div>
-        <p className="mx-auto mt-8 max-w-2xl text-center text-sm font-medium text-muted-foreground">
-          Las prioridades y soluciones dependen del diagnóstico de cada negocio.
-        </p>
       </div>
     </section>
   );
