@@ -34,14 +34,16 @@ import {
 import { useEffect, useId, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
-import heroImage from "../assets/hero-eleva360.png";
 import menuEntradaPremium from "../assets/menu-entrada-premium.webp";
 import menuPlatoPremium from "../assets/menu-plato-premium.webp";
 import menuBebidaPremium from "../assets/menu-bebida-premium.webp";
 
 
+const SITE_URL = "https://www.eleva360.net";
+const HOME_URL = `${SITE_URL}/`;
+const SOCIAL_IMAGE_URL = `${SITE_URL}${logoEleva360}`;
 const WHATSAPP_URL =
-  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20negocio";
+  "https://wa.me/56966645919?text=Hola%20Eleva360%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20inicial%20para%20mi%20negocio.";
 
 /* ————— Motion helpers ————— */
 function Reveal({
@@ -137,19 +139,19 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a su realidad.",
+          "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a tu realidad.",
       },
       { name: "keywords", content: "Soluciones digitales, tecnología para negocios, automatización, presencia digital, transformación digital, Chile" },
       { property: "og:title", content: "Eleva360 | Soluciones digitales para negocios" },
-      { property: "og:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a su realidad." },
+      { property: "og:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a tu realidad." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: heroImage },
+      { property: "og:url", content: HOME_URL },
+      { property: "og:image", content: SOCIAL_IMAGE_URL },
       { name: "twitter:title", content: "Eleva360 | Soluciones digitales para negocios" },
-      { name: "twitter:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a su realidad." },
-      { name: "twitter:image", content: heroImage },
+      { name: "twitter:description", content: "Analizamos qué necesita mejorar tu negocio y priorizamos soluciones digitales simples, por etapas y adaptadas a tu realidad." },
+      { name: "twitter:image", content: SOCIAL_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: HOME_URL }],
   }),
 });
 
@@ -580,7 +582,7 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "google") {
     return (
-      <article className={cardClass} aria-label="Ejemplo de visibilidad local de Café Pacífico">
+      <article className={cardClass} aria-label="Maqueta ilustrativa de un perfil de Google para Café Pacífico">
         <div className="flex items-start gap-2.5">
           <GoogleMapsPinIcon className="h-8 w-6" />
           <div className="min-w-0 flex-1">
@@ -596,7 +598,7 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             </p>
           </div>
           <div className="h-[57px] w-[60px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-            <img src={heroBuilding} alt="Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
+            <img src={heroBuilding} alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
           </div>
         </div>
         <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-[0.6rem] font-semibold text-primary">
@@ -629,7 +631,7 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
 
   if (type === "menu") {
     return (
-      <article className={cardClass} aria-label="Ejemplo de experiencia del cliente de Café Pacífico">
+      <article className={cardClass} aria-label="Maqueta ilustrativa de una carta digital para Café Pacífico">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
             <Smartphone className="h-4 w-4" />
@@ -861,7 +863,7 @@ function HeroSection() {
             >
               <img
                 src={heroBuilding}
-                alt="Negocio local conectado al ecosistema digital de Eleva360"
+                alt="Maqueta ilustrativa de un negocio llamado Café Pacífico"
                 className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
                 loading="eager"
               />
@@ -931,7 +933,7 @@ function HeroSection() {
                         <div className="h-[94px] w-[104px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
                           <img
                             src={heroBuilding}
-                            alt="Vista del Café Pacífico"
+                            alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico"
                             className="h-full w-full scale-[1.7] object-cover object-[53%_62%]"
                           />
                         </div>
@@ -1006,7 +1008,7 @@ function HeroSection() {
                             <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.12),0_2px_8px_rgba(15,23,42,0.10)]">
                               <img
                                 src={item.image}
-                                alt={`${item.label} del menú de Café Pacífico`}
+                                alt={`Maqueta ilustrativa: ${item.label} del menú de Café Pacífico`}
                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
@@ -1166,7 +1168,11 @@ function ProblemSection() {
 
 function GoogleProfileMockup() {
   return (
-    <div className="rounded-xl border border-border bg-[color:var(--muted)] p-3">
+    <div
+      className="rounded-xl border border-border bg-[color:var(--muted)] p-3"
+      role="img"
+      aria-label="Maqueta ilustrativa de presencia local para Panadería Los Aromas"
+    >
       <div className="flex items-start gap-2.5">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
           <MapPin className="h-4 w-4 text-[color:var(--color-g-red)]" />
@@ -1197,9 +1203,6 @@ function GoogleProfileMockup() {
           Llamar
         </span>
       </div>
-      <p className="mt-2 text-right text-[9px] font-semibold text-muted-foreground">
-        Ejemplo ilustrativo
-      </p>
     </div>
   );
 }
@@ -1290,7 +1293,7 @@ function PricingSection() {
     {
       icon: Search,
       title: "Diagnóstico inicial",
-      desc: "Entendemos cómo funciona tu negocio, cuál es su objetivo y dónde podrían existir las principales oportunidades de mejora.",
+      desc: "Entendemos cómo funciona tu negocio, qué quieres lograr y dónde podrían existir las principales oportunidades de mejora.",
       highlight: "Sin costo",
     },
     {
@@ -1401,6 +1404,9 @@ function SolutionSection() {
         />
 
         <div className="relative mt-16">
+          <span className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold whitespace-nowrap text-slate-500 shadow-sm backdrop-blur">
+            Ejemplos ilustrativos
+          </span>
           <svg
             aria-hidden
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
@@ -1473,13 +1479,13 @@ function HowItWorksSection() {
       number: "01",
       icon: Users,
       title: "Entender",
-      desc: "Conocemos cómo funciona tu negocio, cuáles son sus objetivos y cómo atrae, atiende y acompaña actualmente a sus clientes.",
+      desc: "Conocemos cómo funciona tu negocio, qué quieres lograr y cómo atraes, atiendes y acompañas actualmente a tus clientes.",
     },
     {
       number: "02",
       icon: Search,
       title: "Diagnosticar",
-      desc: "Verificamos su presencia digital, proceso de contacto, señales de confianza, competidores y posibles puntos de fricción.",
+      desc: "Revisamos tu presencia digital, proceso de contacto, señales de confianza, competidores y posibles puntos de fricción.",
     },
     {
       number: "03",
