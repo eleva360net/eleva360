@@ -563,6 +563,12 @@
   animation: wa-bob 3.5s ease-in-out infinite;
 }
 
+@media (max-width: 900px) {
+  .animate-wa-bob {
+    display: none !important;
+  }
+}
+
 /* ————— Premium depth: grain, layered shadows, spotlight ————— */
 
 /* Fine grain overlay — adds tactile depth without adding visual noise/color.
@@ -917,6 +923,49 @@
 
   .capability-premium-card:hover .capability-mockup {
     transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 639.98px) {
+  .capabilities-premium-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .capability-card-grid {
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .capability-premium-card {
+    min-height: 31.75rem;
+    padding: 1rem;
+  }
+
+  .capability-mockup-shell {
+    min-height: 10.75rem;
+    margin-top: 0.75rem;
+    padding: 0.875rem;
+  }
+
+  .capability-mockup-shell + div {
+    margin-top: 1.125rem;
+  }
+
+  .capability-premium-card h3 + p {
+    margin-top: 0.5rem;
+  }
+
+  .capability-premium-card h3 + p + div {
+    padding-top: 1rem;
+  }
+
+  .capability-premium-card ul {
+    margin-top: 0.5rem;
+  }
+
+  #capacidades > .relative.mx-auto.max-w-7xl > p {
+    margin-top: 2rem;
   }
 }
 
