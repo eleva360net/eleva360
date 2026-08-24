@@ -1542,68 +1542,211 @@ function HowItWorksSection() {
     {
       number: "01",
       icon: Users,
+      tone: "blue",
       title: "Entender",
       desc: "Conocemos cómo funciona tu negocio, qué quieres lograr y cómo atraes, atiendes y acompañas actualmente a tus clientes.",
     },
     {
       number: "02",
       icon: Search,
+      tone: "cyan",
       title: "Diagnosticar",
       desc: "Revisamos tu presencia digital, proceso de contacto, señales de confianza, competidores y posibles puntos de fricción.",
     },
     {
       number: "03",
       icon: Target,
+      tone: "indigo",
       title: "Priorizar",
       desc: "Definimos qué necesita atención primero, qué puede esperar y qué no conviene implementar por ahora.",
     },
     {
       number: "04",
       icon: Wrench,
+      tone: "sky",
       title: "Implementar",
       desc: "Diseñamos y ponemos en marcha la solución inicial acordada, de forma simple y por etapas.",
     },
     {
       number: "05",
       icon: HeartHandshake,
+      tone: "green",
       title: "Acompañar",
       desc: "Medimos lo implementado, revisamos lo aprendido y planteamos siguientes pasos solamente cuando tengan sentido.",
     },
   ];
 
+  const [activeStep, setActiveStep] = useState(0);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const selectedStep = steps[activeStep];
+
+  const selectTab = (index: number) => {
+    setActiveStep(index);
+    tabRefs.current[index]?.focus();
+  };
+
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex: number | null = null;
+
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % steps.length;
+    if (event.key === "ArrowLeft") nextIndex = (index - 1 + steps.length) % steps.length;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = steps.length - 1;
+
+    if (nextIndex !== null) {
+      event.preventDefault();
+      selectTab(nextIndex);
+    }
+  };
+
   return (
     <section id="como-funciona" className="bg-[color:var(--muted)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="Cómo trabajamos"
-          title="Un proceso claro para decidir mejor antes de implementar."
-          subtitle="Cada etapa tiene un propósito: comprender el negocio, identificar oportunidades y avanzar por prioridades, sin implementar herramientas porque sí."
-        />
+        <div className="methodology-shell rounded-[2rem] px-5 py-9 sm:px-8 sm:py-12 lg:rounded-[2.5rem] lg:px-12 lg:py-14">
+          <div className="methodology-shell-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+          <div className="methodology-shell-light methodology-shell-light-top" aria-hidden="true" />
+          <div className="methodology-shell-light methodology-shell-light-bottom" aria-hidden="true" />
 
-        <div className="relative mt-16">
-          <div aria-hidden className="absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-transparent via-border to-transparent lg:hidden" />
-          <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block" />
-          <div className="grid gap-8 lg:grid-cols-5">
-            {steps.map((s, i) => (
-              <Reveal key={s.title} delay={i * 120}>
-                <div className="relative flex h-full flex-col items-start pl-16 lg:pl-0">
-                  <div className="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-white shadow-sm lg:relative">
-                    <span className="font-display text-sm font-bold text-primary">{s.number}</span>
-                  </div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 lg:mt-6">
-                    <s.icon className="h-5 w-5 text-primary" aria-hidden />
-                  </div>
-                  <h3 className="mt-4 font-display text-lg font-bold text-foreground">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+          <div className="relative z-10 mx-auto max-w-2xl text-center">
+            <span className="methodology-eyebrow inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+              Cómo trabajamos
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+              Un proceso claro para decidir mejor antes de implementar.
+            </h2>
+            <p className="methodology-intro mt-4 text-base leading-relaxed sm:text-lg">
+              Cada etapa tiene un propósito: comprender el negocio, identificar oportunidades y avanzar por prioridades, sin implementar herramientas porque sí.
+            </p>
+          </div>
+
+          <div className="relative z-10 mt-12 hidden lg:block">
+            <div className="methodology-track" aria-hidden="true">
+              <div
+                className="methodology-track-progress"
+                style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
+              />
+            </div>
+
+            <div className="relative grid grid-cols-5" role="tablist" aria-label="Etapas de la metodología Eleva360">
+              {steps.map((step, index) => {
+                const isActive = activeStep === index;
+                const isComplete = index < activeStep;
+
+                return (
+                  <button
+                    key={step.title}
+                    ref={(element) => {
+                      tabRefs.current[index] = element;
+                    }}
+                    id={`methodology-tab-${index}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls="methodology-detail-panel"
+                    tabIndex={isActive ? 0 : -1}
+                    data-complete={isComplete ? "true" : "false"}
+                    className={`methodology-tab methodology-tone-${step.tone} group flex min-w-0 flex-col items-center px-2 text-center`}
+                    onClick={() => setActiveStep(index)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
+                  >
+                    <span className="methodology-tab-number font-display text-[0.65rem] font-extrabold tracking-[0.2em]">
+                      {step.number}
+                    </span>
+                    <span className="methodology-tab-node relative mt-2 flex h-14 w-14 items-center justify-center rounded-2xl">
+                      {isActive && <span className="methodology-node-pulse absolute inset-0 rounded-2xl" aria-hidden="true" />}
+                      <step.icon className="relative z-10 h-5 w-5" aria-hidden="true" />
+                      <span className="methodology-node-status absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full" aria-hidden="true" />
+                    </span>
+                    <span className="methodology-tab-title mt-3 truncate font-display text-sm font-bold">
+                      {step.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div
+              id="methodology-detail-panel"
+              role="tabpanel"
+              aria-labelledby={`methodology-tab-${activeStep}`}
+              aria-live="polite"
+              className={`methodology-detail-panel methodology-tone-${selectedStep.tone} relative mt-9 min-h-60 overflow-hidden rounded-[1.75rem] p-7 lg:p-9`}
+            >
+              <div className="methodology-detail-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+              <div className="methodology-detail-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+              <div key={selectedStep.number} className="methodology-detail-content relative z-10 grid items-center gap-7 md:grid-cols-[auto_1fr]">
+                <div className="methodology-detail-symbol flex h-24 w-24 items-center justify-center rounded-[1.6rem]" aria-hidden="true">
+                  <selectedStep.icon className="h-10 w-10" />
                 </div>
-              </Reveal>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="methodology-detail-number font-display text-sm font-extrabold tracking-[0.22em]">
+                      {selectedStep.number}
+                    </span>
+                    <span className="methodology-stage-label rounded-full px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.16em]">
+                      Etapa {selectedStep.number} de 05
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl font-extrabold text-white sm:text-3xl">
+                    {selectedStep.title}
+                  </h3>
+                  <p className="methodology-detail-description mt-3 max-w-3xl text-base leading-relaxed sm:text-lg">
+                    {selectedStep.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 mt-10 space-y-3 lg:hidden">
+            {steps.map((s, i) => (
+              <div key={s.title} className={`methodology-accordion-item methodology-tone-${s.tone} overflow-hidden rounded-2xl`}>
+                <h3>
+                  <button
+                    id={`methodology-accordion-trigger-${i}`}
+                    type="button"
+                    className="methodology-accordion-trigger flex min-h-16 w-full items-center gap-3 px-4 py-3 text-left"
+                    aria-expanded={activeStep === i}
+                    aria-controls={`methodology-accordion-panel-${i}`}
+                    onClick={() => setActiveStep(i)}
+                  >
+                    <span className="methodology-accordion-number font-display text-[0.65rem] font-extrabold tracking-[0.18em]">
+                      {s.number}
+                    </span>
+                    <span className="methodology-accordion-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
+                      <s.icon className="h-4.5 w-4.5" />
+                    </span>
+                    <span className="min-w-0 flex-1 font-display text-sm font-bold text-white sm:text-base">
+                      {s.title}
+                    </span>
+                    <ChevronRight
+                      className={`methodology-accordion-chevron h-4 w-4 shrink-0 ${activeStep === i ? "rotate-90" : ""}`}
+                      aria-hidden="true"
+                    />
+                  </button>
+                </h3>
+                <div
+                  id={`methodology-accordion-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`methodology-accordion-trigger-${i}`}
+                  hidden={activeStep !== i}
+                  className="methodology-accordion-panel px-4 pb-5 pl-[4.75rem] pr-5"
+                >
+                  <span className="methodology-stage-label inline-flex rounded-full px-2.5 py-1 text-[0.6rem] font-bold uppercase tracking-[0.14em]">
+                    Etapa {s.number} de 05
+                  </span>
+                  <p className="methodology-detail-description mt-3 text-sm leading-relaxed">
+                    {s.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
 
-        <p className="mx-auto mt-12 max-w-3xl text-center text-base font-medium leading-relaxed text-foreground/75">
-          La meta no es implementar más herramientas, sino tomar mejores decisiones sobre qué hacer primero.
-        </p>
+          <p className="methodology-closing relative z-10 mx-auto mt-10 max-w-3xl text-center text-sm font-medium leading-relaxed sm:text-base">
+            La meta no es implementar más herramientas, sino tomar mejores decisiones sobre qué hacer primero.
+          </p>
+        </div>
       </div>
     </section>
   );
