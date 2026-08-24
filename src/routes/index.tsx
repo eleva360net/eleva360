@@ -1,4 +1,5 @@
 import logoEleva360 from "../assets/LogoEleva360-transparente.png";
+import logoEleva360Webp from "../assets/LogoEleva360-transparente.webp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -34,6 +35,7 @@ import {
 import { useEffect, useId, useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 import heroBuilding from "../assets/hero-building.png";
+import heroBuildingWebp from "../assets/hero-building.webp";
 import menuEntradaPremium from "../assets/menu-entrada-premium.webp";
 import menuPlatoPremium from "../assets/menu-plato-premium.webp";
 import menuBebidaPremium from "../assets/menu-bebida-premium.webp";
@@ -212,7 +214,7 @@ function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </a>
@@ -224,7 +226,7 @@ function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
           >
             Solicitar diagnóstico
             <ArrowRight className="h-4 w-4" />
@@ -234,7 +236,7 @@ function Navbar() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background md:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           aria-controls="mobile-navigation"
@@ -251,7 +253,7 @@ function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex min-h-11 items-center text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -261,7 +263,7 @@ function Navbar() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
             >
               Solicitar diagnóstico
             </a>
@@ -272,14 +274,21 @@ function Navbar() {
   );
 }
 
-function Logo() {
+function Logo({ loading = "eager" }: { loading?: "eager" | "lazy" }) {
   return (
     <Link to="/" className="group flex items-center">
-      <img
-        src={logoEleva360}
-        alt="Eleva360"
-        className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
-      />
+      <picture>
+        <source srcSet={logoEleva360Webp} type="image/webp" />
+        <img
+          src={logoEleva360}
+          alt="Eleva360"
+          width={1809}
+          height={576}
+          loading={loading}
+          decoding="async"
+          className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </picture>
     </Link>
   );
 }
@@ -598,7 +607,18 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             </p>
           </div>
           <div className="h-[57px] w-[60px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-            <img src={heroBuilding} alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico" className="h-full w-full scale-[1.65] object-cover object-[53%_62%]" />
+            <picture className="block h-full w-full">
+              <source srcSet={heroBuildingWebp} type="image/webp" />
+              <img
+                src={heroBuilding}
+                alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico"
+                width={1156}
+                height={940}
+                loading="eager"
+                decoding="async"
+                className="h-full w-full scale-[1.65] object-cover object-[53%_62%]"
+              />
+            </picture>
           </div>
         </div>
         <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-[0.6rem] font-semibold text-primary">
@@ -645,7 +665,14 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             { label: "Bebidas", image: menuBebidaPremium },
           ].map((item) => (
             <div key={item.label} className="text-center">
-              <img src={item.image} alt={item.label} className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-100" />
+              <img
+                src={item.image}
+                alt={item.label}
+                width={384}
+                height={384}
+                decoding="async"
+                className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-100"
+              />
               <p className="mt-1 text-[0.58rem] font-semibold text-slate-700">{item.label}</p>
             </div>
           ))}
@@ -861,12 +888,19 @@ function HeroSection() {
                 transform: `translate3d(calc(-50% + ${parallax.x * 12}px), calc(-50% + ${parallax.y * 9}px), 0) rotateY(${parallax.x * -2}deg) rotateX(${parallax.y * 1.4}deg)`,
               }}
             >
-              <img
-                src={heroBuilding}
-                alt="Maqueta ilustrativa de un negocio llamado Café Pacífico"
-                className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
-                loading="eager"
-              />
+              <picture>
+                <source srcSet={heroBuildingWebp} type="image/webp" />
+                <img
+                  src={heroBuilding}
+                  alt="Maqueta ilustrativa de un negocio llamado Café Pacífico"
+                  width={1156}
+                  height={940}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
+                />
+              </picture>
             </div>
 
             {/* Tarjetas independientes — UI del ecosistema Eleva360 */}
@@ -931,11 +965,18 @@ function HeroSection() {
                         </div>
 
                         <div className="h-[94px] w-[104px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
-                          <img
-                            src={heroBuilding}
-                            alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico"
-                            className="h-full w-full scale-[1.7] object-cover object-[53%_62%]"
-                          />
+                          <picture className="block h-full w-full">
+                            <source srcSet={heroBuildingWebp} type="image/webp" />
+                            <img
+                              src={heroBuilding}
+                              alt="Maqueta ilustrativa de un perfil de Google para Café Pacífico"
+                              width={1156}
+                              height={940}
+                              loading="eager"
+                              decoding="async"
+                              className="h-full w-full scale-[1.7] object-cover object-[53%_62%]"
+                            />
+                          </picture>
                         </div>
                       </div>
 
@@ -1009,6 +1050,9 @@ function HeroSection() {
                               <img
                                 src={item.image}
                                 alt={`Maqueta ilustrativa: ${item.label} del menú de Café Pacífico`}
+                                width={384}
+                                height={384}
+                                decoding="async"
                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
@@ -1858,26 +1902,26 @@ function Footer() {
     <footer className="border-t border-border bg-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
         <div className="flex flex-col gap-3">
-          <Logo />
+          <Logo loading="lazy" />
           <p className="max-w-sm text-sm text-muted-foreground">
             Soluciones digitales para negocios que comienzan por entender qué necesita mejorar.
           </p>
         </div>
         <nav aria-label="Enlaces del pie de página" className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-muted-foreground md:justify-end">
-          <a href="#capacidades" className="transition-colors hover:text-foreground">
+          <a href="#capacidades" className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
             Capacidades
           </a>
-          <a href="#como-funciona" className="transition-colors hover:text-foreground">
+          <a href="#como-funciona" className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
             Cómo trabajamos
           </a>
-          <a href="#porque" className="transition-colors hover:text-foreground">
+          <a href="#porque" className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
             Por qué Eleva360
           </a>
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-primary transition-colors hover:text-primary/80"
+            className="inline-flex min-h-11 items-center gap-2 text-primary transition-colors hover:text-primary/80"
           >
             <MessageCircle className="h-4 w-4" />
             WhatsApp
