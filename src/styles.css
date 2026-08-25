@@ -776,7 +776,7 @@
   position: relative;
   isolation: isolate;
   min-width: 0;
-  min-height: 34rem;
+  min-height: 28rem;
   overflow: hidden;
   border: 1px solid rgb(var(--capability-accent) / 0.17);
   background:
