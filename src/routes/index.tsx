@@ -7,7 +7,6 @@ import {
   MapPin,
   MessageCircle,
   Menu,
-  Sparkles,
   Star,
   Store,
   TrendingUp,
@@ -1337,7 +1336,7 @@ function PricingSection() {
     {
       icon: Search,
       title: "Diagnóstico inicial",
-      desc: "Entendemos cómo funciona tu negocio, qué quieres lograr y dónde podrían existir las principales oportunidades de mejora.",
+      desc: "Entendemos cómo funciona tu negocio, qué quieres lograr y cómo se compara tu presencia digital con la de tu competencia directa.",
       highlight: "Sin costo",
     },
     {
@@ -1478,7 +1477,7 @@ function SolutionSection() {
                 className="h-full"
               >
                 <article
-                  className={`capability-premium-card capability-tone-${n.tone} group flex h-full flex-col rounded-[2rem] p-5 sm:p-6 lg:p-7`}
+                  className={`capability-premium-card capability-tone-${n.tone} group flex h-full flex-col rounded-[2rem] p-5 sm:p-6`}
                 >
                   <div className="capability-card-glow" aria-hidden="true" />
                   <div className="capability-card-shine" aria-hidden="true" />
@@ -1495,7 +1494,7 @@ function SolutionSection() {
                     </div>
                   </div>
 
-                  <div className="capability-mockup-shell relative z-10 mt-4 flex min-h-48 items-center rounded-[1.4rem] p-4 sm:min-h-52 sm:p-5">
+                  <div className="capability-mockup-shell relative z-10 mt-4 flex min-h-44 items-center rounded-[1.4rem] p-4 sm:p-5">
                     <div className="capability-mockup-grid pointer-events-none absolute inset-0 rounded-[inherit]" aria-hidden="true" />
                     <div className="capability-connection-line pointer-events-none absolute inset-x-7 top-7 h-px" aria-hidden="true" />
                     <div className="capability-mockup relative z-10 mx-auto w-full max-w-lg">
@@ -1503,14 +1502,14 @@ function SolutionSection() {
                     </div>
                   </div>
 
-                  <div className="relative z-10 mt-6 flex flex-1 flex-col">
+                  <div className="relative z-10 mt-4 flex flex-1 flex-col">
                     <h3 className="font-display text-xl font-bold leading-snug text-foreground sm:text-[1.35rem]">
                       {n.title}
                     </h3>
                     <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
                       {n.desc}
                     </p>
-                    <div className="mt-auto pt-5">
+                    <div className="mt-auto pt-4">
                       <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
                         Puede incluir
                       </p>
@@ -1551,7 +1550,7 @@ function HowItWorksSection() {
       icon: Search,
       tone: "cyan",
       title: "Diagnosticar",
-      desc: "Revisamos tu presencia digital, proceso de contacto, señales de confianza, competidores y posibles puntos de fricción.",
+      desc: "Revisamos tu presencia digital, proceso de contacto, señales de confianza y competencia directa para detectar fricciones y oportunidades.",
     },
     {
       number: "03",
@@ -1848,7 +1847,7 @@ function PlanSection() {
               <div className="max-w-3xl">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/20 backdrop-blur">
-                    <Sparkles className="h-3.5 w-3.5 text-accent" />
+                    <LineChart className="h-3.5 w-3.5 text-accent" aria-hidden />
                     Después de implementar
                   </span>
                   <span className="inline-flex rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent ring-1 ring-accent/25">
@@ -2066,7 +2065,7 @@ function CTASection() {
 
           <div className="relative mx-auto max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white/80 ring-1 ring-white/15">
-              <Sparkles className="h-4 w-4" aria-hidden />
+              <Search className="h-4 w-4" aria-hidden />
               El primer paso es entender
             </span>
             <h2 className="mt-6 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
