@@ -225,7 +225,7 @@ function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm transition-all hover:shadow-md whatsapp-link"
           >
             Solicitar diagnóstico
             <ArrowRight className="h-4 w-4" />
@@ -262,7 +262,7 @@ function Navbar() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold whatsapp-link"
             >
               Solicitar diagnóstico
             </a>
@@ -285,7 +285,7 @@ function Logo({ loading = "eager" }: { loading?: "eager" | "lazy" }) {
           height={576}
           loading={loading}
           decoding="async"
-          className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
+          className="brand-logo h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
         />
       </picture>
     </Link>
@@ -391,9 +391,9 @@ className="pointer-events-none absolute inset-0 z-20 h-full w-full overflow-visi
 
         {/* satellite nodes */}
         {[
-          { icon: MapPin, label: "Google", pos: "left-[25%] top-[25%]", tint: "text-primary bg-primary/10" },
-          { icon: MessageCircle, label: "WhatsApp", pos: "left-[75%] top-[25%]", tint: "text-accent bg-accent/10" },
-          { icon: QrCode, label: "Carta digital", pos: "left-[25%] top-[75%]", tint: "text-primary bg-primary/10" },
+          { icon: MapPin, label: "Google", pos: "left-[25%] top-[25%]", tint: "text-brand-ink bg-primary/10" },
+          { icon: MessageCircle, label: "WhatsApp", pos: "left-[75%] top-[25%]", tint: "text-[var(--whatsapp-ink)] bg-[var(--whatsapp)]/10" },
+          { icon: QrCode, label: "Carta digital", pos: "left-[25%] top-[75%]", tint: "text-brand-ink bg-primary/10" },
           { icon: TrendingUp, label: "Más clientes", pos: "left-[75%] top-[75%]", tint: "text-accent bg-accent/10" },
         ].map((node) => (
           <div
@@ -432,7 +432,7 @@ const HERO_NODES = [
     type: "whatsapp",
     title: "WhatsApp",
     icon: MessageCircle,
-    tint: "bg-accent/10 text-accent",
+    tint: "bg-[var(--whatsapp)]/10 text-[var(--whatsapp-ink)]",
     positionClass: "xl:left-[20%] 2xl:left-[10%]",
     y: 51,
     ax: 26,
@@ -444,7 +444,7 @@ const HERO_NODES = [
     type: "menu",
     title: "Carta digital",
     icon: QrCode,
-    tint: "bg-primary/10 text-primary",
+    tint: "bg-primary/10 text-brand-ink",
     positionClass: "xl:left-[20%] 2xl:left-[10%]",
     y: 87,
     ax: 27,
@@ -456,7 +456,7 @@ const HERO_NODES = [
     type: "dashboard",
     title: "Dashboard",
     icon: BarChart3,
-    tint: "bg-primary/10 text-primary",
+    tint: "bg-primary/10 text-brand-ink",
     positionClass: "xl:left-[76%] 2xl:left-[90%]",
     y: 29,
     ax: 75,
@@ -537,11 +537,11 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
           </feMerge>
         </filter>
       </defs>
-      <path d={connector.d} fill="none" stroke="rgba(37,99,235,0.12)" strokeWidth="4" strokeLinecap="round" />
+      <path d={connector.d} fill="none" stroke="rgb(var(--terracotta-rgb)/0.12)" strokeWidth="4" strokeLinecap="round" />
       <path
         d={connector.d}
         fill="none"
-        stroke="#3B82F6"
+        stroke="var(--terracotta)"
         strokeWidth="1.35"
         strokeLinecap="round"
         strokeDasharray="4 5"
@@ -549,11 +549,11 @@ function HeroCardConnector({ type }: { type: HeroNodeType }) {
       >
         <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="8s" repeatCount="indefinite" />
       </path>
-      <circle cx={connector.start[0]} cy={connector.start[1]} r="4.5" fill="rgba(59,130,246,0.14)" />
-      <circle cx={connector.start[0]} cy={connector.start[1]} r="2.1" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.4" />
-      <circle cx={connector.end[0]} cy={connector.end[1]} r="5" fill="rgba(20,184,166,0.14)" />
-      <circle cx={connector.end[0]} cy={connector.end[1]} r="2.2" fill="#14B8A6" />
-      <circle r="2" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1">
+      <circle cx={connector.start[0]} cy={connector.start[1]} r="4.5" fill="rgb(var(--terracotta-rgb)/0.14)" />
+      <circle cx={connector.start[0]} cy={connector.start[1]} r="2.1" fill="#FFFFFF" stroke="var(--terracotta)" strokeWidth="1.4" />
+      <circle cx={connector.end[0]} cy={connector.end[1]} r="5" fill="rgb(var(--gold-rgb)/0.14)" />
+      <circle cx={connector.end[0]} cy={connector.end[1]} r="2.2" fill="var(--gold)" />
+      <circle r="2" fill="#FFFFFF" stroke="var(--terracotta)" strokeWidth="1">
         <animateMotion dur="6.5s" repeatCount="indefinite" path={connector.d} />
       </circle>
     </svg>
@@ -586,7 +586,7 @@ type MobileHeroCardType = "google" | "whatsapp" | "menu" | "dashboard" | "suppor
 
 function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
   const cardClass =
-    "h-[158px] w-[252px] shrink-0 overflow-hidden rounded-[20px] border border-white/85 bg-white/95 p-3.5 shadow-[0_18px_38px_-22px_rgba(15,23,42,0.34),0_6px_18px_-16px_rgba(37,99,235,0.28)] backdrop-blur-xl";
+    "h-[158px] w-[252px] shrink-0 overflow-hidden rounded-[20px] border border-white/85 bg-white/95 p-3.5 shadow-[0_18px_38px_-22px_rgb(var(--charcoal-rgb)/0.34),0_6px_18px_-16px_rgb(var(--terracotta-rgb)/0.28)] backdrop-blur-xl";
 
   if (type === "google") {
     return (
@@ -594,18 +594,18 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
         <div className="flex items-start gap-2.5">
           <GoogleMapsPinIcon className="h-8 w-6" />
           <div className="min-w-0 flex-1">
-            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-slate-400">Visibilidad local</p>
-            <p className="mt-1 text-[0.9rem] font-bold tracking-[-0.01em] text-slate-900">Café Pacífico</p>
+            <p className="text-[7px] font-bold uppercase tracking-[0.1em] text-muted-foreground">Visibilidad local</p>
+            <p className="mt-1 text-[0.9rem] font-bold tracking-[-0.01em] text-foreground">Café Pacífico</p>
             <div className="mt-1 flex items-center gap-1">
-              <span className="text-[0.68rem] font-semibold text-slate-700">4.9</span>
+              <span className="text-[0.68rem] font-semibold text-foreground">4.9</span>
               <span className="text-[0.66rem] tracking-tight text-amber-400">★★★★★</span>
-              <span className="text-[0.56rem] text-slate-400">(238)</span>
+              <span className="text-[0.56rem] text-muted-foreground">(238)</span>
             </div>
-            <p className="mt-1 text-[0.57rem] text-slate-400">
+            <p className="mt-1 text-[0.57rem] text-muted-foreground">
               <span className="font-semibold text-emerald-600">Abierto</span> · Cierra 23:00
             </p>
           </div>
-          <div className="h-[57px] w-[60px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
+          <div className="h-[57px] w-[60px] shrink-0 overflow-hidden rounded-xl ring-1 ring-border">
             <picture className="block h-full w-full">
               <source srcSet={heroBuildingWebp} type="image/webp" />
               <img
@@ -620,7 +620,7 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             </picture>
           </div>
         </div>
-        <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-[0.6rem] font-semibold text-primary">
+        <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-[0.6rem] font-semibold text-brand-ink">
           <MapPin className="h-3 w-3" /> Cómo llegar
         </div>
       </article>
@@ -634,15 +634,15 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
             <MessageCircle className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Contacto y atención</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-muted-foreground">Contacto y atención</p>
           <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#25D366]" />
         </div>
-        <div className="mt-2.5 rounded-2xl rounded-tl-md bg-slate-50 px-3 py-2.5 text-[0.69rem] leading-[1.45] text-slate-700">
+        <div className="mt-2.5 rounded-2xl rounded-tl-md bg-muted px-3 py-2.5 text-[0.69rem] leading-[1.45] text-foreground">
           Hola 👋<br />Quiero reservar una mesa para este sábado a las 20:00.
-          <div className="mt-0.5 text-right text-[0.52rem] text-slate-400">11:18</div>
+          <div className="mt-0.5 text-right text-[0.52rem] text-muted-foreground">11:18</div>
         </div>
-        <div className="mt-2 flex items-center gap-2 text-[0.56rem] text-slate-400">
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 tracking-[0.18em]">•••</span> Escribiendo...
+        <div className="mt-2 flex items-center gap-2 text-[0.56rem] text-muted-foreground">
+          <span className="rounded-full bg-muted px-2 py-0.5 tracking-[0.18em]">•••</span> Escribiendo...
         </div>
       </article>
     );
@@ -652,10 +652,10 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
     return (
       <article className={cardClass} aria-label="Maqueta ilustrativa de una carta digital para Café Pacífico">
         <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
+          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary/10 text-brand-ink">
             <Smartphone className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Experiencia del cliente</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-muted-foreground">Experiencia del cliente</p>
         </div>
         <div className="mt-2.5 grid grid-cols-3 gap-2.5">
           {[
@@ -670,13 +670,13 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
                 width={384}
                 height={384}
                 decoding="async"
-                className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-100"
+                className="mx-auto h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-border"
               />
-              <p className="mt-1 text-[0.58rem] font-semibold text-slate-700">{item.label}</p>
+              <p className="mt-1 text-[0.58rem] font-semibold text-foreground">{item.label}</p>
             </div>
           ))}
         </div>
-        <div className="mt-2 flex items-center justify-center gap-1 rounded-full border border-slate-200 py-1 text-[0.58rem] font-semibold text-primary">
+        <div className="mt-2 flex items-center justify-center gap-1 rounded-full border border-border py-1 text-[0.58rem] font-semibold text-brand-ink">
           Ver carta <ArrowRight className="h-2.5 w-2.5" />
         </div>
       </article>
@@ -687,10 +687,10 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
     return (
       <article className={cardClass} aria-label="Ejemplo de seguimiento y mejora">
         <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-blue-50 text-primary">
+          <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-primary/10 text-brand-ink">
             <BarChart3 className="h-4 w-4" />
           </span>
-          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Seguimiento y mejora</p>
+          <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-muted-foreground">Seguimiento y mejora</p>
         </div>
         <div className="mt-3.5 grid grid-cols-3 divide-x divide-slate-100 text-center">
           {[
@@ -699,12 +699,12 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
             { label: "Visibilidad", status: "Lectura clara" },
           ].map((item) => (
             <div key={item.label} className="px-1.5">
-              <p className="text-[0.64rem] font-bold text-primary">{item.status}</p>
-              <p className="mt-0.5 text-[0.52rem] text-slate-400">{item.label}</p>
+              <p className="text-[0.64rem] font-bold text-brand-ink">{item.status}</p>
+              <p className="mt-0.5 text-[0.52rem] text-muted-foreground">{item.label}</p>
             </div>
           ))}
         </div>
-        <div className="mt-3.5 rounded-full bg-slate-50 px-3 py-1 text-center text-[0.56rem] font-semibold text-slate-500">
+        <div className="mt-3.5 rounded-full bg-muted px-3 py-1 text-center text-[0.56rem] font-semibold text-muted-foreground">
           Vista de seguimiento
         </div>
       </article>
@@ -715,15 +715,15 @@ function MobileHeroCarouselCard({ type }: { type: MobileHeroCardType }) {
     <article className={cardClass} aria-label="Acompañamiento de Eleva360">
       <div className="flex items-center gap-2">
         <HeartHandshake className="h-4 w-4 text-accent" />
-        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-slate-400">Acompañamiento Eleva360</p>
+        <p className="text-[0.57rem] font-bold uppercase tracking-[0.1em] text-muted-foreground">Acompañamiento Eleva360</p>
       </div>
-      <p className="mt-3 text-[0.68rem] leading-[1.5] text-slate-700">
+      <p className="mt-3 text-[0.68rem] leading-[1.5] text-foreground">
         Revisamos avances y ajustamos las soluciones según las necesidades reales del negocio.
       </p>
-      <div className="mt-3 flex flex-wrap gap-1.5 text-[0.55rem] font-semibold text-primary">
-        <span className="rounded-full bg-blue-50 px-2 py-1">Medir</span>
-        <span className="rounded-full bg-blue-50 px-2 py-1">Ajustar</span>
-        <span className="rounded-full bg-blue-50 px-2 py-1">Acompañar</span>
+      <div className="mt-3 flex flex-wrap gap-1.5 text-[0.55rem] font-semibold text-brand-ink">
+        <span className="rounded-full bg-primary/10 px-2 py-1">Medir</span>
+        <span className="rounded-full bg-primary/10 px-2 py-1">Ajustar</span>
+        <span className="rounded-full bg-primary/10 px-2 py-1">Acompañar</span>
       </div>
     </article>
   );
@@ -736,17 +736,17 @@ function MobileHeroCards() {
   return (
     <div className="relative z-30 mt-3 xl:hidden">
       <div className="mx-1 mb-3 flex items-center justify-between">
-        <span className="text-[0.66rem] font-bold uppercase tracking-[0.12em] text-slate-400">
+        <span className="text-[0.66rem] font-bold uppercase tracking-[0.12em] text-muted-foreground">
           Tu negocio en el centro
         </span>
-        <span className="flex items-center gap-1 text-[0.64rem] font-semibold text-primary">
+        <span className="flex items-center gap-1 text-[0.64rem] font-semibold text-brand-ink">
           En movimiento <ChevronRight className="h-3 w-3" />
         </span>
       </div>
 
       <div className="relative -mx-4 overflow-hidden pb-5 pt-3 sm:-mx-6 lg:-mx-8">
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 bg-gradient-to-r from-white to-transparent" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 bg-gradient-to-l from-white to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 bg-gradient-to-r from-background to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 bg-gradient-to-l from-background to-transparent" />
 
         <svg aria-hidden viewBox="0 0 58 24" className="pointer-events-none absolute left-1/2 top-0 z-10 h-6 w-[58px] -translate-x-1/2 overflow-visible">
           <defs>
@@ -758,12 +758,12 @@ function MobileHeroCards() {
               </feMerge>
             </filter>
           </defs>
-          <path d="M4 2 C16 2 18 21 29 21" fill="none" stroke="rgba(37,99,235,0.16)" strokeWidth="4.5" strokeLinecap="round" />
-          <path d="M4 2 C16 2 18 21 29 21" fill="none" stroke="#3B82F6" strokeWidth="1.4" strokeDasharray="4 5" strokeLinecap="round" filter="url(#mobile-carousel-glow)">
+          <path d="M4 2 C16 2 18 21 29 21" fill="none" stroke="rgb(var(--terracotta-rgb)/0.16)" strokeWidth="4.5" strokeLinecap="round" />
+          <path d="M4 2 C16 2 18 21 29 21" fill="none" stroke="var(--terracotta)" strokeWidth="1.4" strokeDasharray="4 5" strokeLinecap="round" filter="url(#mobile-carousel-glow)">
             <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="8s" repeatCount="indefinite" />
           </path>
-          <circle cx="4" cy="2" r="2.2" fill="#14B8A6" />
-          <circle cx="29" cy="21" r="2.4" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.3" />
+          <circle cx="4" cy="2" r="2.2" fill="var(--gold)" />
+          <circle cx="29" cy="21" r="2.4" fill="#FFFFFF" stroke="var(--terracotta)" strokeWidth="1.3" />
         </svg>
 
         <div className="animate-marquee flex w-max gap-3 pt-3">
@@ -793,19 +793,19 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-white px-4 pt-14 pb-10 sm:px-6 sm:pb-16 lg:px-8 lg:pt-12 lg:pb-16 2xl:pt-20 2xl:pb-24">
+    <section className="relative flex min-h-[88vh] items-center isolate overflow-hidden bg-background px-4 pt-14 pb-10 sm:px-6 sm:pb-16 lg:px-8 lg:pt-12 lg:pb-16 2xl:pt-20 2xl:pb-24">
       {/* Fondo: gradientes radiales suaves + luz ambiental en capas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgba(37,99,235,0.045),transparent_60%)]" />
-        <div className="hero-ambient absolute right-[-6%] top-1/2 h-[620px] w-[620px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.10),transparent_68%)] blur-[70px]" />
-        <div className="hero-ambient absolute bottom-[-12%] left-[38%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(20,184,166,0.07),transparent_70%)] blur-[80px] [animation-delay:-6s]" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgb(var(--terracotta-rgb)/0.045),transparent_60%)]" />
+        <div className="hero-ambient absolute right-[-6%] top-1/2 h-[620px] w-[620px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(var(--terracotta-rgb)/0.10),transparent_68%)] blur-[70px]" />
+        <div className="hero-ambient absolute bottom-[-12%] left-[38%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgb(var(--gold-rgb)/0.07),transparent_70%)] blur-[80px] [animation-delay:-6s]" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-[1600px] items-center gap-10 sm:gap-16 lg:grid-cols-[0.36fr_0.64fr] lg:gap-10 xl:gap-12 2xl:grid-cols-[0.34fr_0.66fr]">
         {/* Bloque de texto */}
         <div className="relative z-30 min-w-0 flex flex-col items-start text-left xl:-translate-y-8 2xl:translate-y-0">
-          <div className="animate-hero-fade-up mb-5 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] backdrop-blur 2xl:mb-7">
+          <div className="animate-hero-fade-up mb-5 inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-white/80 px-3.5 py-1.5 shadow-[0_1px_2px_rgb(var(--charcoal-rgb)/0.03)] backdrop-blur 2xl:mb-7">
             <span className="relative flex h-1.5 w-1.5 rounded-full bg-primary">
               <span className="absolute inset-0 animate-ping rounded-full bg-primary/50" />
             </span>
@@ -828,7 +828,7 @@ function HeroSection() {
     href={WHATSAPP_URL}
     target="_blank"
     rel="noreferrer"
-    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_1px_2px_rgba(37,99,235,0.10),0_8px_20px_-8px_rgba(37,99,235,0.35)] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_2px_4px_rgba(37,99,235,0.10),0_18px_34px_-12px_rgba(37,99,235,0.42)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
+    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] transition-all duration-300 ease-out hover:-translate-y-[2px] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem] whatsapp-link"
   >
     Solicitar diagnóstico inicial
     <ArrowRight className="h-[1.05rem] w-[1.05rem] transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
@@ -836,21 +836,21 @@ function HeroSection() {
 
   <a
     href="#como-funciona"
-    className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-slate-300 hover:shadow-[0_10px_22px_-12px_rgba(15,23,42,0.16)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
+    className="animate-hero-fade-up animation-delay-400 inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-border/80 bg-white px-5 py-3 whitespace-nowrap text-[0.86rem] font-semibold tracking-[-0.01em] text-foreground shadow-[0_1px_2px_rgb(var(--charcoal-rgb)/0.035)] transition-all duration-300 ease-out hover:-translate-y-[1px] hover:border-border hover:shadow-[0_10px_22px_-12px_rgb(var(--charcoal-rgb)/0.16)] sm:w-auto 2xl:px-6 2xl:py-3.5 2xl:text-[0.95rem]"
   >
     Conocer cómo trabajamos
   </a>
 </div>
 
-          <div className="animate-hero-fade-up animation-delay-400 mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-5 text-[0.75rem] text-muted-foreground 2xl:mt-11 2xl:gap-x-6 2xl:gap-y-2.5 2xl:pt-6 2xl:text-[0.8125rem]">
+          <div className="animate-hero-fade-up animation-delay-400 mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-5 text-[0.75rem] text-muted-foreground 2xl:mt-11 2xl:gap-x-6 2xl:gap-y-2.5 2xl:pt-6 2xl:text-[0.8125rem]">
             <span className="flex items-center gap-2">
-              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Diagnóstico antes de proponer
+              <ShieldCheck className="h-[0.9rem] w-[0.9rem] text-brand-ink/80" /> Diagnóstico antes de proponer
             </span>
             <span className="flex items-center gap-2">
               <Zap className="h-[0.9rem] w-[0.9rem] text-accent/80" /> Implementación por etapas
             </span>
             <span className="flex items-center gap-2">
-              <HeartHandshake className="h-[0.9rem] w-[0.9rem] text-primary/80" /> Acompañamiento continuo
+              <HeartHandshake className="h-[0.9rem] w-[0.9rem] text-brand-ink/80" /> Acompañamiento continuo
             </span>
           </div>
         </div>
@@ -863,7 +863,7 @@ function HeroSection() {
           className="relative z-10 isolate mx-auto min-w-0 w-full max-w-[680px] [perspective:1600px] lg:max-w-none lg:w-full"
         >
           <div className="relative z-40 flex justify-start px-2 pb-1 sm:justify-end sm:px-4 sm:pb-2">
-            <span className="rounded-full border border-slate-200/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold text-slate-500 shadow-sm backdrop-blur">
+            <span className="rounded-full border border-border/80 bg-white/90 px-2.5 py-1 text-[0.6rem] font-semibold text-muted-foreground shadow-sm backdrop-blur">
               Ejemplo ilustrativo
             </span>
           </div>
@@ -871,13 +871,13 @@ function HeroSection() {
             {/* Halo suave que integra el edificio con el fondo */}
             <div
               aria-hidden
-              className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.06),rgba(255,255,255,0)_70%)] blur-2xl"
+              className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(var(--terracotta-rgb)/0.06),rgba(255,255,255,0)_70%)] blur-2xl"
             />
 
             {/* Sombra de suelo para anclar el edificio */}
             <div
               aria-hidden
-              className="absolute bottom-[10%] left-1/2 h-10 w-[46%] -translate-x-1/2 rounded-[100%] bg-slate-900/[0.05] blur-2xl"
+              className="absolute bottom-[10%] left-1/2 h-10 w-[46%] -translate-x-1/2 rounded-[100%] bg-foreground/[0.05] blur-2xl"
             />
 
             {/* Edificio con parallax muy suave */}
@@ -897,7 +897,7 @@ function HeroSection() {
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"
-                  className="w-full drop-shadow-[0_36px_60px_rgba(15,23,42,0.10)]"
+                  className="w-full drop-shadow-[0_36px_60px_rgb(var(--charcoal-rgb)/0.10)]"
                 />
               </picture>
             </div>
@@ -919,7 +919,7 @@ function HeroSection() {
                   }`}
                 >
                   <HeroCardConnector type={n.type} />
-                  <div className="group relative z-10 overflow-hidden rounded-[20px] border border-slate-200/70 bg-white shadow-[0_2px_6px_rgba(15,23,42,0.04),0_18px_46px_-16px_rgba(15,23,42,0.22)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-slate-300 hover:shadow-[0_4px_10px_rgba(15,23,42,0.05),0_28px_60px_-18px_rgba(15,23,42,0.28)]">
+                  <div className="group relative z-10 overflow-hidden rounded-[20px] border border-border/70 bg-white shadow-[0_2px_6px_rgb(var(--charcoal-rgb)/0.04),0_18px_46px_-16px_rgb(var(--charcoal-rgb)/0.22)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-border hover:shadow-[0_4px_10px_rgb(var(--charcoal-rgb)/0.05),0_28px_60px_-18px_rgb(var(--charcoal-rgb)/0.28)]">
                   <div className="pointer-events-none absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/5 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* GOOGLE BUSINESS */}
@@ -943,27 +943,27 @@ function HeroSection() {
                               <circle cx="24" cy="22" r="8.5" fill="#FFFFFF" />
                               <circle cx="24" cy="22" r="3.2" fill="#E8F0FE" />
                             </svg>
-                            <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                            <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
                               Visibilidad local
                             </p>
                           </div>
-                          <p className="mt-1.5 truncate text-[17px] font-bold tracking-[-0.01em] text-slate-900">
+                          <p className="mt-1.5 truncate text-[17px] font-bold tracking-[-0.01em] text-foreground">
                             Café Pacífico
                           </p>
 
                           <div className="mt-1.5 flex items-center gap-1.5">
-                            <span className="text-[13px] font-semibold text-slate-800">4.9</span>
+                            <span className="text-[13px] font-semibold text-foreground">4.9</span>
                             <span className="text-[13px] leading-none tracking-tight text-amber-400">★★★★★</span>
-                            <span className="text-[11px] text-slate-400">(238)</span>
+                            <span className="text-[11px] text-muted-foreground">(238)</span>
                           </div>
 
                           <div className="mt-1 flex items-center gap-1.5 text-[10.5px]">
                             <span className="font-semibold text-emerald-600">Abierto</span>
-                            <span className="text-slate-400">· Cierra a las 23:00</span>
+                            <span className="text-muted-foreground">· Cierra a las 23:00</span>
                           </div>
                         </div>
 
-                        <div className="h-[94px] w-[104px] shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-100">
+                        <div className="h-[94px] w-[104px] shrink-0 overflow-hidden rounded-xl ring-1 ring-border">
                           <picture className="block h-full w-full">
                             <source srcSet={heroBuildingWebp} type="image/webp" />
                             <img
@@ -979,7 +979,7 @@ function HeroSection() {
                         </div>
                       </div>
 
-                      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-[11px] font-semibold text-primary shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+                      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3.5 py-2 text-[11px] font-semibold text-brand-ink shadow-[0_1px_2px_rgb(var(--charcoal-rgb)/0.04)]">
                         <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[7px] text-white">▶</span>
                         Cómo llegar
                       </div>
@@ -998,30 +998,30 @@ function HeroSection() {
                             />
                           </svg>
                         </span>
-                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
                           Contacto y atención
                         </p>
                         <span className="ml-auto h-2 w-2 rounded-full bg-[#25D366]" />
                       </div>
 
-                      <div className="mt-3 rounded-2xl rounded-tl-md bg-slate-50 p-3">
-                        <p className="text-[11.5px] leading-[1.5] text-slate-700">
+                      <div className="mt-3 rounded-2xl rounded-tl-md bg-muted p-3">
+                        <p className="text-[11.5px] leading-[1.5] text-foreground">
                           Hola 👋
                           <br />
                           Quiero reservar una mesa
                           <br />
                           para este sábado a las 20:00.
                         </p>
-                        <div className="mt-1 text-right text-[9px] text-slate-400">11:18</div>
+                        <div className="mt-1 text-right text-[9px] text-muted-foreground">11:18</div>
                       </div>
 
                       <div className="mt-2.5 flex items-center gap-2.5">
-                        <div className="flex h-6 items-center gap-1 rounded-full bg-slate-100 px-2.5">
-                          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
-                          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
-                          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                        <div className="flex h-6 items-center gap-1 rounded-full bg-muted px-2.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-border" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-border" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-border" />
                         </div>
-                        <span className="text-[10px] text-slate-400">Escribiendo...</span>
+                        <span className="text-[10px] text-muted-foreground">Escribiendo...</span>
                       </div>
                     </div>
                   )}
@@ -1030,10 +1030,10 @@ function HeroSection() {
                   {n.title.toLowerCase().includes("carta") && (
                     <div className="w-[258px] p-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-brand-ink">
                           <Smartphone className="h-[18px] w-[18px]" />
                         </div>
-                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
                           Experiencia del cliente
                         </p>
                       </div>
@@ -1045,7 +1045,7 @@ function HeroSection() {
                           { label: "Bebidas", count: "10 opciones", image: menuBebidaPremium },
                         ].map((item) => (
                           <div key={item.label} className="flex items-center gap-3">
-                            <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.12),0_2px_8px_rgba(15,23,42,0.10)]">
+                            <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-muted shadow-[inset_0_0_0_1px_rgba(148,163,184,0.12),0_2px_8px_rgb(var(--charcoal-rgb)/0.10)]">
                               <img
                                 src={item.image}
                                 alt={`Maqueta ilustrativa: ${item.label} del menú de Café Pacífico`}
@@ -1056,15 +1056,15 @@ function HeroSection() {
                               />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <p className="text-[12px] font-semibold text-slate-800">{item.label}</p>
-                              <p className="text-[9.5px] text-slate-400">{item.count}</p>
+                              <p className="text-[12px] font-semibold text-foreground">{item.label}</p>
+                              <p className="text-[9.5px] text-muted-foreground">{item.count}</p>
                             </div>
-                            <ChevronRight className="h-4 w-4 shrink-0 text-slate-300" />
+                            <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                           </div>
                         ))}
                       </div>
 
-                      <div className="mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white py-2 text-[11px] font-semibold text-primary shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+                      <div className="mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-full border border-border bg-white py-2 text-[11px] font-semibold text-brand-ink shadow-[0_1px_2px_rgb(var(--charcoal-rgb)/0.04)]">
                         Ver carta completa
                         <ArrowRight className="h-3 w-3" />
                       </div>
@@ -1075,10 +1075,10 @@ function HeroSection() {
                   {n.title.toLowerCase().includes("dashboard") && (
                     <div className="w-[272px] p-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-primary">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-brand-ink">
                           <BarChart3 className="h-[18px] w-[18px]" />
                         </div>
-                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
                           Seguimiento y mejora
                         </p>
                       </div>
@@ -1091,13 +1091,13 @@ function HeroSection() {
                         ].map(({ icon: Icon, label, status }) => (
                           <div
                             key={label}
-                            className="flex items-center justify-between border-b border-slate-100 py-2.5 last:border-0"
+                            className="flex items-center justify-between border-b border-border py-2.5 last:border-0"
                           >
                             <div className="flex items-center gap-2">
-                              <Icon className="h-3.5 w-3.5 text-primary/70" />
-                              <span className="text-[11.5px] text-slate-600">{label}</span>
+                              <Icon className="h-3.5 w-3.5 text-brand-ink/70" />
+                              <span className="text-[11.5px] text-muted-foreground">{label}</span>
                             </div>
-                            <span className="text-right text-[10.5px] font-semibold text-primary">{status}</span>
+                            <span className="text-right text-[10.5px] font-semibold text-brand-ink">{status}</span>
                           </div>
                         ))}
                       </div>
@@ -1112,19 +1112,19 @@ function HeroSection() {
                       <div className="w-[272px] p-4">
                         <div className="flex items-center gap-2.5">
                           <HeartHandshake className="h-5 w-5 text-accent" />
-                          <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                          <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-muted-foreground">
                             Acompañamiento Eleva360
                           </p>
                         </div>
 
-                        <p className="mt-3 text-[11.5px] leading-[1.55] text-slate-700">
+                        <p className="mt-3 text-[11.5px] leading-[1.55] text-foreground">
                           Revisamos avances y ajustamos las soluciones según las necesidades reales del negocio.
                         </p>
 
-                        <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-semibold text-primary">
-                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Medir</span>
-                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Ajustar</span>
-                          <span className="rounded-full bg-blue-50 px-2.5 py-1">Acompañar</span>
+                        <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-semibold text-brand-ink">
+                          <span className="rounded-full bg-primary/10 px-2.5 py-1">Medir</span>
+                          <span className="rounded-full bg-primary/10 px-2.5 py-1">Ajustar</span>
+                          <span className="rounded-full bg-primary/10 px-2.5 py-1">Acompañar</span>
                         </div>
                       </div>
                     )}
@@ -1153,7 +1153,7 @@ function SectionHeader({
   return (
     <div className={`mx-auto max-w-xl ${align === "center" ? "text-center" : "text-left"}`}>
       {eyebrow && (
-        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-ink">
           {eyebrow}
         </span>
       )}
@@ -1284,7 +1284,7 @@ function DigitalMenuMockup() {
           Carta Digital
         </span>
         <div className="flex h-6 w-6 items-center justify-center rounded-md bg-white shadow-sm">
-          <QrCode className="h-3.5 w-3.5 text-primary" />
+          <QrCode className="h-3.5 w-3.5 text-brand-ink" />
         </div>
       </div>
       <div className="mt-2 space-y-1.5">
@@ -1294,7 +1294,7 @@ function DigitalMenuMockup() {
             className="flex items-center justify-between rounded-md bg-white px-2 py-1.5 text-[10px] shadow-sm"
           >
             <span className="font-medium text-foreground">{it.name}</span>
-            <span className="font-bold text-primary">{it.price}</span>
+            <span className="font-bold text-brand-ink">{it.price}</span>
           </div>
         ))}
       </div>
@@ -1368,10 +1368,10 @@ function PricingSection() {
               <div className="card-shine group flex h-full flex-col rounded-3xl border border-border bg-white p-7 shadow-sm tilt-hover hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
                 <div className="card-shine-inner" />
                 <div className="mb-5 flex items-center justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-brand-ink transition-transform duration-300 group-hover:scale-105">
                     <item.icon className="h-7 w-7" aria-hidden />
                   </div>
-                  <span className="font-display text-sm font-extrabold tracking-[0.2em] text-primary/55">
+                  <span className="font-display text-sm font-extrabold tracking-[0.2em] text-brand-ink/55">
                     0{i + 1}
                   </span>
                 </div>
@@ -1380,7 +1380,7 @@ function PricingSection() {
                 </h3>
                 <p className="mt-4 text-center text-sm text-muted-foreground">{item.desc}</p>
                 <div className="mt-auto flex justify-center pt-6">
-                  <span className="inline-flex rounded-full bg-primary/10 px-3 py-1.5 text-center text-xs font-bold text-primary ring-1 ring-primary/15">
+                  <span className="inline-flex rounded-full bg-primary/10 px-3 py-1.5 text-center text-xs font-bold text-brand-ink ring-1 ring-primary/15">
                     {item.highlight}
                   </span>
                 </div>
@@ -1397,7 +1397,7 @@ function PricingSection() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--gradient-start)] to-[color:var(--gradient-end)] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl whatsapp-link"
           >
             Solicitar diagnóstico inicial
             <ArrowRight className="h-4 w-4" />
@@ -1463,7 +1463,7 @@ function SolutionSection() {
 
         <div className="relative mt-12">
           <div className="flex justify-center">
-            <span className="rounded-full border border-slate-200/80 bg-white/90 px-3 py-1 text-[0.65rem] font-semibold whitespace-nowrap text-slate-500 shadow-sm backdrop-blur">
+            <span className="rounded-full border border-border/80 bg-white/90 px-3 py-1 text-[0.65rem] font-semibold whitespace-nowrap text-muted-foreground shadow-sm backdrop-blur">
               Ejemplos ilustrativos
             </span>
           </div>
@@ -1510,7 +1510,7 @@ function SolutionSection() {
                       {n.desc}
                     </p>
                     <div className="mt-auto pt-4">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink/80">
                         Puede incluir
                       </p>
                       <ul className="mt-2.5 flex flex-wrap gap-2">
@@ -1766,7 +1766,7 @@ function ResultsSection() {
 
       <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16 xl:gap-24">
         <div>
-          <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+          <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-ink">
             Áreas de mejora
           </span>
           <h2 className="mt-4 max-w-xl font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
@@ -1778,7 +1778,7 @@ function ResultsSection() {
 
           <div className="improvements-editorial-signal mt-8 h-1 w-16 rounded-full" aria-hidden="true" />
 
-          <div className="mt-10 flex max-w-lg items-start gap-4 border-t border-slate-200/80 pt-6">
+          <div className="mt-10 flex max-w-lg items-start gap-4 border-t border-border/80 pt-6">
             <span className="improvements-closing-marker mt-2 h-2 w-2 shrink-0 rounded-full" aria-hidden="true" />
             <p className="text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
               Las prioridades y soluciones dependen del diagnóstico de cada negocio.
@@ -1873,7 +1873,7 @@ function PlanSection() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-bold text-[color:var(--foreground)] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white/95 hover:shadow-xl"
+                  className="mt-5 inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-bold shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl whatsapp-link"
                 >
                   Solicitar diagnóstico inicial
                   <ArrowRight className="h-5 w-5" />
@@ -1960,14 +1960,14 @@ function FutureSection() {
             <Reveal key={it.title} delay={i * 70} variant="zoom">
               <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm tilt-hover hover:border-primary/40 hover:shadow-lg lg:min-h-[15.5rem]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-brand-ink transition-transform duration-300 group-hover:scale-110">
                     <it.icon className="h-5 w-5" aria-hidden />
                   </div>
                   <h3 className="font-display text-lg font-bold text-foreground">{it.title}</h3>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
                 <div className="mt-auto pt-5">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary/80">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink/80">
                     Puede incluir
                   </p>
                   <ul className="mt-2 flex flex-wrap gap-2">
@@ -2037,7 +2037,7 @@ function WhySection() {
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 100}>
               <SpotlightCard className="group h-full rounded-2xl border border-border bg-white p-6 shadow-soft shadow-soft-hover hover:border-primary/30 lg:min-h-[14rem]">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-brand-ink transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                   <it.icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-display text-lg font-bold text-foreground">{it.title}</h3>
@@ -2079,7 +2079,7 @@ function CTASection() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-bold shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl whatsapp-link"
               >
                 Solicitar diagnóstico inicial
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -2097,7 +2097,7 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border bg-white px-4 py-12 sm:px-6 lg:px-8">
+    <footer className="border-t border-border bg-background px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
         <div className="flex flex-col gap-3">
           <Logo loading="lazy" />
@@ -2119,7 +2119,7 @@ function Footer() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 text-primary transition-colors hover:text-primary/80"
+            className="inline-flex min-h-11 items-center gap-2 transition-colors rounded-full px-4 whatsapp-link"
           >
             <MessageCircle className="h-4 w-4" />
             WhatsApp
@@ -2143,10 +2143,10 @@ function WhatsAppFloating() {
       target="_blank"
       rel="noreferrer"
       aria-label="Conversar con Eleva360 por WhatsApp"
-      className="animate-wa-bob fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 transition-transform hover:scale-110 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
+      className="animate-wa-bob fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-110 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14 whatsapp-link"
     >
       <MessageCircle className="h-6 w-6" />
-      <span className="absolute hidden h-full w-full animate-ping rounded-full bg-accent/40 sm:inline-flex" />
+      <span className="absolute hidden h-full w-full animate-ping rounded-full bg-[var(--whatsapp)]/40 sm:inline-flex" />
     </a>
   );
 }

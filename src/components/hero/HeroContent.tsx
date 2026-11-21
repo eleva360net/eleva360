@@ -21,7 +21,7 @@ const HeroContent: React.FC = () => {
       <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
         <a
           href="/demo"
-          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-md hover:shadow-lg transition-shadow"
+          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground shadow-md hover:shadow-lg transition-shadow"
           aria-label="Solicitar demo"
         >
           Solicitar demo
@@ -38,13 +38,13 @@ const HeroContent: React.FC = () => {
 
       <ul className="mt-6 flex flex-wrap gap-3 text-sm text-muted-foreground">
         <li className="inline-flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 block" /> Integración con WhatsApp y Google Business
+          <span className="h-2 w-2 rounded-full bg-primary block" /> Integración con WhatsApp y Google Business
         </li>
         <li className="inline-flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-rose-400 block" /> Dashboard sencillo y accionable
+          <span className="h-2 w-2 rounded-full bg-brand-ink block" /> Dashboard sencillo y accionable
         </li>
         <li className="inline-flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-sky-400 block" /> Implementación rápida para pymes
+          <span className="h-2 w-2 rounded-full bg-accent block" /> Implementación rápida para pymes
         </li>
       </ul>
     </div>
