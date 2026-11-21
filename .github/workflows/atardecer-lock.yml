@@ -5,6 +5,7 @@ on:
       - feature/eleva360-identidad-atardecer
     paths:
       - .github/workflows/atardecer-lock.yml
+      - src/routes/__root.tsx
 permissions:
   contents: read
 jobs:
