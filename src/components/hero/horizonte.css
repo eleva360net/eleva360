@@ -1,0 +1,1452 @@
+.horizonte {
+  --beige: #f7f1e6;
+  --terra: #d86d48;
+  --terra-txt: #c95e3a;
+  --terra-ink: #b4532f;
+  --gold: #f2be5c;
+  --ink: #1b1a18;
+  --wa: #25d366;
+  --ink-70: rgba(27, 26, 24, 0.76);
+  --ink-55: rgba(27, 26, 24, 0.58);
+  --f-head: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
+  --f-accent: "Instrument Serif", Georgia, serif;
+  --f-ui: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  /* luz cálida que viene del sol, abajo a la izquierda de las tarjetas */
+  --rim: rgba(255, 214, 150, 0.95);
+}
+.horizonte svg.i {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ============ ESCRITORIO: escena 1440×810 (16:9, igual que el fondo) escalada al ancho ============ */
+.horizonte {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--beige);
+  color: var(--ink);
+  font-family: var(--f-ui);
+  margin-top: -4rem;
+}
+.horizonte :where(h1, h2, h3, p, ul, ol) {
+  margin: 0;
+  padding: 0;
+}
+.horizonte a {
+  text-decoration: none;
+}
+.horizonte a:focus-visible,
+.horizonte .stage-scroll:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.horizonte .canvas {
+  position: relative;
+  width: 1440px;
+  height: 810px;
+  transform-origin: 0 0;
+  transform: scale(var(--scale, 1));
+}
+@media (min-width: 1440px) {
+  .horizonte {
+    aspect-ratio: 16 / 9;
+  }
+  .horizonte .canvas {
+    --scale: calc(100cqw / 1440px);
+  }
+}
+.horizonte .bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.horizonte .bg picture,
+.horizonte .bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.horizonte .bg img {
+  object-fit: cover;
+  object-position: 100% 50%;
+}
+/* velo beige: funde la columna de texto con la bruma del propio paisaje */
+.horizonte .veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(247, 241, 230, 0.78) 0%,
+    rgba(247, 241, 230, 0.6) 24%,
+    rgba(247, 241, 230, 0.22) 42%,
+    rgba(247, 241, 230, 0) 56%
+  );
+}
+.horizonte .grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .11 0 0 0 0 .1 0 0 0 0 .09 0 0 0 .35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.horizonte .bg .grain {
+  opacity: 0.12;
+}
+/* el mismo grano por encima de las tarjetas: comparten textura con la fotografía */
+.horizonte .grain.top {
+  z-index: 9;
+  opacity: 0.07;
+}
+/* resplandor del sol sobre la escena (incluye el borde inferior de las tarjetas) */
+.horizonte .sunlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  mix-blend-mode: soft-light;
+  background: radial-gradient(
+    calc(560px * var(--kb, 1)) calc(360px * var(--kb, 1)) at var(--sun-x, 682px) var(--sun-y, 546px),
+    rgba(255, 180, 95, 0.85),
+    rgba(255, 180, 95, 0) 72%
+  );
+}
+
+.horizonte .copy {
+  position: absolute;
+  left: 96px;
+  top: 150px;
+  width: 640px;
+  z-index: 10;
+}
+.horizonte .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--f-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--terra-ink);
+}
+.horizonte .eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1.5px;
+  background: var(--terra);
+}
+.horizonte h1 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+  margin: 24px 0 26px;
+  max-width: 590px;
+  font-variation-settings: "opsz" 96;
+}
+.horizonte h1 em {
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.13em;
+  letter-spacing: -0.015em;
+  color: var(--terra-txt);
+}
+.horizonte .lead {
+  font-size: 18.5px;
+  line-height: 1.6;
+  color: var(--ink-70);
+  max-width: 500px;
+}
+.horizonte .ctas {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+}
+.horizonte .btn {
+  height: 58px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.horizonte .btn-wa {
+  padding: 0 26px 0 22px;
+  background: var(--wa);
+  color: var(--ink);
+  box-shadow:
+    0 1px 0 rgba(27, 26, 24, 0.1),
+    0 18px 32px -20px rgba(27, 26, 24, 0.55);
+}
+.horizonte .btn-wa svg {
+  width: 21px;
+  height: 21px;
+}
+.horizonte .btn-sec {
+  padding: 0 22px;
+  font-weight: 500;
+  background: rgba(255, 250, 243, 0.5);
+  border: 1px solid rgba(27, 26, 24, 0.12);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.horizonte .btn-sec svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ============ TARJETAS: vidrio cálido flotando sobre el pueblo ============ */
+.horizonte .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.horizonte .stage {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --rs: 55px;
+  --bi: 7px;
+}
+.horizonte .stage-scroll {
+  position: absolute;
+  inset: 0;
+}
+.horizonte .stage-in {
+  position: absolute;
+  inset: 0;
+  translate: var(--pan, 0px) 0;
+  transition:
+    translate 1s var(--ease-io),
+    opacity 0.35s var(--ease);
+}
+.horizonte .card {
+  position: absolute;
+  border-radius: 30px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 252, 247, 0.8) 0%,
+    rgba(255, 244, 231, 0.62) 46%,
+    rgba(255, 224, 188, 0.52) 100%
+  );
+  /* sin backdrop-filter: con perspectiva 3D Chrome lo dibuja en bloques visibles; el cielo detrás ya es suave */
+  border: 1px solid rgba(255, 246, 232, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 1.5px -1.5px 0 var(--rim),
+    0 0 0 1px rgba(255, 214, 160, 0.28),
+    0 36px 70px -44px rgba(110, 45, 20, 0.55);
+  transition:
+    opacity 0.7s var(--ease),
+    translate 0.9s var(--ease),
+    scale 0.8s var(--ease-io),
+    box-shadow 0.7s var(--ease),
+    border-color 0.7s var(--ease);
+}
+/* luz ambiente: el borde que mira al sol se calienta */
+.horizonte .card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 80% at 0% 110%,
+    rgba(255, 176, 92, 0.42),
+    rgba(255, 176, 92, 0) 60%
+  );
+}
+/* perspectiva atmosférica: lo más lejano toma el color del cielo */
+.horizonte .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: rgba(240, 196, 170, var(--h, 0));
+  transition: opacity 0.7s var(--ease);
+}
+.horizonte .card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Protagonista */
+.horizonte .c1 {
+  left: 734px;
+  top: 124px;
+  width: 312px;
+  padding: 24px 24px 20px;
+  z-index: 4;
+  transform: perspective(1500px) rotateY(16deg) rotateX(5deg) rotateZ(-3.5deg);
+  border-color: rgba(255, 236, 205, 0.95);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 2px -2px 0 rgba(255, 206, 130, 1),
+    0 0 0 2px rgba(255, 214, 150, 0.9),
+    0 0 18px 3px rgba(255, 186, 105, 0.75),
+    0 0 64px 12px rgba(255, 160, 80, 0.34),
+    0 44px 80px -46px rgba(110, 45, 20, 0.6);
+}
+.horizonte .c1-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.horizonte .tile {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, #ea8d6b 0%, #d86d48 52%, #c2552f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 14px 26px -12px rgba(194, 85, 47, 0.9);
+}
+.horizonte .tile svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 2.1;
+}
+.horizonte .kicker {
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.horizonte .kicker span {
+  display: block;
+  transition: color 0.5s var(--ease);
+}
+.horizonte .kicker .k1 {
+  color: var(--terra-ink);
+}
+.horizonte .kicker .k2 {
+  color: var(--ink-55);
+}
+.horizonte .c1 h2 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin-top: 20px;
+}
+.horizonte .c1-body {
+  position: relative;
+  margin-top: 18px;
+}
+.horizonte .rows {
+  list-style: none;
+}
+.horizonte .row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 50px;
+  padding: 0 10px;
+  border-radius: 15px;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: rgba(27, 26, 24, 0.68);
+  transition:
+    opacity 0.5s var(--ease),
+    translate 0.5s var(--ease),
+    background-color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease),
+    color 0.35s var(--ease);
+}
+.horizonte .row + .row {
+  margin-top: 5px;
+}
+.horizonte .row .ico {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 250, 242, 0.75);
+  color: var(--terra);
+}
+.horizonte .row .ico svg {
+  width: 17px;
+  height: 17px;
+}
+.horizonte .row.on {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  box-shadow: 0 14px 28px -16px rgba(120, 55, 25, 0.55);
+}
+.horizonte .row.reading {
+  color: var(--ink);
+}
+.horizonte .tag {
+  margin-left: auto;
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--terra-ink);
+  transition:
+    opacity 0.45s var(--ease),
+    translate 0.45s var(--ease);
+}
+/* visor de análisis: recorre las áreas y se queda en la oportunidad */
+.horizonte .brk {
+  position: absolute;
+  left: calc(var(--bi) * -1.3);
+  right: calc(var(--bi) * -1.3);
+  top: calc(var(--sy, 1) * var(--rs) - var(--bi));
+  height: calc(var(--rs) - 5px + var(--bi) * 2);
+  pointer-events: none;
+  transition:
+    top 0.5s var(--ease-io),
+    opacity 0.35s var(--ease);
+  background:
+    linear-gradient(var(--terra), var(--terra)) 0 0/15px 1.8px,
+    linear-gradient(var(--terra), var(--terra)) 0 0/1.8px 15px,
+    linear-gradient(var(--terra), var(--terra)) 100% 0/15px 1.8px,
+    linear-gradient(var(--terra), var(--terra)) 100% 0/1.8px 15px,
+    linear-gradient(var(--terra), var(--terra)) 0 100%/15px 1.8px,
+    linear-gradient(var(--terra), var(--terra)) 0 100%/1.8px 15px,
+    linear-gradient(var(--terra), var(--terra)) 100% 100%/15px 1.8px,
+    linear-gradient(var(--terra), var(--terra)) 100% 100%/1.8px 15px;
+  background-repeat: no-repeat;
+}
+/* «Tu negocio»: lo que miramos antes de diagnosticar */
+.horizonte .biz {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 6px;
+  opacity: 0;
+  translate: 0 6px;
+  pointer-events: none;
+  transition:
+    opacity 0.45s var(--ease),
+    translate 0.45s var(--ease);
+}
+.horizonte .biz-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.horizonte .biz-art {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 250, 242, 0.9);
+  box-shadow: 0 12px 24px -16px rgba(120, 55, 25, 0.5);
+}
+.horizonte .biz-art svg {
+  width: 38px;
+  height: 38px;
+}
+.horizonte .biz-art::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 21px;
+  border: 1.5px solid rgba(216, 109, 72, 0.7);
+  opacity: 0;
+  scale: 1.18;
+  transition:
+    opacity 0.7s var(--ease),
+    scale 0.9s var(--ease);
+}
+.horizonte .biz b {
+  display: block;
+  font-family: var(--f-head);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.horizonte .biz small {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+}
+.horizonte .biz p {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink-70);
+}
+/* destello de luz bajo la tarjeta principal */
+.horizonte .glint {
+  position: absolute;
+  left: 792px;
+  top: 500px;
+  width: 200px;
+  height: 2px;
+  border-radius: 2px;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 226, 170, 0),
+    rgba(255, 236, 196, 0.95) 45%,
+    rgba(255, 226, 170, 0)
+  );
+  box-shadow: 0 0 12px 2px rgba(255, 190, 110, 0.55);
+  transform: rotate(-3deg);
+  transition: opacity 1s var(--ease) 0.5s;
+}
+
+/* Secundarias: cada vez más simples y más lejanas */
+.horizonte .badge {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--terra);
+  background: rgba(255, 250, 242, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(216, 109, 72, 0.25);
+  transition:
+    background-color 0.5s,
+    color 0.5s;
+}
+.horizonte .badge svg {
+  width: 19px;
+  height: 19px;
+}
+.horizonte .card h3 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.horizonte .ph {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 11px;
+  border-radius: 6px;
+  background: rgba(27, 26, 24, 0.09);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.horizonte .c2 {
+  left: 1056px;
+  top: 150px;
+  width: 168px;
+  height: 236px;
+  padding: 20px 18px;
+  z-index: 3;
+  border-radius: 26px;
+  --as: 1.1;
+  transform: perspective(1500px) rotateY(16deg) rotateX(4deg) rotateZ(-2.5deg);
+}
+.horizonte .c2 h3 {
+  font-size: 24px;
+  margin-top: 20px;
+}
+/* el orden es la decisión: primero Contacto, lo demás después */
+.horizonte .lns {
+  list-style: none;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.horizonte .lns li {
+  height: 25px;
+  width: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-55);
+  background: rgba(27, 26, 24, 0.05);
+  transition:
+    width 0.6s var(--ease-io),
+    height 0.5s var(--ease-io),
+    padding 0.5s var(--ease-io),
+    background-color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+.horizonte .lns li > * {
+  transition: opacity 0.4s var(--ease) 0.2s;
+}
+.horizonte .lns i {
+  font-style: normal;
+  font-family: var(--f-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+}
+.horizonte .lns .l1 {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 8px 16px -8px rgba(200, 140, 40, 0.9);
+}
+.horizonte .lns .l1 i {
+  color: rgba(27, 26, 24, 0.72);
+}
+
+.horizonte .c3 {
+  left: 1212px;
+  top: 176px;
+  width: 124px;
+  height: 190px;
+  padding: 17px 14px;
+  z-index: 2;
+  border-radius: 22px;
+  --h: 0.12;
+  --as: 1.3;
+  --at: 14px 0;
+  transform: perspective(1500px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+}
+.horizonte .c3 .badge {
+  width: 34px;
+  height: 34px;
+}
+.horizonte .c3 .badge svg {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  transition: opacity 0.35s var(--ease);
+}
+.horizonte .c3 .i-pre {
+  opacity: 0;
+}
+.horizonte .c3 h3 {
+  font-size: 17px;
+  margin-top: 14px;
+}
+.horizonte .c3-body {
+  position: relative;
+  margin-top: 12px;
+}
+.horizonte .c3 .ph {
+  width: 78%;
+}
+.horizonte .chat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.horizonte .msg {
+  max-width: 100%;
+  font-size: 10px;
+  line-height: 1.3;
+  padding: 5px 7px;
+  border-radius: 9px 9px 9px 3px;
+  transition:
+    opacity 0.45s var(--ease),
+    translate 0.45s var(--ease);
+}
+.horizonte .msg.in {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+}
+.horizonte .msg.out {
+  align-self: flex-end;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 9px 9px 3px 9px;
+}
+.horizonte .reply {
+  position: relative;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.horizonte .typing {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  gap: 3px;
+  padding: 7px 8px;
+  border-radius: 9px 9px 3px 9px;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.horizonte .typing span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.horizonte .c4 {
+  left: 1322px;
+  top: 198px;
+  width: 100px;
+  height: 152px;
+  padding: 14px 12px;
+  z-index: 1;
+  border-radius: 19px;
+  --h: 0.24;
+  --as: 1.3;
+  --at: -8px 0;
+  transform: perspective(1500px) rotateY(16deg) rotateX(4deg) rotateZ(-1.5deg);
+}
+.horizonte .c4 .badge {
+  width: 28px;
+  height: 28px;
+}
+.horizonte .c4 .badge svg {
+  width: 14px;
+  height: 14px;
+  transition: rotate 1.6s var(--ease-io);
+}
+.horizonte .c4 h3 {
+  font-size: 14px;
+  margin-top: 12px;
+  letter-spacing: -0.02em;
+}
+.horizonte .c4-body {
+  position: relative;
+  margin-top: 10px;
+}
+.horizonte .c4 .ph {
+  width: 70%;
+  height: 8px;
+}
+.horizonte .cycle {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.horizonte .cycle li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ink-70);
+  transition:
+    opacity 0.45s var(--ease),
+    translate 0.45s var(--ease);
+}
+.horizonte .cycle li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--terra);
+}
+
+/* objeto que viaja entre etapas: la misma oportunidad pasa del diagnóstico a la decisión y a la solución */
+.horizonte .flyer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px 0 5px;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow:
+    0 0 0 1.5px rgba(242, 190, 92, 0.9),
+    0 0 18px 2px rgba(255, 190, 110, 0.6),
+    0 14px 26px -14px rgba(120, 55, 25, 0.6);
+}
+.horizonte .flyer .ico {
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--beige);
+  color: var(--terra);
+}
+.horizonte .flyer svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* volver a ver: discreto, solo al terminar */
+.horizonte .replay {
+  position: absolute;
+  left: 1070px;
+  top: 420px;
+  z-index: 10;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px 0 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid rgba(27, 26, 24, 0.12);
+  background: rgba(255, 250, 243, 0.55);
+  color: var(--ink);
+  font: 500 13px/1 var(--f-ui);
+  opacity: 0;
+  translate: 0 4px;
+  transition:
+    opacity 0.6s var(--ease),
+    translate 0.6s var(--ease),
+    background-color 0.25s;
+}
+.horizonte .replay svg {
+  width: 14px;
+  height: 14px;
+}
+.horizonte .replay:hover {
+  background: rgba(255, 250, 243, 0.85);
+}
+.horizonte .replay:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.horizonte .replay[hidden] {
+  display: none;
+}
+.horizonte .replay[aria-disabled="true"]:not(:focus-visible) {
+  pointer-events: none;
+}
+.horizonte .replay.show,
+.horizonte .replay:focus-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ============ HISTORIA DEL MÉTODO ============
+   Sin JS o con movimiento reducido se ve directamente la composición final (estas reglas no aplican).
+   .anim se activa en <head>; el script marca las etapas alcanzadas (s1…s6) y la etapa en curso (at-1…at-5). */
+.horizonte .st.no-tr,
+.horizonte .st.no-tr * {
+  transition: none !important;
+}
+.horizonte .st.out .stage-in {
+  opacity: 0;
+}
+
+/* 1 · Entender: entra la tarjeta y aparece el negocio */
+.horizonte.anim .st:not(.s1) .c1 {
+  opacity: 0;
+  translate: 0 26px;
+  scale: 0.96;
+}
+.horizonte.anim .st:not(.s1) .glint {
+  opacity: 0;
+}
+.horizonte.anim .st.at-1 .biz {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0.5s;
+}
+.horizonte.anim .st.b-focus .biz-art::after {
+  opacity: 1;
+  scale: 1;
+}
+
+/* 2 · Diagnosticar: aparecen las tres áreas y el visor las recorre */
+.horizonte .st.at-2 .k1 {
+  color: var(--ink-55);
+}
+.horizonte .st.at-2 .k2 {
+  color: var(--terra-ink);
+}
+.horizonte.anim .st:not(.s2) .row {
+  opacity: 0;
+  translate: 0 8px;
+}
+.horizonte .st.at-2 .row:nth-child(1) {
+  transition-delay: 0.3s, 0.3s, 0s, 0s, 0s;
+}
+.horizonte .st.at-2 .row:nth-child(2) {
+  transition-delay: 0.42s, 0.42s, 0s, 0s, 0s;
+}
+.horizonte .st.at-2 .row:nth-child(3) {
+  transition-delay: 0.54s, 0.54s, 0s, 0s, 0s;
+}
+.horizonte.anim .st:not(.scan-on) .brk {
+  opacity: 0;
+}
+.horizonte.anim .st:not(.d-con) .row-con {
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 14px 28px -16px rgba(120, 55, 25, 0);
+  color: rgba(27, 26, 24, 0.68);
+}
+.horizonte.anim .st:not(.d-con) .row-con.reading {
+  color: var(--ink);
+}
+.horizonte.anim .st:not(.d-con) .tag {
+  opacity: 0;
+  translate: 4px 0;
+}
+
+/* las etapas que aún no llegan esperan atenuadas */
+.horizonte.anim .st:not(.s3) .c2,
+.horizonte.anim .st:not(.s4) .c3,
+.horizonte.anim .st:not(.s5) .c4 {
+  opacity: 0.55;
+}
+
+/* etapa en curso: la tarjeta pasa al frente y recibe la luz */
+.horizonte .st.at-3 .c2,
+.horizonte .st.at-4 .c3,
+.horizonte .st.at-5 .c4 {
+  z-index: 7;
+  scale: var(--as);
+  translate: var(--at, 0 0);
+  border-color: rgba(255, 236, 205, 0.95);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 2px -2px 0 rgba(255, 206, 130, 1),
+    0 0 0 2px rgba(255, 214, 150, 0.9),
+    0 0 18px 3px rgba(255, 186, 105, 0.75),
+    0 0 64px 12px rgba(255, 160, 80, 0.3),
+    0 44px 80px -46px rgba(110, 45, 20, 0.6);
+}
+.horizonte .st.at-4 .c3::after,
+.horizonte .st.at-5 .c4::after {
+  opacity: 0;
+}
+.horizonte .st.at-3 .c1,
+.horizonte .st.at-4 .c1,
+.horizonte .st.at-5 .c1 {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 1.5px -1.5px 0 var(--rim),
+    0 0 0 1px rgba(255, 214, 160, 0.28),
+    0 0 0 0 rgba(255, 186, 105, 0),
+    0 0 0 0 rgba(255, 160, 80, 0),
+    0 36px 70px -44px rgba(110, 45, 20, 0.55);
+}
+
+/* las vecinas se apartan para que la tarjeta activa no se superponga a sus textos */
+.horizonte .st.at-4 .c4 {
+  translate: 12px 0;
+  opacity: 0.32;
+}
+.horizonte .st.at-5 .c3 {
+  translate: -18px 0;
+  scale: 0.96;
+}
+
+/* 3 · Priorizar: lo no elegido se atenúa; Contacto llega primero a la lista */
+.horizonte .st.at-3 .row-vis,
+.horizonte .st.at-3 .row-conf,
+.horizonte .st.at-4 .row-vis,
+.horizonte .st.at-4 .row-conf,
+.horizonte .st.at-5 .row-vis,
+.horizonte .st.at-5 .row-conf {
+  opacity: 0.38;
+}
+.horizonte.anim .st:not(.p-land) .lns li {
+  height: 11px;
+  padding: 0;
+  background: rgba(27, 26, 24, 0.09);
+  box-shadow: 0 8px 16px -8px rgba(200, 140, 40, 0);
+}
+.horizonte.anim .st:not(.p-land) .lns li > * {
+  opacity: 0;
+  transition-delay: 0s;
+}
+.horizonte.anim .st:not(.p-land) .lns .l2 {
+  width: 72%;
+}
+.horizonte.anim .st:not(.p-land) .lns .l3 {
+  width: 48%;
+}
+
+/* 4 · Implementar: la prioridad se convierte en una forma simple de atender */
+.horizonte.anim .st:not(.i-land) .c3 .i-pre {
+  opacity: 1;
+}
+.horizonte.anim .st:not(.i-land) .c3 .i-chat {
+  opacity: 0;
+}
+.horizonte .st.at-4.i-land .c3 .badge {
+  background: var(--terra);
+  color: #fff;
+}
+.horizonte.anim .st:not(.s4) .c3 .ph {
+  opacity: 1;
+}
+.horizonte.anim .st:not(.c-1) .msg.in {
+  opacity: 0;
+  translate: 0 5px;
+}
+.horizonte.anim .st:not(.c-3) .msg.out {
+  opacity: 0;
+  translate: 0 5px;
+}
+.horizonte .st.c-2:not(.c-3) .typing {
+  opacity: 1;
+}
+
+/* 5 · Acompañar: un ciclo que vuelve sobre lo implementado */
+.horizonte.anim .st:not(.spin) .c4 .badge svg {
+  rotate: -360deg;
+}
+.horizonte.anim .st:not(.s5) .c4 .ph {
+  opacity: 1;
+}
+.horizonte.anim .st:not(.y-1) .cycle li:nth-child(1),
+.horizonte.anim .st:not(.y-2) .cycle li:nth-child(2),
+.horizonte.anim .st:not(.y-3) .cycle li:nth-child(3) {
+  opacity: 0;
+  translate: 4px 0;
+}
+
+/* ============ 900–1439 px: adaptación real (no escala) ============
+   El texto y los botones usan tamaños CSS propios; el paisaje y las tarjetas se ajustan por JS. */
+@media (900px <= width < 1440px) {
+  .horizonte .canvas {
+    width: 100%;
+    height: auto;
+    min-height: 56.25cqw;
+    transform: none;
+    --copy-left: clamp(40px, 6.667cqw, 96px);
+    --copy-width: clamp(430px, 44.44cqw, 640px);
+    --kc: clamp(0.48, calc((100cqw - var(--copy-left) - var(--copy-width) - 28px) / 718px), 1);
+    --tx: calc(100cqw - 1440px * var(--kc));
+    --ty: 64px;
+  }
+  .horizonte .copy {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-left: var(--copy-left);
+    width: var(--copy-width);
+    padding: clamp(116px, 10.42cqw, 150px) 0 64px;
+  }
+  .horizonte h1 {
+    font-size: clamp(46px, 4.167vw, 60px);
+    max-width: clamp(430px, 40.97vw, 590px);
+    margin: clamp(18px, 1.67vw, 24px) 0 clamp(20px, 1.8vw, 26px);
+  }
+  .horizonte .lead {
+    font-size: clamp(16.5px, 1.285vw, 18.5px);
+    max-width: clamp(400px, 34.7vw, 500px);
+  }
+  .horizonte .ctas {
+    flex-wrap: wrap;
+    gap: 12px 14px;
+    margin-top: clamp(26px, 2.5vw, 36px);
+  }
+  .horizonte .btn {
+    height: clamp(52px, 4.03vw, 58px);
+    font-size: clamp(15px, 1.11vw, 16px);
+  }
+  .horizonte .stage-in {
+    inset: auto;
+    left: 0;
+    top: 0;
+    width: 1440px;
+    height: 810px;
+    transform-origin: 0 0;
+    transform: translate(var(--tx), var(--ty)) scale(var(--kc));
+  }
+  .horizonte .sunlight {
+    --kb: var(--fluid-kb, 1);
+    --sun-x: var(--fluid-sun-x, 682px);
+    --sun-y: var(--fluid-sun-y, 546px);
+  }
+  .horizonte .replay {
+    left: auto;
+    right: clamp(22px, 6cqw, 96px);
+    top: calc(var(--ty) + 420px * var(--kc));
+  }
+  .horizonte .st.at-1 .c1,
+  .horizonte .st.at-2 .c1 {
+    scale: var(--c1a, 1);
+  }
+}
+
+/* ============ MÓVIL ============ */
+@media (width < 900px) {
+  .horizonte .canvas {
+    width: auto;
+    height: auto;
+    transform: none;
+    display: flow-root;
+  }
+  /* el fondo móvil se ancla abajo a la derecha: horizonte y pueblo quedan bajo las tarjetas (ver script) */
+  .horizonte .bg picture {
+    position: static;
+  }
+  .horizonte .bg img {
+    inset: auto;
+    right: 0;
+    bottom: var(--bg-b, -260px);
+    width: auto;
+    height: var(--bg-h, max(1180px, 177.78cqw));
+    max-width: none;
+    object-fit: fill;
+  }
+  .horizonte .veil {
+    background: linear-gradient(
+      180deg,
+      rgba(247, 241, 230, 0.97) 0%,
+      rgba(247, 241, 230, 0.9) 34%,
+      rgba(247, 241, 230, 0.55) 52%,
+      rgba(247, 241, 230, 0) 66%
+    );
+  }
+  .horizonte .sunlight {
+    background: radial-gradient(
+      260px 200px at var(--mobile-sun-x, 90px) var(--mobile-sun-y, 820px),
+      rgba(255, 180, 95, 0.8),
+      rgba(255, 180, 95, 0) 72%
+    );
+  }
+  .horizonte .copy {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    padding: calc(4rem + 14px) 20px 0;
+  }
+  .horizonte .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .horizonte h1 {
+    font-size: clamp(40px, 11vw, 52px);
+    margin: 16px 0 16px;
+    max-width: none;
+  }
+  .horizonte .lead {
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+  .horizonte .ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .horizonte .btn {
+    justify-content: center;
+    height: 54px;
+    font-size: 15.5px;
+  }
+
+  .horizonte .stage {
+    position: relative;
+    inset: auto;
+    height: 236px;
+    margin-top: 40px;
+    --rs: 41px;
+    --bi: 5px;
+  }
+  .horizonte .stage-scroll {
+    top: -18px;
+    bottom: -8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    pointer-events: auto;
+  }
+  .horizonte.playing .stage-scroll {
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .horizonte .stage-in {
+    top: 18px;
+    left: max(0px, calc(50% - 195px));
+    width: 390px;
+  }
+  /* espacio inferior: deja ver el pueblo iluminado y el mar */
+  .horizonte .canvas::after {
+    content: "";
+    display: block;
+    height: var(--band, 150px);
+  }
+
+  .horizonte .c1 {
+    left: 22px;
+    top: 4px;
+    width: 250px;
+    padding: 16px 16px 14px;
+    border-radius: 24px;
+    transform: perspective(1000px) rotateY(12deg) rotateX(4deg) rotateZ(-3deg);
+  }
+  .horizonte .c1-head {
+    gap: 12px;
+  }
+  .horizonte .tile {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+  .horizonte .tile svg {
+    width: 20px;
+    height: 20px;
+  }
+  .horizonte .kicker {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .horizonte .c1 h2 {
+    font-size: 28px;
+    margin-top: 12px;
+  }
+  .horizonte .c1-body {
+    margin-top: 10px;
+  }
+  .horizonte .row {
+    height: 38px;
+    font-size: 14px;
+    gap: 10px;
+    padding: 0 7px;
+    border-radius: 12px;
+  }
+  .horizonte .row + .row {
+    margin-top: 3px;
+  }
+  .horizonte .row .ico {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+  }
+  .horizonte .row .ico svg {
+    width: 14px;
+    height: 14px;
+  }
+  .horizonte .tag {
+    font-size: 8.5px;
+  }
+  .horizonte .biz {
+    gap: 10px;
+    padding: 0 2px;
+  }
+  .horizonte .biz-top {
+    gap: 11px;
+  }
+  .horizonte .biz-art {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+  .horizonte .biz-art svg {
+    width: 30px;
+    height: 30px;
+  }
+  .horizonte .biz-art::after {
+    inset: -6px;
+    border-radius: 17px;
+  }
+  .horizonte .biz b {
+    font-size: 18px;
+  }
+  .horizonte .biz small {
+    font-size: 9px;
+  }
+  .horizonte .biz p {
+    font-size: 13px;
+  }
+  .horizonte .glint {
+    left: 70px;
+    top: 228px;
+    width: 150px;
+  }
+
+  /* en móvil la cámara acompaña la historia: el escenario se desplaza hacia la etapa en curso */
+  .horizonte .c2 {
+    left: 262px;
+    top: 22px;
+    width: 132px;
+    height: 170px;
+    padding: 15px 14px;
+    border-radius: 20px;
+    --as: 1.05;
+  }
+  .horizonte .c2 .badge {
+    width: 32px;
+    height: 32px;
+  }
+  .horizonte .c2 .badge svg {
+    width: 15px;
+    height: 15px;
+  }
+  .horizonte .c2 h3 {
+    font-size: 19px;
+    margin-top: 14px;
+  }
+  .horizonte .lns {
+    margin-top: 14px;
+    gap: 6px;
+  }
+  .horizonte .lns li {
+    height: 21px;
+    font-size: 11px;
+    padding: 0 7px;
+  }
+  .horizonte .lns .l2 i,
+  .horizonte .lns .l3 i {
+    display: none;
+  }
+  .horizonte .lns i {
+    font-size: 7.5px;
+  }
+  .horizonte.anim .st:not(.p-land) .lns li {
+    height: 9px;
+  }
+  .horizonte .c3 {
+    left: 414px;
+    top: 20px;
+    width: 156px;
+    height: 188px;
+    padding: 15px 14px;
+    border-radius: 20px;
+    --as: 1.05;
+    transform: perspective(1000px) rotateY(12deg) rotateX(4deg) rotateZ(-2deg);
+  }
+  .horizonte .c3 .badge {
+    width: 32px;
+    height: 32px;
+  }
+  .horizonte .c3 h3 {
+    font-size: 18px;
+    margin-top: 12px;
+  }
+  .horizonte .msg {
+    font-size: 11.5px;
+    padding: 6px 8px;
+  }
+  .horizonte .c4 {
+    left: 592px;
+    top: 30px;
+    width: 146px;
+    height: 170px;
+    padding: 15px 14px;
+    border-radius: 20px;
+    --as: 1.05;
+    --at: 0 0;
+    transform: perspective(1000px) rotateY(12deg) rotateX(4deg) rotateZ(-1.5deg);
+  }
+  .horizonte .c4 .badge {
+    width: 32px;
+    height: 32px;
+  }
+  .horizonte .c4 .badge svg {
+    width: 15px;
+    height: 15px;
+  }
+  .horizonte .c4 h3 {
+    font-size: 17px;
+    margin-top: 12px;
+  }
+  .horizonte .cycle {
+    gap: 5px;
+  }
+  .horizonte .cycle li {
+    font-size: 13px;
+  }
+  .horizonte .c4 .ph {
+    height: 9px;
+  }
+  .horizonte .c3 {
+    --at: 0 0;
+  }
+  .horizonte .st.at-4 .c4 {
+    translate: none;
+  }
+  .horizonte .st.at-5 .c3 {
+    translate: none;
+    scale: 1;
+  }
+  .horizonte .flyer {
+    height: 30px;
+    font-size: 12.5px;
+    padding: 0 10px 0 4px;
+  }
+  .horizonte .flyer .ico {
+    width: 22px;
+    height: 22px;
+  }
+  .horizonte .replay {
+    left: auto;
+    right: max(20px, calc(410px - 100vw));
+    top: 202px;
+    font-size: 12.5px;
+    height: 30px;
+    scale: 1;
+  }
+}
+@media (560px <= width < 900px) {
+  .horizonte .copy {
+    max-width: 600px;
+  }
+}
+/* tablet: las cuatro tarjetas caben a lo ancho, alineadas con el texto */
+@media (740px <= width < 900px) {
+  .horizonte .stage-in {
+    left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horizonte *,
+  .horizonte *::before,
+  .horizonte *::after {
+    transition: none !important;
+  }
+}
