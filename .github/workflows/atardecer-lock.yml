@@ -1,0 +1,30 @@
+name: Actualizar TanStack para Atardecer
+on:
+  push:
+    branches:
+      - feature/eleva360-identidad-atardecer
+    paths:
+      - .github/workflows/atardecer-lock.yml
+permissions:
+  contents: read
+jobs:
+  lock-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --package-lock-only --ignore-scripts --save-exact @tanstack/react-start@1.168.60
+      - run: npm ci
+      - run: npm ls @tanstack/react-start @tanstack/start-server-core --all
+      - run: npm run build
+      - run: npx --no-install tsc --noEmit
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tanstack-package-lock
+          path: |
+            package.json
+            package-lock.json
+          retention-days: 1
