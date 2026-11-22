@@ -48,8 +48,21 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
               process: "Flujo de consultas",
             }[kind]
           }
+          <small className="sketch-business-name">Café Pacífico</small>
         </span>
-        <span>Ilustrativo</span>
+        {kind === "presence" || kind === "web" ? (
+          <img
+            className="sketch-thumbnail"
+            src={kind === "web" ? businessPhoto : cafePhoto}
+            alt=""
+            width={56}
+            height={56}
+            loading="lazy"
+          />
+        ) : (
+          <span className="sketch-thumbnail sketch-monogram">CP</span>
+        )}
+        <span className="sketch-disclaimer">Ilustrativo</span>
       </div>
       {kind === "presence" && (
         <>
@@ -57,11 +70,8 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
             <Search /> Cafetería en tu zona
           </div>
           <div className="sketch-result">
-            <div className="sketch-place-icon">
-              <img src={cafePhoto} alt="" width={56} height={56} loading="lazy" />
-            </div>
             <div>
-              <b>Café del barrio</b>
+              <b>Café Pacífico</b>
               <span>Cafetería · Información y horarios</span>
             </div>
           </div>
@@ -82,11 +92,8 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
             <small>carta · menú del día</small>
           </div>
           <div className="sketch-page">
-            <div className="sketch-image">
-              <img src={businessPhoto} alt="" loading="lazy" width={192} height={192} />
-            </div>
             <div>
-              <b>Sabores de casa</b>
+              <b>Pastas del día</b>
               <p>Platos preparados al momento.</p>
               <span>
                 Ver la carta <ArrowRight />
@@ -97,18 +104,6 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
       )}
       {kind === "contact" && (
         <>
-          <div className="sketch-chat-header">
-            <img
-              className="sketch-avatar"
-              src={cafePhoto}
-              alt=""
-              width={36}
-              height={36}
-              loading="lazy"
-            />
-            <b>Reservas</b>
-            <span>Café del barrio</span>
-          </div>
           <div className="sketch-message">Quiero reservar una hora.</div>
           <div className="sketch-reply">
             Elige el horario que te acomode.
@@ -123,13 +118,6 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
       )}
       {kind === "process" && (
         <>
-          <div className="sketch-record">
-            <img src={cafePhoto} alt="" width={40} height={40} loading="lazy" />
-            <span>
-              <b>Café del barrio</b>
-              <small>Gestión de consultas</small>
-            </span>
-          </div>
           <ol className="sketch-flow">
             <li>
               <MessageCircle />

@@ -474,17 +474,6 @@
   font-size: 12px;
   overflow: hidden;
 }
-.sketch-caption {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 20px;
-  font-size: 10px;
-  color: #76695d;
-}
-.sketch-caption > span:last-child {
-  color: #85442f;
-}
 .business-sketch svg {
   width: 16px;
   height: 16px;
@@ -505,83 +494,6 @@
   align-items: center;
   gap: 10px;
   margin-top: 18px;
-}
-.sketch-place-icon {
-  flex: 0 0 56px;
-  height: 56px;
-  background: #ead1b2;
-  border-radius: 10px;
-  overflow: hidden;
-  color: #85442f;
-}
-.sketch-place-icon img,
-.sketch-avatar,
-.sketch-record > img {
-  object-fit: cover;
-  object-position: center 62%;
-  background: #ead1b2;
-}
-.sketch-place-icon img {
-  width: 100%;
-  height: 100%;
-}
-.sketch-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.sketch-record {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 12px;
-}
-.sketch-record > img {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-}
-.sketch-record b {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-}
-.sketch-record small {
-  display: block;
-  margin-top: 3px;
-  color: #60564d;
-  font-size: 10px;
-}
-.sketch-process .sketch-caption {
-  margin-bottom: 12px;
-}
-.sketch-process .sketch-flow {
-  gap: 7px;
-}
-.sketch-process .sketch-flow li + li::before {
-  height: 7px;
-  top: -7px;
-}
-.sketch-process .sketch-flow li > svg {
-  width: 25px;
-  height: 25px;
-  padding: 5px;
-}
-.sketch-process .sketch-flow li + li::before {
-  left: 12px;
-}
-.sketch-process .sketch-flow small {
-  font-size: 10px;
-}
-.sketch-contact .sketch-caption {
-  margin-bottom: 16px;
-}
-.sketch-contact .sketch-chat-header {
-  font-size: 11px;
-}
-.sketch-contact .sketch-chat-header > span {
-  font-size: 10px;
 }
 .sketch-result b {
   font-size: 14px;
@@ -628,20 +540,10 @@
 }
 .sketch-page {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 12px;
   padding-top: 16px;
-}
-.sketch-image {
-  height: 105px;
-  overflow: hidden;
-  border-radius: 9px;
-}
-.sketch-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .sketch-page b {
   font-family: var(--business-head);
@@ -670,19 +572,6 @@
 .sketch-page div > span svg {
   width: 12px;
   height: 12px;
-}
-.sketch-chat-header {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  border-bottom: 1px solid #d5c4b2;
-  padding-bottom: 10px;
-  margin-top: -7px;
-}
-.sketch-chat-header > span {
-  margin-left: auto;
-  color: #76695d;
-  font-size: 10px;
 }
 .sketch-message,
 .sketch-reply {
@@ -771,12 +660,8 @@
     padding-top: 16px;
   }
   .business-sketch {
-    height: 216px;
-    padding: 16px 18px;
-  }
-  .sketch-contact,
-  .sketch-process {
     height: 232px;
+    padding: 16px 18px;
   }
   .business-capability-copy .business-tools {
     margin-top: 7px;
@@ -787,11 +672,72 @@
   .business-capability-grid {
     gap: 0;
   }
-  .sketch-caption {
-    margin-bottom: 14px;
-  }
   .business-proposal {
     transform: none;
     width: 100%;
   }
+}
+
+.sketch-caption {
+  display: grid;
+  grid-template-columns: 1fr 56px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 12px;
+  margin-bottom: 16px;
+  min-height: 56px;
+  color: #60564d;
+  font-size: 12px;
+}
+.sketch-caption > span:first-child {
+  align-self: end;
+  font-weight: 500;
+}
+.sketch-disclaimer {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  font-size: 10px;
+  margin-top: 4px;
+  color: #85442f;
+}
+.sketch-business-name {
+  display: block;
+  margin-top: 3px;
+  color: #76695d;
+  font-size: 10px;
+  font-weight: 400;
+}
+.sketch-thumbnail.sketch-monogram {
+  display: grid;
+  place-items: center;
+  color: #85442f;
+  background: #efe0ce;
+  font-family: var(--business-head);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.sketch-thumbnail {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  object-position: center 62%;
+  border-radius: 10px;
+  background: #ead1b2;
+  border: 1px solid #dacbbc;
+}
+.sketch-web .sketch-thumbnail {
+  object-position: center;
+}
+.sketch-result {
+  margin-top: 12px;
+}
+.sketch-place-actions {
+  margin-top: 12px;
+}
+.sketch-message {
+  margin-top: 0;
 }
