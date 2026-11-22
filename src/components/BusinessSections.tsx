@@ -10,7 +10,7 @@ const capabilities = [
   {
     title: "Presencia digital",
     description: "Fortalecemos tu presencia en Google y redes sociales para que más personas encuentren tu negocio y confíen en lo que ofreces.",
-    tools: "Google · Redes sociales · Identidad · Contenido",
+    tools: "Google · Redes sociales · Identidad visual",
     icon: MapPin,
     visual: "presence",
   },
@@ -31,7 +31,7 @@ const capabilities = [
   {
     title: "Procesos y automatización",
     description: "Simplificamos tu operación con automatizaciones y, cuando tiene sentido, software desarrollado a medida para tu negocio.",
-    tools: "Integraciones · Automatizaciones · Software a medida · Seguimiento",
+    tools: "Automatizaciones · Software a medida · Seguimiento",
     icon: Workflow,
     visual: "process",
   },
