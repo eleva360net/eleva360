@@ -67,7 +67,7 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
           height={56}
           loading="lazy"
         />
-        <span className="sketch-disclaimer">Ilustrativo</span>
+        
       </div>
       {kind === "presence" && (
         <>
