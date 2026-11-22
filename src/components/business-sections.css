@@ -708,16 +708,6 @@
   font-size: 10px;
   font-weight: 400;
 }
-.sketch-thumbnail.sketch-monogram {
-  display: grid;
-  place-items: center;
-  color: #85442f;
-  background: #efe0ce;
-  font-family: var(--business-head);
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-}
 .sketch-thumbnail {
   grid-column: 2;
   grid-row: 1 / 3;

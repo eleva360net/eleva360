@@ -50,18 +50,14 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
           }
           <small className="sketch-business-name">Café Pacífico</small>
         </span>
-        {kind === "presence" || kind === "web" ? (
-          <img
-            className="sketch-thumbnail"
-            src={kind === "web" ? businessPhoto : cafePhoto}
-            alt=""
-            width={56}
-            height={56}
-            loading="lazy"
-          />
-        ) : (
-          <span className="sketch-thumbnail sketch-monogram">CP</span>
-        )}
+        <img
+          className="sketch-thumbnail"
+          src={kind === "web" ? businessPhoto : cafePhoto}
+          alt=""
+          width={56}
+          height={56}
+          loading="lazy"
+        />
         <span className="sketch-disclaimer">Ilustrativo</span>
       </div>
       {kind === "presence" && (
