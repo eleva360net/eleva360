@@ -734,3 +734,27 @@
   margin-top: 0;
 }
 
+
+/* Mejora final de legibilidad en móviles */
+@media (max-width: 480px) {
+  .sketch-business-name,
+  .sketch-browser small,
+  .sketch-result div > span,
+  .sketch-place-actions span,
+  .sketch-page p,
+  .sketch-page div > span,
+  .sketch-times span,
+  .sketch-flow small {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .sketch-flow b {
+    font-size: 13px;
+  }
+
+  .business-sketch {
+    height: auto;
+    min-height: 232px;
+  }
+}
