@@ -1,6 +1,8 @@
 import { Check, Globe, MapPin, MessageCircle, Search, ArrowRight, Workflow } from "lucide-react";
 import businessPhoto from "../assets/menu-plato-premium.webp";
 import cafePhoto from "../assets/hero-building.webp";
+import reservationPhoto from "../assets/reserva-cafe.jpg";
+import inquiriesPhoto from "../assets/gestion-consultas.jpg";
 import brandLogo from "../assets/LogoEleva360-transparente.webp";
 import "./business-sections.css";
 
@@ -35,6 +37,13 @@ const capabilities = [
   },
 ] as const;
 
+const capabilityPhotos = {
+  presence: cafePhoto,
+  web: businessPhoto,
+  contact: reservationPhoto,
+  process: inquiriesPhoto,
+} as const;
+
 function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visual"] }) {
   return (
     <div className={`business-sketch sketch-${kind}`} aria-hidden="true">
@@ -52,7 +61,7 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
         </span>
         <img
           className="sketch-thumbnail"
-          src={kind === "web" ? businessPhoto : cafePhoto}
+          src={capabilityPhotos[kind]}
           alt=""
           width={56}
           height={56}
@@ -297,3 +306,4 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
     </div>
   );
 }
+

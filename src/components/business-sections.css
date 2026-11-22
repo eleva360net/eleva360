@@ -719,7 +719,9 @@
   background: #ead1b2;
   border: 1px solid #dacbbc;
 }
-.sketch-web .sketch-thumbnail {
+.sketch-web .sketch-thumbnail,
+.sketch-contact .sketch-thumbnail,
+.sketch-process .sketch-thumbnail {
   object-position: center;
 }
 .sketch-result {
@@ -731,3 +733,4 @@
 .sketch-message {
   margin-top: 0;
 }
+
