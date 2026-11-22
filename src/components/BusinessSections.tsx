@@ -1,5 +1,7 @@
 import { Check, Globe, MapPin, MessageCircle, Search, ArrowRight, Workflow } from "lucide-react";
 import businessPhoto from "../assets/menu-plato-premium.webp";
+import cafePhoto from "../assets/hero-building.webp";
+import brandLogo from "../assets/LogoEleva360-transparente.webp";
 import "./business-sections.css";
 
 const capabilities = [
@@ -56,7 +58,7 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
           </div>
           <div className="sketch-result">
             <div className="sketch-place-icon">
-              <MapPin />
+              <img src={cafePhoto} alt="" width={56} height={56} loading="lazy" />
             </div>
             <div>
               <b>Café del barrio</b>
@@ -96,9 +98,16 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
       {kind === "contact" && (
         <>
           <div className="sketch-chat-header">
-            <MessageCircle />
+            <img
+              className="sketch-avatar"
+              src={cafePhoto}
+              alt=""
+              width={36}
+              height={36}
+              loading="lazy"
+            />
             <b>Reservas</b>
-            <span>Tu negocio</span>
+            <span>Café del barrio</span>
           </div>
           <div className="sketch-message">Quiero reservar una hora.</div>
           <div className="sketch-reply">
@@ -114,6 +123,13 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
       )}
       {kind === "process" && (
         <>
+          <div className="sketch-record">
+            <img src={cafePhoto} alt="" width={40} height={40} loading="lazy" />
+            <span>
+              <b>Café del barrio</b>
+              <small>Gestión de consultas</small>
+            </span>
+          </div>
           <ol className="sketch-flow">
             <li>
               <MessageCircle />
@@ -205,7 +221,14 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
           </div>
           <div className="business-proposal" role="group" aria-label="Qué incluye tu propuesta">
             <div className="proposal-top">
-              <span>Eleva360</span>
+              <img
+                className="proposal-logo"
+                src={brandLogo}
+                alt="Eleva360"
+                width={1809}
+                height={576}
+                loading="lazy"
+              />
               <span>Propuesta de trabajo</span>
             </div>
             <p className="proposal-label">El punto de partida</p>

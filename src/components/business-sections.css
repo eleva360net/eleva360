@@ -132,13 +132,18 @@
   max-width: 450px;
 }
 .business-proposal {
-  background: #f8f2e7;
+  background: radial-gradient(ellipse at 100% 0, #f2be5c18, transparent 65%), #f8f2e7;
   color: #1b1a18;
   padding: 30px 32px 24px;
-  box-shadow: 0 24px 48px #0002;
+  box-shadow:
+    0 1px 0 #fff inset,
+    5px 6px 0 -1px #e5d7c3,
+    9px 11px 0 -2px #cdbca6,
+    0 28px 56px #0003;
   border-radius: 3px;
   transform: rotate(2deg);
   position: relative;
+  border-top: 3px solid #d86d48;
 }
 .proposal-top {
   display: flex;
@@ -149,11 +154,10 @@
   padding-bottom: 18px;
   margin-bottom: 30px;
 }
-.proposal-top > span:first-child {
-  font-family: var(--business-head);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+.proposal-logo {
+  width: 132px;
+  height: auto;
+  object-fit: contain;
 }
 .proposal-top > span:last-child {
   font-size: 0.75rem;
@@ -503,10 +507,81 @@
   margin-top: 18px;
 }
 .sketch-place-icon {
-  padding: 10px;
+  flex: 0 0 56px;
+  height: 56px;
   background: #ead1b2;
-  border-radius: 12px;
+  border-radius: 10px;
+  overflow: hidden;
   color: #85442f;
+}
+.sketch-place-icon img,
+.sketch-avatar,
+.sketch-record > img {
+  object-fit: cover;
+  object-position: center 62%;
+  background: #ead1b2;
+}
+.sketch-place-icon img {
+  width: 100%;
+  height: 100%;
+}
+.sketch-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sketch-record {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+.sketch-record > img {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+}
+.sketch-record b {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.sketch-record small {
+  display: block;
+  margin-top: 3px;
+  color: #60564d;
+  font-size: 10px;
+}
+.sketch-process .sketch-caption {
+  margin-bottom: 12px;
+}
+.sketch-process .sketch-flow {
+  gap: 7px;
+}
+.sketch-process .sketch-flow li + li::before {
+  height: 7px;
+  top: -7px;
+}
+.sketch-process .sketch-flow li > svg {
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+}
+.sketch-process .sketch-flow li + li::before {
+  left: 12px;
+}
+.sketch-process .sketch-flow small {
+  font-size: 10px;
+}
+.sketch-contact .sketch-caption {
+  margin-bottom: 16px;
+}
+.sketch-contact .sketch-chat-header {
+  font-size: 11px;
+}
+.sketch-contact .sketch-chat-header > span {
+  font-size: 10px;
 }
 .sketch-result b {
   font-size: 14px;
@@ -698,6 +773,10 @@
   .business-sketch {
     height: 216px;
     padding: 16px 18px;
+  }
+  .sketch-contact,
+  .sketch-process {
+    height: 232px;
   }
   .business-capability-copy .business-tools {
     margin-top: 7px;
