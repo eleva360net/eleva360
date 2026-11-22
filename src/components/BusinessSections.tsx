@@ -160,30 +160,16 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
       >
         <div className="business-container business-method-layout">
           <div className="business-method-copy">
-            <p className="business-kicker">Cómo trabajamos</p>
+            <p className="business-kicker">Antes de empezar</p>
             <h2 id="method-title">
-              Una prioridad clara.
+              Antes de implementar,
               <br />
-              Una primera <em>solución.</em>
+              <em>todo claro.</em>
             </h2>
             <p className="business-lead">
-              Revisamos tu negocio y definimos por dónde comenzar. Antes de implementar, sabrás qué
-              vamos a hacer y por qué.
+              Te explicamos qué conviene resolver primero y cómo lo llevaríamos a cabo. El alcance,
+              los plazos y la inversión quedan definidos antes de comenzar.
             </p>
-            <ol className="business-method-steps">
-              <li>
-                <b>Entendemos y diagnosticamos</b>
-                <span>Tu objetivo, tus canales y dónde se hace difícil avanzar.</span>
-              </li>
-              <li>
-                <b>Priorizamos y proponemos</b>
-                <span>Una mejora concreta, con alcance, plazo e inversión.</span>
-              </li>
-              <li>
-                <b>Implementamos y revisamos</b>
-                <span>Construimos lo acordado y comprobamos cómo funciona.</span>
-              </li>
-            </ol>
           </div>
           <div className="business-proposal" role="group" aria-label="Qué incluye tu propuesta">
             <div className="proposal-top">
@@ -226,7 +212,7 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
       <section id="acompanamiento" className="business-follow-up" aria-labelledby="followup-title">
         <div className="business-container business-followup-layout">
           <div>
-            <p className="business-kicker">El siguiente paso</p>
+            <p className="business-kicker">Después de implementar</p>
             <h2 id="followup-title">
               Una base que puede
               <br />
@@ -235,11 +221,8 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
           </div>
           <div>
             <p>
-              Lo que aprendemos al implementar orienta las siguientes mejoras. Si necesitas
-              seguimiento periódico, definimos un acompañamiento con alcance propio.
-            </p>
-            <p className="business-followup-cycle">
-              Revisar <span>/</span> Ajustar <span>/</span> Decidir
+              Si tu negocio necesita seguimiento periódico o nuevas mejoras, definimos juntos el
+              siguiente paso y su alcance.
             </p>
           </div>
         </div>
@@ -275,3 +258,4 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
     </div>
   );
 }
+
