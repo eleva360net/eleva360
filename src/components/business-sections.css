@@ -132,13 +132,18 @@
   max-width: 450px;
 }
 .business-proposal {
-  background: #f8f2e7;
+  background: radial-gradient(ellipse at 100% 0, #f2be5c18, transparent 65%), #f8f2e7;
   color: #1b1a18;
   padding: 30px 32px 24px;
-  box-shadow: 0 24px 48px #0002;
+  box-shadow:
+    0 1px 0 #fff inset,
+    5px 6px 0 -1px #e5d7c3,
+    9px 11px 0 -2px #cdbca6,
+    0 28px 56px #0003;
   border-radius: 3px;
   transform: rotate(2deg);
   position: relative;
+  border-top: 3px solid #d86d48;
 }
 .proposal-top {
   display: flex;
@@ -149,11 +154,10 @@
   padding-bottom: 18px;
   margin-bottom: 30px;
 }
-.proposal-top > span:first-child {
-  font-family: var(--business-head);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+.proposal-logo {
+  width: 132px;
+  height: auto;
+  object-fit: contain;
 }
 .proposal-top > span:last-child {
   font-size: 0.75rem;
@@ -470,17 +474,6 @@
   font-size: 12px;
   overflow: hidden;
 }
-.sketch-caption {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 20px;
-  font-size: 10px;
-  color: #76695d;
-}
-.sketch-caption > span:last-child {
-  color: #85442f;
-}
 .business-sketch svg {
   width: 16px;
   height: 16px;
@@ -501,12 +494,6 @@
   align-items: center;
   gap: 10px;
   margin-top: 18px;
-}
-.sketch-place-icon {
-  padding: 10px;
-  background: #ead1b2;
-  border-radius: 12px;
-  color: #85442f;
 }
 .sketch-result b {
   font-size: 14px;
@@ -553,20 +540,10 @@
 }
 .sketch-page {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 12px;
   padding-top: 16px;
-}
-.sketch-image {
-  height: 105px;
-  overflow: hidden;
-  border-radius: 9px;
-}
-.sketch-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .sketch-page b {
   font-family: var(--business-head);
@@ -595,19 +572,6 @@
 .sketch-page div > span svg {
   width: 12px;
   height: 12px;
-}
-.sketch-chat-header {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  border-bottom: 1px solid #d5c4b2;
-  padding-bottom: 10px;
-  margin-top: -7px;
-}
-.sketch-chat-header > span {
-  margin-left: auto;
-  color: #76695d;
-  font-size: 10px;
 }
 .sketch-message,
 .sketch-reply {
@@ -696,7 +660,7 @@
     padding-top: 16px;
   }
   .business-sketch {
-    height: 216px;
+    height: 232px;
     padding: 16px 18px;
   }
   .business-capability-copy .business-tools {
@@ -708,11 +672,89 @@
   .business-capability-grid {
     gap: 0;
   }
-  .sketch-caption {
-    margin-bottom: 14px;
-  }
   .business-proposal {
     transform: none;
     width: 100%;
+  }
+}
+
+.sketch-caption {
+  display: grid;
+  grid-template-columns: 1fr 56px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 12px;
+  margin-bottom: 16px;
+  min-height: 56px;
+  color: #60564d;
+  font-size: 12px;
+}
+.sketch-caption > span:first-child {
+  align-self: end;
+  font-weight: 500;
+}
+.sketch-disclaimer {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  font-size: 10px;
+  margin-top: 4px;
+  color: #85442f;
+}
+.sketch-business-name {
+  display: block;
+  margin-top: 3px;
+  color: #76695d;
+  font-size: 10px;
+  font-weight: 400;
+}
+.sketch-thumbnail {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  object-position: center 62%;
+  border-radius: 10px;
+  background: #ead1b2;
+  border: 1px solid #dacbbc;
+}
+.sketch-web .sketch-thumbnail,
+.sketch-contact .sketch-thumbnail,
+.sketch-process .sketch-thumbnail {
+  object-position: center;
+}
+.sketch-result {
+  margin-top: 12px;
+}
+.sketch-place-actions {
+  margin-top: 12px;
+}
+.sketch-message {
+  margin-top: 0;
+}
+
+
+/* Mejora final de legibilidad en móviles */
+@media (max-width: 480px) {
+  .sketch-business-name,
+  .sketch-browser small,
+  .sketch-result div > span,
+  .sketch-place-actions span,
+  .sketch-page p,
+  .sketch-page div > span,
+  .sketch-times span,
+  .sketch-flow small {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .sketch-flow b {
+    font-size: 13px;
+  }
+
+  .business-sketch {
+    height: auto;
+    min-height: 232px;
   }
 }

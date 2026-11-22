@@ -1,5 +1,9 @@
 import { Check, Globe, MapPin, MessageCircle, Search, ArrowRight, Workflow } from "lucide-react";
 import businessPhoto from "../assets/menu-plato-premium.webp";
+import cafePhoto from "../assets/hero-building.webp";
+import reservationPhoto from "../assets/reserva-cafe.jpg";
+import inquiriesPhoto from "../assets/gestion-consultas.jpg";
+import brandLogo from "../assets/LogoEleva360-transparente.webp";
 import "./business-sections.css";
 
 const capabilities = [
@@ -33,6 +37,13 @@ const capabilities = [
   },
 ] as const;
 
+const capabilityPhotos = {
+  presence: cafePhoto,
+  web: businessPhoto,
+  contact: reservationPhoto,
+  process: inquiriesPhoto,
+} as const;
+
 function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visual"] }) {
   return (
     <div className={`business-sketch sketch-${kind}`} aria-hidden="true">
@@ -46,8 +57,17 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
               process: "Flujo de consultas",
             }[kind]
           }
+          <small className="sketch-business-name">Café Pacífico</small>
         </span>
-        <span>Ilustrativo</span>
+        <img
+          className="sketch-thumbnail"
+          src={capabilityPhotos[kind]}
+          alt=""
+          width={56}
+          height={56}
+          loading="lazy"
+        />
+        
       </div>
       {kind === "presence" && (
         <>
@@ -55,11 +75,8 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
             <Search /> Cafetería en tu zona
           </div>
           <div className="sketch-result">
-            <div className="sketch-place-icon">
-              <MapPin />
-            </div>
             <div>
-              <b>Café del barrio</b>
+              <b>Café Pacífico</b>
               <span>Cafetería · Información y horarios</span>
             </div>
           </div>
@@ -80,11 +97,8 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
             <small>carta · menú del día</small>
           </div>
           <div className="sketch-page">
-            <div className="sketch-image">
-              <img src={businessPhoto} alt="" loading="lazy" width={192} height={192} />
-            </div>
             <div>
-              <b>Sabores de casa</b>
+              <b>Pastas del día</b>
               <p>Platos preparados al momento.</p>
               <span>
                 Ver la carta <ArrowRight />
@@ -95,11 +109,6 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
       )}
       {kind === "contact" && (
         <>
-          <div className="sketch-chat-header">
-            <MessageCircle />
-            <b>Reservas</b>
-            <span>Tu negocio</span>
-          </div>
           <div className="sketch-message">Quiero reservar una hora.</div>
           <div className="sketch-reply">
             Elige el horario que te acomode.
@@ -162,8 +171,9 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
               </h2>
             </div>
             <p className="business-lead">
-              Mejoramos cómo te encuentran, cómo presentas lo que ofreces y cómo atiendes. También
-              creamos herramientas para simplificar tu operación.
+              Mejoramos cómo encuentran tu negocio, cómo descubren lo que ofreces y cómo te contactan.
+              Así facilitamos que más oportunidades se conviertan en ventas, mientras
+              simplificamos tu operación.
             </p>
           </div>
           <div className="business-capability-grid">
@@ -205,7 +215,14 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
           </div>
           <div className="business-proposal" role="group" aria-label="Qué incluye tu propuesta">
             <div className="proposal-top">
-              <span>Eleva360</span>
+              <img
+                className="proposal-logo"
+                src={brandLogo}
+                alt="Eleva360"
+                width={1809}
+                height={576}
+                loading="lazy"
+              />
               <span>Propuesta de trabajo</span>
             </div>
             <p className="proposal-label">El punto de partida</p>
@@ -214,7 +231,7 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
               <br />
               Un plan concreto.
             </h3>
-            <p className="proposal-summary">Lo necesario para comenzar con claridad.</p>
+            <p className="proposal-summary">Un plan para mejorar tu negocio y generar más oportunidades de venta.</p>
             <dl>
               <div>
                 <dt>Prioridad</dt>
@@ -276,8 +293,8 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
           </div>
           <div className="business-contact-action">
             <p>
-              Cuéntanos qué quieres lograr y cómo funciona hoy tu negocio. Te ayudamos a identificar
-              por dónde comenzar.
+              Cuéntanos qué quieres lograr y cómo funciona hoy tu negocio. Identifiquemos oportunidades
+              para atraer más clientes, aumentar tus ventas y mejorar tu operación.
             </p>
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="business-whatsapp">
               <MessageCircle aria-hidden="true" />
