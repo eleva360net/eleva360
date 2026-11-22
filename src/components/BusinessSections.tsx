@@ -1,0 +1,277 @@
+import { Check, Globe, MapPin, MessageCircle, SlidersHorizontal, Workflow } from "lucide-react";
+import "./business-sections.css";
+
+const capabilities = [
+  {
+    title: "Presencia digital",
+    description: "Que te encuentren y entiendan por qué elegir tu negocio.",
+    tools: "Google · Identidad · Contenido",
+    icon: MapPin,
+    visual: "presence",
+  },
+  {
+    title: "Web y experiencias",
+    description: "Espacios claros para mostrar lo que ofreces y facilitar una acción.",
+    tools: "Sitios web · Cartas digitales · Catálogos",
+    icon: Globe,
+    visual: "web",
+  },
+  {
+    title: "Atención y contacto",
+    description: "Consultas más simples y respuestas que ayuden a avanzar.",
+    tools: "WhatsApp Business · Reservas · Formularios",
+    icon: MessageCircle,
+    visual: "contact",
+  },
+  {
+    title: "Procesos y automatización",
+    description: "Menos pasos repetitivos y más orden en tu operación.",
+    tools: "Flujos · Integraciones · Seguimiento",
+    icon: Workflow,
+    visual: "process",
+  },
+] as const;
+
+function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visual"] }) {
+  return (
+    <div className={`business-sketch sketch-${kind}`} aria-hidden="true">
+      {kind === "presence" && (
+        <>
+          <div className="sketch-search">
+            <span /> Tu negocio
+          </div>
+          <div className="sketch-result">
+            <MapPin />
+            <div>
+              <b>Lo que haces, claro.</b>
+              <span>Información · Servicios · Contacto</span>
+            </div>
+            <Check />
+          </div>
+        </>
+      )}
+      {kind === "web" && (
+        <>
+          <div className="sketch-browser">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="sketch-page">
+            <div className="sketch-image">
+              <Globe />
+            </div>
+            <div>
+              <b>
+                Tu oferta.
+                <br />
+                En un solo lugar.
+              </b>
+              <span>Ver servicios</span>
+            </div>
+          </div>
+        </>
+      )}
+      {kind === "contact" && (
+        <>
+          <div className="sketch-message">Quiero reservar una hora.</div>
+          <div className="sketch-reply">
+            Elige el horario que te acomode.
+            <Check />
+          </div>
+          <div className="sketch-times">
+            <span>10:00</span>
+            <span>12:30</span>
+            <span>16:00</span>
+          </div>
+        </>
+      )}
+      {kind === "process" && (
+        <>
+          <div className="sketch-flow">
+            <span>
+              <MessageCircle />
+              Consulta
+            </span>
+            <i />
+            <span>
+              <SlidersHorizontal />
+              Organizar
+            </span>
+            <i />
+            <span>
+              <Check />
+              Seguimiento
+            </span>
+          </div>
+          <div className="sketch-flow-caption">Cada paso conectado.</div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
+  return (
+    <div className="business-content">
+      <section
+        id="capacidades"
+        className="business-capabilities business-section"
+        aria-labelledby="capabilities-title"
+      >
+        <div className="business-container">
+          <div className="business-intro">
+            <div>
+              <p className="business-kicker">Qué podemos hacer</p>
+              <h2 id="capabilities-title">
+                Soluciones para que
+                <br />
+                tu negocio <em>avance.</em>
+              </h2>
+            </div>
+            <p className="business-lead">
+              Mejoramos cómo te encuentran, cómo presentas lo que ofreces y cómo atiendes. También
+              creamos herramientas para simplificar tu operación.
+            </p>
+          </div>
+          <div className="business-capability-grid">
+            {capabilities.map(({ title, description, tools, icon: Icon, visual }) => (
+              <article className="business-capability" key={title}>
+                <CapabilitySketch kind={visual} />
+                <div className="business-capability-copy">
+                  <Icon className="business-capability-icon" aria-hidden="true" />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  <p className="business-tools">{tools}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="business-demo-note">
+            Esquemas de funcionamiento. La solución se diseña para cada negocio.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="como-funciona"
+        className="business-method business-section"
+        aria-labelledby="method-title"
+      >
+        <div className="business-container business-method-layout">
+          <div className="business-method-copy">
+            <p className="business-kicker">Cómo trabajamos</p>
+            <h2 id="method-title">
+              Una prioridad clara.
+              <br />
+              Una primera <em>solución.</em>
+            </h2>
+            <p className="business-lead">
+              Revisamos tu negocio y definimos por dónde comenzar. Antes de implementar, sabrás qué
+              vamos a hacer y por qué.
+            </p>
+            <ol className="business-method-steps">
+              <li>
+                <b>Entendemos y diagnosticamos</b>
+                <span>Tu objetivo, tus canales y dónde se hace difícil avanzar.</span>
+              </li>
+              <li>
+                <b>Priorizamos y proponemos</b>
+                <span>Una mejora concreta, con alcance, plazo e inversión.</span>
+              </li>
+              <li>
+                <b>Implementamos y revisamos</b>
+                <span>Construimos lo acordado y comprobamos cómo funciona.</span>
+              </li>
+            </ol>
+          </div>
+          <div className="business-proposal" role="group" aria-label="Qué incluye tu propuesta">
+            <div className="proposal-top">
+              <span>Eleva360</span>
+              <span>Propuesta de trabajo</span>
+            </div>
+            <p className="proposal-label">El punto de partida</p>
+            <h3>
+              Una decisión.
+              <br />
+              Un plan concreto.
+            </h3>
+            <p className="proposal-summary">Lo necesario para comenzar con claridad.</p>
+            <dl>
+              <div>
+                <dt>Prioridad</dt>
+                <dd>Qué vamos a resolver primero</dd>
+              </div>
+              <div>
+                <dt>Alcance</dt>
+                <dd>Qué incluye la implementación</dd>
+              </div>
+              <div>
+                <dt>Plazo</dt>
+                <dd>Cuándo y qué necesitamos de ti</dd>
+              </div>
+              <div>
+                <dt>Inversión</dt>
+                <dd>El valor del trabajo acordado</dd>
+              </div>
+            </dl>
+            <div className="proposal-bottom">
+              <Check aria-hidden="true" />
+              <span>Todo acordado antes de implementar.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="acompanamiento" className="business-follow-up" aria-labelledby="followup-title">
+        <div className="business-container business-followup-layout">
+          <div>
+            <p className="business-kicker">El siguiente paso</p>
+            <h2 id="followup-title">
+              Una base que puede
+              <br />
+              <em>evolucionar contigo.</em>
+            </h2>
+          </div>
+          <div>
+            <p>
+              Lo que aprendemos al implementar orienta las siguientes mejoras. Si necesitas
+              seguimiento periódico, definimos un acompañamiento con alcance propio.
+            </p>
+            <p className="business-followup-cycle">
+              Revisar <span>/</span> Ajustar <span>/</span> Decidir
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contacto"
+        className="business-contact business-section"
+        aria-labelledby="contact-title"
+      >
+        <div className="business-container business-contact-layout">
+          <div>
+            <p className="business-kicker">Comencemos por tu negocio</p>
+            <h2 id="contact-title">
+              ¿Qué te gustaría
+              <br />
+              <em>mejorar?</em>
+            </h2>
+          </div>
+          <div className="business-contact-action">
+            <p>
+              Cuéntanos qué quieres lograr y cómo funciona hoy tu negocio. Te ayudamos a identificar
+              por dónde comenzar.
+            </p>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="business-whatsapp">
+              <MessageCircle aria-hidden="true" />
+              Solicitar diagnóstico inicial
+            </a>
+            <span className="business-contact-note">Diagnóstico inicial sin costo.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
