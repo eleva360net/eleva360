@@ -3,7 +3,7 @@
   --business-body: "Inter Tight", system-ui, sans-serif;
   --business-accent: "Instrument Serif", Georgia, serif;
   color: #1b1a18;
-  background: #f7f1e6;
+  background: linear-gradient(180deg, #efe0ce 0, #f7f1e6 180px);
   font-family: var(--business-body);
 }
 .business-content :where(h2, h3, p, ol) {
@@ -100,184 +100,6 @@
   color: #76695d;
   margin-top: 30px !important;
 }
-.business-sketch {
-  height: 148px;
-  padding: 22px 16px;
-  border-top: 1px solid #d5c4b2;
-  border-bottom: 1px solid #d5c4b2;
-  background: linear-gradient(145deg, #f5ebdd, #efe0ce);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 0.75rem;
-  position: relative;
-}
-.sketch-search {
-  color: #7c6d60;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-.sketch-search > span {
-  width: 10px;
-  height: 10px;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  position: relative;
-}
-.sketch-search > span::after {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 1px;
-  background: currentColor;
-  transform: rotate(45deg);
-  right: -3px;
-  bottom: -1px;
-}
-.sketch-result {
-  padding: 13px 10px;
-  background: #fffaf2;
-  border: 1px solid #decdbb;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 6px 14px #66452c0b;
-}
-.sketch-result svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  color: #a14b31;
-}
-.sketch-result svg:last-child {
-  width: 14px;
-  margin-left: auto;
-}
-.sketch-result b {
-  display: block;
-  font-weight: 500;
-}
-.sketch-result div span {
-  display: block;
-  font-size: 0.625rem;
-  color: #7c6d60;
-  margin-top: 4px;
-}
-.sketch-browser {
-  display: flex;
-  gap: 4px;
-  border-bottom: 1px solid #d5c4b2;
-  padding-bottom: 10px;
-}
-.sketch-browser span {
-  width: 4px;
-  height: 4px;
-  background: #b79b80;
-  border-radius: 50%;
-}
-.sketch-page {
-  display: flex;
-  gap: 14px;
-  padding-top: 12px;
-  align-items: center;
-}
-.sketch-image {
-  width: 66px;
-  height: 64px;
-  border-radius: 5px;
-  background: linear-gradient(140deg, #bd6949, #eab471);
-  display: grid;
-  place-items: center;
-}
-.sketch-image svg {
-  width: 30px;
-  height: 30px;
-  stroke-width: 1;
-  color: #fff5de;
-}
-.sketch-page b {
-  font-weight: 500;
-  line-height: 1.2;
-}
-.sketch-page div > span {
-  display: block;
-  width: max-content;
-  margin-top: 8px;
-  color: #92472c;
-  border-bottom: 1px solid #c99c80;
-  font-size: 0.625rem;
-}
-.sketch-message,
-.sketch-reply {
-  padding: 9px 10px;
-  background: #fffaf2;
-  border-radius: 8px 8px 8px 0;
-  max-width: max-content;
-  font-size: 0.6875rem;
-}
-.sketch-reply {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  align-self: flex-end;
-  margin-top: 6px;
-  background: #ead1b2;
-  border-radius: 8px 8px 0 8px;
-}
-.sketch-reply svg {
-  width: 12px;
-  height: 12px;
-}
-.sketch-times {
-  display: flex;
-  justify-content: flex-end;
-  gap: 5px;
-  margin-top: 6px;
-}
-.sketch-times span {
-  border: 1px solid #c5a88a;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 0.625rem;
-}
-.sketch-flow {
-  display: flex;
-  align-items: center;
-}
-.sketch-flow > span {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.5625rem;
-}
-.sketch-flow svg {
-  width: 32px;
-  height: 32px;
-  padding: 7px;
-  border: 1px solid #ccb399;
-  background: #fff8ec;
-  border-radius: 8px;
-  color: #91472d;
-  stroke-width: 1.5;
-}
-.sketch-flow i {
-  flex: 0 0 12px;
-  height: 1px;
-  background: #b78460;
-  margin-top: -22px;
-}
-.sketch-flow-caption {
-  text-align: center;
-  color: #7c6d60;
-  font-size: 0.6875rem;
-  margin-top: 18px;
-}
 .business-method {
   background: #23211e;
   color: #f7f1e6;
@@ -308,39 +130,6 @@
   margin-top: 24px;
   color: #c9bfb2;
   max-width: 450px;
-}
-.business-method-steps {
-  list-style: none;
-  padding: 0;
-  margin-top: 30px !important;
-  max-width: 470px;
-}
-.business-method-steps li {
-  padding: 15px 0 15px 20px;
-  border-top: 1px solid #ffffff1c;
-  position: relative;
-}
-.business-method-steps li::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  background: #e2a071;
-  position: absolute;
-  left: 0;
-  top: 23px;
-  border-radius: 50%;
-}
-.business-method-steps b {
-  display: block;
-  font-size: 1rem;
-  font-weight: 500;
-}
-.business-method-steps span {
-  display: block;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  color: #bfb4a6;
-  margin-top: 4px;
 }
 .business-proposal {
   background: #f8f2e7;
@@ -392,30 +181,33 @@
 }
 .business-proposal dl > div {
   display: grid;
-  grid-template-columns: 75px 1fr;
+  grid-template-columns: 82px 1fr;
   gap: 12px;
-  padding: 12px 0;
-  border-top: 1px solid #dcd0c1;
-  font-size: 0.8125rem;
-  line-height: 1.5;
+  padding: 14px 0;
+  border-top: 1px solid #dfd0bf;
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 .business-proposal dt {
   color: #8a452e;
+  font-weight: 500;
 }
 .business-proposal dd {
   margin: 0;
+  color: #60564d;
 }
 .proposal-bottom {
   display: flex;
-  gap: 8px;
   align-items: center;
-  padding-top: 2px;
-  font-size: 0.75rem;
-  color: #76695d;
+  gap: 9px;
+  border-top: 1px solid #d5c4b2;
+  padding-top: 16px;
+  font-size: 0.8125rem;
+  color: #60564d;
 }
 .proposal-bottom svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   color: #8a452e;
   flex-shrink: 0;
 }
@@ -430,21 +222,13 @@
   align-items: center;
 }
 .business-follow-up h2 {
-  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-size: clamp(2rem, 3vw, 2.65rem);
 }
 .business-followup-layout > div > p:not(.business-kicker) {
   color: #60564d;
   font-size: 1rem;
   line-height: 1.65;
   max-width: 420px;
-}
-.business-followup-cycle {
-  margin-top: 18px !important;
-  color: #8a452e !important;
-}
-.business-followup-cycle span {
-  padding-inline: 12px;
-  color: #c9a586;
 }
 .business-contact {
   background: radial-gradient(ellipse at 5% 100%, #e5b77a24, transparent 60%);
@@ -456,32 +240,32 @@
   align-items: center;
 }
 .business-contact h2 {
-  font-size: clamp(2.5rem, 4.8vw, 4.5rem);
+  font-size: clamp(3rem, 5vw, 4.5rem);
 }
 .business-contact-action > p {
   max-width: 400px;
-  color: #60564d;
   font-size: 1.125rem;
   line-height: 1.6;
+  color: #60564d;
 }
 .business-whatsapp {
+  text-decoration: none;
   display: inline-flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  min-height: 52px;
-  padding: 14px 24px;
-  border-radius: 999px;
+  margin-top: 24px;
   background: #25d366;
   color: #10351f;
+  border-radius: 100px;
+  padding: 17px 24px;
   font-size: 1rem;
   font-weight: 600;
-  text-decoration: none;
-  margin-top: 24px;
+  min-height: 52px;
   transition: background 0.2s;
 }
 .business-whatsapp:hover {
-  background: #39df77;
+  background: #39df79;
 }
 .business-whatsapp svg {
   width: 19px;
@@ -515,15 +299,6 @@
   .business-capability-copy h3 {
     font-size: 1.0625rem;
   }
-  .business-sketch {
-    padding-inline: 10px;
-  }
-  .sketch-result {
-    gap: 4px;
-  }
-  .sketch-result div span {
-    font-size: 0.5625rem;
-  }
 }
 @media (max-width: 800px) {
   .business-section {
@@ -554,9 +329,6 @@
   }
   .business-method .business-lead {
     max-width: 540px;
-  }
-  .business-method-steps {
-    max-width: none;
   }
   .business-proposal {
     width: min(100% - 12px, 450px);
@@ -597,17 +369,9 @@
     gap: 0;
   }
   .business-capability {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 108px;
     gap: 18px;
     padding-block: 22px;
     border-top: 1px solid #dacbbc;
-    align-items: center;
-  }
-  .business-capability-copy {
-    grid-column: 1;
-    grid-row: 1;
-    padding: 0;
   }
   .business-capability-icon {
     display: none;
@@ -624,86 +388,6 @@
     font-size: 0.8125rem;
     margin-top: 9px;
     line-height: 1.5;
-  }
-  .business-sketch {
-    grid-column: 2;
-    grid-row: 1;
-    height: 100px;
-    padding: 10px 7px;
-    pointer-events: none;
-  }
-  .sketch-presence .sketch-search {
-    font-size: 0.5625rem;
-    margin-bottom: 9px;
-  }
-  .sketch-result {
-    padding: 9px 5px;
-    gap: 4px;
-  }
-  .sketch-result svg {
-    width: 12px;
-    height: 12px;
-  }
-  .sketch-result b {
-    font-size: 0.5rem;
-  }
-  .sketch-result div span,
-  .sketch-result svg:last-child {
-    display: none;
-  }
-  .sketch-page {
-    gap: 7px;
-  }
-  .sketch-image {
-    width: 28px;
-    height: 43px;
-    flex-shrink: 0;
-  }
-  .sketch-image svg {
-    width: 20px;
-    height: 20px;
-  }
-  .sketch-page b {
-    font-size: 0.5rem;
-  }
-  .sketch-page div > span {
-    font-size: 0.4375rem;
-    margin-top: 5px;
-  }
-  .sketch-message,
-  .sketch-reply {
-    font-size: 0.4375rem;
-    padding: 5px;
-  }
-  .sketch-reply svg {
-    display: none;
-  }
-  .sketch-times {
-    gap: 3px;
-  }
-  .sketch-times span {
-    font-size: 0.375rem;
-    padding: 2px 3px;
-  }
-  .sketch-flow {
-    justify-content: space-between;
-  }
-  .sketch-flow > span {
-    font-size: 0;
-    gap: 0;
-  }
-  .sketch-flow svg {
-    width: 24px;
-    height: 24px;
-    padding: 5px;
-  }
-  .sketch-flow i {
-    flex-basis: 7px;
-    margin-top: 0;
-  }
-  .sketch-flow-caption {
-    font-size: 0.5rem;
-    margin-top: 12px;
   }
   .business-demo-note {
     margin-top: 12px !important;
@@ -734,95 +418,10 @@
     text-align: center;
   }
 }
-.business-proposal dl > div {
-  display: grid;
-  grid-template-columns: 82px 1fr;
-  gap: 12px;
-  padding: 14px 0;
-  border-top: 1px solid #dfd0bf;
-  font-size: 0.875rem;
-  line-height: 1.4;
-}
-.business-proposal dt {
-  color: #8a452e;
-  font-weight: 500;
-}
-.business-proposal dd {
-  margin: 0;
-  color: #60564d;
-}
-.proposal-bottom {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  border-top: 1px solid #d5c4b2;
-  padding-top: 16px;
-  font-size: 0.8125rem;
-  color: #60564d;
-}
-.proposal-bottom svg {
-  width: 16px;
-  height: 16px;
-  color: #8a452e;
-  flex-shrink: 0;
-}
-.business-followup-layout {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 100px;
-  align-items: center;
-  padding-block: 50px;
-  border-bottom: 1px solid #d5c4b2;
-}
 .business-follow-up p:not(.business-kicker) {
   font-size: 1rem;
   line-height: 1.65;
   color: #60564d;
-}
-.business-followup-cycle {
-  margin-top: 18px !important;
-  font-weight: 500;
-  color: #85442f !important;
-}
-.business-followup-cycle span {
-  padding-inline: 12px;
-  color: #bca18a;
-}
-.business-follow-up h2 {
-  font-size: clamp(2rem, 3vw, 2.65rem);
-}
-.business-contact-layout {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 100px;
-  align-items: center;
-}
-.business-contact-action > p {
-  max-width: 400px;
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: #60564d;
-}
-.business-contact h2 {
-  font-size: clamp(3rem, 5vw, 4.5rem);
-}
-.business-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 24px;
-  background: #25d366;
-  color: #10351f;
-  border-radius: 100px;
-  padding: 17px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  min-height: 52px;
-  transition: background 0.2s;
-}
-.business-whatsapp:hover {
-  background: #39df79;
 }
 @media (max-width: 1100px) {
   .business-followup-layout,
@@ -837,8 +436,6 @@
     gap: 24px;
   }
   .business-followup-layout {
-    padding-block: 0;
-    padding-bottom: 44px;
   }
   .business-contact-action > p {
     font-size: 1rem;
@@ -857,5 +454,265 @@
   }
   .business-follow-up h2 {
     font-size: 1.9rem;
+  }
+}
+.business-sketch {
+  height: 232px;
+  padding: 16px;
+  margin-bottom: 2px;
+  background: linear-gradient(145deg, #fffaf2, #efe0ce);
+  border: 1px solid #d5c4b2;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 14px 24px -22px #66452c70;
+  color: #1b1a18;
+  font-size: 12px;
+  overflow: hidden;
+}
+.sketch-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 10px;
+  color: #76695d;
+}
+.sketch-caption > span:last-child {
+  color: #85442f;
+}
+.business-sketch svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.sketch-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #dacbbc;
+  background: #fff;
+  border-radius: 20px;
+  padding: 9px 10px;
+  color: #60564d;
+}
+.sketch-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+.sketch-place-icon {
+  padding: 10px;
+  background: #ead1b2;
+  border-radius: 12px;
+  color: #85442f;
+}
+.sketch-result b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.sketch-result div > span {
+  display: block;
+  font-size: 11px;
+  color: #60564d;
+  margin-top: 5px;
+}
+.sketch-place-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+.sketch-place-actions span {
+  padding: 6px 10px;
+  border: 1px solid #dacbbc;
+  border-radius: 20px;
+  background: #fffaf2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+}
+.sketch-browser {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid #d5c4b2;
+  padding-bottom: 10px;
+}
+.sketch-browser > span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b79b80;
+}
+.sketch-browser small {
+  font-size: 10px;
+  color: #76695d;
+  margin-left: 8px;
+}
+.sketch-page {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+}
+.sketch-image {
+  height: 105px;
+  overflow: hidden;
+  border-radius: 9px;
+}
+.sketch-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sketch-page b {
+  font-family: var(--business-head);
+  font-size: 17px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+.sketch-page p {
+  margin-top: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #60564d;
+}
+.sketch-page div > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  margin-top: 10px;
+  background: #1b1a18;
+  color: #f7f1e6;
+  padding: 7px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+.sketch-page div > span svg {
+  width: 12px;
+  height: 12px;
+}
+.sketch-chat-header {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border-bottom: 1px solid #d5c4b2;
+  padding-bottom: 10px;
+  margin-top: -7px;
+}
+.sketch-chat-header > span {
+  margin-left: auto;
+  color: #76695d;
+  font-size: 10px;
+}
+.sketch-message,
+.sketch-reply {
+  width: fit-content;
+  padding: 9px 10px;
+  border-radius: 10px 10px 10px 2px;
+  background: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 12px;
+}
+.sketch-reply {
+  margin-left: auto;
+  margin-top: 7px;
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  background: #ead1b2;
+  border-radius: 10px 10px 2px 10px;
+}
+.sketch-times {
+  display: flex;
+  justify-content: end;
+  gap: 6px;
+  margin-top: 8px;
+}
+.sketch-times span {
+  background: #fffaf2;
+  padding: 4px 8px;
+  border: 1px solid #c5a88a;
+  border-radius: 5px;
+  font-size: 11px;
+}
+.sketch-flow {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+.sketch-flow li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+.sketch-flow li + li::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 1px;
+  background: #b79b80;
+  left: 15px;
+  top: -12px;
+}
+.sketch-flow li > svg {
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border: 1px solid #ccb399;
+  background: #fffaf2;
+  border-radius: 9px;
+  color: #85442f;
+}
+.sketch-flow b {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+.sketch-flow small {
+  display: block;
+  font-size: 10px;
+  margin-top: 2px;
+  color: #60564d;
+}
+@media (max-width: 1100px) and (min-width: 801px) {
+  .business-capability-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+@media (max-width: 480px) {
+  .business-capability {
+    padding-block: 24px;
+  }
+  .business-capability-copy {
+    padding-top: 16px;
+  }
+  .business-sketch {
+    height: 216px;
+    padding: 16px 18px;
+  }
+  .business-capability-copy .business-tools {
+    margin-top: 7px;
+  }
+  .business-capability-copy > p {
+    margin-top: 7px;
+  }
+  .business-capability-grid {
+    gap: 0;
+  }
+  .sketch-caption {
+    margin-bottom: 14px;
+  }
+  .business-proposal {
+    transform: none;
+    width: 100%;
   }
 }

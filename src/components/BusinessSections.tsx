@@ -1,4 +1,5 @@
-import { Check, Globe, MapPin, MessageCircle, SlidersHorizontal, Workflow } from "lucide-react";
+import { Check, Globe, MapPin, MessageCircle, Search, ArrowRight, Workflow } from "lucide-react";
+import businessPhoto from "../assets/menu-plato-premium.webp";
 import "./business-sections.css";
 
 const capabilities = [
@@ -35,18 +36,38 @@ const capabilities = [
 function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visual"] }) {
   return (
     <div className={`business-sketch sketch-${kind}`} aria-hidden="true">
+      <div className="sketch-caption">
+        <span>
+          {
+            {
+              presence: "Perfil de negocio",
+              web: "Carta digital",
+              contact: "Reserva por chat",
+              process: "Flujo de consultas",
+            }[kind]
+          }
+        </span>
+        <span>Ilustrativo</span>
+      </div>
       {kind === "presence" && (
         <>
           <div className="sketch-search">
-            <span /> Tu negocio
+            <Search /> Cafetería en tu zona
           </div>
           <div className="sketch-result">
-            <MapPin />
-            <div>
-              <b>Lo que haces, claro.</b>
-              <span>Información · Servicios · Contacto</span>
+            <div className="sketch-place-icon">
+              <MapPin />
             </div>
-            <Check />
+            <div>
+              <b>Café del barrio</b>
+              <span>Cafetería · Información y horarios</span>
+            </div>
+          </div>
+          <div className="sketch-place-actions">
+            <span>
+              Cómo llegar <ArrowRight />
+            </span>
+            <span>Contacto</span>
           </div>
         </>
       )}
@@ -56,24 +77,29 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
             <span />
             <span />
             <span />
+            <small>carta · menú del día</small>
           </div>
           <div className="sketch-page">
             <div className="sketch-image">
-              <Globe />
+              <img src={businessPhoto} alt="" loading="lazy" width={192} height={192} />
             </div>
             <div>
-              <b>
-                Tu oferta.
-                <br />
-                En un solo lugar.
-              </b>
-              <span>Ver servicios</span>
+              <b>Sabores de casa</b>
+              <p>Platos preparados al momento.</p>
+              <span>
+                Ver la carta <ArrowRight />
+              </span>
             </div>
           </div>
         </>
       )}
       {kind === "contact" && (
         <>
+          <div className="sketch-chat-header">
+            <MessageCircle />
+            <b>Reservas</b>
+            <span>Tu negocio</span>
+          </div>
           <div className="sketch-message">Quiero reservar una hora.</div>
           <div className="sketch-reply">
             Elige el horario que te acomode.
@@ -88,23 +114,29 @@ function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visua
       )}
       {kind === "process" && (
         <>
-          <div className="sketch-flow">
-            <span>
+          <ol className="sketch-flow">
+            <li>
               <MessageCircle />
-              Consulta
-            </span>
-            <i />
-            <span>
-              <SlidersHorizontal />
-              Organizar
-            </span>
-            <i />
-            <span>
+              <span>
+                <b>Recibir consulta</b>
+                <small>Formulario o mensaje</small>
+              </span>
+            </li>
+            <li>
+              <Workflow />
+              <span>
+                <b>Organizar</b>
+                <small>Registrar en un solo lugar</small>
+              </span>
+            </li>
+            <li>
               <Check />
-              Seguimiento
-            </span>
-          </div>
-          <div className="sketch-flow-caption">Cada paso conectado.</div>
+              <span>
+                <b>Dar seguimiento</b>
+                <small>Saber qué falta responder</small>
+              </span>
+            </li>
+          </ol>
         </>
       )}
     </div>
@@ -258,4 +290,3 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
     </div>
   );
 }
-
