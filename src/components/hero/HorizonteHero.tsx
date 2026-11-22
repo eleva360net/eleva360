@@ -54,10 +54,11 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
 
         <div className="stage st">
           <p className="sr-only">
-            Cómo trabajamos: primero entendemos tu negocio; luego diagnosticamos su visibilidad,
-            contacto y confianza; priorizamos lo que conviene resolver primero (en este ejemplo, el
-            contacto con tus clientes); implementamos una solución simple de atención y te
-            acompañamos revisando, aprendiendo y ajustando.
+            En este ejemplo de cómo trabajamos, primero entendemos tu negocio. Detectamos
+            información dispersa, consultas sin responder y pasos innecesarios. Priorizamos agilizar
+            las respuestas y dejamos ordenar la información y simplificar los pasos para después.
+            Implementamos una forma sencilla de reservar y te acompañamos midiendo, aprendiendo y
+            ajustando.
           </p>
           <div
             className="stage-scroll"
@@ -79,7 +80,7 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                 <div className="c4-body">
                   <span className="ph"></span>
                   <ol className="cycle">
-                    <li>Revisar</li>
+                    <li>Medir</li>
                     <li>Aprender</li>
                     <li>Ajustar</li>
                   </ol>
@@ -105,14 +106,14 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                 <div className="c3-body">
                   <span className="ph"></span>
                   <div className="chat">
-                    <span className="msg in">Hola, ¿atienden hoy?</span>
+                    <span className="msg in">¿Cómo reservo?</span>
                     <span className="reply">
                       <span className="typing">
                         <span></span>
                         <span></span>
                         <span></span>
                       </span>
-                      <span className="msg out">¡Sí! ¿Te envío el horario?</span>
+                      <span className="msg out">Elige tu horario aquí.</span>
                     </span>
                   </div>
                 </div>
@@ -129,15 +130,45 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                 <h3>Priorizar</h3>
                 <ol className="lns">
                   <li className="l1">
-                    <span>Contacto</span>
-                    <i>Primero</i>
+                    <span
+                      style={{
+                        minWidth: 0,
+                        flex: 1,
+                        whiteSpace: "normal",
+                        lineHeight: 1.05,
+                        fontSize: "0.85em",
+                      }}
+                    >
+                      Agilizar respuestas
+                    </span>
+                    <i style={{ flexShrink: 0 }}>Primero</i>
                   </li>
                   <li className="l2">
-                    <span>Visibilidad</span>
+                    <span
+                      style={{
+                        minWidth: 0,
+                        flex: 1,
+                        whiteSpace: "normal",
+                        lineHeight: 1.05,
+                        fontSize: "0.85em",
+                      }}
+                    >
+                      Ordenar información
+                    </span>
                     <i>Después</i>
                   </li>
                   <li className="l3">
-                    <span>Confianza</span>
+                    <span
+                      style={{
+                        minWidth: 0,
+                        flex: 1,
+                        whiteSpace: "normal",
+                        lineHeight: 1.05,
+                        fontSize: "0.85em",
+                      }}
+                    >
+                      Simplificar pasos
+                    </span>
                     <i>Después</i>
                   </li>
                 </ol>
@@ -192,7 +223,7 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                         <small>Así funciona hoy</small>
                       </span>
                     </div>
-                    <p>¿Cómo te encuentran, cómo te contactan y por qué te eligen?</p>
+                    <p>¿Dónde se están perdiendo oportunidades?</p>
                   </div>
                   <ul className="rows">
                     <li className="row row-vis">
@@ -202,7 +233,7 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                           <circle cx="12" cy="12" r="3" />
                         </svg>
                       </span>
-                      Visibilidad
+                      <span style={{ minWidth: 0, lineHeight: 1.15 }}>Información dispersa</span>
                     </li>
                     <li className="row row-con on">
                       <span className="ico">
@@ -217,7 +248,10 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                           />
                         </svg>
                       </span>
-                      Contacto<span className="tag">Oportunidad</span>
+                      <span style={{ minWidth: 0, lineHeight: 1.15 }}>Consultas sin responder</span>
+                      <span className="tag" style={{ flexShrink: 0 }}>
+                        Oportunidad
+                      </span>
                     </li>
                     <li className="row row-conf">
                       <span className="ico">
@@ -226,7 +260,7 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                           <path d="M9 12l2 2 4-4" />
                         </svg>
                       </span>
-                      Confianza
+                      <span style={{ minWidth: 0, lineHeight: 1.15 }}>Pasos innecesarios</span>
                     </li>
                   </ul>
                   <span className="brk"></span>
@@ -247,7 +281,7 @@ export function HorizonteHero({ whatsappUrl }: { whatsappUrl: string }) {
                     />
                   </svg>
                 </span>
-                Contacto
+                Agilizar respuestas
               </div>
             </div>
           </div>
