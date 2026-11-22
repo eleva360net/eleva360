@@ -80,7 +80,7 @@ function Navbar() {
 
   const links = [
     { label: "Capacidades", href: "#capacidades" },
-    { label: "Cómo trabajamos", href: "#como-funciona" },
+    { label: "Antes de implementar", href: "#como-funciona" },
     { label: "Acompañamiento", href: "#acompanamiento" },
   ];
 
@@ -210,7 +210,7 @@ function Footer() {
             href="#como-funciona"
             className="inline-flex min-h-11 items-center transition-colors hover:text-foreground"
           >
-            Cómo trabajamos
+            Antes de implementar
           </a>
           <a
             href="#acompanamiento"
