@@ -171,8 +171,9 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
               </h2>
             </div>
             <p className="business-lead">
-              Mejoramos cómo te encuentran, cómo presentas lo que ofreces y cómo atiendes. También
-              creamos herramientas para simplificar tu operación.
+              Mejoramos cómo encuentran tu negocio, cómo descubren lo que ofreces y cómo te contactan.
+              Así facilitamos que más oportunidades se conviertan en ventas, mientras
+              simplificamos tu operación.
             </p>
           </div>
           <div className="business-capability-grid">
@@ -230,7 +231,7 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
               <br />
               Un plan concreto.
             </h3>
-            <p className="proposal-summary">Lo necesario para comenzar con claridad.</p>
+            <p className="proposal-summary">Un plan para mejorar tu negocio y generar más oportunidades de venta.</p>
             <dl>
               <div>
                 <dt>Prioridad</dt>
@@ -292,8 +293,8 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
           </div>
           <div className="business-contact-action">
             <p>
-              Cuéntanos qué quieres lograr y cómo funciona hoy tu negocio. Te ayudamos a identificar
-              por dónde comenzar.
+              Cuéntanos qué quieres lograr y cómo funciona hoy tu negocio. Identifiquemos oportunidades
+              para atraer más clientes, aumentar tus ventas y mejorar tu operación.
             </p>
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="business-whatsapp">
               <MessageCircle aria-hidden="true" />
@@ -306,4 +307,3 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
     </div>
   );
 }
-
