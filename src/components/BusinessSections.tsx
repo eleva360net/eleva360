@@ -9,8 +9,8 @@ import "./business-sections.css";
 const capabilities = [
   {
     title: "Presencia digital",
-    description: "Que te encuentren y entiendan por qué elegir tu negocio.",
-    tools: "Google · Identidad · Contenido",
+    description: "Fortalecemos tu presencia en Google y redes sociales para que más personas encuentren tu negocio y confíen en lo que ofreces.",
+    tools: "Google · Redes sociales · Identidad · Contenido",
     icon: MapPin,
     visual: "presence",
   },
@@ -30,8 +30,8 @@ const capabilities = [
   },
   {
     title: "Procesos y automatización",
-    description: "Menos pasos repetitivos y más orden en tu operación.",
-    tools: "Flujos · Integraciones · Seguimiento",
+    description: "Simplificamos tu operación con automatizaciones y, cuando tiene sentido, software desarrollado a medida para tu negocio.",
+    tools: "Integraciones · Automatizaciones · Software a medida · Seguimiento",
     icon: Workflow,
     visual: "process",
   },
