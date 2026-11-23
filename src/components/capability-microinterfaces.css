@@ -1,0 +1,415 @@
+/* Presencia digital — microinterfaces Google e Instagram.
+   Estilos aislados: no afectan HORIZONTE ni las otras capacidades. */
+.sketch-presence { padding: 14px 15px; }
+.presence-visual { display: flex; flex-direction: column; gap: 8px; height: 100%; min-width: 0; }
+.presence-visual-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; color: #60564d; font-size: 10px; line-height: 1.2; font-weight: 600; }
+.presence-visual-heading > span:last-child { font-size: 10px; font-weight: 400; color: #8a7765; }
+.presence-channel-card { min-width: 0; padding: 8px 10px; background: rgba(255, 252, 246, .94); border: 1px solid #decfbd; border-radius: 11px; box-shadow: 0 1px 0 #fff inset; }
+.presence-google { flex: 0 0 84px; }
+.presence-instagram { flex: 1; min-height: 0; }
+.presence-channel-head { display: flex; align-items: center; gap: 5px; height: 15px; font-size: 11px; line-height: 1; }
+.presence-channel-head svg { width: 13px; height: 13px; color: #a54f35; }
+.presence-channel-head strong { font-weight: 700; }
+.presence-channel-head > span { margin-left: auto; color: #76695d; font-size: 10px; white-space: nowrap; }
+.presence-google-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; min-width: 0; }
+.presence-google-row > img { width: 37px; height: 37px; flex: 0 0 37px; object-fit: cover; object-position: center 62%; border-radius: 7px; background: #ead1b2; }
+.presence-google-row > div { flex: 1; min-width: 0; }
+.presence-google-row b { display: block; font-size: 12px; font-weight: 700; line-height: 1.15; }
+.presence-google-row small { display: block; margin-top: 4px; color: #76695d; font-size: 10px; line-height: 1.15; }
+.presence-google-row .presence-arrow { width: 15px; height: 15px; color: #a54f35; }
+.presence-posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; height: 37px; margin-top: 5px; }
+.presence-posts > img, .presence-brand-tile { width: 100%; height: 37px; object-fit: cover; object-position: center; border-radius: 5px; overflow: hidden; }
+.presence-brand-tile { display: grid; place-items: center; background: linear-gradient(135deg, #b65a38, #85442f); color: #fff5e7; font-family: var(--business-head); font-size: 16px; font-weight: 700; letter-spacing: -0.06em; }
+@media (max-width: 480px) {
+  .sketch-presence { height: 232px; }
+  .presence-visual-heading, .presence-visual-heading > span:last-child, .presence-channel-head > span, .presence-google-row small { font-size: 11px; }
+}
+
+/* Web y experiencias: sitio y carta dentro de una microinterfaz real.
+   Restringido a .sketch-web; no modifica las otras tarjetas. */
+.sketch-web { padding: 14px 15px; }
+
+.web-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-width: 0;
+}
+
+.web-visual-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  color: #60564d;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.web-visual-heading span:last-child {
+  color: #8a7765;
+  font-weight: 400;
+}
+
+.web-browser-frame {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #decfbd;
+  border-radius: 11px;
+  background: rgba(255, 252, 246, .96);
+  box-shadow: 0 1px 0 #fff inset;
+}
+
+.web-browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 28px;
+  padding: 0 11px;
+  border-bottom: 1px solid #e5d9cb;
+  background: #f7efe3;
+}
+
+.web-browser-dots { display: flex; gap: 4px; }
+.web-browser-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c8ad93;
+}
+
+.web-browser-chrome small {
+  display: block;
+  color: #76695d;
+  font-size: 10px;
+}
+
+.web-page-content {
+  padding: 11px;
+}
+
+.web-page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  padding-bottom: 9px;
+  color: #1b1a18;
+  font-size: 12px;
+}
+
+.web-page-heading strong { font-weight: 700; }
+.web-page-heading span {
+  font-size: 10px;
+  color: #76695d;
+}
+
+.web-featured-dish {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.web-featured-dish > img {
+  width: 72px;
+  height: 76px;
+  flex: 0 0 72px;
+  object-fit: cover;
+  border-radius: 7px;
+  background: #ead1b2;
+}
+
+.web-product-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.web-product-details > strong {
+  font-family: var(--business-head);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.web-product-details > small {
+  margin-top: 4px;
+  color: #76695d;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.web-cta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  border-radius: 5px;
+  padding: 6px 8px;
+  color: #f7f1e6;
+  background: #1b1a18;
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.web-cta-chip svg { width: 12px; height: 12px; }
+
+@media (max-width: 480px) {
+  .sketch-web { height: 232px; }
+  .web-visual-heading { font-size: 11px; }
+  .web-browser-chrome small,
+  .web-page-heading span,
+  .web-product-details > small { font-size: 11px; }
+}
+
+/* Atención y contacto — conversación que termina en una acción. */
+.sketch-contact {
+  padding: 14px 15px;
+}
+.contact-visual,
+.process-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-width: 0;
+}
+.contact-visual-heading,
+.process-visual-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  color: #60564d;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+.contact-visual-heading > span:last-child,
+.process-visual-heading > span:last-child {
+  color: #8a7765;
+  font-weight: 400;
+}
+.contact-chat-frame {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #decfbd;
+  border-radius: 11px;
+  background: #fffcf6;
+}
+.contact-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 5px 9px;
+  background: #f8f0e5;
+  border-bottom: 1px solid #e5d9cb;
+}
+.contact-chat-avatar {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  border-radius: 8px;
+  background: #e1e9dc;
+  color: #547554;
+}
+.contact-chat-avatar svg { width: 14px; height: 14px; }
+.contact-chat-header > div { flex: 1; min-width: 0; }
+.contact-chat-header strong,
+.contact-chat-header small {
+  display: block;
+  line-height: 1.2;
+}
+.contact-chat-header strong { font-size: 11px; font-weight: 700; }
+.contact-chat-header small { margin-top: 2px; font-size: 10px; color: #76695d; }
+.contact-chat-status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #789b73;
+}
+.contact-chat-messages {
+  padding: 8px 9px 7px;
+}
+.contact-bubble {
+  max-width: 91%;
+  width: fit-content;
+  font-size: 10.5px;
+  line-height: 1.35;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+.contact-customer {
+  background: #f1e8dc;
+  border-bottom-left-radius: 3px;
+}
+.contact-response {
+  background: #e3ecd9;
+  border-bottom-right-radius: 3px;
+  margin: 5px 0 0 auto;
+}
+.contact-time-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 5px;
+}
+.contact-time-row > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 7px;
+  border-radius: 5px;
+  border: 1px solid #d8c4ac;
+  font-size: 10px;
+  line-height: 1;
+}
+.contact-time-row > span.contact-time-selected {
+  border-color: #9eb595;
+  background: #e3ecd9;
+}
+.contact-time-row svg { width: 10px; height: 10px; }
+.contact-confirmation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  color: #597257;
+  font-size: 10px;
+  margin-top: 5px;
+}
+.contact-confirmation svg { width: 10px; height: 10px; }
+
+/* Procesos y automatización — sistema, registro y seguimiento. */
+.sketch-process { padding: 14px 15px; }
+.process-dashboard {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #decfbd;
+  border-radius: 11px;
+  background: #fffcf6;
+}
+.process-dashboard-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  flex: 0 0 34px;
+  padding: 0 10px;
+  background: #f8f0e5;
+  border-bottom: 1px solid #e5d9cb;
+}
+.process-dashboard-head svg {
+  width: 14px;
+  height: 14px;
+  color: #a54f35;
+}
+.process-dashboard-head strong { flex: 1; font-size: 10px; font-weight: 700; }
+.process-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #789b73;
+}
+.process-incoming,
+.process-outcome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 9px 0;
+  padding: 8px 9px;
+  border: 1px solid #e4d7c7;
+  background: #fffaf2;
+  border-radius: 7px;
+}
+.process-incoming > div,
+.process-outcome > div { flex: 1; min-width: 0; }
+.process-incoming strong,
+.process-outcome strong { display: block; font-size: 10.5px; line-height: 1.18; }
+.process-incoming small,
+.process-outcome small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  line-height: 1.15;
+  color: #76695d;
+}
+.process-incoming > span {
+  padding: 4px 5px;
+  border-radius: 4px;
+  background: #f0e0cf;
+  color: #955035;
+  font-size: 9px;
+  line-height: 1;
+}
+.process-connector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  height: 25px;
+  flex: 0 0 25px;
+  color: #955035;
+}
+.process-connector > span { font-size: 17px; line-height: 1; }
+.process-connector small { font-size: 10px; font-weight: 600; }
+.process-outcome {
+  margin-top: 0;
+  background: #f2f4eb;
+  border-color: #d4ddca;
+}
+.process-check {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #dfe9d7;
+  color: #597257;
+}
+.process-check svg { width: 12px; height: 12px; }
+.process-followup-pill {
+  font-size: 9px;
+  line-height: 1;
+  padding: 5px;
+  border-radius: 4px;
+  background: #e7ecdc;
+  color: #536c50;
+}
+@media (max-width: 480px) {
+  .sketch-contact,
+  .sketch-process { height: 232px; }
+  .contact-visual-heading,
+  .contact-visual-heading > span:last-child,
+  .process-visual-heading,
+  .process-visual-heading > span:last-child { font-size: 11px; }
+}
+
+/* Ajuste fino de lectura: tamaños mayores dentro de las demos móviles. */
+@media (max-width: 480px) {
+  .contact-chat-header strong,
+  .process-dashboard-head strong,
+  .process-incoming strong,
+  .process-outcome strong,
+  .contact-bubble { font-size: 11px; }
+  .contact-chat-header small,
+  .contact-time-row > span,
+  .contact-confirmation,
+  .process-incoming small,
+  .process-outcome small,
+  .process-connector small { font-size: 10.5px; }
+}

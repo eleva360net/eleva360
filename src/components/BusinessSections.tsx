@@ -1,10 +1,9 @@
-import { Check, Globe, MapPin, MessageCircle, Search, ArrowRight, Workflow } from "lucide-react";
+import { Check, Globe, MapPin, MessageCircle, ArrowRight, Workflow, Instagram } from "lucide-react";
 import businessPhoto from "../assets/menu-plato-premium.webp";
 import cafePhoto from "../assets/hero-building.webp";
-import reservationPhoto from "../assets/reserva-cafe.jpg";
-import inquiriesPhoto from "../assets/gestion-consultas.jpg";
 import brandLogo from "../assets/LogoEleva360-transparente.webp";
 import "./business-sections.css";
+import "./capability-microinterfaces.css";
 
 const capabilities = [
   {
@@ -37,116 +36,135 @@ const capabilities = [
   },
 ] as const;
 
-const capabilityPhotos = {
-  presence: cafePhoto,
-  web: businessPhoto,
-  contact: reservationPhoto,
-  process: inquiriesPhoto,
-} as const;
-
 function CapabilitySketch({ kind }: { kind: (typeof capabilities)[number]["visual"] }) {
   return (
     <div className={`business-sketch sketch-${kind}`} aria-hidden="true">
-      <div className="sketch-caption">
-        <span>
-          {
-            {
-              presence: "Perfil de negocio",
-              web: "Carta digital",
-              contact: "Reserva por chat",
-              process: "Flujo de consultas",
-            }[kind]
-          }
-          <small className="sketch-business-name">Café Pacífico</small>
-        </span>
-        <img
-          className="sketch-thumbnail"
-          src={capabilityPhotos[kind]}
-          alt=""
-          width={56}
-          height={56}
-          loading="lazy"
-        />
-        
-      </div>
-      {kind === "presence" && (
-        <>
-          <div className="sketch-search">
-            <Search /> Cafetería en tu zona
+      {kind === "presence" ? (
+        <div className="presence-visual">
+          <div className="presence-visual-heading">
+            <span>Google y redes sociales</span>
+            <span>Café Pacífico</span>
           </div>
-          <div className="sketch-result">
-            <div>
-              <b>Café Pacífico</b>
-              <span>Cafetería · Información y horarios</span>
+          <div className="presence-channel-card presence-google">
+            <div className="presence-channel-head">
+              <MapPin aria-hidden="true" />
+              <strong>Google</strong>
+              <span>Perfil de negocio</span>
+            </div>
+            <div className="presence-google-row">
+              <img src={cafePhoto} alt="" width={38} height={38} loading="lazy" />
+              <div>
+                <b>Café Pacífico</b>
+                <small>Ubicación y horarios</small>
+              </div>
+              <ArrowRight aria-hidden="true" className="presence-arrow" />
             </div>
           </div>
-          <div className="sketch-place-actions">
-            <span>
-              Cómo llegar <ArrowRight />
-            </span>
-            <span>Contacto</span>
-          </div>
-        </>
-      )}
-      {kind === "web" && (
-        <>
-          <div className="sketch-browser">
-            <span />
-            <span />
-            <span />
-            <small>carta · menú del día</small>
-          </div>
-          <div className="sketch-page">
-            <div>
-              <b>Pastas del día</b>
-              <p>Platos preparados al momento.</p>
-              <span>
-                Ver la carta <ArrowRight />
-              </span>
+          <div className="presence-channel-card presence-instagram">
+            <div className="presence-channel-head">
+              <Instagram aria-hidden="true" />
+              <strong>Instagram</strong>
+              <span>Perfil y contenido</span>
+            </div>
+            <div className="presence-posts">
+              <img src={cafePhoto} alt="" loading="lazy" />
+              <img src={businessPhoto} alt="" loading="lazy" />
+              <div className="presence-brand-tile" aria-hidden="true">CP</div>
             </div>
           </div>
-        </>
-      )}
-      {kind === "contact" && (
-        <>
-          <div className="sketch-message">Quiero reservar una hora.</div>
-          <div className="sketch-reply">
-            Elige el horario que te acomode.
-            <Check />
+        </div>
+      ) : kind === "web" ? (
+        <div className="web-visual">
+          <div className="web-visual-heading">
+            <span>Sitio web · Carta digital</span>
+            <span>Café Pacífico</span>
           </div>
-          <div className="sketch-times">
-            <span>10:00</span>
-            <span>12:30</span>
-            <span>16:00</span>
+          <div className="web-browser-frame">
+            <div className="web-browser-chrome">
+              <div className="web-browser-dots" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <small>Carta digital</small>
+            </div>
+            <div className="web-page-content">
+              <div className="web-page-heading">
+                <strong>Café Pacífico</strong>
+                <span>Menú del día</span>
+              </div>
+              <div className="web-featured-dish">
+                <img src={businessPhoto} alt="" width={72} height={76} loading="lazy" />
+                <div className="web-product-details">
+                  <strong>Pastas del día</strong>
+                  <small>Preparadas al momento</small>
+                  <span className="web-cta-chip">
+                    Ver la carta <ArrowRight aria-hidden="true" />
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-        </>
-      )}
-      {kind === "process" && (
-        <>
-          <ol className="sketch-flow">
-            <li>
-              <MessageCircle />
-              <span>
-                <b>Recibir consulta</b>
-                <small>Formulario o mensaje</small>
-              </span>
-            </li>
-            <li>
-              <Workflow />
-              <span>
-                <b>Organizar</b>
-                <small>Registrar en un solo lugar</small>
-              </span>
-            </li>
-            <li>
-              <Check />
-              <span>
-                <b>Dar seguimiento</b>
-                <small>Saber qué falta responder</small>
-              </span>
-            </li>
-          </ol>
-        </>
+        </div>
+      ) : kind === "contact" ? (
+        <div className="contact-visual">
+          <div className="contact-visual-heading">
+            <span>WhatsApp · Reservas</span>
+            <span>Café Pacífico</span>
+          </div>
+          <div className="contact-chat-frame">
+            <div className="contact-chat-header">
+              <span className="contact-chat-avatar"><MessageCircle aria-hidden="true" /></span>
+              <div>
+                <strong>Café Pacífico</strong>
+                <small>Atención a clientes</small>
+              </div>
+              <span className="contact-chat-status" aria-hidden="true" />
+            </div>
+            <div className="contact-chat-messages">
+              <div className="contact-bubble contact-customer">Hola, ¿tienen mesa para dos?</div>
+              <div className="contact-bubble contact-response">Sí, ¿qué horario prefieres?</div>
+              <div className="contact-time-row">
+                <span>12:30</span>
+                <span className="contact-time-selected"><Check aria-hidden="true" /> 16:00</span>
+              </div>
+              <div className="contact-confirmation"><Check aria-hidden="true" /> Horario seleccionado</div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="process-visual">
+          <div className="process-visual-heading">
+            <span>Panel de gestión</span>
+            <span>Café Pacífico</span>
+          </div>
+          <div className="process-dashboard">
+            <div className="process-dashboard-head">
+              <Workflow aria-hidden="true" />
+              <strong>Consultas y reservas</strong>
+              <span className="process-status-dot" aria-hidden="true" />
+            </div>
+            <div className="process-incoming">
+              <div>
+                <strong>Nueva consulta</strong>
+                <small>Reserva · Mesa para dos</small>
+              </div>
+              <span>Nueva</span>
+            </div>
+            <div className="process-connector">
+              <span aria-hidden="true">↓</span>
+              <small>Registro automático</small>
+            </div>
+            <div className="process-outcome">
+              <span className="process-check"><Check aria-hidden="true" /></span>
+              <div>
+                <strong>Consulta organizada</strong>
+                <small>Lista para seguimiento</small>
+              </div>
+              <span className="process-followup-pill">Pendiente</span>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -307,3 +325,4 @@ export function BusinessSections({ whatsappUrl }: { whatsappUrl: string }) {
     </div>
   );
 }
+
