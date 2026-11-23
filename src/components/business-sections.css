@@ -803,3 +803,9 @@
     margin-top: 8px;
   }
 }
+/* Recuperar iconos junto a los títulos en móvil */
+@media (max-width: 800px) {
+  .business-capability .business-capability-icon {
+    display: block;
+  }
+}
