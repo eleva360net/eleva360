@@ -62,7 +62,27 @@ function Index() {
         <HorizonteHero whatsappUrl={WHATSAPP_URL} />
         <BusinessSections whatsappUrl={WHATSAPP_URL} />
       </main>
-      <Footer />
+            <Footer />
+
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escríbenos por WhatsApp"
+        title="Escríbenos por WhatsApp"
+        className="fixed right-5 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_28px_rgba(0,0,0,0.22)] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4"
+        style={{ bottom: "calc(20px + env(safe-area-inset-bottom))" }}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="30"
+          height="30"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.3 4.8 4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.9a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z" />
+        </svg>
+      </a>
     </div>
   );
 }
